@@ -10,6 +10,7 @@
 #-----------------------------------------------------------------------------
 
 import sys
+import os
 import functions as func
 
 
@@ -20,6 +21,7 @@ def make_link(celex, lang):
 
 
 if __name__ == '__main__':
+    path = os.getcwd()
     celex = sys.argv[1]  # collect celex code
     languages = sys.argv[2:]  # collect language codes
     #create html and txt files for each language code
@@ -27,6 +29,8 @@ if __name__ == '__main__':
                  celex, '', is_celex = True) # no prefix
     source_file = celex + '_' + languages[0] + '.txt'
     target_file = celex + '_' + languages[1] + '.txt'
+    source_file = os.path.join(path, source_file)
+    target_file = os.path.join(path, target_file)
     func.aligner(source_file, target_file, languages[0].lower(), languages[1].lower())
 
 # model pentru apelat LF Aligner

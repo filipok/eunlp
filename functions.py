@@ -67,7 +67,6 @@ def aligner(source_file, target_file, lang_source, lang_target):
         command = 'C:\Users\Filip\Dropbox\Tranzit\LFalign\LF_aligner_4.05.exe --filetype="t" --infiles="' + source_file + '","' + target_file + '" --languages="' + lang_source + '","' + lang_target + '" --segment="y" --review="n" --tmx="y"'
         print command
         check_output(command, shell = True)
-        print "I have no idea where the tmx is saved by default, but usually in the C: root"
     else:
         # let's assume everything else is linux
         # sentence splitter
