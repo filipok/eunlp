@@ -1,0 +1,4 @@
+The sentence segmenter is from the europarl project at http://www.statmt.org/europarl/
+The exe was made with PAR Packager and is used by the aligner in Windows environments.
+
+You can customize the segmenter's behaviour by adding/adapting the nonbreaking prefix files; see README.doc
