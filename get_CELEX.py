@@ -25,6 +25,9 @@ if __name__ == '__main__':
     #create html and txt files for each language code
     func.scraper(languages, make_link, 'The requested document does not exist',
                  celex, '', is_celex = True) # no prefix
+    source_file = celex + '_' + languages[0] + '.txt'
+    target_file = celex + '_' + languages[1] + '.txt'
+    func.aligner(source_file, target_file, languages[0].lower(), languages[1].lower())
 
 # model pentru apelat LF Aligner
 # C:\Users\Filip\Dropbox\Tranzit\LFalign\LF_aligner_4.05.exe --filetype="t" --infiles="C:\Users\Filip\Dropbox\Python_Work\Diverse Moses\32014R0468_EN.txt","C:\Users\Filip\Dropbox\Python_Work\Diverse Moses\32014R0468_RO.txt" --languages="en","ro" --segment="y" --review="n" --tmx="y"
