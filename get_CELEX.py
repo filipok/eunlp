@@ -32,8 +32,3 @@ if __name__ == '__main__':
     source_file = os.path.join(path, source_file)
     target_file = os.path.join(path, target_file)
     func.aligner(source_file, target_file, languages[0].lower(), languages[1].lower())
-
-# model pentru apelat LF Aligner
-# C:\Users\Filip\Dropbox\Tranzit\LFalign\LF_aligner_4.05.exe --filetype="t" --infiles="C:\Users\Filip\Dropbox\Python_Work\Diverse Moses\32014R0468_EN.txt","C:\Users\Filip\Dropbox\Python_Work\Diverse Moses\32014R0468_RO.txt" --languages="en","ro" --segment="y" --review="n" --tmx="y"
-#from subprocess import check_output
-#check_output('C:\Users\Filip\Dropbox\Tranzit\LFalign\LF_aligner_4.05.exe --filetype="t" --infiles="32014R0468_EN.txt","32014R0468_RO.txt" --languages="en","ro" --segment="y" --review="n" --tmx="y"', shell = True)
