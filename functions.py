@@ -34,7 +34,7 @@ def strip_celex(text):
     # discard some leftover Javascript and newlines
     split = re.split(r'\n\t{5}Text\n', text)
     text = split[1]
-    split = re.split(r'\nTop\s{3}\n', text)
+    split = re.split(r'\n\s{,6}Top\s{,6}\n', text)
     text = split[0]
     text = re.sub(r'\n+', r'\n', text)
     return text
@@ -65,12 +65,19 @@ def aligner(source_file, target_file, lang_source, lang_target):
     computer = sys.platform
     if computer == 'win32':
         command = 'C:\Users\Filip\Dropbox\Tranzit\LFalign\LF_aligner_4.05.exe --filetype="t" --infiles="' + source_file + '","' + target_file + '" --languages="' + lang_source + '","' + lang_target + '" --segment="y" --review="n" --tmx="y"'
-        print command
         check_output(command, shell = True)
     else:
         # let's assume everything else is linux
         # sentence splitter
+        command = ' perl sentence_splitter/split-sentences.perl ' + lang_source + ' < ' + source_file + '> ' + source_file + '_s'
+        check_output(command, shell = True)
+        command = ' perl sentence_splitter/split-sentences.perl ' + lang_target + ' < ' + target_file + '> ' + target_file + '_s'
+        check_output(command, shell = True)
         # tokenizer
+        command = ' perl tokenizer.perl ' + lang_source + ' < ' + source_file + '_s ' + '> ' + source_file + '_st'
+        check_output(command, shell = True)
+        command = ' perl tokenizer.perl ' + lang_target  + ' < ' + target_file + '_s ' + '> ' + target_file + '_st'
+        check_output(command, shell = True)
         # hunalign
         # make it human readable
         # turn it into tmx
