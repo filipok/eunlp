@@ -1,0 +1,5 @@
+Antiword from:
+http://www.informatik.uni-frankfurt.de/~markus/antiword/
+
+This binary is only used on Windows.
+On other OSes, you need to install antiword yourself, in the /usr/bin folder.

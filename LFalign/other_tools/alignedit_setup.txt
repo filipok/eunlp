@@ -1,0 +1,15 @@
+You can make some look&feel settings for the alignment editor in this file. Just enter a value in the [] and save the file to make a change, or change back to [] to restore the default.
+
+You can specify background colours using simple names (white, blue, red etc.) or you can specify exact shades using # codes such as #EBEBFF. You can use sites like www.colorpicker.com to find codes for colours that you are happy with.
+
+
+Some font types you can use: Courier, Lucida Console, Verdana, Calibri, Times, Helvetica, Garamond, Tahoma, MS Sans Serif.
+The number is the font size. If you set a larger font size, also increase the row height multiplier to make the cells tall enough to fit all the text.
+
+Colour of odd rows: [white]
+Colour of even rows: [#EBEBFF] 
+Colour of active cell: [#A6C1FF]
+Font: [-*-Courier-Medium-R-Normal--*-160-*-*-*-*-*-*]
+Row height multiplier: [-11]
+
+Hide buttons: [n]

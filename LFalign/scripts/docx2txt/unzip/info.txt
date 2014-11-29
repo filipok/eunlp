@@ -1,0 +1,7 @@
+UnZip version 5.51
+
+From:
+http://www.info-zip.org/UnZip.html
+http://gnuwin32.sourceforge.net
+
+Only needed by doxc2txt on Windows, other OSes are presumed to have unzip at /usr/bin/unzip

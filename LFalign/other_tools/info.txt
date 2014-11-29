@@ -1,0 +1,5 @@
+﻿This folder contains a TMX maker and a GUI alignment editor. The batch aligner has been removed as it was replaced by a command line argument mode in the main script (see the main readme).
+
+For my other software for translators, see the "grab bag" at sourceforge.net/projects/aligner
+
+Shameless solicitation: register at Dropbox (and install the app) using the referral link https://www.dropbox.com/referrals/NTE2Mzc3OTUwOQ?src=global0 to get us both some free online storage space. Dropbox is a great free cloud backup/webhosting/file syncing service, you will probably like it. I will definitely like the extra space I get if you sign up and install the app :)

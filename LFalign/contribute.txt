@@ -1,0 +1,18 @@
+If you would like to contribute to the LF Aligner project, here are a couple of ways you could help:
+
+- Contribute to the nonbreaking prefix lists. This could improve sentence segmentation in your language. Essentially, this involves reporting words that are followed by a full stop but do not end the sentence (such as Mr. or sgt. in English).
+
+- Systematically test document converters. LF Aligner relies on three different converters to convert files (doc, docx, rtf etc.) to txt. Some of these could be eliminated or the results improved if someone took the trouble to systematically test and compare them and help me decide which one to replace with which etc.
+
+- Improve/translate the readme and the GUI.
+
+- Help improve the design/look and feel. Create icons, pick colours etc. Some tech skills are needed for this.
+
+- Work on the code. This requires Perl and/or Perl/Tk skills.
+
+- Do testing and very basic 'development' on OSX, possibly allowing for the release of a prepackaged GUI version on this platform. Same for your linux flavour of choice.
+
+- Donate. You can donate some Dropbox storage space to me: just register at Dropbox (and install the app) using the referral link https://www.dropbox.com/referrals/NTE2Mzc3OTUwOQ?src=global0 I'm not asking for money donations, but if you feel the urge to throw some cash at me, I'm happy to give you my paypal.
+
+
+Contact me at lfaligner@gmail.com if you wish to contribute to the project.

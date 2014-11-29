@@ -1,0 +1,1198 @@
+					
+14.5.2014   
+RO
+Jurnalul Oficial al Uniunii Europene
+L 141/1
+REGULAMENTUL (UE) NR. 468/2014 AL BĂNCII CENTRALE EUROPENE
+din 16 aprilie 2014
+de instituire a cadrului de cooperare la nivelul Mecanismului unic de supraveghere între Banca Centrală Europeană și autoritățile naționale competente și cu autoritățile naționale desemnate (Regulamentul-cadru privind MUS)
+(BCE/2014/17)
+CONSILIUL GUVERNATORILOR BĂNCII CENTRALE EUROPENE,
+având în vedere Tratatul privind funcționarea Uniunii Europene, în special articolul 127 alineatul (6) și articolul 132,
+având în vedere Statutul Sistemului European al Băncilor Centrale și al Băncii Centrale Europene, în special articolul 34,
+având în vedere Regulamentul (UE) nr. 1024/2013 al Consiliului din 15 octombrie 2013 de conferire a unor atribuții specifice Băncii Centrale Europene în ceea ce privește politicile legate de supravegherea prudențială a instituțiilor de credit (1), în special articolul 4 alineatul (3), articolul 6 și articolul 33 alineatul (2),
+având în vedere Acordul interinstituțional între Parlamentul European și Banca Centrală Europeană privind modalitățile practice de exercitare a controlului democratic și de monitorizare a exercitării atribuțiilor conferite Băncii Centrale Europene în cadrul Mecanismului unic de supraveghere (2),
+având în vedere consultarea publică și analiza desfășurate în conformitate cu articolul 4 alineatul (3) din Regulamentul (UE) nr. 1024/2013,
+având în vedere propunerea Consiliului de supraveghere și în consultare cu autoritățile naționale competente,
+întrucât:
+(1)
+Regulamentul (UE) nr. 1024/2013 (denumit în continuare „Regulamentul privind MUS”) instituie Mecanismul unic de supraveghere (MUS) compus din Banca Centrală Europeană (BCE) și autoritățile naționale competente (ANC) din statele membre participante.
+(2)
+În temeiul articolului 6 din Regulamentul privind MUS, BCE are competența exclusivă să exercite atribuțiile microprudențiale conferite acesteia prin articolul 4 din acel regulament cu privire la instituțiile de credit cu sediul în statele membre participante. BCE este responsabilă cu funcționarea eficace și coerentă a MUS și cu monitorizarea funcționării sistemului, în baza responsabilităților și procedurilor stabilite în articolul 6 din Regulamentul privind MUS.
+(3)
+Dacă este cazul și fără a aduce atingere responsabilității și răspunderii BCE pentru atribuțiile care îi sunt conferite prin Regulamentul privind MUS, ANC sunt responsabile să sprijine BCE, în condițiile stabilite în Regulamentul privind MUS și în prezentul regulament, prin pregătirea și punerea în aplicare a oricăror acte referitoare la atribuțiile prevăzute la articolul 4 din Regulamentul privind MUS cu privire la toate instituțiile de credit, inclusiv să acorde asistență în activitățile de verificare. În acest scop, ANC ar trebui să urmeze instrucțiunile furnizate de BCE în îndeplinirea atribuțiilor menționate la articolul 4 din Regulamentul privind MUS.
+(4)
+BCE, ANC și autoritățile naționale desemnate (AND) trebuie să îndeplinească atribuțiile macroprudențiale prevăzute la articolul 5 din Regulamentul privind MUS și să urmeze procedurile de coordonare prevăzute în acel regulament, în prezentul regulament și în legislația relevantă a Uniunii, fără a aduce atingere rolului Eurosistemului și al Comitetului european pentru risc sistemic.
+(5)
+În cadrul MUS, responsabilitățile de supraveghere corespunzătoare ale BCE și ale ANC sunt alocate pe baza caracterului semnificativ al entităților care intră în domeniul de aplicare al MUS. Prezentul regulament stabilește, în special, metodologia specifică de evaluare a acestui caracter semnificativ, în conformitate cu articolul 6 alineatul (7) din Regulamentul privind MUS. BCE are competență de supraveghere directă pentru instituțiile de credit, societățile financiare holding, societățile financiare holding mixte cu sediul în statele membre participante și sucursalele din state membre participante care aparțin instituțiilor de credit cu sediul în state membre neparticipante care sunt semnificative. ANC sunt responsabile cu supravegherea directă a entităților care sunt mai puțin semnificative, fără a aduce atingere prerogativei BCE de a decide, în cazuri specifice, să supravegheze direct aceste entități, atunci când este necesar pentru aplicarea consecventă a standardelor de supraveghere.
+(6)
+Pentru a ține cont de evoluțiile recente ale legislației Uniunii în domeniul sancțiunilor și de jurisprudența Curții Europene a Drepturilor Omului cu privire la principiul separării fazei de investigare de cea a luării deciziilor, BCE va înființa o unitate independentă de investigare care să investigheze în mod autonom încălcările normelor și deciziilor în materie de supraveghere.
+(7)
+Articolul 6 alineatul (7) din Regulamentul privind MUS precizează că BCE trebuie, în consultare cu ANC și pe baza unei propuneri din partea Consiliului de supraveghere, să adopte și să publice cadrul de organizare a modalităților practice de cooperare între BCE și ANC în cadrul MUS.
+(8)
+Articolul 33 alineatul (2) din Regulamentul privind MUS precizează că BCE trebuie să publice, prin intermediul unor regulamente și decizii, modalitățile operaționale detaliate de punere în aplicare a atribuțiilor care îi sunt conferite prin acel regulament. Prezentul regulament cuprinde dispozițiile de punere în aplicare a articolul 33 alineatul (2) referitoare la cooperarea dintre BCE și ANC în cadrul MUS.
+(9)
+Ca urmare, prezentul regulament dezvoltă și detaliază procedurile de cooperare prevăzute în Regulamentul privind MUS între BCE și ANC în cadrul MUS, precum și, după caz, cu autoritățile naționale desemnate, asigurând astfel funcționarea eficace și coerentă a MUS.
+(10)
+BCE acordă o importanță deosebită evaluării cuprinzătoare a instituțiilor de credit, inclusiv din perspectiva bilanțului, pe care trebuie să o desfășoare înainte de preluarea atribuțiilor care i-au fost conferite. Aceasta se extinde asupra oricăror state membre care aderă la zona euro și, prin urmare, aderă la MUS după data de începere a supravegherii în conformitate cu articolul 33 alineatul (2) din Regulamentul privind MUS.
+(11)
+Pentru buna funcționare a MUS este esențial să existe o cooperare deplină între BCE și ANC și ca acestea să facă schimb de toate informațiile care pot avea impact asupra atribuțiilor corespunzătoare ale acestora, în special toate informațiile de care dispun ANC cu privire la procedurile care pot avea un impact asupra siguranței și solidității unei entități supravegheate sau care interacționează cu procedurile de supraveghere în raport cu aceste entități,
+ADOPTĂ PREZENTUL REGULAMENT:
+PARTEA I
+DISPOZIȚII GENERALE
+Articolul 1
+Obiectul și scopul
+(1)   Prezentul regulament prevede reguli cu privire la următoarele aspecte:
+(a)
+cadrul prevăzut la articolul 6 alineatul (7) din Regulamentul privind MUS, și anume un cadru de organizare a modalităților practice de punere în aplicare a articolului 6 din Regulamentul privind MUS cu privire la cooperarea în cadrul MUS, incluzând:
+(i)
+metodologia specifică pentru a evalua și verifica dacă o entitate supravegheată este clasificată drept semnificativă sau mai puțin semnificativă în temeiul criteriilor prevăzute la articolul 6 alineatul (4) din Regulamentul privind MUS, precum și modalitățile generate de această evaluare;
+(ii)
+definirea de proceduri, inclusiv termene, și în legătură cu posibilitatea ca ANC să elaboreze proiecte de decizii transmise BCE spre analiză, cu privire la relația dintre BCE și ANC în ceea ce privește supravegherea entităților supravegheate semnificative;
+(iii)
+definirea de proceduri, inclusiv termene, cu privire la relația dintre BCE și ANC în ceea ce privește supravegherea entităților supravegheate mai puțin semnificative. În special, aceste proceduri impun ANC, în funcție de cazurile definite în prezentul regulament:
+—
+să notifice BCE orice proceduri importante în materie de supraveghere;
+—
+să evalueze mai aprofundat, la solicitarea BCE, aspecte specifice ale procedurii;
+—
+să transmită BCE proiectele de decizii importante în materie de supraveghere, cu privire la care BCE își poate exprima opiniile;
+(b)
+cooperarea și schimbul de informații între BCE și ANC în cadrul MUS, în ceea ce privește procedurile referitoare la entitățile supravegheate semnificative și entitățile supravegheate mai puțin semnificative, inclusiv procedurile comune aplicabile autorizațiilor privind inițierea activității unui instituții de credit, retragerii acestor autorizații și evaluării achizițiilor și cedării de participații calificate;
+(c)
+procedurile referitoare la cooperarea între BCE, ANC și AND cu privire la atribuțiile și instrumentele macroprudențiale în sensul articolului 5 din Regulamentul privind MUS;
+(d)
+procedurile referitoare la funcționarea cooperării strânse în sensul articolului 7 din Regulamentul privind MUS, aplicabile între BCE, ANC și AND;
+(e)
+procedurile referitoare la cooperarea între BCE și ANC în ceea ce privește articolele 10-13 din Regulamentul privind MUS, inclusiv cu privire la anumite aspecte legate de raportarea în scopuri de supraveghere;
+(f)
+procedurile referitoare la adoptarea deciziilor în materie de supraveghere adresate entităților supravegheate și altor persoane;
+(g)
+acordurile lingvistice dintre BCE și ANC și dintre BCE și entitățile supravegheate și alte persoane;
+(h)
+procedurile aplicabile prerogativelor de sancționare ale BCE și ANC în cadrul MUS referitoare la atribuțiile conferite BCE prin Regulamentul privind MUS;
+(i)
+dispoziții tranzitorii.
+(2)   Prezentul regulament nu afectează atribuțiile de supraveghere care nu au fost conferite BCE prin Regulamentul privind MUS și care, prin urmare, rămân în competența autorităților naționale.
+(3)   Prezentul regulament se coroborează în special cu Decizia BCE/2004/2 (3) și cu Regulamentul de procedură al Consiliului de supraveghere al Băncii Centrale Europene (4), mai ales în ceea ce privește procesul decizional din cadrul MUS, inclusiv procedura aplicabilă între Consiliul de supraveghere și Consiliul guvernatorilor în cazul absenței unei obiecții a Consiliului guvernatorilor în conformitate cu articolul 26 alineatul (8) din Regulamentul privind MUS și alte acte juridice relevante ale BCE, inclusiv Decizia BCE/2014/16 (5).
+Articolul 2
+Definiții
+În sensul prezentului regulament, se aplică definițiile cuprinse în Regulamentul privind MUS, cu excepția unor dispoziții contrare, concomitent cu următoarele definiții:
+1.
+„autorizație” înseamnă o autorizație astfel cum este definită la articolul 4 alineatul (1) punctul 42 din Regulamentul (UE) nr. 575/2013 al Parlamentului European și al Consiliului (6);
+2.
+„sucursală” înseamnă o sucursală astfel cum este definită la articolul 4 alineatul (1) punctul 17 din Regulamentul (UE) nr. 575/2013;
+3.
+„proceduri comune” înseamnă procedurile prevăzute în partea V pentru o autorizație privind inițierea activității unei instituții de credit, retragerea autorizației privind desfășurarea unei asemenea activități și deciziile cu privire la participațiile calificate;
+4.
+„stat membru din zona euro” înseamnă un stat membru a cărui monedă este euro;
+5.
+„grup” înseamnă un grup de întreprinderi, dintre care cel puțin una este o instituție de credit, care este compus dintr-o întreprindere-mamă și filialele acesteia sau din întreprinderi legate între ele printr-o relație în sensul articolului 22 din Directiva 2013/34/UE a Parlamentului European și a Consiliului (7), inclusiv orice subgrup al acestuia;
+6.
+„echipă comună de supraveghere” înseamnă o echipă de supraveghetori însărcinată cu supravegherea unei entități supravegheate semnificative sau a unui grup supravegheat semnificativ;
+7.
+„entitate supravegheată mai puțin semnificativă” înseamnă atât (a) o entitate supravegheată mai puțin semnificativă dintr-un stat membru din zona euro, cât și (b) o entitate supravegheată mai puțin semnificativă dintr-un stat membru din afara zonei euro care este un stat membru participant;
+8.
+„entitate supravegheată mai puțin semnificativă dintr-un stat membru din zona euro” înseamnă o entitate supravegheată cu sediul într-un stat membru din zona euro care nu are statutul de entitate supravegheată semnificativă în sensul articolului 6 alineatul (4) din Regulamentul privind MUS;
+9.
+„autoritate națională competentă” (ANC) înseamnă o autoritate națională competentă, astfel cum este definită la articolul 2 punctul (2) din Regulamentul privind MUS. Această definiție nu aduce atingere mecanismelor existente în temeiul legislației naționale care alocă anumite atribuții de supraveghere unei bănci centrale naționale (BCN) care nu este desemnată drept ANC. În acest caz, BCN își exercită aceste atribuții în cadrul stabilit de legislația națională și de prezentul regulament. O trimitere la ANC în prezentul regulament se aplică în această situație, după caz, BCN pentru atribuțiile alocate acesteia de legislația națională;
+10.
+„ANC în cooperare strânsă” înseamnă o ANC desemnată de un stat membru participant în cooperare strânsă în conformitate cu Directiva 2013/36/UE a Parlamentului European și a Consiliului (8);
+11.
+„autoritate națională desemnată” (AND) înseamnă o autoritate națională desemnată, astfel cum este definită la articolul 2 punctul (7) din Regulamentul privind MUS;
+12.
+„AND în cooperare strânsă” înseamnă o AND din afara zonei euro desemnată de un stat membru participant în cooperare strânsă în scopul atribuțiilor legate de articolul 5 din Regulamentul privind MUS.
+13.
+„stat membru din afara zonei euro” înseamnă un stat membru a cărui monedă nu este euro;
+14.
+„întreprindere-mamă” înseamnă o întreprindere-mamă astfel cum este definită la articolul 4 alineatul (1) punctul 15 din Regulamentul (UE) nr. 575/2013;
+15.
+„stat membru participant în cooperare strânsă” înseamnă un stat membru din afara zonei euro care a inițiat o cooperare strânsă cu BCE în conformitate cu articolul 7 din Regulamentul privind MUS;
+16.
+„entitate supravegheată semnificativă” înseamnă atât (a) o entitate supravegheată semnificativă dintr-un stat membru din zona euro; cât și (b) o entitate supravegheată semnificativă dintr-un stat membru participant din afara zonei euro;
+17.
+„entitate supravegheată semnificativă dintr-un stat membru din zona euro” înseamnă o entitate supravegheată cu sediul într-un stat membru din zona euro care are statutul de entitate supravegheată semnificativă în temeiul unei decizii a BCE bazate pe articolul 6 alineatul (4) sau pe articolul 6 alineatul (5) litera (b) din Regulamentul privind MUS;
+18.
+„entitate supravegheată semnificativă dintr-un stat membru participant din afara zonei euro” înseamnă o entitate supravegheată cu sediul într-un stat membru participant din afara zonei euro care are statutul de entitate supravegheată semnificativă în temeiul unei decizii a BCE bazate pe articolul 6 alineatul (4) sau pe articolul 6 alineatul (5) litera (b) din Regulamentul privind MUS;
+19.
+„filială” înseamnă o filială astfel cum este definită la articolul 4 alineatul (1) punctul 16 din Regulamentul (UE) nr. 575/2013;
+20.
+„entitate supravegheată” înseamnă oricare dintre următoarele: (a) o instituție de credit cu sediul într-un stat membru participant; (b) o societate financiară holding cu sediul într-un stat membru participant; (c) o societate financiară holding mixtă cu sediul într-un stat membru participant, cu condiția să îndeplinească condițiile stabilite la punctul 21 litera (b); (d) o sucursală înființată într-un stat membru participant de o instituție de credit cu sediul într-un stat membru neparticipant.
+O contraparte centrală (CPC), astfel cum este definită la articolul 2 alineatul (1) din Regulamentul (UE) nr. 648/2012 al Parlamentului European și al Consiliului (9), care se califică drept instituție de credit în sensul Directivei 2013/36/UE, este considerată entitate supravegheată în conformitate cu Regulamentul privind MUS, prezentul regulament și legislația relevantă a Uniunii fără a aduce atingere supravegherii CPC de către ANC relevante, astfel cum se prevede în Regulamentul (UE) nr. 648/2012;
+21.
+„grup supravegheat” înseamnă oricare dintre următoarele:
+(a)
+un grup a cărui întreprindere-mamă este o instituție de credit sau o societate financiară holding care are sediul principal într-un stat membru participant;
+(b)
+un grup a cărui întreprindere-mamă este o societate financiară holding mixtă cu sediul principal într-un stat membru participant, în cazul în care coordonatorul conglomeratului financiar, în sensul Directivei 2002/87/CE a Parlamentului European și a Consiliului (10), este o autoritate competentă pentru supravegherea instituțiilor de credit și este și coordonator în funcția sa de autoritate de supraveghere a instituțiilor de credit;
+(c)
+entități supravegheate care au fiecare sediul principal în același stat membru participant, cu condiția ca acestea să fie afiliate în mod permanent la un organism central care le supraveghează în condițiile stabilite la articolul 10 din Regulamentul (UE) nr. 575/2013 și care are sediul în același stat membru participant;
+22.
+„grup supravegheat semnificativ” înseamnă un grup supravegheat care are statutul de grup supravegheat semnificativ în temeiul unei decizii a BCE bazate pe articolul 6 alineatul (4) sau pe articolul 6 alineatul (5) litera (b) din Regulamentul privind MUS;
+23.
+„grup supravegheat mai puțin semnificativ” înseamnă un grup supravegheat care nu are statutul de grup supravegheat semnificativ în sensul articolului 6 alineatul (4) din Regulamentul privind MUS;
+24.
+„procedură a BCE în materie de supraveghere” înseamnă orice activitate a BCE orientată către pregătirea emiterii unei decizii a BCE în materie de supraveghere, inclusiv proceduri comune și impunerea de sancțiuni administrative pecuniare. Toate procedurile BCE în materie de supraveghere fac obiectul părții III. De asemenea, partea III se aplică în cazul impunerii de sancțiuni administrative pecuniare, cu excepția cazului în care partea X prevede altfel;
+25.
+„procedură a ANC în materie de supraveghere” înseamnă orice activitate a ANC orientată către pregătirea emiterii unei decizii în materie de supraveghere de către ANC, care este adresată uneia sau mai multor entități supravegheate sau grupuri supravegheate sau uneia sau mai multor persoane, inclusiv impunerea de sancțiuni administrative;
+26.
+„decizie a BCE în materie de supraveghere” înseamnă un act juridic adoptat de BCE în exercitarea atribuțiilor și prerogativelor conferite acesteia prin Regulamentul privind MUS, care ia forma unei decizii a BCE, este adresată uneia sau mai multor entități supravegheate sau grupuri supravegheate ori uneia sau mai multor alte persoane și care nu este un act juridic de aplicare generală;
+27.
+„țară terță” înseamnă o țară care nu este un stat membru sau un stat membru din Spațiul Economic European;
+28.
+„zi lucrătoare” înseamnă o zi care nu este sâmbătă, duminică sau o sărbătoare legală aplicabilă BCE în conformitate cu calendarul aplicabil BCE (11).
+PARTEA II
+ORGANIZAREA MUS
+TITLUL 1
+STRUCTURI PENTRU SUPRAVEGHEREA ENTITĂȚILOR SUPRAVEGHEATE SEMNIFICATIVE ȘI MAI PUȚIN SEMNIFICATIVE
+CAPITOLUL 1
+Supravegherea entităților supravegheate semnificative
+Articolul 3
+Echipe comune de supraveghere
+(1)   Se înființează o echipă comună de supraveghere pentru supravegherea fiecărei entități supravegheate semnificative sau a fiecărui grup supravegheat semnificativ din statele membre participante. Fiecare echipă comună de supraveghere este compusă din membri ai personalului BCE și ANC numiți în conformitate cu articolul 4, care lucrează sub coordonarea unui membru desemnat al personalului BCE (denumit în continuare „coordonatorul ECS”) și a unuia sau mai multor subcoordonatori din cadrul ANC, astfel cum se detaliază la articolul 6.
+(2)   Fără a aduce atingere altor dispoziții din prezentul regulament, atribuțiile unei echipe comune de supraveghere includ următoarele, fără a se limita la acestea:
+(a)
+realizează procesul de supraveghere și evaluare (PSE) prevăzut la articolul 97 din Directiva 2013/36/UE pentru entitatea supravegheată semnificativă sau pentru grupul supravegheat semnificativ pe care o/îl supraveghează;
+(b)
+ținând seama de PSE, participă la pregătirea unui program de supraveghere prudențială care urmează a fi propus Consiliului de supraveghere, inclusiv a unui plan de inspecție la fața locului, astfel cum se prevede la articolul 99 din Directiva 2013/36/UE, pentru respectiva entitate supravegheată semnificativă sau respectivul grup supravegheat semnificativ;
+(c)
+pune în aplicare programul de supraveghere prudențială aprobat de BCE și orice decizii ale BCE în materie de supraveghere cu privire la entitatea supravegheată semnificativă sau grupul supravegheat semnificativ care face obiectul supravegherii;
+(d)
+asigură coordonarea cu echipa de inspecție la fața locului prevăzută în partea XI în ceea ce privește punerea în aplicare a planului de inspecție la fața locului;
+(e)
+contactează ANC, după caz.
+Articolul 4
+Constituirea și componența echipelor comune de supraveghere
+(1)   BCE este responsabilă cu constituirea și componența echipelor comune de supraveghere. Numirea membrilor personalului din cadrul ANC în echipele comune de supraveghere este făcută de ANC respective în conformitate cu alineatul (2).
+(2)   În conformitate cu principiile prevăzute la articolul 6 alineatul (8) din Regulamentul privind MUS și fără a aduce atingere articolului 31 din acel regulament, ANC numesc una sau mai multe persoane din personalul acestora ca membru/i al/ai unei echipe comune de supraveghere. Un membru al personalului ANC poate fi numit membru al mai multor echipe comune de supraveghere.
+(3)   Fără a aduce atingere alineatului (2), BCE poate solicita ANC să modifice numirile efectuate în cazul în care este oportun pentru componența unei echipe comune de supraveghere.
+(4)   Atunci când mai multe ANC exercită atribuții de supraveghere într-un stat membru participant sau atunci când într-un stat membru participant legislația națională conferă unei BCN atribuții specifice de supraveghere, iar BCN nu este o ANC, autoritățile relevante își coordonează participarea în cadrul echipelor comune de supraveghere.
+(5)   BCE și ANC se consultă reciproc și ajung la un acord cu privire la utilizarea resurselor ANC în ceea ce privește echipele comune de supraveghere.
+Articolul 5
+Implicarea membrilor personalului BCN ale statelor membre participante
+(1)   BCN ale statelor membre participante care sunt implicate în supravegherea prudențială a unei entități supravegheate semnificative sau a unui grup supravegheat semnificativ în temeiul legislației naționale a acestora, dar care nu sunt ANC, pot, de asemenea, să numească unul sau mai mulți membri ai personalului lor într-o echipă comună de supraveghere.
+(2)   BCE este informată cu privire la aceste numiri, iar articolul 4 se aplică în consecință.
+(3)   Atunci când membrii personalului BCN ale statelor membre participante sunt numiți într-o echipă comună de supraveghere, trimiterile la ANC în ceea ce privește echipele comune de supraveghere se interpretează ca incluzând o trimitere la aceste BCN.
+Articolul 6
+Coordonatorul și subcoordonatorii ECS
+(1)   Coordonatorul ECS, asistat de subcoordonatorii din cadrul ANC definiți la alineatul (2), asigură coordonarea lucrărilor în cadrul echipei comune de supraveghere. În acest sens, membrii echipei comune de supraveghere urmează instrucțiunile coordonatorului ECS în ceea ce privește atribuțiile acestora în echipa comună de supraveghere. Aceasta nu aduce atingere atribuțiilor și obligațiilor acestora în cadrul ANC respective.
+(2)   Fiecare ANC care numește în echipa comună de supraveghere mai mult de un membru al personalului îl desemnează pe unul dintre aceștia drept subcoordonator (denumit în continuare „subcoordonator din cadrul ANC”). Subcoordonatorii din cadrul ANC îl asistă pe coordonatorul ECS la organizarea și coordonarea atribuțiilor în echipa comună de supraveghere, în special în ceea ce privește membrii personalului care au fost numiți de aceeași ANC ca și subcoordonatorul din cadrul ANC relevant. Subcoordonatorul din cadrul ANC poate da instrucțiuni membrilor echipei comune de supraveghere numiți de aceeași ANC, cu condiția ca acestea să nu intre în conflict cu instrucțiunile date de coordonatorul ECS.
+CAPITOLUL 2
+Supravegherea entităților supravegheate mai puțin semnificative
+Articolul 7
+Implicarea membrilor personalului din alte ANC într-o echipă de supraveghere a unei ANC
+Fără a aduce atingere articolului 31 alineatul (1) din Regulamentul privind MUS, atunci când, în ceea ce privește supravegherea entităților supravegheate mai puțin semnificative, BCE stabilește că este oportună implicarea membrilor personalului uneia sau mai multor altor ANC în echipa de supraveghere a unei ANC, BCE poate solicita acesteia din urmă să implice membri ai personalului acestor alte ANC.
+TITLUL 2
+SUPRAVEGHEREA PE BAZĂ CONSOLIDATĂ ȘI PARTICIPAREA BCE ȘI A ANC ÎN COLEGIILE DE SUPRAVEGHETORI
+Articolul 8
+Supravegherea pe bază consolidată
+(1)   BCE efectuează supravegherea pe bază consolidată astfel cum este prevăzut la articolul 111 din Directiva 2013/36/UE în ceea ce privește instituțiile de credit, societățile financiare holding sau societățile financiare holding mixte care sunt semnificative pe bază consolidată atunci când întreprinderea-mamă este fie o instituție-mamă dintr-un stat membru participant, fie o instituție-mamă din UE cu sediul într-un stat membru participant.
+(2)   ANC relevantă îndeplinește atribuțiile autorității responsabile cu supravegherea pe bază consolidată în ceea ce privește instituțiile de credit, societățile financiare holding sau societățile financiare holding mixte care sunt mai puțin semnificative pe bază consolidată.
+Articolul 9
+BCE ca președinte al unui colegiu de supraveghetori
+(1)   Atunci când BCE este autoritatea responsabilă cu supravegherea consolidată, aceasta prezidează colegiul înființat în conformitate cu articolul 116 din Directiva 2013/36/UE. ANC ale statelor membre participante în care își au sediul, dacă este cazul, întreprinderea-mamă, filialele și sucursalele semnificative în sensul articolului 51 din Directiva 2013/36/UE au dreptul să participe la colegiu în calitate de observatori.
+(2)   În cazul în care nu este constituit niciun colegiu în conformitate cu articolul 116 din Directiva 2013/36/UE, iar o entitate supravegheată semnificativă are sucursale în state membre neparticipante care sunt considerate semnificative în conformitate cu articolul 51 alineatul (1) din Directiva 2013/36/UE, BCE constituie un colegiu de supraveghetori cu autoritățile competente din statele membre gazdă.
+Articolul 10
+BCE și ANC ca membri ai unui colegiu de supraveghetori
+În cazul în care autoritatea responsabilă cu supravegherea consolidată nu este situată într-un stat membru participant, BCE și ANC participă la colegiul de supraveghetori în conformitate cu următoarele reguli și cu legislația relevantă a Uniunii:
+(a)
+în cazul în care entitățile supravegheate din statele membre participante sunt toate entități supravegheate semnificative, BCE participă la colegiul de supraveghetori în calitate de membru, în timp ce ANC au dreptul să participe la același colegiu în calitate de observatori;
+(b)
+în cazul în care entitățile supravegheate din statele membre participante sunt toate entități supravegheate mai puțin semnificative, ANC participă la colegiul de supraveghetori în calitate de membri;
+(c)
+în cazul în care entitățile supravegheate din statele membre participante sunt atât entități supravegheate mai puțin semnificative, cât și entități supravegheate semnificative, BCE și ANC participă la colegiul de supraveghetori în calitate de membri. ANC din statele membre participante în care își au sediul entitățile supravegheate semnificative au dreptul să participe la colegiul de supraveghetori în calitate de observatori.
+TITLUL 3
+PROCEDURI PENTRU DREPTUL DE STABILIRE ȘI LIBERTATEA DE A PRESTA SERVICII
+CAPITOLUL 1
+Proceduri pentru dreptul de stabilire și libertatea de a presta servicii în cadrul MUS
+Articolul 11
+Dreptul de stabilire al instituțiilor de credit în cadrul MUS
+(1)   Orice entitate supravegheată semnificativă care dorește să înființeze o sucursală pe teritoriul altui stat membru participant notifică intenția sa ANC din statul membru participant în care entitatea supravegheată semnificativă își are sediul principal. Informațiile sunt furnizate în conformitate cu cerințele prevăzute la articolul 35 alineatul (2) din Directiva 2013/36/UE. ANC informează imediat BCE cu privire la primirea acestei notificări.
+(2)   Oricare entitate supravegheată mai puțin semnificativă care dorește să înființeze o sucursală pe teritoriul altui stat membru participant notifică această intenție ANC care îi corespunde, în conformitate cu cerințele prevăzute la articolul 35 alineatul (2) din Directiva 2013/36/UE.
+(3)   Atunci când BCE nu ia nicio decizie în sens contrar în termen de două luni de la primirea notificării, sucursala prevăzută la alineatul (1) poate fi înființată și își poate începe activitatea. BCE comunică aceste informații ANC din statul membru participant în care va fi înființată sucursala.
+(4)   Atunci când ANC din statul membru de origine nu ia nicio decizie în sens contrar în termen de două luni de la primirea notificării, sucursala prevăzută la alineatul (2) poate fi înființată și își poate începe activitatea. ANC comunică aceste informații BCE și ANC din statul membru participant în care va fi înființată sucursala.
+(5)   În cazul modificării oricăreia dintre informațiile comunicate conform alineatelor (1) și (2), entitatea supravegheată notifică în scris această schimbare ANC care a primit informațiile inițiale cu cel puțin o lună înainte de implementarea modificării. Respectiva ANC informează ANC din statul membru în care se își are sediul sucursala.
+Articolul 12
+Exercitarea libertății de a presta servicii de către instituțiile de credit în cadrul MUS
+(1)   Orice entitate supravegheată semnificativă care dorește să exercite libertatea de a presta servicii prin desfășurarea activităților sale pe teritoriul altui stat membru participant pentru prima dată notifică intenția sa ANC din statul membru participant pe teritoriul căruia este situat sediul principal al entității supravegheate semnificative. Informațiile sunt furnizate în conformitate cu cerințele stabilite la articolul 39 alineatul (1) din Directiva 2013/36/UE. ANC informează imediat BCE despre primirea acestei notificări. ANC comunică notificarea și ANC din statul membru participant în care vor fi prestate serviciile.
+(2)   Orice entitate supravegheată mai puțin semnificativă care dorește să exercite libertatea de a presta servicii prin desfășurarea activităților sale pe teritoriul altui stat membru participant pentru prima dată notifică ANC care îi corespunde în conformitate cu cerințele stabilite la articolul 39 alineatul (1) din Directiva 2013/36/UE. Notificarea se comunică BCE și ANC din statul membru participant în care vor fi furnizate serviciile.
+CAPITOLUL 2
+Proceduri pentru dreptul de stabilire și libertatea de a presta servicii în cadrul MUS ale instituțiilor de credit cu sediul în state membre neparticipante
+Articolul 13
+Notificarea exercitării dreptului de stabilire în cadrul MUS de către instituțiile de credit cu sediul în statele membre neparticipante
+(1)   Atunci când autoritatea competentă dintr-un stat membru neparticipant comunică informațiile prevăzute la articolul 35 alineatul (2) din Directiva 2013/36/UE, în conformitate cu procedura stabilită la articolul 35 alineatul (3) al acesteia, ANC din statul membru participant în care urmează a fi înființată sucursala, respectiva ANC notifică imediat BCE cu privire la primirea acestei comunicări.
+(2)   În termen de două luni de la primirea comunicării din partea autorității competente a unui stat membru neparticipant, BCE, în cazul unei sucursale care este semnificativă în temeiul criteriilor prevăzute la articolul 6 din Regulamentul privind MUS și în partea IV a prezentului regulament, sau ANC relevantă, în cazul unei sucursale care este mai puțin semnificativă în temeiul criteriilor prevăzute la articolul 6 din Regulamentul privind MUS și în partea IV a prezentului regulament, pregătește supravegherea sucursalei în conformitate cu articolele 40-46 din Directiva 2013/36/UE și, dacă este necesar, stabilește condițiile în care, din motive de interes general, sucursala își poate desfășura activitatea în statul membru gazdă.
+(3)   ANC informează BCE cu privire la condițiile în care, în temeiul legislației naționale și din motive de interes general, o sucursală poate desfășura activități în statele membre ale acestor ANC.
+(4)   Orice modificare a informațiilor furnizate de instituția de credit care dorește înființarea unei sucursale conform literelor (b), (c) sau (d) de la articolul 35 alineatul (2) din Directiva 2013/36/UE este notificată ANC prevăzute la alineatul (1).
+Articolul 14
+Autoritatea competentă din statul membru gazdă pentru sucursale
+(1)   În conformitate cu articolul 4 alineatul (2) din Regulamentul privind MUS, BCE exercită prerogativele autorității competente din statul membru gazdă atunci când o sucursală este semnificativă în sensul articolului 6 alineatul (4) din acel regulament.
+(2)   Atunci când o sucursală este mai puțin semnificativă în sensul articolului 6 alineatul (4) din Regulamentul privind MUS, ANC din statul membru participant în care își are sediul sucursala exercită prerogativele autorității competente din statul membru gazdă.
+Articolul 15
+Notificarea exercitării libertății de a presta servicii în cadrul MUS de către instituțiile de credit cu sediul în statele membre neparticipante
+Atunci când autoritatea competentă dintr-un stat membru neparticipant transmite o notificare în sensul articolului 39 alineatul (2) din Directiva 2013/36/UE, ANC din statul membru participant în care se exercită libertatea de a presta servicii este destinatarul notificării. ANC informează imediat BCE cu privire la primirea acestei notificări.
+Articolul 16
+Autoritatea competentă din statul membru gazdă pentru libertatea de a presta servicii
+(1)   În conformitate cu articolul 4 alineatul (2) și în limitele prevăzute la articolul 4 alineatul (1) din Regulamentul privind MUS, BCE îndeplinește atribuțiile autorității competente din statul membru gazdă pentru instituțiile de credit cu sediul în statele membre neparticipante care exercită libertatea de a presta servicii în statele membre participante.
+(2)   În cazul în care libertatea de a presta servicii este de interes general, sub rezerva anumitor condiții prevăzute de legislația națională a statelor membre participante, ANC informează BCE cu privire la aceste condiții.
+CAPITOLUL 3
+Proceduri pentru dreptul de stabilire și exercitarea libertății de a presta servicii în ceea ce privește statele membre neparticipante
+Articolul 17
+Dreptul de stabilire și libertatea de a presta servicii în ceea ce privește statele membre neparticipante
+(1)   O entitate supravegheată semnificativă care dorește să înființeze o sucursală sau să exercite libertatea de a presta servicii pe teritoriul unui stat membru neparticipant notifică ANC relevantă cu privire la intenția sa în conformitate cu legislația Uniunii aplicabilă. ANC informează imediat BCE despre primirea acestei notificări. BCE exercită prerogativele autorității competente din statul membru de origine.
+(2)   O entitate supravegheată mai puțin semnificativă care dorește să înființeze o sucursală sau să exercite libertatea de a presta servicii pe teritoriul unui stat membru neparticipant notifică ANC relevantă cu privire la intenția sa în conformitate cu legislația aplicabilă a Uniunii. ANC relevantă exercită prerogativele autorității competente din statul membru de origine.
+TITLUL 4
+SUPRAVEGHEREA SUPLIMENTARĂ A CONGLOMERATELOR FINANCIARE
+Articolul 18
+Coordonator
+(1)   BCE preia funcția de coordonator al unui conglomerat financiar în conformitate cu criteriile stabilite în legislația relevantă a Uniunii pentru o entitate supravegheată semnificativă.
+(2)   ANC preia funcția de coordonator al unui conglomerat financiar în conformitate cu criteriile stabilite în legislația relevantă a Uniunii pentru o entitate supravegheată mai puțin semnificativă.
+PARTEA III
+DISPOZIȚII GENERALE APLICABILE FUNCȚIONĂRII MUS
+TITLUL 1
+PRINCIPII ȘI OBLIGAȚII
+Articolul 19
+Prezentare generală
+Prezenta parte stabilește (a) principiile generale pentru asigurarea funcționării MUS de către BCE și ANC și (b) dispozițiile pe care BCE urmează să le aplice atunci când desfășoară o procedură a BCE în materie de supraveghere.
+Principiile generale și dispozițiile aplicabile între BCE și ANC în cooperare strânsă sunt stabilite în partea IX.
+Articolul 20
+Datoria de a coopera cu bună credință
+BCE și ANC au datoria de a coopera cu bună credință și obligația de a face schimb de informații.
+Articolul 21
+Obligația generală de a face schimb de informații
+(1)   Fără a aduce atingere prerogativei BCE de a primi direct sau de a avea acces direct în mod continuu la informațiile raportate de entitățile supravegheate, ANC, în special, furnizează BCE în timp util și cu exactitate toate informațiile necesare pentru ca BCE să-și îndeplinească atribuțiile care îi sunt conferite prin Regulamentul privind MUS. Aceste informații includ informații provenind din activitățile de verificare și activitățile la fața locului ale ANC.
+(2)   În situațiile în care BCE obține informații direct de la persoanele fizice sau juridice prevăzute la articolul 10 alineatul (1) din Regulamentul privind MUS, aceasta transmite ANC în cauză aceste informații în timp util și cu exactitate. Aceste informații includ, în special, informațiile necesare pentru ca ANC să-și îndeplinească rolul de susținere a BCE.
+(3)   Fără a aduce atingere alineatului (2), BCE asigură ANC accesul regulat la informațiile actualizate necesare pentru îndeplinirea atribuțiilor ANC în materie de supraveghere prudențială.
+Articolul 22
+Dreptul BCE de a da instrucțiuni ANC sau AND să-și utilizeze prerogativele și să ia măsuri în cazul în care BCE are o atribuție de supraveghere, dar nu și prerogativa aferentă
+(1)   În măsura în care este necesar pentru îndeplinirea atribuțiilor care îi sunt conferite prin Regulamentul privind MUS, BCE poate solicita, prin intermediul unor instrucțiuni, ca ANC sau AND sau ambele să facă uz de prerogativele lor în temeiul și în conformitate cu condițiile prevăzute în legislația națională și în conformitate cu articolul 9 din Regulamentul privind MUS, în cazul în care Regulamentul privind MUS nu conferă BCE astfel de prerogative.
+(2)   ANC și/sau, în ceea ce privește articolul 5 din Regulamentul privind MUS, AND informează fără întârzieri nejustificate BCE cu privire la exercitarea acestor prerogative.
+Articolul 23
+Regimul lingvistic între BCE și ANC
+BCE și ANC adoptă mecanisme pentru comunicarea între ele în cadrul MUS, inclusiv limba (limbile) care urmează a fi folosită(e).
+Articolul 24
+Regimul lingvistic între BCE și persoanele juridice sau fizice, inclusiv entitățile supravegheate
+(1)   Orice document pe care o entitate supravegheată sau orice altă persoană juridică sau fizică inclusă individual în sfera de aplicare a procedurilor BCE în materie de supraveghere îl transmite BCE poate fi redactat în oricare din limbile oficiale ale Uniunii, aleasă de către entitatea supravegheată sau persoana respectivă.
+(2)   BCE, entitățile supravegheate și orice altă persoană juridică sau fizică inclusă individual în sfera de aplicare a procedurilor BCE în materie de supraveghere pot conveni să utilizeze în mod exclusiv una dintre limbile oficiale ale Uniunii în comunicarea scrisă dintre ele, inclusiv în ceea ce privește deciziile BCE în materie de supraveghere.
+Revocarea unui asemenea acord privind utilizarea unei limbi afectează numai elementele procedurii BCE în materie de supraveghere care nu au fost îndeplinite încă.
+În cazul în care participanții la o audiere solicită să fie audiați într-o limbă oficială a Uniunii, alta decât limba procedurii BCE în materie de supraveghere, această cerință este notificată BCE cu suficient timp în avans pentru a întreprinde demersurile necesare.
+TITLUL 2
+DISPOZIȚII GENERALE PRIVIND PROCESUL ECHITABIL PENTRU ADOPTAREA DECIZIILOR BCE ÎN MATERIE DE SUPRAVEGHERE
+CAPITOLUL 1
+Procedurile BCE în materie de supraveghere
+Articolul 25
+Principii generale
+(1)   Orice proceduri ale BCE în materie de supraveghere inițiate în conformitate cu articolul 4 și capitolul III secțiunea 2 din Regulamentul privind MUS se desfășoară în conformitate cu articolul 22 din Regulamentul privind MUS și cu dispozițiile din prezentul titlu.
+(2)   Dispozițiile prezentului titlu nu se aplică procedurilor desfășurate de comitetul administrativ de control.
+Articolul 26
+Părți
+(1)   Părțile la o procedură a BCE în materie de supraveghere sunt:
+(a)
+cele care depun o cerere;
+(b)
+cele cărora BCE intenționează să le adreseze sau le-a adresat o decizie a BCE în materie de supraveghere.
+(2)   ANC nu sunt considerate părți.
+Articolul 27
+Reprezentarea unei părți
+(1)   O parte poate fi reprezentată de către reprezentanții legali sau statutari ai acesteia sau de către orice alt reprezentant împuternicit printr-un mandat scris să ia orice măsuri cu privire la procedura BCE în materie de supraveghere.
+(2)   Orice revocare a mandatului produce efecte numai de la primirea de către BCE a unei revocări scrise. BCE confirmă primirea unei astfel de revocări.
+(3)   Atunci când o parte a desemnat un reprezentant într-o procedură a BCE în materie de supraveghere, BCE contactează numai reprezentatul desemnat în această procedură în materie de supraveghere, cu excepția cazului în care anumite circumstanțe impun BCE să contacteze partea în mod direct. În acest din urmă caz, reprezentantul este informat.
+Articolul 28
+Obligațiile generale ale BCE și ale părților la o procedură a BCE în materie de supraveghere
+(1)   O procedură a BCE în materie de supraveghere poate fi inițiată din oficiu sau la solicitarea unei părți. Sub rezerva alineatului (3), BCE stabilește faptele care vor fi relevante pentru adoptarea deciziei sale finale în fiecare procedură a BCE în materie de supraveghere din oficiu.
+(2)   În evaluarea sa, BCE ține seama de toate circumstanțele relevante.
+(3)   Sub rezerva legislației Uniunii, o parte trebuie să participe la o procedură a BCE în materie de supraveghere și să ofere asistență pentru clarificarea faptelor. În procedurile BCE în materie de supraveghere inițiate la solicitarea unei părți, BCE poate limita propria stabilire a faptelor la a cere părții să furnizeze informațiile relevante privind faptele.
+Articolul 29
+Proba în procedurile BCE în materie de supraveghere
+(1)   Pentru a stabili faptele unui caz, BCE utilizează probele pe care, după o analiză atentă, le consideră adecvate.
+(2)   Părțile, sub rezerva legislației Uniunii, asistă BCE în stabilirea faptelor cazului. În special, sub rezerva limitelor referitoare la procedurile de sancționare prevăzute de legislația Uniunii, părțile declară cu bună credință faptele care le sunt cunoscute.
+(3)   BCE poate stabili un termen până la care părțile pot furniza probe.
+Articolul 30
+Martori și experți în procedurile BCE în materie de supraveghere
+(1)   BCE poate audia martori și experți dacă apreciază necesar acest lucru.
+(2)   Atunci când BCE numește un expert, aceasta definește atribuția acestui expert într-un acord și stabilește un termen până la care expertul își transmite raportul.
+(3)   Atunci când BCE audiază martori sau experți, aceștia au dreptul la rambursarea la cerere a cheltuielilor de deplasare și ședere. Martorii au dreptul la compensație pentru pierderea de venituri, iar experții la onorariile convenite pentru serviciile acestora, după ce și-au prezentat declarațiile. Compensația este furnizată în conformitate cu dispozițiile corespunzătoare aplicabile în cazul compensării martorilor și remunerării experților de către Curtea de Justiție a Uniunii Europene.
+(4)   BCE poate impune ca persoanele menționate la articolul 11 alineatul (1) litera (c) din Regulamentul privind MUS să se prezinte în calitate de martori la sediul BCE sau în orice alt loc de pe teritoriul unui stat membru participant stabilit de BCE. Atunci când o persoană menționată la articolul 11 alineatul (1) litera (c) din Regulamentul privind MUS este o persoană juridică, persoanele fizice care reprezintă această persoană juridică sunt obligate să participe în conformitate cu teza anterioară.
+Articolul 31
+Dreptul de a fi audiat
+(1)   Înainte ca BCE să poată adopta o decizie a BCE în materie de supraveghere adresată unei părți care să afecteze negativ drepturile acestei părți, partea trebuie să aibă posibilitatea de a transmite BCE comentarii în scris cu privire la faptele, obiecțiile și temeiul juridic relevante pentru decizia BCE în materie de supraveghere. În cazul în care BCE consideră adecvat, aceasta poate acorda părților posibilitatea să prezinte în cadrul unei ședințe comentarii cu privire la faptele, obiecțiile și temeiul juridic relevante pentru decizia BCE în materie de supraveghere. Notificarea prin care BCE acordă părții posibilitatea de a-și transmite comentariile menționează conținutul material al deciziei BCE în materie de supraveghere pe care BCE intenționează să o adopte și faptele materiale, obiecțiile și temeiul juridic pe care BCE intenționează să-și fundamenteze decizia. Capitolul III secțiunea 1 din Regulamentul privind MUS nu face obiectul dispozițiilor din prezentul articol.
+(2)   În cazul în care BCE acordă unei părți posibilitatea de a prezenta în cadrul unei ședințe comentarii cu privire la faptele, obiecțiile și temeiul juridic relevante pentru decizia BCE în materie de supraveghere, cu excepția unei absențe motivate, absența părții nu reprezintă un motiv de amânare a ședinței. În cazul în care partea absentează motivat, BCE poate amâna ședința sau poate acorda părții posibilitatea de a prezenta în scris comentarii asupra faptelor, obiecțiilor și temeiului juridic relevante pentru decizia BCE în materie de supraveghere. BCE întocmește procesul-verbal al ședinței, care urmează a fi semnat de către părți, și oferă părților o copie a procesului-verbal.
+(3)   În principiu, părții i se acordă posibilitatea de a transmite comentarii în scris în termen de două săptămâni de la primirea unei declarații în care sunt prezentate faptele, obiecțiile și temeiul juridic pe care BCE intenționează să-și întemeieze decizia BCE în materie de supraveghere.
+La cererea părții, BCE poate prelungi termenul, după caz.
+În anumite circumstanțe, BCE poate scurta termenul la trei zile lucrătoare. În plus, termenul este scurtat la trei zile lucrătoare în situațiile acoperite de articolele 14 și 15 din Regulamentul privind MUS.
+(4)   Fără a aduce atingere alineatului (3) și sub rezerva alineatului (5), BCE poate adopta o decizie a BCE în materie de supraveghere adresată unei părți care să afecteze negativ drepturile acelei părți, fără a acorda părții posibilitatea de a prezenta comentarii cu privire la faptele, obiecțiile și temeiul juridic relevante pentru decizia BCE în materie de supraveghere înainte de adoptarea acesteia în cazul în care este considerată necesară adoptarea urgentă a unei decizii pentru a preveni prejudicii semnificative în sistemul financiar.
+(5)   În cazul în care este adoptată o decizie a BCE urgentă în materie de supraveghere în conformitate cu alineatul (4), părții i se acordă posibilitatea de a prezenta în scris comentarii cu privire la faptele, obiecțiile și temeiul juridic relevante pentru decizia BCE în materie de supraveghere, fără întârzieri nejustificate, după adoptarea acesteia. În principiu, părții i se dă posibilitatea de a-și transmite în scris comentariile în termen de două săptămâni de la primirea deciziei BCE în materie de supraveghere. La cererea părții, BCE poate prelungi termenul-limită; totuși, acest termen nu poate să depășească șase luni. BCE verifică decizia BCE în materie de supraveghere pornind de la comentariile părților și o poate confirma, revoca, modifica sau o poate revoca și înlocui cu o nouă decizie a BCE în materie de supraveghere.
+(6)   Pentru procedurile BCE în materie de supraveghere referitoare la sancțiuni întemeiate pe articolul 18 din Regulamentul privind MUS și partea X din prezentul regulament, alineatele (4) și (5) nu se aplică.
+Articolul 32
+Accesul la dosare într-o procedură a BCE în materie de supraveghere
+(1)   Drepturile la apărare ale părților în cauză sunt respectate pe deplin în procedurile BCE în materie de supraveghere. În acest scop și după deschiderea procedurii BCE în materie de supraveghere, părțile au dreptul de acces la dosarul BCE, sub rezerva interesului legitim al persoanelor fizice și juridice, altele decât partea relevantă, de protejare a secretelor economice ale acestora. Dreptul de acces la un dosar nu se extinde și la informațiile confidențiale. ANC transmit BCE, fără întârzieri nejustificate, orice solicitare primită de către acestea cu privire la accesul la dosare legate de procedurile BCE în materie de supraveghere.
+(2)   Dosarele constau în toate documentele obținute, produse sau agregate de BCE în cursul procedurii BCE în materie de supraveghere, indiferent de mediul de stocare.
+(3)   Nimic din prezentul articol nu împiedică BCE sau ANC să divulge și să utilizeze informațiile necesare pentru demonstrarea unei încălcări.
+(4)   BCE poate stabili ca accesul la un dosar să fie acordat într-una sau mai multe dintre modalitățile următoare, ținând cont în mod corespunzător de capacitățile tehnice ale părților:
+(a)
+prin intermediul unui CD-ROM sau al oricărui dispozitiv electronic de stocare a datelor, inclusiv unul care poate deveni disponibil în viitor;
+(b)
+prin copii pe suport de hârtie ale dosarului care poate fi accesat, transmise acestora prin poștă;
+(c)
+prin invitarea acestora să examineze la sediul BCE dosarul care poate fi accesat.
+(5)   În sensul prezentului articol, informațiile confidențiale pot include documente interne ale BCE și ANC și corespondența dintre BCE și o ANC sau dintre ANC.
+CAPITOLUL 2
+Deciziile BCE în materie de supraveghere
+Articolul 33
+Motivarea deciziilor BCE în materie de supraveghere
+(1)   Sub rezerva alineatului (2), o decizie a BCE în materie de supraveghere este însoțită de motivarea acesteia.
+(2)   Motivarea conține faptele materiale și temeiurile juridice pe care se întemeiază decizia BCE în materie de supraveghere.
+(3)   Sub rezerva articolului 31 alineatul (4), BCE își întemeiază decizia în materie de supraveghere numai pe faptele și obiecțiile cu privire la care o parte a putut prezenta comentarii.
+Articolul 34
+Efectul suspensiv
+Fără a aduce atingere dispozițiilor articolului 278 TFUE și articolului 24 alineatul (8) din Regulamentul privind MUS, BCE poate decide ca aplicarea unei decizii a BCE în materie de supraveghere să fie suspendată fie: (a) prin prevederea acestei suspendări în decizia BCE în materie de supraveghere; fie (b) la solicitarea destinatarului unei decizii a BCE în materie de supraveghere, în alte cazuri decât o solicitare de control de către comitetul administrativ de control.
+Articolul 35
+Notificarea deciziilor BCE în materie de supraveghere
+(1)   BCE poate notifica unei părți o decizie a BCE în materie de supraveghere: (a) oral; (b) prin transmiterea sau înmânarea unei copii a deciziei în materie de supraveghere; (c) prin scrisoare recomandată cu confirmare de primire; (d) prin serviciu de curierat rapid; (e) prin telefax; sau (f) pe cale electronică, în conformitate cu alineatul (10).
+(2)   În cazul în care un reprezentant este împuternicit prin mandat scris, BCE poate notifica reprezentantului decizia BCE în materie de supraveghere. În aceste cazuri, BCE nu este obligată să notifice decizia BCE în materie de supraveghere și entității supravegheate reprezentate de acel reprezentant.
+(3)   În cazul notificării orale a unei decizii a BCE în materie de supraveghere, se consideră că notificarea deciziei a fost făcută destinatarului dacă un membru al personalului BCE a informat cu privire la decizia BCE în materie de supraveghere fie: (a) persoana fizică relevantă, în cazul unei persoane fizice; fie (b) un agent autorizat în acest sens al persoanei juridice, în cazul unei persoane juridice. În acest caz, după această notificare orală, fără întârzieri nejustificate, destinatarului i se transmite o copie scrisă a deciziei BCE în materie de supraveghere.
+(4)   În cazul notificării unei decizii a BCE în materie de supraveghere prin scrisoare recomandată cu confirmare de primire, se consideră că notificarea deciziei BCE în materie de supraveghere a fost făcută destinatarului în a zecea zi de la predarea scrisorii la furnizorul de servicii poștale, cu excepția cazului în care confirmarea de primire indică primirea scrisorii la o dată diferită.
+(5)   În cazul notificării unei decizii a BCE în materie de supraveghere prin serviciu de curierat rapid, se consideră că notificarea deciziei BCE în materie de supraveghere a fost făcută destinatarului în a zecea zi de la predarea scrisorii la serviciul de curierat, cu excepția cazului în care recipisa de primire emisă de serviciul de curierat indică primirea scrisorii la o dată diferită.
+(6)   În sensul alineatelor (4) și (5), decizia BCE în materie de supraveghere trebuie să fie transmisă la o adresă care permite comunicarea deciziei (o adresă valabilă). O adresă valabilă este:
+(a)
+în cazul unei proceduri a BCE în materie de supraveghere inițiate la cererea sau solicitarea destinatarului unei decizii a BCE în materie de supraveghere, adresa furnizată de destinatar în cererea sau solicitarea acestuia;
+(b)
+în cazul unei entități supravegheate, ultima adresă oficială a sediului principal furnizată BCE de entitatea supravegheată;
+(c)
+în cazul unei persoane fizice, ultima adresă furnizată BCE, iar dacă nicio adresă nu este furnizată BCE și persoana fizică este un angajat, membru al organelor de conducere sau acționar al unei entități supravegheate, adresa oficială a entității supravegheate în conformitate cu litera (b).
+(7)   Fiecare persoană care este parte la o procedură a BCE în materie de supraveghere transmite BCE, la cerere, o adresă valabilă.
+(8)   În cazul în care persoana își are sediul sau domiciliul într-un stat care nu este un stat membru, BCE poate solicita părții să numească, într-un termen rezonabil, un destinatar autorizat care este rezident într-un stat membru sau care are sediul comercial într-un stat membru. În cazul în care nu este numit niciun destinatar autorizat în urma unei astfel de solicitări și, respectiv, până la numirea unui astfel de destinatar autorizat, orice comunicare poate fi transmisă în conformitate cu alineatele (3)-(5) și (9) la adresa părții care a fost pusă la dispoziția BCE.
+(9)   Atunci când persoana care este destinatarul unei decizii ale BCE în materie de supraveghere a furnizat BCE un număr de fax, BCE poate notifica decizia BCE în materie de supraveghere prin transmiterea prin telefax a unei copii a deciziei BCE în materie de supraveghere. Decizia BCE în materie de supraveghere este considerată ca fiind notificată destinatarului dacă BCE a primit raportul pentru verificarea transmiterii ce confirmă transmiterea cu succes a faxului.
+(10)   BCE poate stabili criteriile pe baza cărora o decizie a BCE în materie de supraveghere poate fi transmisă prin mijloace de comunicare electronice sau comparabile cu acestea.
+TITLUL 3
+RAPORTAREA ÎNCĂLCĂRILOR
+Articolul 36
+Raportarea încălcărilor
+Orice persoană poate transmite cu bună credință un raport direct către BCE dacă această persoană are motive rezonabile să creadă că raportul va indica încălcări ale actelor juridice prevăzute la articolul 4 alineatul (3) din Regulamentul privind MUS de către instituțiile de credit, societățile financiare holding, societățile financiare holding mixte sau autoritățile competente (inclusiv BCE).
+Articolul 37
+Protecția corespunzătoare pentru raportarea încălcărilor
+(1)   Atunci când o persoană transmite cu bună credință un raport cu privire la presupuse încălcări ale actelor juridice prevăzute la articolul 4 alineatul (3) din Regulamentul privind MUS de către entitățile supravegheate sau de către autoritățile competente, raportul este tratat ca un raport protejat.
+(2)   Toate datele personale privind atât persoana care transmite un raport protejat, cât și persoana presupus responsabilă de o încălcare, sunt protejate în conformitate cu cadrul privind protecția datelor aplicabil în Uniune.
+(3)   BCE nu dezvăluie identitatea unei persoane care a transmis un raport protejat fără obținerea în prealabil a consimțământului explicit al acelei persoane, cu excepția cazului în care această dezvăluire este impusă de o hotărâre a unei instanțe judecătorești în contextul unor investigații suplimentare sau al unor proceduri judiciare ulterioare.
+Articolul 38
+Proceduri pentru măsurile adoptate în urma rapoartelor
+(1)   BCE evaluează toate rapoartele referitoare la entitățile supravegheate semnificative. Aceasta evaluează și rapoartele referitoare la entitățile supravegheate mai puțin semnificative în ceea ce privește încălcări ale regulamentelor sau deciziilor BCE. În acest din urmă caz, atunci când ANC primesc aceste rapoarte, acestea le transmit BCE, fără să comunice identitatea persoanei care a făcut raportul, cu excepția cazului în care această persoană își dă consimțământul în mod explicit.
+(2)   Fără a aduce atingere alineatului (1), BCE transmite către ANC relevante rapoartele referitoare la o entitate supravegheată mai puțin semnificativă, fără a comunica identitatea persoanei care a făcut raportul, cu excepția cazului în care această persoană își dă consimțământul în mod explicit.
+(3)   BCE face schimb de informații cu ANC: (a) pentru a evalua dacă rapoartele au fost trimise atât BCE, cât și ANC relevante, și pentru a-și coordona eforturile; și (b) pentru a cunoaște rezultatul măsurilor adoptate ca urmare a rapoartelor transmise ANC.
+(4)   BCE își exercită în mod rezonabil puterea de apreciere pentru stabilirea modalității de evaluare a rapoartelor primite și a măsurilor care urmează a fi luate.
+(5)   În cazul unor presupuse încălcări de către entitățile supravegheate, entitatea supravegheată relevantă transmite BCE orice informații și documente solicitate de aceasta pentru a evalua rapoartele primite.
+(6)   În cazul unor presupuse încălcări de către autoritățile competente (altele decât BCE), BCE solicită autorității competente relevante să transmită comentarii cu privire la faptele raportate.
+(7)   În raportul său anual prevăzut la articolul 20 alineatul (2) din Regulamentul privind MUS, BCE transmite informații cu privire la rapoartele primite în formă prescurtată sau agregată, astfel încât entitățile supravegheate sau persoanele individuale să nu poată fi identificate.
+PARTEA IV
+STABILIREA STATUTULUI UNEI ENTITĂȚI SUPRAVEGHEATE CA SEMNIFICATIVĂ SAU MAI PUȚIN SEMNIFICATIVĂ
+TITLUL 1
+DISPOZIȚII GENERALE PRIVIND CLASIFICAREA ENTITĂȚILOR CA SEMNIFICATIVE SAU MAI PUȚIN SEMNIFICATIVE
+Articolul 39
+Clasificarea ca semnificativă a unei entități supravegheate pe bază individuală
+(1)   O entitate supravegheată este considerată entitate supravegheată semnificativă în cazul în care BCE stabilește acest lucru într-o decizie a BCE adresată entității supravegheate relevante în conformitate cu articolele 43-49, explicând motivele unei astfel de decizii.
+(2)   O entitate supravegheată încetează să fie clasificată ca entitate supravegheată semnificativă în cazul în care BCE stabilește, într-o decizie motivată a BCE adresată entității supravegheate, că este o entitate supravegheată mai puțin semnificativă sau că nu mai este o entitate supravegheată.
+(3)   O entitate supravegheată poate fi clasificată ca entitate supravegheată semnificativă pe baza oricăruia dintre următoarele elemente:
+(a)
+dimensiunea sa, stabilită în conformitate cu articolele 50-55 (denumită în continuare „criteriul dimensiunii”);
+(b)
+importanța sa pentru economia Uniunii sau a oricărui stat membru participant, stabilită în conformitate cu articolele 56-58 (denumită în continuare „criteriul importanței economice”);
+(c)
+caracterul semnificativ al acesteia în ceea ce privește activitățile transfrontaliere, stabilit în conformitate cu articolele 59 și 60 (denumit în continuare „criteriul activităților transfrontaliere”);
+(d)
+o solicitare de asistență financiară publică directă sau primirea acesteia din partea Mecanismului european de stabilitate (MES), stabilită în conformitate cu articolele 61-64 (denumită în continuare „criteriul asistenței financiare publice directe”);
+(e)
+faptul că entitatea supravegheată este una dintre cele mai semnificative trei instituții de credit dintr-un stat membru participant, stabilită în conformitate cu articolele 65 și 66.
+(4)   Entitățile supravegheate semnificative sunt supravegheate direct de BCE, cu excepția cazului în care circumstanțe specifice justifică supravegherea de către ANC relevantă în conformitate cu titlul 9 din prezenta parte.
+(5)   De asemenea, BCE supraveghează direct o entitate supravegheată mai puțin semnificativă sau un grup supravegheat mai puțin semnificativ în temeiul unei decizii a BCE adoptate în conformitate cu articolul 6 alineatul (5) litera (b) din Regulamentul privind MUS conform căreia BCE va exercita direct toate prerogativele relevante prevăzute la articolul 6 alineatul (4) din Regulamentul privind MUS. În scopurile MUS, o astfel de entitate supravegheată mai puțin semnificativă sau un astfel de grup supravegheat mai puțin semnificativ va fi clasificat ca semnificativ.
+(6)   Înainte de luarea deciziilor BCE prevăzute în prezentul articol, BCE se consultă cu ANC relevante. De asemenea, fiecare decizie a BCE prevăzută în prezentul articol este notificată ANC relevante.
+Articolul 40
+Clasificarea ca semnificative a entităților supravegheate care fac parte dintr-un grup
+(1)   În cazul în care una sau mai multe entități supravegheate fac parte dintr-un grup supravegheat, criteriile pentru stabilirea caracterului semnificativ se stabilește la cel mai înalt nivel de consolidare în cadrul statelor membre participante, în conformitate cu dispozițiile prevăzute în partea IV titlurile 3-7.
+(2)   Fiecare dintre entitățile supravegheate care fac parte dintr-un grup supravegheat este considerată a fi o entitate supravegheată semnificativă în oricare dintre circumstanțele următoare:
+(a)
+în cazul în care grupul supravegheat la cel mai înalt nivel de consolidare al acestuia în cadrul statelor membre participante îndeplinește criteriul dimensiunii, criteriul importanței economice sau criteriul activităților transfrontaliere;
+(b)
+în cazul în care una dintre entitățile supravegheate care fac parte din grupul supravegheat îndeplinește criteriul asistenței financiare publice directe;
+(c)
+în cazul în care una dintre entitățile supravegheate care fac parte din grupul supravegheat este una dintre cele mai semnificative trei instituții de credit dintr-un stat membru participant.
+(3)   Atunci când se stabilește că un grup supravegheat este semnificativ sau că un grup supravegheat nu mai este semnificativ, BCE adoptă o decizie a BCE privind clasificarea ca entitate supravegheată semnificativă sau privind retragerea clasificării ca entitate supravegheată semnificativă și furnizează datele de început și de sfârșit ale supravegherii directe de către BCE fiecărei entități supravegheate care face parte din grupul supravegheat în cauză, în conformitate cu criteriile și procedurile prevăzute la articolul 39.
+Articolul 41
+Dispoziții specifice privind sucursalele instituțiilor de credit cu sediul în state membre neparticipante
+(1)   Toate sucursalele deschise în același stat membru participant de către o instituție de credit cu sediul într-un stat membru neparticipant sunt considerate o singură entitate supravegheată în sensul prezentului regulament.
+(2)   Sucursalele deschise în state membre participante diferite de către o instituție de credit cu sediul într-un stat membru neparticipant sunt tratate individual, ca entități supravegheate separate, în sensul prezentului regulament.
+(3)   Fără a aduce atingere alineatului (1), sucursalele unei instituții de credit cu sediul într-un stat membru neparticipant sunt evaluate individual ca entități supravegheate separate și separat de filialele aceleiași instituții de credit, atunci când se stabilește dacă este îndeplinit oricare dintre criteriile prevăzute la articolul 6 alineatul (4) din Regulamentul privind MUS.
+Articolul 42
+Dispoziții specifice privind filialele instituțiilor de credit cu sediul în state membre neparticipante și în țări terțe
+(1)   Filialele cu sediul într-unul sau mai multe state membre participante ale unei instituții de credit care își are sediul principal într-un stat membru neparticipant sau într-o țară terță sunt evaluate separat de sucursalele acestei instituții de credit atunci când se stabilește dacă este îndeplinit oricare dintre criteriile prevăzute la articolul 6 alineatul (4) din Regulamentul privind MUS.
+(2)   Următoarele filiale sunt evaluate separat atunci când se stabilește dacă este îndeplinit sau nu oricare dintre criteriile prevăzute la articolul 6 alineatul (4) din Regulamentul privind MUS:
+(a)
+cele care au sediul într-un stat membru participant;
+(b)
+cele care aparțin unui grup a cărui întreprindere-mamă își are sediul principal într-un stat membru neparticipant sau într-o țară terță; și
+(c)
+cele care nu aparțin unui grup supravegheat în statele membre participante.
+TITLUL 2
+PROCEDURA DE CLASIFICARE A ENTITĂȚILOR SUPRAVEGHEATE CA ENTITĂȚI SUPRAVEGHEATE SEMNIFICATIVE
+CAPITOLUL 1
+Clasificarea ca semnificativă a unei entități supravegheate
+Articolul 43
+Verificarea statutului unei entități supravegheate
+(1)   Cu excepția cazului în care prezentul regulament prevede altfel, BCE verifică cel puțin anual măsura în care o entitate supravegheată semnificativă sau un grup supravegheat semnificativ continuă să îndeplinească oricare dintre criteriile prevăzute la articolul 6 alineatul (4) din Regulamentul privind MUS.
+(2)   Cu excepția cazului în care prezentul regulament prevede altfel, fiecare ANC verifică cel puțin anual măsura în care o entitate supravegheată mai puțin semnificativă sau un grup supravegheat mai puțin semnificativ îndeplinește oricare dintre criteriile prevăzute la articolul 6 alineatul (4) din Regulamentul privind MUS. În cazul unui grup supravegheat mai puțin semnificativ, ANC relevantă din statul membru participant în care își are sediul întreprinderea-mamă, stabilită la nivelul cel mai înalt de consolidare din statele membre participante, efectuează această verificare.
+(3)   BCE poate verifica, în orice moment după primirea de informații relevante, în special în cazurile prevăzute la articolul 52: (a) dacă o entitate supravegheată îndeplinește oricare dintre criteriile prevăzute la articolul 6 alineatul (4) din Regulamentul privind MUS; și (b) dacă o entitate supravegheată semnificativă nu mai îndeplinește oricare dintre criteriile prevăzute la articolul 6 alineatul (4) din Regulamentul privind MUS.
+(4)   În cazul în care ANC apreciază că o entitate supravegheată mai puțin semnificativă sau un grup supravegheat mai puțin semnificativ îndeplinește oricare dintre criteriile prevăzute la articolul 6 alineatul (4) din Regulamentul privind MUS, ANC relevantă informează BCE fără întârzieri nejustificate.
+(5)   La solicitarea BCE sau a unei ANC, BCE și ANC relevantă cooperează pentru a stabili dacă este îndeplinit vreunul dintre criteriile prevăzute la articolul 6 alineatul (4) din Regulamentul privind MUS cu privire la o entitate supravegheată sau un grup supravegheat.
+(6)   În cazul în care BCE (a) decide să preia supravegherea directă a unei entități supravegheate sau a unui grup supravegheat sau (b) decide că supravegherea directă a unei entități supravegheate sau a unui grup supravegheat de către BCE încetează, BCE și ANC relevantă cooperează pentru a asigura tranziția lipsită de dificultăți a competențelor de supraveghere. În special, un raport privind istoricul activității de supraveghere și profilul de risc al entității supravegheate este pregătit de ANC relevantă, atunci când BCE preia supravegherea directă a unei entități supravegheate, și de BCE, atunci când ANC relevantă devine competentă să supravegheze entitatea în cauză.
+(7)   BCE stabilește dacă o entitate supravegheată sau un grup supravegheat este semnificativ utilizând criteriile prevăzute la articolul 6 alineatul (4) din Regulamentul privind MUS în ordinea stabilită în acesta, și anume: (a) dimensiunea; (b) importanța pentru economia Uniunii sau a oricărui stat membru participant; (c) caracterul semnificativ al activităților transfrontaliere; (d) solicitarea sau primirea de asistență financiară publică direct de la MES; (e) faptul că este una dintre cele mai semnificative trei instituții de credit dintr-un stat membru participant.
+Articolul 44
+Procedura aplicabilă la stabilirea caracterului semnificativ al unei entități supravegheate
+(1)   Atunci când adoptă decizii cu privire la clasificarea unei entități supravegheate sau a unui grup supravegheat ca semnificativă/semnificativ în temeiul prezentului titlu, și în lipsa unei prevederi contrare, BCE aplică normele procedurale prevăzute în titlul 2 din Partea III a prezentului regulament.
+(2)   O decizie a BCE cu privire la clasificarea ca semnificativ(ă) a unei entități supravegheate sau a unui grup supravegheat este notificată de BCE în scris, în termenul prevăzut la articolul 45, fiecărei entități supravegheate vizate și, de asemenea, este comunicată ANC relevante. Pentru entitățile supravegheate care fac parte dintr-un grup supravegheat semnificativ, BCE notifică decizia BCE entității supravegheate aflate la cel mai înalt nivel de consolidare din statele membre participante și se asigură că toate entitățile supravegheate din cadrul grupului supravegheat semnificativ sunt informate corespunzător.
+(3)   Pentru entitățile supravegheate cărora BCE nu le transmite notificări conform alineatului (1), lista prevăzută la articolul 49 alineatul (2) servește drept notificare a clasificării lor ca mai puțin semnificative.
+(4)   BCE acordă fiecărei entități supravegheate relevante posibilitatea de a depune observații în scris înainte de adoptarea unei decizii a BCE în conformitate cu alineatul (1).
+(5)   În plus, BCE acordă ANC relevante, în conformitate cu articolul 39 alineatul (6), posibilitatea de a transmite observații și comentarii în scris, iar acestea sunt luate în considerare în mod corespunzător de către BCE.
+(6)   O entitate supravegheată sau un grup supravegheat este clasificat(ă) ca entitate supravegheată semnificativă sau ca grup supravegheat semnificativ de la data notificării deciziei BCE care stabilește că este o entitate supravegheată semnificativă sau un grup supravegheat semnificativ.
+CAPITOLUL 2
+Începerea și încetarea supravegherii directe de către BCE
+Articolul 45
+Începerea supravegherii directe de către BCE
+(1)   BCE precizează într-o decizie a BCE data la care urmează să preia supravegherea directă a unei entități supravegheate sau a unui grup supravegheat care a fost clasificat(ă) ca entitate supravegheată semnificativă sau ca grup supravegheat semnificativ. Această decizie a BCE poate fi aceeași cu decizia prevăzută la articolul 44 alineatul (2). Sub rezerva alineatului (2), BCE notifică această decizie a BCE fiecărei entități supravegheate în cauză cu cel puțin o lună înainte de data la care va prelua supravegherea directă.
+(2)   În cazul în care BCE preia supravegherea directă a unei entități supravegheate sau a unui grup supravegheat, în baza unei solicitări de sau a unei primiri de asistență financiară publică directă din partea MES, BCE notifică în timp util decizia BCE menționată la alineatul (1) fiecărei entități supravegheate în cauză, cu cel puțin o săptămână înainte de data la care va prelua supravegherea directă.
+(3)   BCE transmite ANC relevante copii ale deciziilor BCE prevăzute la alineatul (1).
+(4)   BCE preia supravegherea directă a unei entități supravegheate sau unui grup supravegheat cel mai târziu la 12 luni de la data la care BCE notifică acestei entități supravegheate sau acestui grup supravegheat o decizie a BCE în conformitate cu articolul 44 alineatul (2).
+(5)   În sensul prezentului articol, în cazul unui grup supravegheat, BCE notifică decizia BCE entității supravegheate aflate la cel mai înalt nivel de consolidare din statele membre participante și se asigură că toate entitățile supravegheate din acel grup sunt informate corespunzător până la termenul relevant.
+Articolul 46
+Încetarea supravegherii directe de către BCE
+(1)   Atunci când BCE stabilește că supravegherea directă de către BCE a unei entități supravegheate sau a unui grup supravegheat va înceta, BCE emite o decizie a BCE pentru fiecare entitate supravegheată în cauză, precizând data și motivele pentru care supravegherea directă va înceta. BCE adoptă această decizie cu cel puțin cu o lună înainte de data la care supravegherea directă de către BCE va înceta. De asemenea, BCE transmite ANC relevante o copie a acestei decizii a BCE. Articolul 45 alineatul (5) se aplică în mod corespunzător.
+(2)   BCE dă fiecărei entități supravegheate relevante posibilitatea de a depune observații în scris înainte de adoptarea unei decizii a BCE în temeiul alineatului (1).
+(3)   Orice decizie a BCE care precizează data la care urmează să înceteze supravegherea directă a unei entități supravegheate de către BCE poate fi emisă împreună cu decizia de clasificare ca mai puțin semnificativă a acelei entități supravegheate.
+Articolul 47
+Motive pentru încetarea supravegherii directe de către BCE
+(1)   În cazul unei entități supravegheate semnificative care este clasificată ca atare pe baza: (a) dimensiunii; (b) importanței pentru economia Uniunii sau a oricărui stat membru participant; sau (c) caracterului semnificativ al activităților transfrontaliere, sau pentru că face parte dintr-un grup supravegheat care îndeplinește cel puțin unul dintre aceste criterii, BCE adoptă o decizie a BCE pentru încetarea clasificării acesteia ca entitate supravegheată semnificativă și a supravegherii directe dacă, pentru trei ani calendaristici consecutivi, niciunul dintre criteriile menționate anterior și prevăzute la articolul 6 alineatul (4) din Regulamentul privind MUS nu a fost îndeplinit, fie la nivel individual, fie la nivelul grupului supravegheat de care aparține entitatea supravegheată.
+(2)   În cazul unei entități supravegheate care este clasificată ca semnificativă pe baza faptului că a fost solicitată asistență financiară publică directă de la MES pentru: (a) ea însăși; (b) grupul supravegheat de care aparține entitatea supravegheată; sau (c) orice entitate supravegheată care aparține acestui grup și care nu este semnificativă din alte motive, BCE adoptă o decizie a BCE pentru încetarea clasificării acesteia ca entitate supravegheată semnificativă și a supravegherii directe, în cazul în care acordarea asistenței financiare publice directe a fost refuzată sau asistența financiară publică directă a fost înapoiată în întregime sau a încetat. Această decizie, în cazul înapoierii sau încetării asistenței financiare publice directe, poate fi luată numai la trei ani calendaristici de la înapoierea completă sau încetarea asistenței financiare publice directe.
+(3)   În cazul unei entități supravegheate care este clasificată ca semnificativă pe baza faptului că este una dintre cele mai semnificative trei instituții de credit dintr-un stat membru participant, stabilită în conformitate cu articolele 65-66, sau care aparține grupului supravegheat al unei astfel de instituții de credit și care nu este semnificativă din alte motive, BCE adoptă o decizie a BCE pentru încetarea clasificării sale ca entitate supravegheată semnificativă și a supravegherii directe dacă, pentru trei ani calendaristici consecutivi, entitatea supravegheată relevantă nu a fost una dintre cele mai semnificative trei instituții de credit dintr-un stat membru participant.
+(4)   În cazul unei entități supravegheate care este supravegheată direct de către BCE în temeiul unei decizii a BCE adoptate în conformitate cu articolul 6 alineatul (5) litera (b) din Regulamentul privind MUS și care nu este semnificativă din alte motive, BCE adoptă o decizie a BCE pentru încetarea supravegherii directe de către BCE dacă, în marja rezonabilă de apreciere a acesteia, supravegherea directă nu mai este necesară pentru a asigura aplicarea consecventă a standardelor înalte de supraveghere.
+Articolul 48
+Proceduri în curs
+(1)   În cazul în care urmează să aibă loc o schimbare de competență între BCE și o ANC, autoritatea a cărei competență urmează să înceteze (denumită în continuare „autoritatea a cărei competență încetează”) informează autoritatea care urmează să devină competentă (denumită în continuare „autoritatea care preia supravegherea”) cu privire la orice procedură în materie de supraveghere inițiată în mod oficial și care necesită o decizie. Autoritatea a cărei competență încetează oferă aceste informații imediat ce ia cunoștință de schimbarea iminentă de competență. Autoritatea a cărei competență încetează actualizează aceste informații în mod continuu și, ca regulă generală, în mod lunar, atunci când sunt de raportat informații noi cu privire la o procedură în materie de supraveghere. Autoritatea care preia supravegherea poate, în cazuri justificate corespunzător, să permită o raportare mai puțin frecventă. În sensul articolelor 48 și 49, o procedură în materie de supraveghere înseamnă o procedură a BCE sau ANC în materie de supraveghere.
+Înainte de schimbarea competenței, autoritatea a cărei competență încetează contactează fără întârzieri nejustificate autoritatea care preia supravegherea, după inițierea oficială a oricărei proceduri noi în materie de supraveghere care necesită o decizie.
+(2)   În cazul în care competența de supraveghere se schimbă, autoritatea a cărei competență încetează depune eforturi pentru a finaliza orice procedură în materie de supraveghere aflată în curs care necesită o decizie înainte de data la care urmează să aibă loc modificarea competenței de supraveghere.
+(3)   În cazul în care o procedură în materie de supraveghere instituită în mod oficial, care necesită o decizie, nu poate fi încheiată înainte de data la care are loc o modificare a competenței de supraveghere, autoritatea a cărei competență încetează rămâne competentă să finalizeze respectiva procedură în materie de supraveghere aflată în curs. În acest sens, autoritatea a cărei competență încetează păstrează, de asemenea, toate prerogativele relevante până la finalizarea procedurii în materie de supraveghere. Autoritatea a cărei competență încetează finalizează respectiva procedură în materie de supraveghere aflată în curs în conformitate cu legislația aplicabilă în temeiul prerogativelor pe care le-a păstrat. Autoritatea a cărei competentă încetează informează autoritatea care preia supravegherea înainte de luarea oricărei decizii într-o procedură în materie de supraveghere care era în curs înainte de modificarea competenței. Aceasta transmite autorității care preia supravegherea o copie a deciziei luate și orice documente relevante legate de această decizie.
+(4)   Prin derogare de la alineatul (3), BCE poate decide, în termen de o lună de la primirea informațiilor necesare, să finalizeze evaluarea sa cu privire la procedura relevantă în materie de supraveghere inițiată în mod oficial și, în consultare cu ANC relevantă, să preia procedura în materie de supraveghere în cauză. În cazul în care, din motive ce țin de legislația națională, o decizie a BCE este necesară înainte de sfârșitul perioadei de evaluare prevăzute în teza anterioară, ANC transmite BCE informațiile necesare și precizează în special intervalul în care BCE trebuie să decidă dacă intenționează sau nu să preia procedura. Atunci când BCE preia o procedură în materie de supraveghere, aceasta notifică ANC relevante și părților decizia sa de a prelua procedura în materie de supraveghere în cauză. BCE precizează în decizia BCE consecințele preluării acestei proceduri în materie de supraveghere.
+(5)   BCE și ANC relevantă cooperează cu privire la finalizarea oricărei proceduri în curs și pot face schimb de informații relevante în acest sens.
+(6)   Acest articol nu se aplică procedurilor comune.
+CAPITOLUL 3
+Lista entităților supravegheate
+Articolul 49
+Publicare
+(1)   BCE publică o listă care cuprinde denumirea fiecărei entități supravegheate și fiecărui grup supravegheat care este supravegheat(ă) direct de BCE, indicând, atunci când este relevant pentru entitatea supravegheată, grupul supravegheat de care aceasta aparține, și temeiul juridic specific pentru această supraveghere directă. Această listă include, în cazul unei clasificări ca semnificativ(ă) pe baza criteriului dimensiunii, valoarea totală a activelor entității supravegheate sau ale grupului supravegheat. De asemenea, BCE publică denumirile entităților supravegheate care, deși îndeplinesc unul dintre criteriile prevăzute la articolul 6 alineatul (4) din Regulamentul privind MUS și, prin urmare, s-ar califica drept semnificative, sunt totuși considerate mai puțin semnificative de către BCE din cauza unor circumstanțe specifice în conformitate cu partea IV titlul 9 și, prin urmare, nu sunt supravegheate direct de către BCE.
+(2)   BCE publică o listă care cuprinde denumirea fiecărei entități supravegheate care este supravegheată de o ANC și denumirea ANC relevante.
+(3)   Listele prevăzute la alineatele (1) și (2) se publică electronic și sunt accesibile pe website-ul BCE.
+(4)   Listele prevăzute la alineatele (1) și (2) sunt actualizate în mod regulat.
+TITLUL 3
+STABILIREA CARACTERULUI SEMNIFICATIV PE BAZA DIMENSIUNII
+Articolul 50
+Stabilirea caracterului semnificativ pe baza dimensiunii
+(1)   Caracterul semnificativ al unei entități supravegheate sau al unui grup supravegheat bazat pe criteriul dimensiunii se stabilește în raport cu valoarea totală a activelor sale.
+(2)   O entitate supravegheată sau un grup supravegheat este clasificat(ă) ca semnificativ(ă) dacă valoarea totală a activelor sale depășește 30 miliarde EUR (denumit în continuare „pragul de dimensiune”).
+Articolul 51
+Baza pentru stabilirea caracterului semnificativ al unei entități supravegheate după dimensiune
+(1)   În cazul în care entitatea supravegheată face parte dintr-un grup supravegheat, valoarea totală a activelor sale se stabilește pe baza raportării consolidate prudențiale de la sfârșitul anului pentru grupul supravegheat în conformitate cu legislația aplicabilă.
+(2)   În cazul în care activele totale nu pot fi stabilite pe baza datelor prevăzute la alineatul (1), valoarea totală a activelor se stabilește pe baza celor mai recente conturi anuale consolidate auditate întocmite în conformitate cu Standardele internaționale de raportare financiară (International Financial Reporting Standards) (IFRS) care sunt aplicabile în Uniune în conformitate cu Regulamentul (CE) nr. 1606/2002 al Parlamentului European și al Consiliului (12) și, dacă aceste conturi anuale nu sunt disponibile, pe baza conturilor anuale consolidate întocmite în conformitate cu legislația contabilă națională aplicabilă.
+(3)   În cazul în care entitatea supravegheată nu face parte dintr-un grup supravegheat, valoarea totală a activelor se stabilește pe baza raportării individuale prudențiale de la sfârșitul anului în conformitate cu legislația aplicabilă.
+(4)   În cazul în care activele totale nu pot fi stabilite utilizând datele prevăzute la alineatul (3), valoarea totală a activelor se stabilește pe baza celor mai recente conturi anuale auditate întocmite în conformitate cu IFRS aplicabile în Uniune în conformitate cu Regulamentul (CE) nr. 1606/2002 și, în cazul în care aceste conturi anuale nu sunt disponibile, pe baza conturilor anuale întocmite în conformitate cu legislația contabilă națională aplicabilă.
+(5)   Dacă entitatea supravegheată este o sucursală a unei instituții de credit cu sediul într-un stat membru neparticipant, valoarea totală a activelor acesteia este stabilită pe baza datelor statistice raportate în conformitate cu Regulamentul (CE) nr. 25/2009 (BCE/2008/32) al Băncii Centrale Europene (13).
+Articolul 52
+Baza pentru stabilirea caracterului semnificativ după dimensiune în circumstanțe specifice sau excepționale
+(1)   În cazul în care, pentru o entitate supravegheată mai puțin semnificativă, există o modificare substanțială excepțională a circumstanțelor relevante pentru stabilirea caracterului semnificativ pe baza criteriului dimensiunii, ANC relevantă verifică dacă pragul de dimensiune este îndeplinit în continuare sau nu.
+În cazul unei astfel de schimbări cu privire la o entitate supravegheată semnificativă, BCE verifică dacă pragul de dimensiune este îndeplinit în continuare sau nu.
+O modificare substanțială excepțională a circumstanțelor relevante pentru stabilirea caracterului semnificativ pe baza criteriului dimensiunii include oricare dintre următoarele: (a) fuziunea a două sau mai multe instituții de credit; (b) vânzarea sau transferul unei divizii semnificative a entității; (c) transferul de acțiuni la o instituție de credit, astfel încât aceasta nu mai aparține unui grup supravegheat căruia îi aparținuse înainte de vânzare; (d) decizia definitivă de a efectua o lichidare ordonată a entității supravegheate (sau a grupului supravegheat); (e) situații de fapt comparabile.
+(2)   O entitate supravegheată mai puțin semnificativă și, în cazul unui grup supravegheat mai puțin semnificativ, entitatea supravegheată mai puțin semnificativă la nivelul cel mai înalt de consolidare din statele membre participante informează ANC relevantă cu privire la orice modificare menționată la alineatul (1).
+O entitate supravegheată semnificativă și, în cazul unui grup supravegheat semnificativ, entitatea supravegheată la nivelul cel mai înalt de consolidare din statele membre participante informează BCE cu privire la orice modificare menționată la alineatul (1).
+(3)   Prin derogare de la regula de trei ani prevăzută la articolul 47 alineatele (1)-(3), precum și în cazul unor circumstanțe excepționale, inclusiv cele prevăzute la alineatul (1), BCE decide, în consultare cu ANC, dacă entitățile supravegheate afectate sunt semnificative sau mai puțin semnificative, precum și data de la care supravegherea este efectuată de către BCE sau ANC.
+Articolul 53
+Grupuri de întreprinderi consolidate
+(1)   În scopul stabilirii caracterului semnificativ pe baza criteriului dimensiunii, grupul supravegheat de întreprinderi consolidate constă în întreprinderi care trebuie consolidate în scopuri prudențiale în conformitate cu legislația Uniunii.
+(2)   În scopul stabilirii caracterului semnificativ pe baza criteriului dimensiunii, grupul supravegheat de întreprinderi consolidate include filiale și sucursale din statele membre neparticipante și țări terțe.
+Articolul 54
+Metoda de consolidare
+Metoda de consolidare este metoda de consolidare aplicabilă în conformitate cu legislația Uniunii în scopuri prudențiale.
+Articolul 55
+Metoda de calculare a activelor totale
+În scopul stabilirii caracterului semnificativ al unei instituții de credit pe baza criteriului dimensiunii, „valoarea totală a activelor” este preluată din rândul „active totale” dintr-un bilanț întocmit în conformitate cu legislația Uniunii în scopuri prudențiale.
+TITLUL 4
+STABILIREA CARACTERULUI SEMNIFICATIV PE BAZA IMPORTANȚEI PENTRU ECONOMIA UNIUNII SAU A ORICĂRUI STAT MEMBRU PARTICIPANT
+Articolul 56
+Pragul importanței economice naționale
+O entitate supravegheată cu sediul într-un stat membru participant sau un grup supravegheat a cărui întreprindere-mamă are sediul într-un stat membru participant este clasificat(ă) drept semnificativ(ă) pe baza importanței sale pentru economia statului membru participant relevant în cazul în care:
+ (pragul importanței economice naționale);
+și
+A ≥ 5 miliarde EUR,
+unde:
+A
+este valoarea totală a activelor stabilită în conformitate cu articolele 51-55 pentru un anumit an calendaristic; și
+B
+este produsul intern brut la prețurile pieței definit la punctul 8.89 din anexa A la Regulamentul (UE) nr. 549/2013 al Parlamentului European și al Consiliului (14) (SEC 2010) și publicat de Eurostat pentru anul calendaristic respectiv.
+Articolul 57
+Criterii pentru stabilirea caracterului semnificativ pe baza importanței pentru economia Uniunii sau a oricărui stat membru participant
+(1)   BCE ține seama de criteriile următoare, în special atunci când evaluează dacă o entitate supravegheată sau un grup supravegheat este semnificativ(ă) pentru economia Uniunii sau a unui stat membru participant din alte motive decât cele prevăzute la articolul 56:
+(a)
+caracterul semnificativ al entității supravegheate sau al grupului supravegheat pentru sectoare economice specifice din Uniune sau dintr-un stat membru participant;
+(b)
+interconectarea entității supravegheate sau a grupului supravegheat cu economia Uniunii sau a unui stat membru participant;
+(c)
+substituibilitatea entității supravegheate sau a grupului supravegheat atât ca participant la piață, cât și ca prestator de servicii pentru clienți;
+(d)
+complexitatea activității, cea structurală și operațională a entității supravegheate sau a grupului supravegheat.
+(2)   Articolul 52 alineatul (3) se aplică în mod corespunzător.
+Articolul 58
+Stabilirea caracterului semnificativ pe baza importanței pentru economia oricărui stat membru participant la solicitarea unei ANC
+(1)   O ANC poate notifica BCE că apreciază că o entitate supravegheată este semnificativă în ceea ce privește economia națională a acesteia.
+(2)   BCE evaluează notificarea primită de la ANC pe baza criteriilor stabilite în articolul 57 alineatul (1).
+(3)   Articolul 57 se aplică în consecință.
+TITLUL 5
+STABILIREA CARACTERULUI SEMNIFICATIV PE BAZA CARACTERULUI SEMNIFICATIV AL ACTIVITĂȚILOR TRANSFRONTALIERE
+Articolul 59
+Criterii pentru stabilirea caracterului semnificativ pe baza caracterului semnificativ al activităților transfrontaliere ale unui grup supravegheat
+(1)   Un grup supravegheat poate fi considerat semnificativ de către BCE pe baza activităților sale transfrontaliere numai atunci când întreprinderea-mamă a unui grup supravegheat a înființat filiale, care la rândul lor sunt instituții de credit, în mai multe alte state membre participante.
+(2)   Un grup supravegheat poate fi considerat semnificativ de către BCE pe baza activităților sale transfrontaliere numai în cazul în care valoarea totală a activelor sale depășește 5 miliarde EUR și:
+(a)
+raportul dintre activele transfrontaliere și activele totale ale acestuia este mai mare de 20 %; sau
+(b)
+raportul dintre pasivele transfrontaliere și pasivele totale ale acestuia este mai mare de 20 %.
+(3)   Articolul 52 alineatul (3) se aplică în mod corespunzător.
+Articolul 60
+Active și pasive transfrontaliere
+(1)   „Activele transfrontaliere”, în contextul unui grup supravegheat, înseamnă partea din activele totale pentru care contrapartea este o instituție de credit sau altă persoană fizică sau juridică situată într-un stat membru participant, altul decât statul membru în care întreprinderea-mamă a grupului supravegheat relevant își are sediul principal.
+(2)   „Pasivele transfrontaliere”, în contextul unui grup supravegheat, înseamnă partea din pasivele totale pentru care contrapartea este o instituție de credit sau altă persoană fizică sau juridică situată într-un stat membru participant, altul decât statul membru în care întreprinderea-mamă a grupului supravegheat relevant își are sediul principal.
+TITLUL 6
+STABILIREA CARACTERULUI SEMNIFICATIV PE BAZA UNEI SOLICITĂRI DE SAU A PRIMIRII DE ASISTENȚĂ FINANCIARĂ PUBLICĂ DIN PARTEA MES
+Articolul 61
+Solicitarea de sau primirea de asistență financiară publică directă din partea MES
+(1)   Asistența financiară publică directă pentru o entitate supravegheată este solicitată atunci când un membru al MES solicită acordarea de către MES de asistență financiară acestei entități în conformitate cu o decizie luată de Consiliul guvernatorilor MES în temeiul articolului 19 din Tratatul privind Mecanismul european de stabilitate privind recapitalizarea directă a unei instituții de credit și cu instrumentele adoptate în temeiul acestei decizii.
+(2)   Asistența financiară publică directă este primită de o instituție de credit atunci când asistența financiară a fost primită de instituția de credit în conformitate cu decizia și instrumentele prevăzute la alineatul (1).
+Articolul 62
+Obligația ANC de a informa BCE cu privire la o posibilă solicitare de sau primire de asistență financiară publică de către o entitate supravegheată mai puțin semnificativă
+(1)   Fără a aduce atingere obligației prevăzute la articolul 96 de a informa BCE cu privire la deteriorarea situației financiare a unei entități supravegheate mai puțin semnificative, ANC informează BCE imediat ce ia cunoștință de posibila necesitate de a acorda asistență financiară publică în mod indirect la nivel național de la MES și/sau de către MES pentru o entitate supravegheată mai puțin semnificativă.
+(2)   ANC transmite BCE, pentru analiză, evaluarea sa privind situația financiară a entității supravegheate mai puțin semnificative înainte de a o transmite MES, cu excepția cazurilor urgente bine justificate.
+Articolul 63
+Începerea și încetarea supravegherii directe
+(1)   O entitate supravegheată pentru care se solicită asistență financiară publică directă de la MES sau care a primit asistență financiară publică directă de la MES este clasificată ca entitate supravegheată semnificativă de la data la care a fost solicitată asistența financiară publică directă în numele acesteia.
+(2)   Data la care BCE preia supravegherea directă este specificată într-o decizie a BCE în conformitate cu titlul 2.
+(3)   Articolul 52 alineatul (3) se aplică în mod corespunzător.
+Articolul 64
+Domeniu de aplicare
+În cazul în care se solicită asistență financiară directă pentru o entitate supravegheată care face parte dintr-un grup supravegheat, toate entitățile supravegheate care fac parte din acest grup supravegheat sunt clasificate ca semnificative.
+TITLUL 7
+STABILIREA CARACTERULUI SEMNIFICATIV PE BAZA FAPTULUI CĂ ENTITATEA SUPRAVEGHEATĂ ESTE UNA DINTRE CELE MAI SEMNIFICATIVE TREI INSTITUȚII DE CREDIT DINTR-UN STAT MEMBRU PARTICIPANT
+Articolul 65
+Criterii pentru stabilirea celor mai semnificative trei instituții de credit dintr-un stat membru participant
+(1)   O instituție de credit sau un grup supravegheat este clasificat(ă) ca semnificativ(ă) în cazul în care este una/unul dintre cele mai semnificative trei instituții de credit sau grupuri supravegheate dintr-un stat membru participant.
+(2)   În scopul identificării celor mai semnificative trei instituții de credit sau grupuri supravegheate dintr-un stat membru participant, BCE și ANC relevantă țin cont de dimensiunea entității supravegheate și, respectiv, a grupului supravegheat, astfel cum este stabilită în conformitate cu articolele 50-55.
+Articolul 66
+Procesul de analiză
+(1)   Pentru fiecare stat membru participant, BCE stabilește până la data de 1 octombrie a fiecărui an calendaristic dacă trei instituții de credit sau grupuri supravegheate cu o întreprindere-mamă cu sediul într-un astfel de stat membru participant ar trebui sau nu clasificate ca entități supravegheate semnificative.
+(2)   La solicitarea BCE, ANC informează BCE cu privire la cele mai semnificative trei instituții de credit sau grupuri supravegheate cu sediul în statele membre participante corespunzătoare acestora până la data de 1 octombrie a anului calendaristic în cauză. Cele mai semnificative trei instituții de credit sau grupuri supravegheate sunt stabilite de ANC în baza criteriilor stabilite la articolele 50-55.
+(3)   Pentru fiecare dintre cele mai semnificative trei instituții de credit sau grupuri supravegheate din statele membre participante, ANC relevantă transmite BCE un raport privind istoricul activității de supraveghere și profilul de risc în fiecare caz, cu excepția situației în care instituția de credit sau grupul supravegheat este deja clasificat(ă) ca semnificativ(ă).
+La primirea informațiilor prevăzute la alineatul (2), BCE își desfășoară propria evaluare. În acest scop, BCE poate solicita ANC relevante să îi transmită orice informații relevante.
+(4)   Dacă, la data de 1 octombrie a unui anumit an, una sau mai multe dintre cele mai semnificative trei instituții de credit sau grupuri supravegheate dintr-un stat membru participant nu sunt clasificate ca entități supravegheate semnificative, BCE adoptă o decizie în conformitate cu titlul 2 pentru oricare dintre cele mai semnificative trei instituții de credit sau grupuri supravegheate care nu sunt clasificate ca semnificative.
+(5)   Articolul 52 alineatul (3) se aplică în mod corespunzător.
+TITLUL 8
+DECIZIA BCE DE A SUPRAVEGHEA DIRECT ENTITĂȚILE SUPRAVEGHEATE MAI PUȚIN SEMNIFICATIVE ÎN CONFORMITATE CU ARTICOLUL 6 ALINEATUL (5) LITERA (B) DIN REGULAMENTUL PRIVIND MUS
+Articolul 67
+Criteriile pentru o decizie a BCE în conformitate cu articolul 6 alineatul (5) litera (b) din Regulamentul privind MUS
+(1)   BCE, în conformitate cu articolul 6 alineatul (5) litera (b) din Regulamentul privind MUS, poate decide în orice moment, prin intermediul unei decizii a BCE, să exercite direct supravegherea unei entități supravegheate mai puțin semnificative sau a unui grup supravegheat mai puțin semnificativ, atunci când acest lucru este necesar pentru a asigura aplicarea consecventă a standardelor înalte de supraveghere.
+(2)   Înainte de adoptarea deciziei BCE prevăzute la alineatul (1), BCE analizează, printre altele, oricare dintre următorii factori:
+(a)
+dacă entitatea supravegheată mai puțin semnificativă sau grupul supravegheat mai puțin semnificativ este aproape de îndeplinirea unuia dintre criteriile cuprinse în articolul 6 alineatul (4) din Regulamentul privind MUS;
+(b)
+interconectarea entității supravegheate mai puțin semnificative sau a grupului supravegheat mai puțin semnificativ cu alte instituții de credit;
+(c)
+dacă entitatea supravegheată mai puțin semnificativă în cauză este o filială a unei entități supravegheate care își are sediul principal într-un stat membru neparticipant sau într-o țară terță și care a înființat una sau mai multe filiale, care la rândul lor sunt instituții de credit, sau una sau mai multe sucursale în statele membre participante, dintre care una sau mai multe sunt semnificative;
+(d)
+faptul că instrucțiunile BCE nu au fost urmate de către ANC;
+(e)
+faptul că ANC nu a respectat actele prevăzute la articolul 4 alineatul (3) primul paragraf din Regulamentul privind MUS;
+(f)
+faptul că entitatea supravegheată mai puțin semnificativă a solicitat sau a primit indirect asistență financiară de la FESF sau de la MES.
+Articolul 68
+Procedura de pregătire a unei decizii BCE în conformitate cu articolul 6 alineatul (5) litera (b) din Regulamentul privind MUS la solicitarea unei ANC
+(1)   BCE, la solicitarea unei ANC, evaluează dacă este necesară sau nu exercitarea supravegherii directe în conformitate cu Regulamentul privind MUS cu privire la o entitate supravegheată mai puțin semnificativă sau un grup supravegheat mai puțin semnificativ pentru a asigura aplicarea consecventă a standardelor înalte de supraveghere.
+(2)   Solicitarea ANC: (a) identifică entitatea supravegheată mai puțin semnificativă sau grupul supravegheat mai puțin semnificativ cu privire la care ANC consideră că BCE ar trebui să preia supravegherea directă, și (b) precizează motivul pentru care supravegherea de către BCE a entității supravegheate mai puțin semnificative sau a grupului supravegheat mai puțin semnificativ este necesară pentru a asigura aplicarea consecventă a standardelor înalte de supraveghere.
+(3)   Solicitarea ANC este însoțită de un raport privind istoricul activității de supraveghere și profilul de risc al entității supravegheate mai puțin semnificative relevante sau al grupului supravegheat mai puțin semnificativ relevant.
+(4)   În cazul în care BCE nu este de acord cu solicitarea ANC, se consultă cu ANC în cauză înainte de a face evaluarea finală cu privire la necesitatea supravegherii de către BCE a entității supravegheate mai puțin semnificative sau a grupului supravegheat mai puțin semnificativ pentru a asigura aplicarea consecventă a standardelor înalte de supraveghere.
+(5)   În cazul în care BCE decide că supravegherea directă de către BCE a entității supravegheate mai puțin semnificative sau a grupului supravegheat mai puțin semnificativ este necesară pentru a asigura aplicarea consecventă a standardelor înalte de supraveghere, aceasta adoptă o decizie a BCE în conformitate cu titlul 2.
+Articolul 69
+Procedură de pregătire a deciziilor BCE în conformitate cu articolul 6 alineatul (5) litera (b) din Regulamentul privind MUS din propria inițiativă a BCE
+(1)   BCE poate solicita unei ANC să transmită un raport privind istoricul activității de supraveghere și profilul de risc al entității supravegheate mai puțin semnificative sau al grupului supravegheat mai puțin semnificativ. BCE precizează data până la care acest raport ar trebui să îi fie transmis.
+(2)   BCE se consultă cu ANC înainte de evaluarea finală a acesteia cu privire la necesitatea supravegherii de către BCE a entității supravegheate mai puțin semnificative sau a grupului supravegheat mai puțin semnificativ pentru a asigura aplicarea consecventă a standardelor înalte de supraveghere.
+(3)   În cazul în care BCE concluzionează că supravegherea directă de către BCE a entității supravegheate mai puțin semnificative sau a grupului supravegheat mai puțin semnificativ este necesară pentru a asigura aplicarea consecventă a standardelor înalte de supraveghere, aceasta adoptă o decizie a BCE în conformitate cu titlul 2.
+TITLUL 9
+CIRCUMSTANȚE SPECIFICE CARE POT JUSTIFICA CLASIFICAREA CA MAI PUȚIN SEMNIFICATIVĂ A UNEI ENTITĂȚI SUPRAVEGHEATE CHIAR DACĂ SUNT ÎNDEPLINITE CRITERIILE PRIVIND CLASIFICAREA CA SEMNIFICATIVĂ
+Articolul 70
+Circumstanțe specifice care conduc la clasificarea ca mai puțin semnificativă a unei entități supravegheate semnificative
+(1)   Circumstanțe specifice, astfel cum sunt prevăzute la articolul 6 alineatul (4) al doilea și al cincilea paragraf din Regulamentul privind MUS (denumite în continuare „circumstanțe specifice”), există atunci când circumstanțe specifice și de fapt fac să fie nepotrivită clasificarea ca semnificativă a entității supravegheate, având în vedere obiectivele și principiile Regulamentului privind MUS și, în special, nevoia de a asigura aplicarea consecventă a standardelor înalte de supraveghere.
+(2)   Termenul „circumstanțe specifice” se interpretează în mod strict.
+Articolul 71
+Evaluarea existenței circumstanțelor specifice
+(1)   Existența circumstanțelor specifice care justifică clasificarea ca mai puțin semnificativă a ceea ce altfel ar fi o entitate supravegheată semnificativă se stabilește de la caz la caz și în mod specific pentru entitatea supravegheată sau grupul supravegheat în cauză, dar nu pentru categorii de entități supravegheate.
+(2)   Articolul 40 se aplică în mod corespunzător.
+(3)   Articolele 44-46 și articolele 48-49 se aplică în mod corespunzător. BCE precizează într-o decizie a BCE motivele care o conduc la concluzia că există circumstanțe specifice.
+Articolul 72
+Verificare
+(1)   BCE, cu sprijinul ANC relevante, verifică cel puțin anual dacă circumstanțele specifice continuă să existe în ceea ce privește o entitate supravegheată sau un grup supravegheat care a fost clasificat(ă) ca mai puțin semnificativ(ă) din cauza unor circumstanțe specifice.
+(2)   Entitatea supravegheată în cauză furnizează orice informații și documente solicitate de BCE pentru desfășurarea unei verificări prevăzute la alineatul (1).
+(3)   În cazul în care BCE consideră că circumstanțele specifice nu mai există, aceasta adoptă o decizie a BCE adresată entității supravegheate relevante prin care se stabilește că este clasificată ca semnificativă și că nu mai există circumstanțe specifice.
+(4)   Titlul 2 din partea IV se aplică în mod corespunzător.
+PARTEA V
+PROCEDURI COMUNE
+TITLUL 1
+COOPERAREA CU PRIVIRE LA O CERERE DE AUTORIZARE PRIVIND INIțIEREA ACTIVITĂȚII UNEI INSTITUȚII DE CREDIT
+Articolul 73
+Notificarea BCE cu privire la o cerere de autorizare privind inițierea activității unei instituții de credit
+(1)   O ANC care primește o cerere de autorizare privind inițierea activității unei instituții de credit care urmează a se înființa într-un stat membru participant notifică BCE cu privire la primirea acestei cereri în termen de 15 zile lucrătoare.
+(2)   De asemenea, ANC informează BCE cu privire la termenul în care o decizie privind cererea trebuie luată și notificată solicitantului în conformitate cu legislația națională relevantă.
+(3)   În cazul în care cererea nu este completă, ANC, din proprie inițiativă sau la solicitarea BCE, cere solicitantului să furnizeze informațiile suplimentare necesare. ANC trimite BCE orice astfel de informații suplimentare obținute, în termen de 15 zile lucrătoare de la primirea acestora de către ANC.
+Articolul 74
+Evaluarea cererilor de către ANC
+ANC căreia i se transmite o cerere evaluează dacă solicitantul respectă toate condițiile de autorizare prevăzute în legislația națională relevantă a statului membru al ANC.
+Articolul 75
+Deciziile ANC de respingere a unei cereri
+ANC respinge cererile care nu respectă condițiile de autorizare stabilite în legislația națională relevantă și trimit BCE o copie a deciziei lor.
+Articolul 76
+Proiecte de decizii ale ANC cu privire la autorizarea privind inițierea activității unei instituții de credit
+(1)   În cazul în care ANC apreciază că cererea respectă toate condițiile de autorizare stabilite în legislația națională relevantă, aceasta pregătește un proiect de decizie prin care propune ca BCE să acorde solicitantului autorizația privind inițierea activității unei instituții de credit (denumit în continuare „proiect de decizie de autorizare”).
+(2)   ANC se asigură că proiectul de decizie de autorizare este notificat BCE și solicitantului cu cel puțin 20 de zile lucrătoare înainte de sfârșitul perioadei maxime de evaluare prevăzute de legislația națională relevantă.
+(3)   ANC poate propune includerea de recomandări, condiții și/sau restricții în proiectul de decizie de autorizare în conformitate cu legislația națională și a Uniunii. În aceste cazuri, ANC este responsabilă de evaluarea conformității cu condițiile și/sau restricțiile.
+Articolul 77
+Evaluarea de către BCE a cererilor și audierea solicitanților
+(1)   BCE evaluează cererea în baza condițiilor de autorizare stabilite în legislația relevantă a Uniunii. Dacă, în opinia sa, aceste condiții nu sunt îndeplinite, BCE acordă solicitantului oportunitatea de a prezenta comentarii în scris cu privire la faptele și obiecțiile relevante pentru evaluare, în conformitate cu articolul 31.
+(2)   În cazul în care este considerată necesară o întâlnire și în toate celelalte cazuri justificate în mod corespunzător, BCE poate prelungi perioada maximă pentru a decide cu privire la o cerere în conformitate cu articolul 14 alineatul (3) din Regulamentul privind MUS. Prelungirea este notificată solicitantului în conformitate cu articolul 35 din prezentul regulament.
+Articolul 78
+Deciziile BCE privind cererile
+(1)   BCE ia o decizie cu privire la un proiect de decizie de autorizare primit de la ANC în termen de 10 zile lucrătoare, cu excepția cazului în care a fost luată o decizie privind prelungirea perioadei maxime, în conformitate cu articolul 77 alineatul (2). Aceasta poate susține proiectul de decizie de autorizare și, prin urmare, poate fi de acord cu autorizarea sau poate obiecta față de proiectul de decizie de autorizare.
+(2)   BCE își bazează decizia pe evaluarea de către aceasta a cererii, a proiectului de decizie de autorizare și a comentariilor transmise de solicitant în conformitate cu articolul 77.
+(3)   Dacă BCE nu adoptă o decizie în termenul prevăzut la alineatul (1), proiectul deciziei de autorizare pregătit de ANC este considerat adoptat.
+(4)   BCE adoptă o decizie de acordare a autorizației în cazul în care solicitantul îndeplinește toate condițiile de autorizare în conformitate cu legislația relevantă a Uniunii și a statului membru în care își are sediul solicitantul.
+(5)   Decizia de acordare a autorizației acoperă activitățile solicitantului ca instituție de credit, astfel cum se prevede în legislația națională relevantă, fără a aduce atingere oricăror altor cerințe suplimentare pentru autorizare prevăzute de legislația națională relevantă pentru alte activități decât activitatea de acceptare de depozite sau alte fonduri rambursabile de la populație și de acordare de credite pe cont propriu.
+Articolul 79
+Procedura în cazul expirării autorizației
+Autorizația expiră în situațiile prevăzute la articolul 18 litera (a) din Directiva 2013/36/UE atunci când legislația națională relevantă prevede astfel. ANC informează BCE cu privire la cazurile individuale în care expiră o autorizație. Ulterior BCE face publică expirarea autorizației în conformitate cu legislația națională relevantă, după ce a informat ANC relevantă și entitatea supravegheată în cauză.
+TITLUL 2
+COOPERAREA ÎN CEEA CE PRIVEȘTE RETRAGEREA UNEI AUTORIZAȚII
+Articolul 80
+Propunerea ANC de a retrage o autorizație
+(1)   În cazul în care ANC relevantă consideră că autorizația unei instituții de credit ar trebui retrasă în întregime sau parțial în conformitate cu legislația națională sau a Uniunii relevantă, inclusiv o retragere la solicitarea instituției de credit, aceasta transmite BCE un proiect de decizie prin care propune retragerea unei autorizații (denumită în continuare „proiect de decizie de retragere”), împreună cu orice documente justificative relevante.
+(2)   ANC se coordonează cu autoritatea națională competentă pentru rezoluția instituțiilor de credit (denumită în continuare „autoritate națională de rezoluție”) în ceea ce privește orice proiect de decizie de retragere cu relevanță pentru autoritate națională de rezoluție.
+Articolul 81
+Evaluarea de către BCE a unui proiect de decizie de retragere
+(1)   BCE evaluează fără întârzieri nejustificate proiectul de decizie de retragere. În special, aceasta ține seama de motivele de urgență invocate de ANC.
+(2)   Dreptul de a fi audiat prevăzut la articolul 31 este aplicabil.
+Articolul 82
+Evaluarea din propria inițiativă a BCE și consultarea ANC
+(1)   În cazul în care BCE ia cunoștință de circumstanțe care pot justifica retragerea unei autorizații, aceasta evaluează din proprie inițiativă dacă autorizația ar trebui retrasă în conformitate cu legislația relevantă a Uniunii.
+(2)   BCE se poate consulta în orice moment cu ANC relevante. În cazul în care BCE intenționează să retragă o autorizație, aceasta se consultă cu ANC din statul membru în care are sediul instituția de credit cu cel puțin 25 de zile lucrătoare înainte de data la care intenționează să ia decizia. În cazuri urgente bine justificate, termenul de consultare poate fi redus la cinci zile lucrătoare.
+(3)   În cazul în care BCE intenționează să retragă o autorizație, aceasta informează ANC relevante cu privire la orice observații transmise de instituția de credit. Dreptul instituției de credit de a fi audiată, prevăzut la articolul 31, este aplicabil.
+(4)   BCE se coordonează cu autoritatea națională de rezoluție în ceea ce privește orice propunere de retragere a autorizației în conformitate cu articolul 14 alineatul (5) din Regulamentul privind MUS. BCE informează ANC imediat ce a inițiat contactul cu autoritatea națională de rezoluție.
+Articolul 83
+Decizia BCE privind retragerea unei autorizații
+(1)   BCE ia o decizie privind retragerea unei autorizații fără întârzieri nejustificate. În acest sens, poate accepta sau respinge proiectul relevant de decizie de retragere.
+(2)   În luarea deciziei, BCE ține cont de toate aspectele următoare: (a) propria evaluare a circumstanțelor care justifică retragerea; (b) dacă este cazul, proiectul ANC de decizie de retragere; (c) consultarea cu ANC relevantă și, atunci când ANC nu este autoritatea națională de rezoluție, autoritatea națională de rezoluție (împreună cu ANC, „autorități naționale”); (d) orice observații transmise de instituția de credit în conformitate cu articolul 81 alineatul (2) și articolul 82 alineatul (3).
+(3)   De asemenea, BCE adoptă o decizie în cazurile descrise la articolul 84 în cazul în care autoritatea națională de rezoluție relevantă nu obiectează față de retragerea autorizației sau BCE stabilește că acțiunile corespunzătoare necesare pentru menținerea stabilității financiare nu au fost puse în aplicare de autoritățile naționale.
+Articolul 84
+Procedura în cazul măsurilor potențiale de rezoluție care urmează a fi luate de autoritățile naționale
+(1)   În cazul în care autoritatea națională de rezoluție notifică obiecția sa față de intenția BCE de a retrage o autorizație, BCE și autoritatea națională de rezoluție stabilesc de comun acord un interval în care BCE se abține de la a proceda la retragerea autorizației. BCE informează ANC imediat după inițierea contactului cu autoritatea națională de rezoluție în vederea ajungerii la acest acord.
+(2)   După expirarea perioadei de timp convenite, BCE analizează dacă urmărește să procedeze la retragerea autorizației sau să prelungească intervalul convenit în conformitate cu articolul 14 alineatul (6) din Regulamentul privind MUS, ținând seama de orice progrese făcute. BCE se consultă atât cu ANC relevantă, cât și cu autoritatea națională de rezoluție, dacă este diferită de ANC. ANC informează BCE cu privire la măsurile luate de aceste autorități și cu propria evaluare a consecințelor unei retrageri.
+(3)   În cazul în care autoritatea națională de rezoluție nu obiectează față de retragerea unei autorizații sau BCE stabilește că autoritățile naționale nu au pus în aplicare măsurile corespunzătoare pentru menținerea stabilității financiare, se aplică articolul 83.
+TITLUL 3
+COOPERARE PRIVIND ACHIZIȚIILE DE PARTICIPAȚII CALIFICATE
+Articolul 85
+Notificarea ANC cu privire la achiziția de participații calificate
+(1)   O ANC care primește o notificare cu privire la o intenție de a achiziționa o participație calificată într-o instituție de credit cu sediul în statul membru participant al acelei ANC notifică BCE cu privire la această notificare cel târziu la cinci zile lucrătoare de la confirmarea primirii în conformitate cu articolul 22 alineatul (2) din Directiva 2013/36/UE.
+(2)   ANC notifică BCE dacă a suspendat perioada de evaluare din cauza unei solicitări de informații suplimentare. ANC transmite BCE astfel de informații suplimentare în termen de 5 zile lucrătoare de la primirea acestora de către ANC.
+(3)   De asemenea, ANC informează BCE cu privire la data la care decizia de a se opune sau nu achiziției unei participații calificate trebuie notificată solicitantului în conformitate cu legislația națională relevantă.
+Articolul 86
+Evaluarea achizițiilor potențiale
+(1)   ANC căreia îi este notificată o intenție de achiziție a unei participații calificate într-o instituție de credit evaluează măsura în care achiziția potențială respectă toate condițiile prevăzute în legislația națională și a Uniunii relevantă. În urma acestei evaluări, ANC pregătește un proiect de decizie prin care BCE să se opună sau nu achiziției.
+(2)   ANC transmite BCE proiectul de decizie de a se opune sau nu achiziției cu cel puțin 15 zile lucrătoare înainte de expirarea perioadei de evaluare prevăzute de legislația relevantă a Uniunii.
+Articolul 87
+Decizia BCE privind achiziția
+BCE decide dacă se opune sau nu achiziției în baza evaluării pe care a făcut-o privind achiziția propusă și a proiectului de decizie al ANC. Dreptul de a fi audiat prevăzut la articolul 31 este aplicabil.
+TITLUL 4
+NOTIFICAREA DECIZIILOR PRIVIND PROCEDURILE COMUNE
+Articolul 88
+Proceduri pentru notificarea deciziilor
+(1)   BCE notifică părților următoarele decizii, fără întârzieri nejustificate, în conformitate cu articolul 35:
+(a)
+o decizie a BCE privind retragerea unei autorizații ca instituție de credit;
+(b)
+o decizie a BCE privind achiziția unei participații calificate într-o instituție de credit.
+(2)   BCE notifică ANC relevante, fără întârzieri nejustificate, oricare dintre următoarele decizii:
+(a)
+o decizie a BCE privind o cerere de autorizare ca instituție de credit;
+(b)
+o decizie a BCE privind retragerea unei autorizații ca instituție de credit;
+(c)
+o decizie a BCE privind achiziția unei participații calificate într-o instituție de credit.
+(3)   ANC notifică solicitantului autorizării următoarele decizii:
+(a)
+un proiect de decizie de autorizare;
+(b)
+o decizie a ANC de respingere a cererii de autorizare atunci când solicitantul nu respectă condițiile de autorizare stabilite în legislația națională relevantă;
+(c)
+o decizie a BCE de a obiecta față de proiectul de decizie de autorizare prevăzut la litera (a);
+(d)
+o decizie a BCE de autorizare.
+(4)   ANC notifică autorității naționale de rezoluție relevante decizia BCE privind retragerea autorizației ca instituție de credit.
+(5)   BCE notifică Autorității bancare europene (ABE) fiecare decizie a BCE de acordare sau retragere a unei autorizații ca instituție de credit, precum și fiecare expirare a unei autorizații. Cu această ocazie, BCE precizează motivele deciziilor de retragere a unei autorizații sau ale expirării unei autorizații.
+PARTEA VI
+PROCEDURI PENTRU SUPRAVEGHEREA ENTITĂȚILOR SUPRAVEGHEATE SEMNIFICATIVE
+TITLUL 1
+SUPRAVEGHEREA ENTITĂȚILOR SUPRAVEGHEATE SEMNIFICATIVE ȘI ASISTENȚA ANC
+Articolul 89
+Supravegherea entităților supravegheate semnificative
+BCE efectuează supravegherea directă a entităților supravegheate semnificative în conformitate cu procedurile stabilite în partea II, în special în ceea ce privește atribuțiile și componența echipelor comune de supraveghere.
+Articolul 90
+Rolul ANC în asistarea BCE
+(1)   O ANC asistă BCE în îndeplinirea atribuțiilor sale în condițiile stabilite în Regulamentul privind MUS și în prezentul regulament și, în special, îndeplinește toate activitățile de mai jos:
+(a)
+transmite BCE proiecte de decizii privind entitățile supravegheate semnificative cu sediul în statul membru participant al acesteia, în conformitate cu articolul 91;
+(b)
+asistă BCE în pregătirea și punerea în aplicare a oricăror acte referitoare la exercitarea atribuțiilor conferite BCE prin Regulamentul privind MUS, inclusiv prin sprijinirea în activitățile de verificare și în evaluările curente ale situației unei entități supravegheate semnificative;
+(c)
+sprijină BCE în aplicarea deciziilor sale, utilizând, dacă este necesar, prerogativele prevăzute la articolul 9 alineatul (1) al treilea paragraf și la articolul 11 alineatul (2) din Regulamentul privind MUS.
+(2)   Atunci când sprijină BCE, o ANC urmează instrucțiunile BCE cu privire la entitățile supravegheate semnificative.
+Articolul 91
+Proiecte de decizii de pregătit de ANC pentru a fi analizate de BCE
+(1)   În conformitate cu articolul 6 alineatul (3) și articolul 6 alineatul (7) litera (b) din Regulamentul privind MUS, BCE poate solicita unei ANC să pregătească un proiect de decizie privind exercitarea atribuțiilor prevăzute la articolul 4 din Regulamentul privind MUS pentru a fi analizată de aceasta.
+Solicitarea precizează termenul de trimitere către BCE a proiectului de decizie.
+(2)   De asemenea, o ANC poate, din proprie inițiativă, transmite pentru a fi analizat de BCE un proiect de decizie cu privire la o entitate supravegheată semnificativă, prin intermediul echipei comune de supraveghere.
+Articolul 92
+Schimbul de informații
+BCE și ANC, fără întârzieri nejustificate, fac schimb de informații privind entitățile supravegheate semnificative atunci când există indicii serioase care întăresc ideea că aceste entități supravegheate semnificative nu își mai pot onora obligațiile față de creditori și, în special, nu mai pot prezenta garanții pentru activele încredințate acestora de către deponenți sau atunci când există indicii serioase cu privire la circumstanțe care ar putea conduce la stabilirea faptului că instituția de credit în cauză nu este capabilă să ramburseze depozitele astfel cum se prevede la articolul 1 alineatul (3) punctul (i) din Directiva 94/19/CE a Parlamentului European și a Consiliului (15). BCE și ANC procedează astfel anterior luării unei decizii legate de acest fapt.
+TITLUL 2
+CONFORMITATEA CU CERINȚELE REFERITOARE LA ÎNDEPLINIREA CRITERIILOR DE ONORABILITATE ȘI COMPETENȚĂ PENTRU PERSOANELE RESPONSABILE DE CONDUCEREA INSTITUȚIILOR DE CREDIT
+Articolul 93
+Evaluarea caracterului adecvat al membrilor organelor de conducere ale entităților supravegheate semnificative
+(1)   Pentru a se asigura că instituțiile dispun de cadre de guvernanță robuste și fără a aduce atingere legislației naționale și a Uniunii relevante și părții V, o entitate supravegheată semnificativă notifică ANC relevantă cu privire la orice schimbare a membrilor organelor sale de conducere în funcții de conducere și de supraveghere (denumiți în continuare „membrii ai organelor de conducere”) în sensul articolului 3 alineatul (1) punctul 7 și articolului 3 alineatul (2) din Directiva 2013/36/UE, inclusiv cu privire la reînnoirea mandatului membrilor organelor de conducere. ANC relevantă notifică BCE fără întârzieri nejustificate orice asemenea schimbare, informând-o cu privire la termenul în care trebuie luată și notificată o decizie în conformitate cu legislația națională relevantă.
+(2)   Pentru a evalua caracterul adecvat al membrilor organelor de conducere ale entităților supravegheate semnificative, BCE are prerogativele de supraveghere pe care le au autoritățile competente în temeiul legislației naționale și a Uniunii relevante.
+Articolul 94
+Verificarea continuă a caracterului adecvat al membrilor organelor de conducere
+(1)   O entitate supravegheată semnificativă informează fără întârzieri nejustificate ANC relevantă cu privire la orice fapte noi care pot afecta o evaluare inițială a caracterului adecvat sau orice alt aspect care ar putea avea un impact asupra caracterului adecvat al unui membru al organelor de conducere, imediat ce aceste fapte sau aspecte devin cunoscute entității supravegheate sau membrului relevant al organelor de conducere. ANC relevantă notifică BCE fără întârzieri nejustificate cu privire la aceste fapte sau aspecte noi.
+(2)   BCE poate iniția o evaluare nouă pe baza noilor fapte sau aspecte prevăzute la alineatul (1) sau dacă BCE ia cunoștință de fapte noi care pot avea un impact asupra evaluării inițiale a membrului relevant al organelor de conducere sau orice alt aspect care ar putea avea un impact asupra caracterului adecvat al unui membru al organelor de conducere. BCE decide apoi cu privire la măsurile corespunzătoare, în conformitate cu legislația națională și a Uniunii relevantă și informează fără întârzieri nejustificate ANC relevantă cu privire la aceste măsuri.
+TITLUL 3
+ALTE PROCEDURI DE APLICAT DE ENTITĂȚILE SUPRAVEGHEATE SEMNIFICATIVE
+Articolul 95
+Solicitări, notificări sau cereri ale entităților supravegheate semnificative
+(1)   O entitate supravegheată semnificativă adresează BCE toate solicitările, notificările sau cererile sale referitoare la exercitarea atribuțiilor conferite BCE, fără a aduce atingere procedurilor specifice prevăzute în special în partea V și interacțiunii obișnuite a acesteia cu ANC a acestei entități.
+(2)   BCE pune orice astfel de solicitare, notificare sau cerere la dispoziția ANC relevante și poate solicita ANC să pregătească un proiect de decizie în conformitate cu articolul 91.
+(3)   În cazul unor modificări substanțiale față de autorizația acordată în urma solicitării, notificării sau cererii inițiale, entitatea supravegheată semnificativă adresează BCE o nouă solicitare, notificare sau cerere în conformitate cu procedura prevăzută la alineatul (1).
+PARTEA VII
+PROCEDURI PENTRU SUPRAVEGHEREA ENTITĂȚILOR SUPRAVEGHEATE MAI PUȚIN SEMNIFICATIVE
+TITLUL 1
+NOTIFICAREA BCE DE CĂTRE ANC CU PRIVIRE LA PROCEDURILE IMPORTANTE ALE ANC ÎN MATERIE DE SUPRAVEGHERE ȘI PROIECTELE DE DECIZII IMPORTANTE ÎN MATERIE DE SUPRAVEGHERE
+Articolul 96
+Deteriorarea situației financiare a unei entități supravegheate mai puțin semnificative
+ANC informează BCE atunci când situația oricărei entități supravegheate mai puțin semnificative se deteriorează rapid și semnificativ, în special dacă această deteriorare ar putea conduce la o solicitare de asistență financiară directă sau indirectă din partea MES, fără a aduce atingere aplicării articolului 62.
+Articolul 97
+Notificarea BCE de către ANC cu privire la procedurile importante ale ANC în materie de supraveghere
+(1)   Pentru a permite BCE să monitorizeze funcționarea sistemului, astfel cum se prevede la articolul 6 alineatul (5) litera (c) din Regulamentul privind MUS, ANC furnizează BCE informații cu privire la procedurile importante ale ANC în materie de supraveghere referitoare la entitățile supravegheate mai puțin semnificative. BCE definește criterii generale, în special ținând seama de situația de risc și impactul potențial asupra sistemului financiar național al entității supravegheate mai puțin semnificative în cauză, pentru a stabili ce informații sunt notificate pentru care entități supravegheate mai puțin semnificative. Informațiile sunt transmise de către ANC ex ante sau, în cazuri urgente bine justificate, simultan cu deschiderea unei proceduri.
+(2)   Procedurile importante ale ANC în materie de supraveghere prevăzute la alineatul (1) constau în:
+(a)
+demiterea membrilor consiliilor de administrație ale entităților supravegheate mai puțin semnificative și numirea de manageri speciali care să preia conducerea entităților supravegheate mai puțin semnificative; și
+(b)
+proceduri care au un impact semnificativ asupra entității supravegheate mai puțin semnificative.
+(3)   Pe lângă solicitările de informații transmise de BCE în conformitate cu prezentul articol, BCE poate oricând solicita ANC informații cu privire la îndeplinirea atribuțiilor alocate acestora cu privire la entitățile supravegheate mai puțin semnificative.
+(4)   Pe lângă solicitările de informații transmise de BCE în conformitate cu prezentul articol, ANC informează din proprie inițiativă BCE cu privire la orice altă procedură ANC în materie de supraveghere:
+(a)
+pe care acestea le consideră importante; sau
+(b)
+care pot afecta negativ reputația MUS.
+(5)   În cazul în care BCE solicită unei ANC să evalueze mai detaliat anumite aspecte ale unei proceduri importante a ANC în materie de supraveghere, această solicitare precizează aspectele vizate. BCE și ANC se asigură că cealaltă parte are suficient timp pentru a permite ca procedura și MUS în ansamblu să funcționeze eficient.
+Articolul 98
+Notificarea BCE de către ANC cu privire la proiectele de decizii importante în materie de supraveghere
+(1)   Pentru a permite BCE să monitorizeze funcționarea sistemului, astfel cum se prevede la articolul 6 alineatul (5) litera (c) din Regulamentul privind MUS, ANC trimit BCE proiecte de decizii în materie de supraveghere care îndeplinesc criteriile stabilite la alineatele (2) și (3) atunci când proiectul de decizie se referă la entitățile supravegheate mai puțin semnificative pentru care BCE consideră că, în baza criteriilor generale definite de BCE privind situația de risc a acestora și impactul potențial asupra sistemului financiar național, informațiile trebuie notificate acesteia.
+(2)   Sub rezerva alineatului (1), proiectele de decizii în materie de supraveghere sunt trimise BCE înainte de a fi adresate entităților supravegheate mai puțin semnificative în cazul în care aceste decizii:
+(a)
+se referă la demiterea membrilor organelor de conducere ale entităților supravegheate mai puțin semnificative și la numirea managerilor speciali; sau
+(b)
+au un impact semnificativ asupra entității supravegheate mai puțin semnificative.
+(3)   În plus față de cerințele privind informațiile stabilite la alineatele (1) și (2), ANC transmit BCE orice alte proiecte de decizii în materie de supraveghere:
+(a)
+cu privire la care sunt solicitate opiniile BCE; sau
+(b)
+care pot afecta negativ reputația MUS.
+(4)   ANC trimit BCE proiectele de decizii care îndeplinesc criteriile prevăzute la alineatele (1), (2) și (3) și care, prin urmare, sunt considerate proiecte de decizii importante în materie de supraveghere, cu cel puțin 10 zile înainte de data planificată pentru adoptarea deciziei. BCE își exprimă opiniile cu privire la proiectul de decizie într-un termen rezonabil înainte de adoptarea planificată a deciziei. În cazuri urgente, ANC relevantă definește o perioadă de timp rezonabilă pentru trimiterea proiectului de decizie care să îndeplinească criteriile prevăzute la alineatele (1), (2) și (3).
+TITLUL 2
+RAPORTAREA EX POST DE ANC CĂTRE BCE CU PRIVIRE LA ENTITĂȚILE SUPRAVEGHEATE MAI PUȚIN SEMNIFICATIVE
+Articolul 99
+Obligația generală a ANC de a raporta către BCE
+(1)   Pentru a permite BCE să monitorizeze funcționarea MUS în conformitate cu articolul 6 alineatul (5) litera (c) din Regulamentul privind MUS și fără a aduce atingere capitolului 1, BCE poate impune ANC să raporteze periodic către BCE cu privire la măsurile pe care le-au luat și cu privire la îndeplinirea atribuțiilor care le-au fost alocate în conformitate cu articolul 6 alineatul (6) din Regulamentul privind MUS. BCE informează anual ANC cu privire la categoriile de entități supravegheate mai puțin semnificative și natura informațiilor solicitate.
+(2)   Cerințele stabilite în conformitate cu alineatul (1) nu aduc atingere dreptului BCE de a utiliza prerogativele prevăzute la articolele 10-13 din Regulamentul privind MUS cu privire la entitățile supravegheate mai puțin semnificative.
+Articolul 100
+Frecvența și obiectul rapoartelor transmise de ANC către BCE
+ANC transmit BCE un raport anual cu privire la entitățile supravegheate mai puțin semnificative, grupurile supravegheate mai puțin semnificative sau categoriile de entități supravegheate mai puțin semnificative, în conformitate cu cerințele BCE.
+PARTEA VIII
+COOPERAREA DINTRE BCE, ANC ȘI AND CU PRIVIRE LA ATRIBUȚIILE ȘI INSTRUMENTELE MACROPRUDENȚIALE
+TITLUL 1
+DEFINIREA INSTRUMENTELOR MACROPRUDENȚIALE
+Articolul 101
+Dispoziții generale
+(1)   În sensul acestei părți, instrumentele macroprudențiale înseamnă oricare dintre următoarele instrumente:
+(a)
+amortizoarele de capital în sensul articolelor 130-142 din Directiva 2013/36/UE;
+(b)
+măsurile pentru instituțiile de credit autorizate la nivel național sau pentru o subcategorie a acestor instituții de credit în conformitate cu articolul 458 din Regulamentul (UE) nr. 575/2013;
+(c)
+orice alte măsuri care pot fi adoptate de AND sau ANC menite să diminueze riscurile sistemice sau macroprudențiale și care sunt prevăzute pentru, și fac obiectul procedurilor prezentate în, Regulamentul (UE) nr. 575/2013 și al Directivei 2013/36/UE în cazurile prevăzute specific de legislația UE relevantă.
+(2)   Procedurile macroprudențiale prevăzute la articolul 5 alineatele (1) și (2) din Regulamentul privind MUS nu constituie proceduri ale BCE sau ANC în materie de supraveghere în sensul prezentului regulament, fără a aduce atingere articolului 22 din Regulamentul privind MUS în ceea ce privește deciziile adresate entităților supravegheate individuale.
+Articolul 102
+Aplicarea instrumentelor macroprudențiale de către BCE
+BCE aplică instrumentele macroprudențiale prevăzute la articolul 101 în conformitate cu prezentul regulament și cu articolul 5 alineatul (2) și articolul 9 alineatul (2) din Regulamentul privind MUS și, atunci când instrumentele macroprudențiale sunt prevăzute într-o directivă, sub rezerva punerii în aplicare a acestei directive în legislația națională. În cazul în care AND nu stabilește o rată a amortizorului de capital, acest fapt nu împiedică BCE să stabilească o cerință privind amortizorul în conformitate cu prezentul regulament și cu articolul 5 alineatul (2) din Regulamentul privind MUS.
+TITLUL 2
+DISPOZIȚII PROCEDURALE PENTRU UTILIZAREA INSTRUMENTELOR MACROPRUDENȚIALE
+Articolul 103
+Lista ANC și AND responsabile pentru instrumentele macroprudențiale
+BCE colectează de la ANC și AND din statele membre participante informații privind identitatea autorităților desemnate pentru respectivele instrumente macroprudențiale prevăzute la articolul 101 și instrumentele macroprudențiale pe care le pot utiliza aceste autorități.
+Articolul 104
+Schimbul de informații și cooperarea privind utilizarea instrumentelor macroprudențiale de către o ANC sau AND
+(1)   În conformitate cu articolul 5 alineatul (1) din Regulamentul privind MUS, ANC sau AND relevantă, atunci când intenționează să aplice aceste instrumente, notifică BCE această intenție cu zece zile lucrătoare înainte de luarea acestei decizii. Cu toate acestea, în cazul în care o ANC sau AND intenționează să utilizeze un instrument macroprudențial, aceasta informează BCE cât mai curând posibil cu privire la identificarea de către aceasta a unui risc macroprudențial sau sistemic pentru sistemul financiar și, acolo unde este posibil, cu privire la detaliile instrumentului preconizat. Aceste informații includ, cât mai mult posibil, detalii privind măsura preconizată, inclusiv data preconizată pentru aplicare.
+(2)   Intenția este notificată BCE de către ANC sau AND.
+(3)   În cazul în care BCE obiectează cu privire la măsura preconizată a unei ANC sau AND, BCE prezintă motivele obiecției sale în termen de cinci zile lucrătoare de la data primirii notificării intenției. Această obiecție este transmisă în scris și include motivele care stau la baza acesteia. ANC sau AND ține seama în mod corespunzător de motivația BCE înainte de a proceda la luarea deciziei, după caz.
+Articolul 105
+Schimbul de informații și cooperarea privind utilizarea de către BCE a instrumentelor macroprudențiale
+(1)   În conformitate cu articolul 5 alineatul (2) din Regulamentul privind MUS, BCE, atunci când intenționează din proprie inițiativă sau la propunerea unei ANC sau AND să aplice cerințe mai stricte pentru amortizoarele de capital sau să aplice măsuri mai stricte care vizează contracararea riscurilor sistemice sau macroprudențiale, cooperează strâns cu AND din statele membre în cauză și, în special, notifică AND sau ANC intenția sa cu 10 zile lucrătoare înainte de luarea acestei decizii. Cu toate acestea, în cazul în care BCE urmărește să aplice cerințe mai stricte pentru amortizoarele de capital sau să aplice măsuri mai stricte care vizează contracararea riscurilor sistemice sau macroprudențiale la nivelul instituțiilor de credit care fac obiectul procedurilor prevăzute în Regulamentul (UE) nr. 575/2013 și Directiva 2013/36/UE în cazurile specific menționate în legislația Uniunii, BCE informează ANC sau AND relevantă cât mai curând posibil cu privire la identificarea de către aceasta a unui risc macroprudențial sau sistemic pentru sistemul financiar și, acolo unde este posibil, cu privire la detaliile instrumentului avut în vedere. Aceste informații includ, în măsura în care este posibil, detalii privind măsura preconizată, inclusiv data preconizată pentru aplicare.
+(2)   În cazul în care oricare dintre ANC sau AND în cauză obiectează față de măsura preconizată a BCE, aceasta precizează BCE motivele pe care se întemeiază în termen de cinci zile lucrătoare de la primirea notificării intenției BCE. Această obiecție este transmisă în scris și include motivele care stau la baza acesteia. BCE ține seama în mod corespunzător de motivația respectivă înainte de a proceda la luarea deciziei, după caz.
+PARTEA IX
+PROCEDURI PENTRU COOPERAREA STRÂNSĂ
+TITLUL 1
+PRINCIPII GENERALE ȘI DISPOZIȚII COMUNE
+Articolul 106
+Procedura de stabilire a unei cooperări strânse
+BCE evaluează solicitările statelor membre din afara zonei euro de stabilire a unei cooperări strânse în conformitate cu procedura prevăzută în Decizia BCE/2014/5 (16).
+Articolul 107
+Principii aplicabile atunci când a fost stabilită o cooperare strânsă
+(1)   De la data de la care se aplică o decizie a BCE în conformitate cu articolul 7 alineatul (2) din Regulamentul privind MUS de stabilire a unei cooperări strânse între BCE și o ANC dintr-un stat membru din afara zonei euro și până la încetarea sau suspendarea acestei cooperări strânse, BCE îndeplinește atribuțiile prevăzute la articolul 4 alineatele (1) și (2) și articolul 5 din Regulamentul privind MUS în ceea ce privește entitățile și grupurile supravegheate cu sediul în statul membru participant relevant în cooperare strânsă, în conformitate cu articolul 6 din Regulamentul privind MUS.
+(2)   În cazul în care a fost stabilită o cooperare strânsă în conformitate cu articolul 7 alineatul (2) din Regulamentul privind MUS, în ceea ce privește entitățile și grupurile supravegheate semnificative și entitățile și grupurile supravegheate mai puțin semnificative cu sediul în statul membru participant în cooperare strânsă, BCE și ANC în cooperare strânsă sunt într-o poziție comparabilă cu cea a entităților și grupurilor supravegheate semnificative și entităților și grupurilor supravegheate mai puțin semnificative cu sediul în statele membre din zona euro, ținând seama de faptul că BCE nu are prerogative direct aplicabile cu privire la entitățile și grupurile supravegheate semnificative și entitățile și grupurile supravegheate mai puțin semnificative cu sediul în statul membru participant în cooperare strânsă.
+(3)   În conformitate cu articolul 6 din Regulamentul privind MUS, BCE poate da unei ANC în cooperare strânsă instrucțiuni cu privire la entitățile și grupurile supravegheate semnificative și numai instrucțiuni generale cu privire la entitățile și grupurile supravegheate mai puțin semnificative.
+(4)   Cooperarea strânsă încetează la data la care derogarea în conformitate cu articolul 139 TFUE este abrogată pentru un stat membru participant în cooperare strânsă în conformitate cu articolul 140 alineatul (2) TFUE, iar dispozițiile prezentei părți încetează atunci să se aplice.
+Articolul 108
+Instrumente juridice privind supravegherea în legătură cu cooperarea strânsă
+(1)   În ceea ce privește atribuțiile prevăzute la articolul 4 alineatele (1) și (2) și articolul 5 din Regulamentul privind MUS, BCE poate da instrucțiuni, poate face solicitări și poate emite orientări.
+(2)   În cazul în care BCE consideră că o măsură referitoare la atribuțiile prevăzute la articolul 4 alineatele (1) și (2) din Regulamentul privind MUS ar trebui adoptată de ANC în cooperare strânsă în legătură cu o entitate supravegheată sau un grup supravegheat, aceasta adresează acestei ANC:
+(a)
+cu privire la o entitate supravegheată semnificativă sau grup supravegheat semnificativ, o instrucțiune generală sau specifică, o solicitare sau o orientare prin care solicită emiterea unei decizii în materie de supraveghere în legătură cu acea entitate supravegheată semnificativă sau acel grup supravegheat semnificativ din statul membru participant în cooperare strânsă; sau
+(b)
+cu privire la o entitate supravegheată mai puțin semnificativă sau un grup supravegheat mai puțin semnificativ, o instrucțiune generală sau o orientare.
+(3)   În cazul în care BCE consideră că o măsură referitoare la atribuțiile prevăzute la articolul 5 din Regulamentul privind MUS ar trebui adoptată de ANC sau AND în cooperare strânsă, aceasta poate adresa acelei ANC sau AND o instrucțiune generală sau specifică, o solicitare sau o orientare prin care să solicite aplicarea unor cerințe mai stricte pentru amortizoarele de capital sau aplicarea unor măsuri mai stricte care să vizeze contracararea riscurilor sistemice sau macroprudențiale.
+(4)   BCE precizează în instrucțiune, solicitare sau orientare un termen relevant pentru adoptarea măsurii de către ANC în cooperare strânsă, care nu este mai scurt de 48 de ore, cu excepția cazului în care este necesară o adoptare mai timpurie pentru a preveni daune ireparabile. La stabilirea termenului, BCE ține seama de normele administrative și procedurale care trebuie respectate de către ANC relevantă în cooperare strânsă.
+(5)   O ANC în cooperare strânsă ia toate măsurile necesare pentru a respecta instrucțiunile, solicitările sau orientările BCE și informează BCE fără întârzieri nejustificate cu privire la măsurile pe care le-a luat.
+TITLUL 2
+COOPERARE STRÂNSĂ ÎN LEGĂTURĂ CU PĂRȚILE III, IV, V, VIII, X ȘI XI
+Articolul 109
+Regimul lingvistic în cadrul regimului de cooperare strânsă
+Mecanismele prevăzute la articolul 23 se aplică mutatis mutandis în ceea ce privește ANC în cooperare strânsă
+Articolul 110
+Evaluarea caracterului semnificativ al instituțiilor de credit în cadrul regimului de cooperare strânsă
+(1)   Dispozițiile părții IV privind stabilirea statutului entităților supravegheate sau al grupurilor supravegheate ca semnificative sau mai puțin semnificative se aplică mutatis mutandis cu privire la entitățile supravegheate și grupurile supravegheate din statele membre participante în cooperare strânsă în conformitate cu dispozițiile prezentului articol.
+(2)   O ANC în cooperare strânsă se asigură că procedurile stabilite în partea IV pot fi aplicate pentru entitățile supravegheate și grupurile supravegheate cu sediul în statul său membru.
+(3)   În circumstanțele în care partea IV prevede ca BCE să adreseze o decizie unei entități supravegheate sau unui grup supravegheat, BCE, în loc să adreseze o decizie unei entități supravegheate sau unui grup supravegheat, dă instrucțiuni ANC în cooperare strânsă, iar această ANC adresează o decizie unei entități supravegheate sau unui grup supravegheat în conformitate cu aceste instrucțiuni.
+Articolul 111
+Proceduri comune în cadrul regimului de cooperare strânsă
+(1)   Dispozițiile părții V privind procedurile comune se aplică mutatis mutandis în ceea ce privește entitățile supravegheate și grupurile supravegheate din statele membre participante în cooperare strânsă, sub rezerva dispozițiilor prezentului articol.
+(2)   O ANC în cooperare strânsă se asigură că procedurile stabilite în partea V pot fi aplicate pentru entitățile supravegheate cu sediul în statul său membru. În special, ANC în cooperare strânsă se asigură că BCE primește toate informațiile și documentele necesare pentru îndeplinirea atribuțiilor conferite acesteia prin Regulamentul privind MUS.
+(3)   În circumstanțele în care partea V prevede ca BCE să adreseze o decizie unei entități supravegheate sau unui grup supravegheat, BCE, în loc să adreseze o decizie unei entități supravegheate sau unui grup supravegheat, dă instrucțiuni ANC în cooperare strânsă, iar această ANC adresează o decizie unei entități supravegheate sau unui grup supravegheat în conformitate cu aceste instrucțiuni.
+(4)   În circumstanțele în care partea V prevede ca ANC relevantă să pregătească un proiect de decizie, o ANC în cooperare strânsă transmite BCE un proiect de decizie și solicită instrucțiuni.
+Articolul 112
+Instrumente macroprudențiale în cadrul regimului de cooperare strânsă
+Dispozițiile părții VIII privind cooperarea dintre BCE, ANC și AND în ceea ce privește atribuțiile și instrumentele macroprudențiale se aplică mutatis mutandis cu privire la entitățile supravegheate și grupurile supravegheate din statele membre participante în cooperare strânsă.
+Articolul 113
+Sancțiuni administrative în cadrul regimului de cooperare strânsă
+(1)   Dispozițiile părții X privind sancțiunile administrative se aplică mutatis mutandis cu privire la entitățile supravegheate și grupurile supravegheate din statele membre participante în cooperare strânsă.
+(2)   În circumstanțele în care articolul 18 din Regulamentul privind MUS, coroborat cu partea X din prezentul regulament, prevede ca BCE să adreseze o decizie unei entități supravegheate sau unui grup supravegheat, BCE, în loc să adreseze o decizie unei entități supravegheate sau unui grup supravegheat, dă instrucțiuni ANC în cooperare strânsă, iar această ANC adresează o decizie unei entități supravegheate sau unui grup supravegheat în conformitate cu aceste instrucțiuni.
+(3)   În cazurile în care articolul 18 din Regulamentul privind MUS sau partea X din prezentul regulament prevede ca ANC relevantă să adreseze o decizie unei entități supravegheate semnificative sau unui grup supravegheat semnificativ, o ANC în cooperare strânsă inițiază proceduri în vederea luării de măsuri care să asigure impunerea de sancțiuni administrative corespunzătoare numai la instrucțiunile BCE. ANC în cooperare strânsă informează BCE după adoptarea unei decizii.
+Articolul 114
+Prerogative de investigare în conformitate cu articolele 10-13 din Regulamentul privind MUS în cadrul regimului de cooperare strânsă
+(1)   Dispozițiile părții XI care se referă la cooperarea cu privire la articolele 10-13 din Regulamentul privind MUS se aplică mutatis mutandis cu privire la entitățile supravegheate și grupurile supravegheate din statele membre participante în cooperare strânsă.
+(2)   O ANC în cooperare strânsă utilizează prerogativele de investigare în temeiul articolelor 10-13 din Regulamentul privind MUS în conformitate cu instrucțiunile BCE.
+(3)   O ANC în cooperare strânsă furnizează BCE concluziile care rezultă din utilizarea prerogativelor de investigare în temeiul articolelor 10-13 din Regulamentul privind MUS.
+(4)   O ANC în cooperare strânsă se asigură că membrii desemnați ai personalului BCE pot participa în calitate de observatori la orice investigație în conformitate cu articolele 10-13 din Regulamentul privind MUS.
+TITLUL 3
+COOPERARE STRÂNSĂ PRIVIND ENTITĂȚILE SUPRAVEGHEATE SEMNIFICATIVE
+Articolul 115
+Supravegherea entităților supravegheate semnificative într-un stat membru participant în cooperare strânsă
+(1)   Părțile II și VI se aplică mutatis mutandis entităților supravegheate semnificative și grupurilor supravegheate semnificative cu sediul într-un stat membru participant în cooperare strânsă în conformitate cu dispozițiile prezentului articol.
+(2)   O ANC în cooperare strânsă se asigură că BCE primește toate informațiile și raportările din partea și cu privire la entitățile supravegheate semnificative și grupurile supravegheate semnificative pe care le primește ANC în cooperare strânsă și care sunt necesare pentru îndeplinirea atribuțiilor conferite BCE prin Regulamentul privind MUS.
+(3)   Se înființează o echipă comună de supraveghere pentru a supraveghea fiecare entitate supravegheată semnificativă sau grup supravegheat semnificativ cu sediul într-un stat membru participant în cooperare strânsă. Membrii echipei comune de supraveghere sunt numiți în conformitate cu articolul 4. ANC în cooperare strânsă numește subcoordonatorul ANC care să acționeze direct în legătură cu entitatea supravegheată semnificativă sau grupul supravegheat semnificativ, în conformitate cu instrucțiunile coordonatorului ECS.
+(4)   O ANC în cooperare strânsă se asigură că membrii desemnați ai personalului BCE sunt invitați să participe la orice inspecție la fața locului desfășurată cu privire la o entitate supravegheată semnificativă sau un grup supravegheat semnificativ. BCE poate stabili numărul de membri ai personalului BCE care vor participa în calitate de observatori.
+(5)   În contextul supravegherii pe bază consolidată și al colegiilor de supraveghetori, în situația în care o întreprindere-mamă are sediul într-un stat membru din zona euro sau într-un stat membru participant din afara zonei euro, BCE, ca autoritate competentă, este autoritatea responsabilă cu supravegherea consolidată și prezidează colegiul de supraveghetori. BCE invită ANC relevantă în cooperare strânsă să numească un membru al personalului ANC în calitate de observator. BCE poate acționa prin transmiterea de instrucțiuni ANC relevante în cooperare strânsă.
+Articolul 116
+Decizii privind entitățile supravegheate semnificative și grupurile supravegheate semnificative
+(1)   Fără a aduce atingere prerogativelor ANC privind atribuțiile care nu sunt conferite BCE în conformitate cu Regulamentul privind MUS, o ANC în cooperare strânsă adoptă decizii privind entitățile supravegheate semnificative și grupurile supravegheate semnificative din statul său membru numai la instrucțiunile BCE. De asemenea, ANC în cooperare strânsă poate solicita instrucțiuni de la BCE.
+(2)   O ANC în cooperare strânsă pune imediat la dispoziția BCE orice decizie cu privire la o entitate supravegheată semnificativă sau un grup supravegheat semnificativ.
+(3)   O ANC în cooperare strânsă informează BCE cu privire la următoarele: (a) deciziile pe care le adoptă în baza prerogativelor sale cu privire la atribuțiile care nu sunt conferite BCE în conformitate cu Regulamentul privind MUS; și (b) deciziile pe care le adoptă în conformitate cu instrucțiunile BCE sau astfel cum se prevede în această parte.
+TITLUL 4
+COOPERAREA STRÂNSĂ CU PRIVIRE LA ENTITĂȚILE SUPRAVEGHEATE MAI PUȚIN SEMNIFICATIVE ȘI GRUPURILE SUPRAVEGHEATE MAI PUȚIN SEMNIFICATIVE
+Articolul 117
+Supravegherea entităților supravegheate mai puțin semnificative și a grupurilor supravegheate mai puțin semnificative
+(1)   Partea VII se aplică mutatis mutandis entităților supravegheate mai puțin semnificative și grupurilor supravegheate mai puțin semnificative din statele membre participante în cooperare strânsă în conformitate cu dispozițiile următoare.
+(2)   În scopul asigurării consecvenței rezultatelor activităților de supraveghere în cadrul MUS, BCE poate da instrucțiuni generale și transmite orientări și solicitări unei ANC în cooperare strânsă, solicitându-i să adopte o decizie în materie de supraveghere cu privire la entitățile supravegheate mai puțin semnificative sau grupurile supravegheate mai puțin semnificative cu sediul în statul membru participant în cooperare strânsă. Aceste instrucțiuni generale, orientări sau solicitări se pot referi la grupuri sau categorii de instituții de credit.
+(3)   De asemenea, BCE poate adresa unei ANC în cooperare strânsă o solicitare de evaluare mai aprofundată a aspectelor unei proceduri importante a ANC, astfel cum se prevede la articolul 6 alineatul (7) litera (c) punctul (ii) din Regulamentul privind MUS.
+TITLUL 5
+PROCEDURA ÎN CAZUL DEZACORDULUI UNUI STAT MEMBRU PARTICIPANT ÎN COOPERARE STRÂNSĂ
+Articolul 118
+Procedura în cazul dezacordului cu proiectul de decizie al Consiliului de supraveghere în conformitate cu articolul 7 alineatul (8) din Regulamentul privind MUS
+(1)   BCE informează ANC în cooperare strânsă în cauză cu privire la proiectul complet de decizie al Consiliului de supraveghere în legătură cu o entitate supravegheată sau un grup supravegheat situat într-un stat membru participant în cooperare strânsă, sub rezerva cerințelor de confidențialitate prevăzute de legislația Uniunii.
+(2)   În cazul în care ANC în cooperare strânsă nu este de acord cu proiectul complet de decizie al Consiliului de supraveghere, aceasta, în termen de cinci zile lucrătoare de la primirea proiectului complet de decizie, notifică în scris Consiliul guvernatorilor cu privire la motivele dezacordului.
+(3)   Consiliul guvernatorilor decide cu privire la chestiune în termen de cinci zile lucrătoare de la primirea acestei notificări, ținând seama pe deplin de motivele declarate pentru dezacord, și transmite în scris ANC în cooperare strânsă motivele deciziei sale.
+(4)   Un stat membru participant în cooperare strânsă poate solicita BCE încetarea cooperării strânse care a fost stabilită cu aceasta, cu aplicare imediată, și nu este legat de nicio decizie ulterioară a Consiliului guvernatorilor.
+Articolul 119
+Procedura în cazul dezacordului cu o obiecție a Consiliului guvernatorilor la un proiect de decizie al Consiliului de supraveghere în conformitate cu articolul 7 alineatul (7) din Regulamentul privind MUS
+(1)   BCE informează o ANC în cooperare strânsă cu privire la orice obiecție a Consiliului guvernatorilor față de un proiect complet de decizie al Consiliului de supraveghere.
+(2)   În cazul în care ANC în cooperare strânsă nu este de acord cu obiecția Consiliului guvernatorilor față de proiectul complet de decizie al Consiliului de supraveghere, aceasta, în termen de cinci zile lucrătoare de la primirea obiecției Consiliului guvernatorilor, notifică BCE motivele dezacordului său.
+(3)   Consiliul guvernatorilor își dă avizul scris cu privire la dezacordul motivat exprimat de ANC în cooperare strânsă în termen de 30 de zile de la primirea dezacordului motivat și, comunicând motivele sale în acest sens, confirmă sau retrage obiecția. BCE informează ANC în cooperare strânsă cu privire la aceasta.
+(4)   În cazul în care Consiliul guvernatorilor își confirmă obiecția, în termen de cinci zile de la primirea informării cu privire la confirmarea obiecției sale de către Consiliul guvernatorilor, ANC în cooperare strânsă poate notifica BCE că orice decizie luată în urma modificării proiectului complet de decizie inițial față de care obiectează Consiliul guvernatorilor nu are caracter obligatoriu în ceea ce o privește.
+În acest caz, BCE analizează posibilitatea suspendării sau încetării cooperării strânse cu ANC în cooperare strânsă, ținând seama în mod corespunzător de eficacitatea supravegherii, și ia o decizie în această privință. BCE ține seama, în special, de factorii menționați la articolul 7 alineatul (7) din Regulamentul privind MUS.
+PARTEA X
+SANCȚIUNI ADMINISTRATIVE
+TITLUL 1
+DEFINIȚII ȘI LEGĂTURA CU REGULAMENTUL (CE) NR. 2532/98 AL CONSILIULUI
+ (17)
+Articolul 120
+Definiția sancțiunilor administrative
+În sensul acestei părți, „sancțiuni administrative” se referă la oricare din următoarele:
+(a)
+sancțiuni administrative pecuniare prevăzute și impuse în temeiul articolului 18 alineatul (1) din Regulamentul privind MUS;
+(b)
+amenzi și penalități cu titlu cominatoriu prevăzute la articolul 2 din Regulamentul (CE) nr. 2532/98 și impuse în temeiul articolului 18 alineatul (7) din Regulamentul privind MUS.
+Articolul 121
+Legătura cu Regulamentul (CE) nr. 2532/98
+(1)   În sensul procedurilor prevăzute la articolul 18 alineatul (1) din Regulamentul privind MUS, se aplică numai normele procedurale cuprinse în prezentul regulament, în conformitate cu articolul 18 alineatul (4) din Regulamentul privind MUS.
+(2)   În sensul procedurilor prevăzute la articolul 18 alineatul (7) din Regulamentul privind MUS, normele procedurale cuprinse în prezentul regulament le completează pe cele stabilite în Regulamentul (CE) nr. 2532/98 și se aplică în conformitate cu articolele 25 și 26 din Regulamentul privind MUS.
+Articolul 122
+Prerogativele BCE de a aplica sancțiuni administrative în temeiul articolului 18 alineatul (7) din Regulamentul privind MUS
+BCE impune sancțiuni administrative, astfel cum sunt definite la articolul 120 litera (b), în cazul nerespectării obligațiilor prevăzute de regulamentele sau deciziile BCE pentru:
+(a)
+entitățile supravegheate semnificative; sau
+(b)
+entitățile supravegheate mai puțin semnificative, atunci când regulamentele sau deciziile BCE relevante impun obligații entităților supravegheate mai puțin semnificative față de BCE.
+TITLUL 2
+NORME PROCEDURALE PENTRU IMPUNEREA DE SANCȚIUNI ADMINISTRATIVE, ALTELE DECÂT PENALITĂȚI CU TITLU COMINATORIU, ASUPRA ENTITĂȚILOR SUPRAVEGHEATE DIN STATELE MEMBRE DIN ZONA EURO
+Articolul 123
+Înființarea unei unități independente de investigare
+(1)   BCE înființează o unitate independentă internă de investigare (denumită în continuare „unitate de investigare”) care este compusă din agenți de investigare desemnați de BCE.
+(2)   Agenții de investigare nu sunt implicați și nu au fost implicați în perioada de doi ani anterioară preluării postului de agent de investigare în supravegherea directă sau indirectă ori în autorizarea entității supravegheate relevante.
+(3)   Agenții de investigare își îndeplinesc funcțiile de investigare independent de Consiliul de supraveghere și Consiliul guvernatorilor și nu iau parte la deliberările Consiliului de supraveghere și ale Consiliului guvernatorilor.
+Articolul 124
+Trimiterea presupuselor încălcări la unitatea de investigare
+Atunci când BCE, în îndeplinirea atribuțiilor sale în temeiul Regulamentului privind MUS, consideră că există motive pentru a suspecta că una sau mai multe încălcări
+(a)
+în temeiul legislației relevante a Uniunii direct aplicabile, astfel cum se prevede la articolul 18 alineatul (1) din Regulamentul privind MUS, sunt sau au fost comise de o entitate supravegheată semnificativă cu sediul principal într-un stat membru din zona euro; sau
+(b)
+ale unui regulament sau ale unei decizii a BCE, astfel cum se prevede la articolul 18 alineatul (7) din Regulamentul privind MUS, sunt sau au fost comise de către o entitate supravegheată care are sediul principal într-un stat membru din zona euro,
+BCE transmite chestiunea unității de investigare.
+Articolul 125
+Prerogativele unității de investigare
+(1)   În scopul investigării presupuselor încălcări prevăzute la articolul 124, unitatea de investigare poate exercita prerogativele acordate BCE în temeiul Regulamentului privind MUS.
+(2)   Atunci când se face o solicitare entității supravegheate în cauză în temeiul prerogativelor acordate BCE în conformitate cu Regulamentul privind MUS în contextul unei investigații, unitatea de investigare precizează obiectul și scopul investigației.
+(3)   În îndeplinirea atribuțiilor sale, unitatea de investigare are acces la toate documentele și informațiile colectate de BCE și, după caz, de ANC relevante în cursul activităților de supraveghere ale acestora.
+Articolul 126
+Drepturi procedurale
+(1)   La încheierea unei investigații și înaintea pregătirii și transmiterii către Consiliul de supraveghere a unei propuneri de proiect complet de decizie, unitatea de investigare notifică în scris entității supravegheate în cauză concluziile investigației desfășurate și orice obiecții față de acestea.
+(2)   În notificarea prevăzută la alineatul (1), unitatea de investigare informează entitatea supravegheată în cauză cu privire la dreptul acesteia de a transmite observații în scris unității de investigare cu privire la faptele și obiecțiile ridicate față de entitate stabilite în notificare, inclusiv dispozițiile individuale a căror încălcare este suspectată, și stabilește un termen rezonabil pentru primirea acestor observații. BCE nu este obligată să țină seama de observațiile scrise primite după expirarea termenului stabilit de unitatea de investigare.
+(3)   De asemenea, unitatea de investigare, în urma unei notificări în conformitate cu alineatul (1), poate invita entitatea supravegheată în cauză să participe la o audiere. Părțile care fac obiectul investigației pot fi reprezentate și/sau asistate la audiere de avocați sau alte persoane calificate. Audierile nu sunt publice.
+(4)   Dreptul de acces al entității supravegheate investigate la dosarul unității de investigare se stabilește în conformitate cu articolul 32.
+Articolul 127
+Examinarea dosarului de către Consiliul de supraveghere
+(1)   În cazul în care o unitate de investigare consideră că ar trebui impusă o sancțiune administrativă asupra unei entități supravegheate, unitatea de investigare transmite o propunere de proiect complet de decizie Consiliului de supraveghere, stabilind că entitatea supravegheată în cauză a comis o încălcare și precizând sancțiunea administrativă care trebuie impusă. De asemenea, unitatea de investigare transmite Consiliului de supraveghere dosarul investigației.
+(2)   Unitatea de investigare își bazează propunerea de proiect complet de decizie numai pe faptele și obiecțiile cu privire la care entitatea supravegheată a avut posibilitatea să transmită observații.
+(3)   În cazul în care Consiliul de supraveghere consideră că dosarul transmis de unitatea de investigare este incomplet, acesta poate înapoia dosarul unității de investigare, împreună cu o cerere motivată de informații suplimentare. Articolul 125 se aplică în mod corespunzător.
+(4)   În cazul în care Consiliul de supraveghere, în temeiul unui dosar complet, este de acord cu propunerea de proiect complet de decizie a unității de investigare cu privire la una sau mai multe încălcări și cu faptele care stau la baza acestei decizii, adoptă proiectul complet de decizie propus de unitatea de investigare cu privire la încălcarea sau încălcările cu care este de acord că au avut loc. În măsura în care Consiliul de supraveghere nu este de acord cu propunerea, se ia o decizie în conformitate cu alineatele relevante din prezentul articol.
+(5)   În cazul în care Consiliul de supraveghere, în baza unui dosar complet, consideră că faptele descrise în propunerea de proiect complet de decizie prevăzută la alineatul (1) nu par să indice dovezi suficiente cu privire la o încălcare prevăzută la articolul 124, acesta poate adopta un proiect complet de decizie de închidere a cazului.
+(6)   În cazul în care Consiliul de supraveghere, în temeiul unui dosar complet, este de acord cu concluziile din propunerea de proiect complet de decizie a unității de investigare în sensul comiterii unei încălcări de către entitatea supravegheată în cauză, dar nu este de acord cu recomandarea propusă privind sancțiunile administrative, adoptă proiectul complet de decizie, specificând sancțiunea administrativă pe care o consideră corespunzătoare.
+(7)   În cazul în care Consiliul de supraveghere, în temeiul unui dosar complet, nu este de acord cu propunerea unității de investigare, dar concluzionează că o entitate supravegheată a comis o încălcare diferită sau că propunerea unității de investigare se întemeiază pe alte fapte, acesta informează entitatea supravegheată în cauză în scris cu privire la concluziile sale și obiecțiile ridicate împotriva entității supravegheate în cauză. Articolul 126 alineatele (2)-(4) se aplică în mod corespunzător cu privire la Consiliul de supraveghere.
+(8)   Consiliul de supraveghere pregătește un proiect complet de decizie stabilind dacă entitatea supravegheată în cauză a comis sau nu o încălcare și precizând sancțiunile administrative care urmează a fi impuse, dacă este cazul.
+(9)   Proiectele complete de decizie adoptate de Consiliul de supraveghere și care urmează a fi propuse Consiliului guvernatorilor se bazează numai pe faptele și obiecțiile cu privire la care entitatea supravegheată a avut posibilitatea să transmită observații.
+Articolul 128
+Definiția cifrei de afaceri anuale totale pentru stabilirea limitei superioare a sancțiunilor administrative pecuniare
+Cifra de afaceri anuală totală prevăzută la articolul 18 alineatul (1) din Regulamentul privind MUS înseamnă cifra de afaceri anuală definită la articolul 67 din Directiva 2013/36/UE a unei entități supravegheate, în conformitate cu cele mai recente conturi financiare anuale disponibile ale acestei entități supravegheate. Atunci când entitatea supravegheată care a comis încălcarea aparține unui grup supravegheat, cifra de afaceri anuală totală relevantă este cifra de afaceri anuală totală care rezultă din cele mai recente conturi financiare anuale consolidate disponibile ale grupului supravegheat.
+TITLUL 3
+PENALITĂȚI CU TITLU COMINATORIU
+Articolul 129
+Norme procedurale aplicabile penalităților cu titlu cominatoriu
+(1)   În cazul unei încălcări continue a unui regulament sau a unei decizii în materie de supraveghere ale BCE, aceasta poate impune o penalitate cu titlu cominatoriu în vederea obligării persoanelor în cauză să respecte regulamentul sau decizia în materie de supraveghere. BCE aplică normele procedurale prevăzute la articolul 22 din Regulamentului privind MUS și în partea III titlul 2 din prezentul regulament.
+(2)   O penalitate cu titlu cominatoriu trebuie să fie eficace și proporțională. Penalitatea cu titlu cominatoriu se calculează pentru fiecare zi de încălcare până când persoana în cauză se conformează regulamentului sau deciziei BCE în materie de supraveghere în cauză.
+(3)   Limitele superioare ale penalităților cu titlu cominatoriu sunt cele specificate în Regulamentul (CE) nr. 2532/98. Perioada relevantă începe să curgă la data stabilită în decizia de impunere a penalităților cu titlu cominatoriu. Data stabilită în decizie este, cel mai devreme, data la care persoana în cauză este notificată în scris cu privire la motivele BCE de impunere a penalităților cu titlu cominatoriu.
+(4)   Penalitățile cu titlu cominatoriu pot fi impuse pentru perioade de cel mult șase luni de la data specificată în decizia prevăzută la alineatul (3).
+TITLUL 4
+TERMENE
+Articolul 130
+Termene de prescripție pentru impunerea sancțiunilor administrative
+(1)   Prerogativa BCE de a impune sancțiuni administrative entităților supravegheate face obiectul unui termen de prescripție de cinci ani, care începe să curgă de la data comiterii încălcării. În cazul unor încălcări continue sau repetate, termenul de prescripție începe să curgă de la data la care încălcarea încetează.
+(2)   Orice măsură luată de BCE în scopul investigației sau al procedurilor referitoare la o încălcare în temeiul articolului 124 determină întreruperea cursului prescripției pentru impunerea sancțiunilor administrative pecuniare. Cursul prescripției se întrerupe cu efect de la data la care acțiunea este notificată entității supravegheate în cauză.
+(3)   După fiecare întrerupere începe să curgă un nou termen de prescripție. Cu toate acestea, termenul de prescripție expiră cel mai târziu în ziua în care s-a scurs o perioadă egală cu dublul termenului de prescripție fără ca BCE să fi impus o sancțiune administrativă. Acest termen se prelungește cu orice perioadă de timp pentru care cursul prescripției este suspendat în conformitate cu alineatul (5).
+(4)   Termenul de prescripție pentru impunerea sancțiunilor administrative se suspendă pentru orice perioadă în care decizia finală a Consiliului guvernatorilor BCE face obiectul procedurilor de control în fața comitetului administrativ de control sau al unei căi de atac în fața Curții de Justiție.
+(5)   Termenul de prescripție se suspendă, de asemenea, pentru perioada în care sunt în curs proceduri penale împotriva entității supravegheate în legătură cu aceleași fapte.
+Articolul 131
+Termene de prescripție pentru executarea sancțiunilor administrative
+(1)   Prerogativa BCE de a executa o decizie luată în conformitate cu articolul 18 alineatele (1) și (7) din Regulamentul privind MUS face obiectul unui termen de prescripție de cinci ani, care începe să curgă la data adoptării deciziei în cauză.
+(2)   Orice acțiune a BCE destinată să execute plata sau termenii și condițiile de plată prevăzute de sancțiunea administrativă în cauză determină întreruperea cursului prescripției pentru executarea sancțiunilor administrative.
+(3)   După fiecare întrerupere începe să curgă un nou termen de prescripție.
+(4)   Termenul de prescripție pentru executarea sancțiunilor administrative se suspendă pentru perioadele în care:
+(a)
+se acordă timp pentru efectuarea plății;
+(b)
+executarea plății este suspendată ca urmare a unei decizii a Consiliului guvernatorilor BCE sau a Curții de Justiție.
+TITLUL 5
+PUBLICAREA DECIZIILOR ȘI SCHIMBUL DE INFORMAȚII
+Articolul 132
+Publicarea deciziilor privind sancțiunile administrative
+(1)   BCE publică pe website-ul acesteia, fără întârzieri nejustificate, și după ce decizia a fost notificată entității supravegheate în cauză, orice decizie de impunere a unei sancțiuni administrative, astfel cum este definită la articolul 120, asupra unei entități supravegheate într-un stat membru participant, inclusiv informații privind tipul și natura încălcării și identitatea entității supravegheate în cauză, cu excepția cazului în care această metodă de publicare:
+(a)
+ar pune în pericol stabilitatea piețelor financiare sau o anchetă penală în curs; sau
+(b)
+ar cauza, în măsura în care se poate stabili acest lucru, daune disproporționate entității supravegheate în cauză.
+În aceste circumstanțe, deciziile privind sancțiunile administrative se publică sub formă anonimizată. Alternativ, în cazul în care aceste circumstanțe ar putea înceta într-un termen rezonabil, publicarea în temeiul prezentului alineat poate fi amânată pentru un astfel de termen.
+(2)   În cazul în care este în curs o cale de atac la Curtea de Justiție cu privire la o decizie prevăzută la alineatul (1), BCE, fără întârzieri nejustificate, publică pe website-ul oficial al acesteia și informații privind situația căii de atac în cauză și rezultatul acestuia.
+(3)   BCE se asigură că informațiile publicate în temeiul alineatelor (1) și (2) rămân pe website-ul oficial al acesteia o perioadă de cel puțin cinci ani.
+Articolul 133
+Informarea ABE
+Sub rezerva cerințelor privind secretul profesional prevăzute la articolul 27 din Regulamentul privind MUS, BCE informează ABE cu privire la toate sancțiunile administrative definite la articolul 120 care sunt impuse unei entități supravegheate într-un stat membru din zona euro, inclusiv orice cale de atac cu privire la aceste sancțiuni și rezultatul acesteia.
+TITLUL 6
+COOPERARE ÎNTRE BCE ȘI ANC DIN STATELE MEMBRE DIN ZONA EURO ÎN TEMEIUL ARTICOLULUI 18 ALINEATUL (5) DIN REGULAMENTUL PRIVIND MUS
+Articolul 134
+Entități supravegheate semnificative
+(1)   În ceea ce privește entitățile supravegheate semnificative, o ANC inițiază proceduri numai la solicitarea BCE atunci când este necesar în scopul desfășurării atribuțiilor conferite BCE în temeiul Regulamentului privind MUS, în vederea luării de măsuri pentru a asigura impunerea de sancțiuni corespunzătoare în cazurile care nu sunt acoperite de articolul 18 alineatul (1) din Regulamentul privind MUS. Aceste cazuri includ aplicarea de:
+(a)
+sancțiuni nepecuniare în cazul unei încălcări a legislației Uniunii direct aplicabile de către persoane fizice sau juridice, precum și orice sancțiuni pecuniare în cazul unei încălcări a legislației Uniunii direct aplicabile de către persoane fizice;
+(b)
+orice sancțiuni pecuniare sau nepecuniare în cazul unei încălcări de către persoane fizice sau juridice a oricăror norme naționale care transpun directivele relevante ale Uniunii;
+(c)
+orice sancțiuni pecuniare sau nepecuniare care urmează a fi impuse în conformitate cu legislația națională relevantă care conferă prerogative specifice ANC din statele membre din zona euro care în prezent nu sunt impuse de legislația relevantă a Uniunii.
+Prevederile acestui alineat nu aduc atingere posibilității ca o ANC să inițieze proceduri din proprie inițiativă cu privire la aplicarea legislației naționale pentru atribuțiile care nu îi sunt conferite BCE.
+(2)   O ANC poate cere ca BCE să-i solicite să inițieze proceduri în cazurile prevăzute la alineatul (1).
+(3)   O ANC dintr-un stat membru participant notifică BCE cu privire la finalizarea unei proceduri de sancționare inițiate la solicitarea BCE în conformitate cu alineatul (1). În special, BCE este informată cu privire la sancțiunile impuse, dacă este cazul.
+Articolul 135
+Raportarea cu privire la entitățile supravegheate mai puțin semnificative
+ANC relevantă notifică periodic BCE cu privire la toate sancțiunile administrative impuse entităților supravegheate mai puțin semnificative în legătură cu exercitarea atribuțiilor sale de supraveghere.
+TITLUL 7
+INFRACȚIUNI
+Articolul 136
+Proba privind fapte ce pot constitui o infracțiune
+Atunci când, în exercitarea atribuțiilor prevăzute de Regulamentul privind MUS, BCE are motive să suspecteze că ar fi fost comisă o infracțiune, aceasta solicită ANC relevante să sesizeze autoritățile corespunzătoare cu privire la această situație în vederea anchetării și posibilei urmăriri penale, în conformitate cu legislația națională.
+TITLUL 8
+ÎNCASĂRILE DIN SANCȚIUNI
+Articolul 137
+Încasările din sancțiuni
+Încasările din sancțiunile administrative impuse de BCE în temeiul articolului 18 alineatele (1) și (7) din Regulamentul privind MUS sunt proprietatea BCE.
+PARTEA XI
+ACCESUL LA INFORMAȚII, RAPORTAREA, INVESTIGAȚIILE ȘI INSPECȚIILE LA FAȚA LOCULUI
+TITLUL 1
+PRINCIPII GENERALE
+Articolul 138
+Cooperare dintre BCE și ANC cu privire la prerogativele prevăzute la articolele 10-13 din Regulamentul privind MUS
+Dispozițiile prevăzute în această parte se aplică entităților supravegheate semnificative. De asemenea, acestea se aplică entităților supravegheate mai puțin semnificative în cazul în care BCE decide, în conformitate cu articolul 6 alineatul (5) litera (d) din Regulamentul privind MUS, să facă uz de prerogativele prevăzute la articolele 10-13 din Regulamentul privind MUS cu privire la o entitate supravegheată mai puțin semnificativă. Aceasta totuși nu aduce atingere competenței ANC de a supraveghea direct entitățile supravegheate mai puțin semnificative în conformitate cu articolul 6 alineatul (6) din Regulamentul privind MUS.
+TITLUL 2
+COOPERAREA ÎN CEEA CE PRIVEȘTE SOLICITĂRILE DE INFORMAȚII
+Articolul 139
+Solicitări ad-hoc de informații în temeiul articolului 10 din Regulamentul privind MUS
+(1)   În conformitate cu articolul 10 din Regulamentul privind MUS și sub rezerva și în conformitate cu legislația relevantă a Uniunii, BCE poate solicita unei persoane fizice sau juridice prevăzute la articolul 10 alineatul (1) din acel regulament să furnizeze toate informațiile necesare pentru exercitarea atribuțiilor conferite acesteia prin Regulamentul privind MUS. BCE precizează informațiile în cauză și termenul rezonabil în care trebuie furnizate BCE.
+(2)   Înainte de a solicita furnizarea informațiilor în conformitate cu articolul 10 alineatul (1) din Regulamentul privind MUS, BCE ține seama în primul rând de informațiile de care ANC deja dispun.
+(3)   BCE pune la dispoziția ANC relevante o copie a tuturor informațiilor primite de la persoana fizică sau juridică căreia i-a fost adresată solicitarea de informații.
+TITLUL 3
+RAPORTAREA
+Articolul 140
+Atribuțiile cu privire la raportarea în scopuri de supraveghere către autoritățile competente
+(1)   BCE este responsabilă cu asigurarea conformității cu legislația relevantă a Uniunii care impune cerințe instituțiilor de credit în domeniul raportării către autoritățile competente.
+(2)   În acest scop, BCE are atribuțiile și prerogativele referitoare la entitățile supravegheate semnificative prevăzute în legislația relevantă a Uniunii cu privire la raportarea în scopuri de supraveghere. ANC au atribuțiile și prerogativele referitoare la entitățile supravegheate mai puțin semnificative stabilite în legislația relevantă a Uniunii cu privire la raportarea către autoritățile competente.
+(3)   Fără a aduce atingere alineatului (2) și cu excepția cazului în care se prevede altfel, fiecare entitate supravegheată comunică ANC relevante care îi revine informații care trebuie raportate periodic în conformitate cu legislația relevantă a Uniunii. Cu excepția cazului în care se prevede în mod specific altfel, toate informațiile raportate de către entitățile supravegheate sunt transmise ANC. Acestea efectuează verificările inițiale ale datelor și pun informațiile la dispoziția BCE.
+(4)   BCE organizează procesele referitoare la colectarea și evaluarea calității datelor raportate de entitățile supravegheate sub rezerva și în conformitate cu legislația relevantă a Uniunii și standardele tehnice de punere în aplicare ale ABE.
+Articolul 141
+Solicitări de informații la intervale regulate în temeiul articolului 10 din Regulamentul privind MUS
+(1)   În conformitate cu articolul 10 din Regulamentul privind MUS, în special prerogativa BCE de a solicita furnizarea de informații la interval regulate și în formate specifice în scopuri de supraveghere și în scopuri statistice aferente, și sub rezerva și în conformitate cu legislația relevantă a Uniunii, BCE poate solicita entităților supravegheate să raporteze informații suplimentare în materie de supraveghere ori de câte ori aceste informații sunt necesare pentru ca BCE să-și îndeplinească atribuțiile care i-au fost conferite prin Regulamentul privind MUS. Sub rezerva condițiilor stabilite în legislația relevantă a Uniunii, BCE poate specifica, în special, categoriile de informații care ar trebui raportate, precum și procesele, formatele, frecvențele și termenele pentru furnizarea informațiilor respective.
+(2)   În cazul în care BCE solicită persoanelor fizice sau juridice prevăzute la articolul 10 alineatul (1) din Regulamentul privind MUS să furnizeze informații la intervale regulate, articolul 140 alineatele (3) și (4) din prezentul regulament se aplică în consecință.
+TITLUL 4
+COOPERAREA PRIVIND INVESTIGAȚIILE GENERALE
+Articolul 142
+Lansarea unei investigații generale în temeiul articolului 11 din Regulamentul privind MUS
+BCE desfășoară o investigație cu privire la orice persoană fizică sau juridică prevăzută la articolul 10 alineatul (1) din Regulamentul privind MUS în temeiul unei decizii a BCE. O astfel de decizie precizează următoarele elemente:
+(a)
+temeiul juridic al deciziei și scopul acesteia;
+(b)
+intenția de a exercita prerogativele stabilite la articolul 11 alineatul (1) din Regulamentul privind MUS;
+(c)
+faptul că orice împiedicare a investigației de către persoana investigată constituie o încălcare a unei decizii a BCE în sensul articolului 18 alineatul (7) din Regulamentul privind MUS, fără a aduce atingere legislației naționale astfel cum este prevăzut la articolul 11 alineatul (2) din Regulamentul privind MUS.
+TITLUL 5
+INSPECȚIILE LA FAȚA LOCULUI
+Articolul 143
+Decizia BCE de desfășura o inspecție la fața locului în temeiul articolului 12 din Regulamentul privind MUS
+(1)   În conformitate cu articolul 12 din Regulamentul privind MUS, pentru a-și îndeplini atribuțiile care i-au fost conferite prin Regulamentul privind MUS, BCE numește echipe de inspecție la fața locului, în conformitate cu articolul 144, pentru a desfășura la sediul unei persoane juridice toate inspecțiile la fața locului necesare, astfel cum este prevăzut la articolul 10 alineatul (1) din Regulamentul privind MUS.
+(2)   Fără a aduce atingere articolului 142 și în conformitate cu articolul 12 alineatul (3) din Regulamentul privind MUS, inspecțiile la fața locului se desfășoară în baza unei decizii a BCE, care precizează cel puțin următoarele:
+(a)
+obiectul și scopul inspecției la fața locului; și
+(b)
+faptul că orice împiedicare a inspecției la fața locului de către persoana juridică care face obiectul acesteia constituie o încălcare a unei decizii a BCE în sensul articolului 18 alineatul (7) din Regulamentul privind MUS, fără a aduce atingere legislației naționale, astfel cum este prevăzut la articolul 11 alineatul (2) din Regulamentul privind MUS.
+(3)   În cazul în care inspecția la fața locului urmează unei investigații desfășurate în temeiul unei decizii a BCE prevăzute la articolul 142 și cu condiția ca inspecția la fața locului să aibă același scop și aceeași acoperire ca investigația, personalul oficial și alte persoane autorizate de BCE și de o ANC beneficiază de acces la sediul comercial și terenul persoanei juridice care face obiectul investigației în temeiul aceleiași decizii, în conformitate cu articolul 12 alineatele (2) și (4) din Regulamentul privind MUS și fără a aduce atingere articolului 13 din acesta.
+Articolul 144
+Înființarea și componența echipelor de inspecție la fața locului
+(1)   BCE este responsabilă cu înființarea și componența echipelor de inspecție la fața locului, cu implicarea ANC, în conformitate cu articolul 12 din Regulamentul privind MUS.
+(2)   BCE desemnează șeful echipei de inspecție la fața locului dintre membrii personalului BCE și ANC.
+(3)   BCE și ANC se consultă reciproc și convin asupra utilizării resurselor ANC în ceea ce privește echipele de inspecție la fața locului.
+Articolul 145
+Procedura și notificarea unei inspecții la fața locului
+(1)   BCE notifică persoana juridică care face obiectul unei inspecții la fața locului cu privire la decizia BCE prevăzută la articolul 143 alineatul (2) și cu privire la identitatea membrilor echipei de inspecție la fața locului cu cel puțin cinci zile lucrătoare înainte de începerea inspecției la fața locului. Aceasta notifică ANC din statul membru în care urmează să se desfășoare inspecția la fața locului cu privire la respectiva inspecție cu cel puțin o săptămână înaintea notificării persoanei juridice care face obiectul inspecției la fața locului.
+(2)   Atunci când desfășurarea corespunzătoare și eficiența inspecției impun acest lucru, BCE poate efectua inspecția la fața locului fără notificarea prealabilă a entității supravegheate în cauză. ANC este notificată cât mai curând posibil înainte de începerea acestei inspecții la fața locului.
+Articolul 146
+Desfășurarea inspecțiilor la fața locului
+(1)   Cei care desfășoară inspecția la fața locului urmează instrucțiunile șefului echipei de inspecție la fața locului.
+(2)   Atunci când entitatea care face obiectul inspecției la fața locului este o entitate supravegheată semnificativă, șeful echipei de inspecție la fața locului este responsabil de coordonarea dintre echipa de inspecție la fața locului și echipa comună de supraveghere responsabilă cu supravegherea acestei entități supravegheate semnificative.
+PARTEA XII
+DISPOZIȚII TRANZITORII ȘI FINALE
+Articolul 147
+Începerea supravegherii directe de către BCE atunci când BCE preia atribuțiile pentru prima dată
+(1)   Cu cel puțin două luni înainte de 4 noiembrie 2014, BCE adresează o decizie fiecărei entități supravegheate cu privire la care preia atribuțiile care i-au fost conferite prin Regulamentul privind MUS, confirmându-i astfel că este o entitate supravegheată semnificativă. Pentru entitățile care sunt membri ai unui grup supravegheat semnificativ, BCE notifică decizia BCE entității supravegheate aflate la nivelul cel mai înalt de consolidare din statele membre participante și se asigură că toate entitățile supravegheate din grupul supravegheat semnificativ sunt informate corespunzător. Aceste decizii produc efecte de la 4 noiembrie 2014.
+(2)   Fără a aduce atingere alineatului (1), în cazul în care BCE începe înainte de 4 noiembrie 2014 să-și îndeplinească atribuțiile care i-au fost conferite, aceasta adresează o decizie entității în cauză și ANC relevante. Cu excepția cazului în care se prevede altfel în prezentul regulament, o astfel de decizie produce efecte de la notificare. ANC relevante sunt informate în prealabil, cât mai curând posibil, cu privire la intenția de a emite o astfel de decizie.
+(3)   Înainte de adoptarea unei decizii în temeiul alineatului (1), BCE acordă entității supravegheate relevante posibilitatea de a depune observații în scris.
+Articolul 148
+Definirea formatului raportului privind istoricul activității de supraveghere și profilul de risc transmis de ANC către BCE
+(1)   ANC, cel mai târziu până la 4 august 2014, transmit BCE identitatea instituțiilor de credit pe care le-au autorizat, precum și un raport privind aceste instituții de credit într-un format stabilit de BCE.
+(2)   Fără a aduce atingere alineatului (1), în cazul în care BCE începe înainte de 4 noiembrie 2014 să îndeplinească atribuțiile care i-au fost conferite, aceasta poate solicita ANC să-i transmită într-un termen rezonabil, care este precizat în solicitare, identitatea instituțiilor de credit relevante și un raport într-un format stabilit de BCE.
+Articolul 149
+Continuitatea procedurilor existente
+(1)   Cu excepția situației în care BCE decide altfel, în cazul în care o ANC a inițiat proceduri în materie de supraveghere pentru care BCE devine competentă în temeiul Regulamentului privind MUS, iar acest lucru are loc înainte de 4 noiembrie 2014, se aplică procedurile prevăzute la articolul 48.
+(2)   Prin derogare de la articolul 48, prezentul articol se aplică procedurilor comune.
+Articolul 150
+Decizii în materie de supraveghere luate de ANC
+Fără a aduce atingere exercitării de BCE a prerogativelor care îi sunt conferite prin Regulamentul privind MUS, deciziile în materie de supraveghere luate de ANC înainte de 4 noiembrie 2014 nu sunt afectate.
+Articolul 151
+State membre care adoptă moneda euro
+(1)   Sub rezerva alineatului (2), în circumstanțe în care o derogare în conformitate cu articolul 139 TFUE este abrogată pentru un stat membru în conformitate cu articolul 140 alineatul (2) TFUE, articolele 148-149 se aplică în mod corespunzător în ceea ce privește procedurile în materie de supraveghere sau deciziile inițiate sau luate de ANC din acel stat membru.
+(2)   Trimiterea la 4 noiembrie 2014 din articolele 149 și 150 se interpretează ca o trimitere la data la care euro este adoptat în statul membru relevant.
+Articolul 152
+Continuitatea aranjamentelor existente
+Toate aranjamentele de cooperare existente încheiate de o ANC cu alte autorități înainte de 4 noiembrie 2014 și care acoperă cel puțin parțial atribuțiile transferate BCE de Regulamentul privind MUS continuă să se aplice. BCE poate decide să participe la aceste aranjamente de cooperare existente în conformitate cu procedura aplicabilă aranjamentelor în cauză sau poate stabili noi aranjamente de cooperare cu terți pentru atribuțiile transferate acesteia prin Regulamentul privind MUS. O ANC continuă să aplice aranjamentele de cooperare existente numai în măsura în care acestea nu sunt înlocuite de aranjamente de cooperare ale BCE. Atunci când este necesar pentru respectarea aranjamentelor de cooperare existente, ANC este responsabilă cu asistarea BCE, în special prin exercitarea drepturilor sale și prin îndeplinirea responsabilităților preluate de aceasta în baza acordurilor, în coordonare cu BCE.
+Articolul 153
+Dispoziții finale
+Prezentul regulament intră în vigoare în ziua următoare datei publicării în Jurnalul Oficial al Uniunii Europene.
+Prezentul regulament este obligatoriu în toate elementele sale și se aplică direct în statele membre, în conformitate cu tratatele.
+Adoptat la Frankfurt pe Main, 16 aprilie 2014.
+Pentru Consiliul guvernatorilor BCE
+Președintele BCE
+Mario DRAGHI
+(1)  JO L 287, 29.10.2013, p. 63.
+(2)  JO L 320, 30.11.2013, p. 1.
+(3)  Decizia BCE/2004/2 din 19 februarie 2004 de adoptare a Regulamentului de procedură al Băncii Centrale Europene (JO L 80, 18.3.2004, p. 33).
+(4)  Adoptat la 31 martie 2014 și disponibil pe website-ul BCE, la adresa www.ecb.europa.eu. Nepublicat încă în Jurnalul Oficial.
+(5)  Decizia BCE/2014/16 din 14 aprilie 2014 privind instituirea unui comitet administrativ de control și normele de funcționare ale acestuia. Nepublicată încă în Jurnalul Oficial.
+(6)  Regulamentul (UE) nr. 575/2013 al Parlamentului European și al Consiliului din 26 iunie 2013 privind cerințele prudențiale pentru instituțiile de credit și societățile de investiții și de modificare a Regulamentului (UE) nr. 648/2012 (JO L 176, 27.6.2013, p. 1).
+(7)  Directiva 2013/34/UE a Parlamentului European și a Consiliului din 26 iunie 2013 privind situațiile financiare anuale, situațiile financiare consolidate și rapoartele conexe ale anumitor tipuri de întreprinderi, de modificare a Directivei 2006/43/CE a Parlamentului European și a Consiliului și de abrogare a Directivelor 78/660/CEE și 83/349/CEE ale Consiliului (JO L 182, 29.6.2013, p. 19).
+(8)  Directiva 2013/36/UE a Parlamentului European și a Consiliului din 26 iunie 2013 cu privire la accesul la activitatea instituțiilor de credit și supravegherea prudențială a instituțiilor de credit și a firmelor de investiții, de modificare a Directivei 2002/87/CE și de abrogare a Directivelor 2006/48/CE și 2006/49/CE (JO L 176, 27.6.2013, p. 338).
+(9)  Regulamentul (UE) nr. 648/2012 al Parlamentului European și al Consiliului din 4 iulie 2012 privind instrumentele financiare derivate extrabursiere, contrapărțile centrale și registrele centrale de tranzacții (JO L 201, 27.7.2012, p. 1).
+(10)  Directiva 2002/87/CE a Parlamentului European și a Consiliului din 16 decembrie 2002 privind supravegherea suplimentară a instituțiilor de credit, a întreprinderilor de asigurare și a întreprinderilor de investiții care aparțin unui conglomerat financiar și de modificare a Directivelor 73/239/CEE, 79/267/CEE, 92/49/CEE, 92/96/CEE, 93/6/CEE și 93/22/CEE ale Consiliului și a Directivelor 98/78/CE și 2000/12/CE ale Parlamentului European și ale Consiliului (JO L 35, 11.2.2003, p. 1).
+(11)  Astfel cum este publicat pe website-ul BCE.
+(12)  Regulamentul (CE) nr. 1606/2002 al Parlamentului European și al Consiliului din 19 iulie 2002 privind aplicarea standardelor internaționale de contabilitate (JO L 243, 11.9.2002, p. 1).
+(13)  Regulamentul (CE) nr. 25/2009 al Băncii Centrale Europene din 19 decembrie 2008 privind bilanțul sectorului instituții financiare monetare (BCE/2008/32) (JO L 15, 20.1.2009, p. 14).
+(14)  Regulamentul (UE) nr. 549/2013 al Parlamentului European și al Consiliului din 21 mai 2013 privind Sistemul european de conturi naționale și regionale din Uniunea Europeană (JO L 174, 26.6.2013, p. 1).
+(15)  Directiva 94/19/CE a Parlamentului European și a Consiliului din 30 mai 1994 privind sistemele de garantare a depozitelor (JO L 135, 31.5.1994, p. 5).
+(16)  Decizia BCE/2014/5 din 31 ianuarie 2014 privind cooperarea strânsă cu autoritățile naționale competente din statele membre participante a căror monedă nu este euro (nepublicată încă în Jurnalul Oficial).
+(17)  Regulamentul (CE) nr. 2532/98 al Consiliului din 23 noiembrie 1998 cu privire la atribuțiile Băncii Centrale Europene în materie de sancțiuni (JO L 318, 27.11.1998, p. 4).

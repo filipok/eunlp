@@ -1,0 +1,4 @@
+﻿Planned features:
+
+- Windows GUI program for convenient batch alignments (will use command line arguments internally)
+- Mixed filetypes in alignment

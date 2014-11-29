@@ -66,7 +66,7 @@ def aligner(source_file, target_file, lang_source, lang_target, align_file):
     # check OS
     computer = sys.platform
     if computer == 'win32':
-        command = 'C:\Users\Filip\Dropbox\Tranzit\LFalign\LF_aligner_4.05.exe --filetype="t" --infiles="' + source_file + '","' + target_file + '" --languages="' + lang_source + '","' + lang_target + '" --segment="y" --review="n" --tmx="y"'
+        command = 'LFalign\LF_aligner_4.05.exe --filetype="t" --infiles="' + source_file + '","' + target_file + '" --languages="' + lang_source + '","' + lang_target + '" --segment="y" --review="n" --tmx="y"'
         check_output(command, shell = True)
     else:
         # let's assume everything else is linux
