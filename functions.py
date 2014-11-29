@@ -1,8 +1,6 @@
 #-----------------------------------------------------------------------------
-# Name:        download_EP
-# Purpose:     Download EP minutes in EN and RO using a list of dates
-# How to use:   python dates_list.txt EN RO FR
-# Date format in dates_list.txt, one per line:  20131011 [= October 11, 2013]
+# Name:        functins.py
+# Purpose:     Various project functions
 #
 # Author:      Filip
 #
@@ -31,12 +29,16 @@ def check_error(text, error_string):
 
 
 def strip_celex(text):
-    # discard some leftover Javascript and newlines
+    # discard some leftover Javascript and newlines at the beginning
     split = re.split(r'\n\t{5}Text\n', text)
     text = split[1]
+    # discard some leftover Javascript and newlines at the end
     split = re.split(r'\n\s{,6}Top\s{,6}\n', text)
     text = split[0]
+    # remove empty newlines
     text = re.sub(r'\n+', r'\n', text)
+    # double newlines, otherwise the splitter merges the first lines
+    text = re.sub(r'\n', r'\n\n', text)
     return text
 
 
@@ -60,7 +62,7 @@ def scraper(languages, make_link, error_text, url_code, prefix, is_celex = False
             else:
                 print "Error in link " + url_code + " " + lang_code + "."
 
-def aligner(source_file, target_file, lang_source, lang_target):
+def aligner(source_file, target_file, lang_source, lang_target, align_file):
     # check OS
     computer = sys.platform
     if computer == 'win32':
@@ -79,6 +81,9 @@ def aligner(source_file, target_file, lang_source, lang_target):
         command = ' perl tokenizer.perl ' + lang_target  + ' < ' + target_file + '_s ' + '> ' + target_file + '_st'
         check_output(command, shell = True)
         # hunalign
+        dictionary = lang_source + lang_target + '.dic' #this assumes the file exists
+        command = 'hunalign-1.1/src/hunalign/hunalign ' + dictionary + ' '  + source_file + '_st ' + target_file + '_st -text > '+ align_file+ '.txt'
+        check_output(command, shell = True)
         # make it human readable
         # turn it into tmx
-        pass
+        # pass

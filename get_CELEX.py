@@ -31,4 +31,5 @@ if __name__ == '__main__':
     target_file = celex + '_' + languages[1] + '.txt'
     source_file = os.path.join(path, source_file)
     target_file = os.path.join(path, target_file)
-    func.aligner(source_file, target_file, languages[0].lower(), languages[1].lower())
+    align_file = 'align_' + celex
+    func.aligner(source_file, target_file, languages[0].lower(), languages[1].lower(), align_file)
