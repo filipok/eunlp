@@ -12,8 +12,13 @@ import urllib2
 import codecs
 import re
 import sys
+import os
 from bs4 import BeautifulSoup
 from subprocess import check_output
+
+def delete_and_rename(file_to_change_name, file_to_delete):
+    os.remove(file_to_delete) #delete file_2
+    os.rename(file_to_change_name, file_to_delete) #rename file_1 to file_2
 
 
 def download(link):
