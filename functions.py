@@ -67,6 +67,34 @@ def scraper(languages, make_link, error_text, url_code, prefix, is_celex = False
             else:
                 print "Error in link " + url_code + " " + lang_code + "."
 
+def untokenize(file_name):
+    # u'\u2026' ellipsis
+    # u'\u2018' single opening quotation mark
+    # u'\u2019' single closing quotation mark
+    # u'\u201c' double opening quotation mark
+    # u'\u201d' double closing quotation mark
+    # u'\u201e' low double opening quotation mark
+    # u'\u00ab' left-pointing double angle quotation mark
+    # u'\u00bb' right-pointing double angle quotation mark
+
+    # Define punctuation marks where spaces should be removed after/before.
+    space_after =['(', u'\u201e', '[', u'\u2018', u'\u201c', u'\u00ab']
+    space_before =[')', '.', ',', ":", ";", "?", "!", u'\u201d', u'\u2019', ']', u'\u2026', u'\u00bb']
+    new_name = 'un_' + file_name
+    with codecs.open(new_name, "w", "utf-8") as fout:
+        with codecs.open(file_name, "r", "utf-8") as fin:
+            for line in fin:
+                for sign in space_after:
+                    new = sign
+                    old = sign + " "
+                    line = line.replace(old, new)
+                for sign in space_before:
+                    new = sign
+                    old = " " + sign
+                    line = line.replace(old, new)
+                fout.write(line)
+
+
 def aligner(source_file, target_file, lang_source, lang_target, align_file):
     # check OS
     computer = sys.platform
