@@ -84,6 +84,10 @@ def untokenize(file_name):
     with codecs.open(new_name, "w", "utf-8") as fout:
         with codecs.open(file_name, "r", "utf-8") as fin:
             for line in fin:
+                apostrophe = u'\u2019'
+                new = apostrophe + "s "
+                old = apostrophe + " s "
+                line = line.replace(old, new)  # English possessive (Saxon)
                 for sign in space_after:
                     new = sign
                     old = sign + " "
