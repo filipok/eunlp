@@ -134,9 +134,9 @@ def tab_to_tmx(file_name, lang_source, lang_target):
                 # remove triple tildas from hunalign
                 source = source.replace('~~~ ', '')
                 target = target.replace('~~~ ', '')
-                # TODO untokenize source and target
-                # TODO also create plain text source and target files (am _s!)
+                # TODO use hunalign without -text
                 # test each line for quasi-empty < P >
+                #TODO < P > are created by the sentence splitter, clean there
                 if source != '&lt; P &gt;':
                     #   create TU line
                     tu = '<tu creationdate="' + current_date + \
