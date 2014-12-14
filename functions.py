@@ -14,6 +14,7 @@ import re
 import sys
 import os
 from bs4 import BeautifulSoup
+import datetime
 from subprocess import check_output
 
 def delete_and_rename(file_to_change_name, file_to_delete):
@@ -180,6 +181,6 @@ def aligner(source_file, target_file, lang_source, lang_target, align_file):
         command = 'hunalign-1.1/src/hunalign/hunalign ' + dictionary + ' '  + source_file + '_st ' + target_file + '_st -text > '+ align_file+ '.txt'
         check_output(command, shell = True)
         # untokenize alignment
-        untokenize(align_file)
+        untokenize(align_file + '.txt')
         # turn alignment into tmx
-        tab_to_tmx(align_file, lang_source, lang_target)
+        tab_to_tmx('un_' + align_file + '.txt', lang_source, lang_target)
