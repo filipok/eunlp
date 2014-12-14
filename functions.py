@@ -78,8 +78,8 @@ def untokenize(file_name):
     # u'\u00bb' right-pointing double angle quotation mark
 
     # Define punctuation marks where spaces should be removed after/before.
-    space_after =['(', u'\u201e', '[', u'\u2018', u'\u201c', u'\u00ab']
-    space_before =[')', '.', ',', ":", ";", "?", "!", u'\u201d', u'\u2019', ']', u'\u2026', u'\u00bb']
+    space_after =['(', u'\u201e', '[', u'\u2018', u'\u201c', u'\u00ab', "/"]
+    space_before =[')', '.', ',', ":", ";", "?", "!", u'\u201d', u'\u2019', ']', u'\u2026', u'\u00bb', "/"]
     new_name = 'un_' + file_name
     with codecs.open(new_name, "w", "utf-8") as fout:
         with codecs.open(file_name, "r", "utf-8") as fin:
@@ -134,7 +134,7 @@ def tab_to_tmx(file_name, lang_source, lang_target):
                 source = source.replace('~~~ ', '')
                 target = target.replace('~~~ ', '')
                 # TODO untokenize source and target
-                # TODO also create plain text source and target files
+                # TODO also create plain text source and target files (am _s!)
                 # test each line for quasi-empty < P >
                 if source != '&lt; P &gt;':
                     #   create TU line
@@ -179,6 +179,7 @@ def aligner(source_file, target_file, lang_source, lang_target, align_file):
         dictionary = lang_source + lang_target + '.dic' #this assumes the file exists
         command = 'hunalign-1.1/src/hunalign/hunalign ' + dictionary + ' '  + source_file + '_st ' + target_file + '_st -text > '+ align_file+ '.txt'
         check_output(command, shell = True)
-        # make it human readable
-        # turn it into tmx
-        # pass
+        # untokenize alignment
+        untokenize(align_file)
+        # turn alignment into tmx
+        tab_to_tmx(align_file, lang_source, lang_target)
