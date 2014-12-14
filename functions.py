@@ -1,12 +1,9 @@
-#-----------------------------------------------------------------------------
-# Name:        functins.py
+# Name:        functions.py
 # Purpose:     Various project functions
 #
 # Author:      Filip
 #
 # Created:     4.11.2014
-# Licence:     Public domain
-#-----------------------------------------------------------------------------
 
 import urllib2
 import codecs
@@ -17,9 +14,10 @@ from bs4 import BeautifulSoup
 import datetime
 from subprocess import check_output
 
+
 def delete_and_rename(file_to_change_name, file_to_delete):
-    os.remove(file_to_delete) #delete file_2
-    os.rename(file_to_change_name, file_to_delete) #rename file_1 to file_2
+    os.remove(file_to_delete)  # delete file_2
+    os.rename(file_to_change_name, file_to_delete)  # rename file_1 to file_2
 
 
 def download(link):
@@ -48,9 +46,8 @@ def strip_celex(text):
     return text
 
 
-
-def scraper(languages, make_link, error_text, url_code, prefix, is_celex = False):
-    for lang_code in languages:
+def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False):
+    for lang_code in langs:
             link = make_link(url_code, lang_code)
             text = download(link)
             if check_error(text, error_text):
@@ -68,6 +65,7 @@ def scraper(languages, make_link, error_text, url_code, prefix, is_celex = False
             else:
                 print "Error in link " + url_code + " " + lang_code + "."
 
+
 def untokenize(file_name):
     # u'\u2026' ellipsis
     # u'\u2018' single opening quotation mark
@@ -79,8 +77,9 @@ def untokenize(file_name):
     # u'\u00bb' right-pointing double angle quotation mark
 
     # Define punctuation marks where spaces should be removed after/before.
-    space_after =['(', u'\u201e', '[', u'\u2018', u'\u201c', u'\u00ab', "/"]
-    space_before =[')', '.', ',', ":", ";", "?", "!", u'\u201d', u'\u2019', ']', u'\u2026', u'\u00bb', "/"]
+    space_after = ['(', u'\u201e', '[', u'\u2018', u'\u201c', u'\u00ab', "/"]
+    space_before = [')', '.', ',', ":", ";", "?", "!", u'\u201d', u'\u2019',
+                    ']', u'\u2026', u'\u00bb', "/"]
     new_name = 'un_' + file_name
     with codecs.open(new_name, "w", "utf-8") as fout:
         with codecs.open(file_name, "r", "utf-8") as fin:
@@ -134,9 +133,7 @@ def tab_to_tmx(file_name, lang_source, lang_target):
                 # remove triple tildas from hunalign
                 source = source.replace('~~~ ', '')
                 target = target.replace('~~~ ', '')
-                # TODO use hunalign without -text
-                # test each line for quasi-empty < P >
-                #TODO < P > are created by the sentence splitter, clean there
+                # test each line for quasi-empty < P > #TODO stop testing
                 if source != '&lt; P &gt;':
                     #   create TU line
                     tu = '<tu creationdate="' + current_date + \
@@ -162,25 +159,40 @@ def aligner(source_file, target_file, lang_source, lang_target, align_file):
     # check OS
     computer = sys.platform
     if computer == 'win32':
-        command = 'LFalign\LF_aligner_4.05.exe --filetype="t" --infiles="' + source_file + '","' + target_file + '" --languages="' + lang_source + '","' + lang_target + '" --segment="y" --review="n" --tmx="y"'
-        check_output(command, shell = True)
+        command = 'LFalign\LF_aligner_4.05.exe --filetype="t" --infiles="' \
+                  + source_file + '","' + target_file + '" --languages="' + \
+                  lang_source + '","' + lang_target + \
+                  '" --segment="y" --review="n" --tmx="y"'
+        check_output(command, shell=True)
     else:
         # let's assume everything else is linux
+        # TODO use the same file names
         # sentence splitter
-        command = ' perl sentence_splitter/split-sentences.perl ' + lang_source + ' < ' + source_file + '> ' + source_file + '_s'
-        check_output(command, shell = True)
-        command = ' perl sentence_splitter/split-sentences.perl ' + lang_target + ' < ' + target_file + '> ' + target_file + '_s'
-        check_output(command, shell = True)
+        command = ' perl sentence_splitter/split-sentences.perl ' + \
+                  lang_source + ' < ' + source_file + '> ' + source_file + '_s'
+        check_output(command, shell=True)
+        command = ' perl sentence_splitter/split-sentences.perl ' \
+                  + lang_target + ' < ' + target_file + '> ' + target_file +\
+                  '_s'
+        check_output(command, shell=True)
+        # TODO remove < P >
         # tokenizer
-        command = ' perl tokenizer.perl ' + lang_source + ' < ' + source_file + '_s ' + '> ' + source_file + '_st'
-        check_output(command, shell = True)
-        command = ' perl tokenizer.perl ' + lang_target  + ' < ' + target_file + '_s ' + '> ' + target_file + '_st'
-        check_output(command, shell = True)
+        command = ' perl tokenizer.perl ' + lang_source + ' < ' + source_file\
+                  + '_s ' + '> ' + source_file + '_st'
+        check_output(command, shell=True)
+        command = ' perl tokenizer.perl ' + lang_target + ' < ' + target_file\
+                  + '_s ' + '> ' + target_file + '_st'
+        check_output(command, shell=True)
         # hunalign
-        dictionary = lang_source + lang_target + '.dic' #this assumes the file exists
-        command = 'hunalign-1.1/src/hunalign/hunalign ' + dictionary + ' '  + source_file + '_st ' + target_file + '_st -text > '+ align_file+ '.txt'
-        check_output(command, shell = True)
+        dictionary = lang_source + lang_target + '.dic'  # TODO if !exist ?
+        # TODO use hunalign without -text
+        command = 'hunalign-1.1/src/hunalign/hunalign ' + dictionary + ' '  \
+                  + source_file + '_st ' + target_file + '_st -text > ' + \
+                  align_file + '.txt'
+        check_output(command, shell=True)
+        # TODO skip untokenization
         # untokenize alignment
         untokenize(align_file + '.txt')
+        # TODO use hunalign output without -text in tab_to_tmx
         # turn alignment into tmx
         tab_to_tmx('un_' + align_file + '.txt', lang_source, lang_target)
