@@ -99,6 +99,64 @@ def untokenize(file_name):
                 fout.write(line)
 
 
+def tab_to_tmx(file_name, lang_source, lang_target):
+    # get current date
+    current_date = datetime.datetime.now().isoformat()
+    current_date = current_date[0:4] + current_date[5:7] + current_date[8:10] \
+        + "T" + current_date[11:13] + current_date[14:16] + \
+        current_date[17:19] + "Z"
+    # create new TMX file
+    tmx_file = file_name + ".tmx"
+    # open tmx_file
+    with codecs.open(tmx_file, "w", "utf-8") as fout:
+        # add tmx header (copied from LF Aligner output)
+        fout.write('<?xml version="1.0" encoding="utf-8" ?>\n')
+        fout.write('<!DOCTYPE tmx SYSTEM "tmx14.dtd">\n')
+        fout.write('<tmx version="1.4">\n')
+        fout.write('  <header\n')
+        fout.write('    creationtool="eunlp"\n')
+        fout.write('    creationtoolversion="0.01"\n')
+        fout.write('    datatype="unknown"\n')
+        fout.write('    segtype="sentence"\n')
+        fout.write('    adminlang="' + lang_source + '"\n')
+        fout.write('    srclang="' + lang_source + '"\n')
+        fout.write('    o-tmf="TW4Win 2.0 Format"\n')
+        fout.write('  >\n')
+        fout.write('  </header>\n')
+        fout.write('  <body>\n')
+        with codecs.open(file_name, "r", "utf-8") as fin:
+            for line in fin:
+                #   get source and target to temp variables
+                text = re.split(r'\t', line)
+                source = text[0]
+                target = text[1]
+                # remove triple tildas from hunalign
+                source = source.replace('~~~ ', '')
+                target = target.replace('~~~ ', '')
+                # TODO untokenize source and target
+                # TODO also create plain text source and target files
+                # test each line for quasi-empty < P >
+                if source != '&lt; P &gt;':
+                    #   create TU line
+                    tu = '<tu creationdate="' + current_date + \
+                         '" creationid="eunlp"><prop type="Txt::Note">' + \
+                         file_name + '</prop>\n'
+                    fout.write(tu)
+                    #   create TUV source line
+                    tuv = '<tuv xml:lang="' + lang_source + '"><seg>' + source\
+                          + '</seg></tuv>\n'
+                    fout.write(tuv)
+                    #   create TUV target line
+                    tuv = '<tuv xml:lang="' + lang_target + '"><seg>' + target\
+                          + '</seg></tuv> </tu>\n'
+                    fout.write(tuv)
+                    fout.write('\n')
+        # add tmx footer
+        fout.write('\n')
+        fout.write('</body>\n')
+        fout.write('</tmx>')
+
+
 def aligner(source_file, target_file, lang_source, lang_target, align_file):
     # check OS
     computer = sys.platform
