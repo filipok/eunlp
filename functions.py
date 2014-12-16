@@ -66,7 +66,7 @@ def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False):
                 print "Error in link " + url_code + " " + lang_code + "."
 
 
-def untokenize(file_name):
+def untokenize(input_file, output_file):
     # u'\u2026' ellipsis
     # u'\u2018' single opening quotation mark
     # u'\u2019' single closing quotation mark
@@ -80,9 +80,8 @@ def untokenize(file_name):
     space_after = ['(', u'\u201e', '[', u'\u2018', u'\u201c', u'\u00ab', "/"]
     space_before = [')', '.', ',', ":", ";", "?", "!", u'\u201d', u'\u2019',
                     ']', u'\u2026', u'\u00bb', "/"]
-    new_name = 'un_' + file_name
-    with codecs.open(new_name, "w", "utf-8") as fout:
-        with codecs.open(file_name, "r", "utf-8") as fin:
+    with codecs.open(output_file, "w", "utf-8") as fout:
+        with codecs.open(input_file, "r", "utf-8") as fin:
             for line in fin:
                 apostrophe = u'\u2019'
                 new = apostrophe + "s "
@@ -99,16 +98,23 @@ def untokenize(file_name):
                 fout.write(line)
 
 
-def tab_to_tmx(file_name, lang_source, lang_target):
+def remove_p(input_name, output_name):
+    empty_line = '<P>\n'
+    with codecs.open(output_name, "w", "utf-8") as fout:
+        with codecs.open(input_name, "r", "utf-8") as fin:
+            for line in fin:
+                if line != empty_line:
+                    fout.write(line)
+
+
+def tab_to_tmx(input_name, tmx_name, lang_source, lang_target):
     # get current date
     current_date = datetime.datetime.now().isoformat()
     current_date = current_date[0:4] + current_date[5:7] + current_date[8:10] \
         + "T" + current_date[11:13] + current_date[14:16] + \
         current_date[17:19] + "Z"
     # create new TMX file
-    tmx_file = file_name + ".tmx"
-    # open tmx_file
-    with codecs.open(tmx_file, "w", "utf-8") as fout:
+    with codecs.open(tmx_name, "w", "utf-8") as fout:
         # add tmx header (copied from LF Aligner output)
         fout.write('<?xml version="1.0" encoding="utf-8" ?>\n')
         fout.write('<!DOCTYPE tmx SYSTEM "tmx14.dtd">\n')
@@ -124,7 +130,7 @@ def tab_to_tmx(file_name, lang_source, lang_target):
         fout.write('  >\n')
         fout.write('  </header>\n')
         fout.write('  <body>\n')
-        with codecs.open(file_name, "r", "utf-8") as fin:
+        with codecs.open(input_name, "r", "utf-8") as fin:
             for line in fin:
                 #   get source and target to temp variables
                 text = re.split(r'\t', line)
@@ -138,7 +144,7 @@ def tab_to_tmx(file_name, lang_source, lang_target):
                     #   create TU line
                     tu = '<tu creationdate="' + current_date + \
                          '" creationid="eunlp"><prop type="Txt::Note">' + \
-                         file_name + '</prop>\n'
+                         input_name + '</prop>\n'
                     fout.write(tu)
                     #   create TUV source line
                     tuv = '<tuv xml:lang="' + lang_source + '"><seg>' + source\
@@ -155,44 +161,46 @@ def tab_to_tmx(file_name, lang_source, lang_target):
         fout.write('</tmx>')
 
 
-def aligner(source_file, target_file, lang_source, lang_target, align_file):
+def aligner(source_file, target_file, s_lang, t_lang, align_file):
     # check OS
     computer = sys.platform
     if computer == 'win32':
         command = 'LFalign\LF_aligner_4.05.exe --filetype="t" --infiles="' \
                   + source_file + '","' + target_file + '" --languages="' + \
-                  lang_source + '","' + lang_target + \
+                  s_lang + '","' + t_lang + \
                   '" --segment="y" --review="n" --tmx="y"'
         check_output(command, shell=True)
     else:
         # let's assume everything else is linux
-        # TODO use the same file names
-        # sentence splitter
+        # sentence splitter; resulting file are with the .spl extension
         command = ' perl sentence_splitter/split-sentences.perl ' + \
-                  lang_source + ' < ' + source_file + '> ' + source_file + '_s'
+                  s_lang + ' < ' + source_file + '> ' + source_file[:-4] + \
+                  ".spl"
         check_output(command, shell=True)
         command = ' perl sentence_splitter/split-sentences.perl ' \
-                  + lang_target + ' < ' + target_file + '> ' + target_file +\
-                  '_s'
+                  + t_lang + ' < ' + target_file + '> ' + target_file[:-4] + \
+                  ".spl"
         check_output(command, shell=True)
-        # TODO remove < P >
-        # tokenizer
-        command = ' perl tokenizer.perl ' + lang_source + ' < ' + source_file\
-                  + '_s ' + '> ' + source_file + '_st'
+        # remove < P > and create files without extension
+        remove_p(source_file[:-4] + ".spl", source_file[:-4])
+        remove_p(target_file[:-4] + ".spl", target_file[:-4])
+        # tokenizer and create files with the .tok extension
+        command = ' perl tokenizer.perl ' + s_lang + ' < ' + source_file[:-4]\
+                  + '> ' + source_file[:-4] + '.tok'
         check_output(command, shell=True)
-        command = ' perl tokenizer.perl ' + lang_target + ' < ' + target_file\
-                  + '_s ' + '> ' + target_file + '_st'
+        command = ' perl tokenizer.perl ' + t_lang + ' < ' + target_file[:-4]\
+                  + '> ' + target_file[:-4] + '.tok'
         check_output(command, shell=True)
         # hunalign
-        dictionary = lang_source + lang_target + '.dic'  # TODO if !exist ?
+        dictionary = s_lang + t_lang + '.dic'  # TODO if !exist ?
         # TODO use hunalign without -text
         command = 'hunalign-1.1/src/hunalign/hunalign ' + dictionary + ' '  \
-                  + source_file + '_st ' + target_file + '_st -text > ' + \
-                  align_file + '.txt'
+                  + source_file[:-4] + '.tok ' + target_file[:-4] + \
+                  '.tok -text > ' + align_file + '.txt'
         check_output(command, shell=True)
         # TODO skip untokenization
         # untokenize alignment
-        untokenize(align_file + '.txt')
+        untokenize(align_file + '.txt', align_file + '.un.txt')
         # TODO use hunalign output without -text in tab_to_tmx
         # turn alignment into tmx
-        tab_to_tmx('un_' + align_file + '.txt', lang_source, lang_target)
+        tab_to_tmx(align_file + '.un.txt', align_file + '.tmx', s_lang, t_lang)
