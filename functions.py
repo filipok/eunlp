@@ -161,6 +161,17 @@ def tab_to_tmx(input_name, tmx_name, lang_source, lang_target):
         fout.write('</tmx>')
 
 
+def splitter_wrapper(lang, input_file, output_file):
+    command = ' perl sentence_splitter/split-sentences.perl -l ' + \
+        lang + ' < ' + input_file + '> ' + output_file
+    check_output(command, shell=True)
+
+
+def tokenizer_wrapper(lang, input_file, output_file):
+    command = ' perl tokenizer.perl -l ' + lang + ' < ' + input_file + ' > '\
+              + output_file
+    check_output(command, shell=True)
+
 def aligner(source_file, target_file, s_lang, t_lang, align_file):
     # check OS
     computer = sys.platform
@@ -173,24 +184,14 @@ def aligner(source_file, target_file, s_lang, t_lang, align_file):
     else:
         # let's assume everything else is linux
         # sentence splitter; resulting file are with the .spl extension
-        command = ' perl sentence_splitter/split-sentences.perl ' + \
-                  s_lang + ' < ' + source_file + '> ' + source_file[:-4] + \
-                  ".spl"
-        check_output(command, shell=True)
-        command = ' perl sentence_splitter/split-sentences.perl ' \
-                  + t_lang + ' < ' + target_file + '> ' + target_file[:-4] + \
-                  ".spl"
-        check_output(command, shell=True)
+        splitter_wrapper(s_lang, source_file, source_file[:-4] + '.spl')
+        splitter_wrapper(t_lang, target_file, target_file[:-4] + '.spl')
         # remove < P > and create files without extension
         remove_p(source_file[:-4] + ".spl", source_file[:-4])
         remove_p(target_file[:-4] + ".spl", target_file[:-4])
         # tokenizer and create files with the .tok extension
-        command = ' perl tokenizer.perl ' + s_lang + ' < ' + source_file[:-4]\
-                  + '> ' + source_file[:-4] + '.tok'
-        check_output(command, shell=True)
-        command = ' perl tokenizer.perl ' + t_lang + ' < ' + target_file[:-4]\
-                  + '> ' + target_file[:-4] + '.tok'
-        check_output(command, shell=True)
+        tokenizer_wrapper(s_lang, source_file[:-4], source_file[:-4] + '.tok')
+        tokenizer_wrapper(t_lang, target_file[:-4], target_file[:-4] + '.tok')
         # hunalign
         dictionary = s_lang + t_lang + '.dic'  # TODO if !exist ?
         # TODO use hunalign without -text
