@@ -214,9 +214,9 @@ def aligner(source_file, target_file, s_lang, t_lang, align_file):
         output_lines = ladder2text_new.create_output_lines(align_file + '.lad',
                                                            source_file[:-4],
                                                            target_file[:-4])
-        f = open(align_file + '.tab', 'w')
-        f.write(output_lines)
-        f.close()
+        with codecs.open(align_file + '.tab', "w", "utf-8") as fout:
+            for line in output_lines:
+               fout.write(line + '\n')
         # turn alignment into tmx
         tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang)
         # create parallel source and target text files
