@@ -12,6 +12,7 @@ import sys
 import os
 from bs4 import BeautifulSoup
 import datetime
+import ladder2text_new
 from subprocess import check_output
 
 
@@ -107,7 +108,19 @@ def remove_p(input_name, output_name):
                     fout.write(line)
 
 
-def tab_to_tmx(input_name, tmx_name, lang_source, lang_target):
+def tab_to_separate(input_name, output_source, output_target):
+    with codecs.open(input_name, "r", "utf-8") as fin:
+        with codecs.open(output_source, "w", "utf-8") as out_s:
+            with codecs.open(output_target, "w", "utf-8") as out_t:
+                for line in fin:
+                    text = re.split(r'\t', line)
+                    source = text[2]
+                    target = text[1]
+                    out_s.write(source + '\n')
+                    out_t.write(target + '\n')
+
+
+def tab_to_tmx(input_name, tmx_name, s_lang, t_lang):
     # get current date
     current_date = datetime.datetime.now().isoformat()
     current_date = current_date[0:4] + current_date[5:7] + current_date[8:10] \
@@ -124,8 +137,8 @@ def tab_to_tmx(input_name, tmx_name, lang_source, lang_target):
         fout.write('    creationtoolversion="0.01"\n')
         fout.write('    datatype="unknown"\n')
         fout.write('    segtype="sentence"\n')
-        fout.write('    adminlang="' + lang_source + '"\n')
-        fout.write('    srclang="' + lang_source + '"\n')
+        fout.write('    adminlang="' + s_lang + '"\n')
+        fout.write('    srclang="' + s_lang + '"\n')
         fout.write('    o-tmf="TW4Win 2.0 Format"\n')
         fout.write('  >\n')
         fout.write('  </header>\n')
@@ -134,27 +147,25 @@ def tab_to_tmx(input_name, tmx_name, lang_source, lang_target):
             for line in fin:
                 #   get source and target to temp variables
                 text = re.split(r'\t', line)
-                source = text[0]
+                source = text[2]
                 target = text[1]
                 # remove triple tildas from hunalign
                 source = source.replace('~~~ ', '')
                 target = target.replace('~~~ ', '')
-                # test each line for quasi-empty < P > #TODO stop testing
-                if source != '&lt; P &gt;':
-                    #   create TU line
-                    tu = '<tu creationdate="' + current_date + \
-                         '" creationid="eunlp"><prop type="Txt::Note">' + \
-                         input_name + '</prop>\n'
-                    fout.write(tu)
-                    #   create TUV source line
-                    tuv = '<tuv xml:lang="' + lang_source + '"><seg>' + source\
-                          + '</seg></tuv>\n'
-                    fout.write(tuv)
-                    #   create TUV target line
-                    tuv = '<tuv xml:lang="' + lang_target + '"><seg>' + target\
-                          + '</seg></tuv> </tu>\n'
-                    fout.write(tuv)
-                    fout.write('\n')
+                #   create TU line
+                tu = '<tu creationdate="' + current_date + \
+                     '" creationid="eunlp"><prop type="Txt::Note">' + \
+                     input_name + '</prop>\n'
+                fout.write(tu)
+                #   create TUV source line
+                tuv = '<tuv xml:lang="' + s_lang + '"><seg>' + source\
+                      + '</seg></tuv>\n'
+                fout.write(tuv)
+                #   create TUV target line
+                tuv = '<tuv xml:lang="' + t_lang + '"><seg>' + target\
+                      + '</seg></tuv> </tu>\n'
+                fout.write(tuv)
+                fout.write('\n')
         # add tmx footer
         fout.write('\n')
         fout.write('</body>\n')
@@ -194,14 +205,20 @@ def aligner(source_file, target_file, s_lang, t_lang, align_file):
         tokenizer_wrapper(t_lang, target_file[:-4], target_file[:-4] + '.tok')
         # hunalign
         dictionary = s_lang + t_lang + '.dic'  # TODO if !exist ?
-        # TODO use hunalign without -text
+        # create ladder
         command = 'hunalign-1.1/src/hunalign/hunalign ' + dictionary + ' '  \
                   + source_file[:-4] + '.tok ' + target_file[:-4] + \
-                  '.tok -text > ' + align_file + '.txt'
+                  '.tok > ' + align_file + '.lad'
         check_output(command, shell=True)
-        # TODO skip untokenization
-        # untokenize alignment
-        untokenize(align_file + '.txt', align_file + '.un.txt')
-        # TODO use hunalign output without -text in tab_to_tmx
+        # create aligned output
+        output_lines = ladder2text_new.create_output_lines(align_file + '.lad',
+                                                           source_file[:-4],
+                                                           target_file[:-4])
+        f = open(align_file + '.tab', 'w')
+        f.write(output_lines)
+        f.close()
         # turn alignment into tmx
-        tab_to_tmx(align_file + '.un.txt', align_file + '.tmx', s_lang, t_lang)
+        tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang)
+        # create parallel source and target text files
+        tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
+                        target_file[:-4] + '.ali')
