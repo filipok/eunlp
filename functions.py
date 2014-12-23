@@ -208,7 +208,8 @@ def aligner(source_file, target_file, s_lang, t_lang, align_file):
         # create hunalign empty dic
         dictionary = s_lang + t_lang + '.dic'
         if not os.path.exists(dictionary):
-            check_output('touch ' + dictionary, shell=True)
+            with codecs.open(dictionary, "w", "utf-8"):
+                pass
         # create hunalign ladder alignment
         align_file = align_file + '_' + s_lang + '_' + t_lang
         command = 'hunalign-1.1/src/hunalign/hunalign ' + dictionary + ' '  \
