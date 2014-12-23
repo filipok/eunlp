@@ -31,5 +31,5 @@ if __name__ == '__main__':
     align_file = os.path.join(path, 'bi_' + celex)
     dictionary = os.path.join(path, languages[0].lower() +
                               languages[1].lower() + '.dic')
-    func.aligner(source_file, target_file, dictionary, languages[0].lower(),
-                 languages[1].lower(), align_file)
+    func.aligner(source_file, target_file, languages[0].lower(),
+                 languages[1].lower(), dictionary, align_file)
