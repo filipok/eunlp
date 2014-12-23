@@ -28,6 +28,8 @@ if __name__ == '__main__':
     target_file = celex + '_' + languages[1] + '.txt'
     source_file = os.path.join(path, source_file)
     target_file = os.path.join(path, target_file)
-    align_file = 'bi_' + celex
-    func.aligner(source_file, target_file, languages[0].lower(),
+    align_file = os.path.join(path, 'bi_' + celex)
+    dictionary = os.path.join(path, languages[0].lower() +
+                              languages[1].lower() + '.dic')
+    func.aligner(source_file, target_file, dictionary, languages[0].lower(),
                  languages[1].lower(), align_file)

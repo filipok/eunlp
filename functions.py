@@ -185,7 +185,7 @@ def tokenizer_wrapper(lang, input_file, output_file):
     check_output(command, shell=True)
 
 
-def aligner(source_file, target_file, s_lang, t_lang, align_file):
+def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file):
     # check OS
     computer = sys.platform
     if computer == 'win32':
@@ -205,8 +205,7 @@ def aligner(source_file, target_file, s_lang, t_lang, align_file):
         # tokenizer and create files with the .tok extension
         tokenizer_wrapper(s_lang, source_file[:-4], source_file[:-4] + '.tok')
         tokenizer_wrapper(t_lang, target_file[:-4], target_file[:-4] + '.tok')
-        # create hunalign empty dic
-        dictionary = s_lang + t_lang + '.dic'
+        # create empty hunalign dic if there is none
         if not os.path.exists(dictionary):
             with codecs.open(dictionary, "w", "utf-8"):
                 pass
