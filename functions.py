@@ -217,7 +217,7 @@ def aligner(source_file, target_file, s_lang, t_lang, align_file):
                                                            target_file[:-4])
         with codecs.open(align_file + '.tab', "w", "utf-8") as fout:
             for line in output_lines:
-                fout.write(line + '\n')
+                fout.write(unicode(line, "utf-8") + '\n')
         # turn alignment into tmx
         tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang)
         # create parallel source and target text files
