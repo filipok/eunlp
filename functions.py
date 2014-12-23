@@ -127,6 +127,8 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang):
     current_date = current_date[0:4] + current_date[5:7] + current_date[8:10] \
         + "T" + current_date[11:13] + current_date[14:16] + \
         current_date[17:19] + "Z"
+    # create note id
+    note = input_name[-20:-10]
     # create new TMX file
     with codecs.open(tmx_name, "w", "utf-8") as fout:
         # add tmx header (copied from LF Aligner output)
@@ -156,7 +158,7 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang):
                 #   create TU line
                 tu = '<tu creationdate="' + current_date + \
                      '" creationid="eunlp"><prop type="Txt::Note">' + \
-                     input_name + '</prop>\n'
+                     note + '</prop>\n'
                 fout.write(tu)
                 #   create TUV source line
                 tuv = '<tuv xml:lang="' + s_lang + '"><seg>' + source\
