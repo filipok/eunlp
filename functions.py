@@ -113,6 +113,7 @@ def tab_to_separate(input_name, output_source, output_target):
         with codecs.open(output_source, "w", "utf-8") as out_s:
             with codecs.open(output_target, "w", "utf-8") as out_t:
                 for line in fin:
+                    line = line.strip('\n')
                     text = re.split(r'\t', line)
                     source = text[2]
                     target = text[1]
