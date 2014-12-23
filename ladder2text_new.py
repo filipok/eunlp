@@ -38,8 +38,10 @@ The second and third columns are the chunks corresponding to each other.
 '''
 
 
-def create_output_lines(ladder_file, s_lines, t_lines):
+def create_output_lines(ladder_file, s_file, t_file):
     ladder_lines = readfile(ladder_file)
+    s_lines = readfile(s_file)
+    t_lines = readfile(t_file)
     ladder = map(parse_ladder_line, ladder_lines)
     # the next map() does all the work, so here are some comments...
     # the map() iterates over the holes of the ladder.
