@@ -243,5 +243,3 @@ def aligner(source_file, target_file, s_lang, t_lang, align_file):
         # remove .txt files
         os.remove(source_file[:-4] + ".txt")
         os.remove(target_file[:-4] + ".txt")
-
-
