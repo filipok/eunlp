@@ -205,9 +205,11 @@ def aligner(source_file, target_file, s_lang, t_lang, align_file):
         # tokenizer and create files with the .tok extension
         tokenizer_wrapper(s_lang, source_file[:-4], source_file[:-4] + '.tok')
         tokenizer_wrapper(t_lang, target_file[:-4], target_file[:-4] + '.tok')
-        # hunalign
-        dictionary = s_lang + t_lang + '.dic'  # TODO if !exist ?
-        # create ladder
+        # create hunalign empty dic
+        dictionary = s_lang + t_lang + '.dic'
+        if not os.path.exists(dictionary):
+            check_output('touch ' + dictionary)
+        # create hunalign ladder alignment
         align_file = align_file + '_' + s_lang + '_' + t_lang
         command = 'hunalign-1.1/src/hunalign/hunalign ' + dictionary + ' '  \
                   + source_file[:-4] + '.tok ' + target_file[:-4] + \
