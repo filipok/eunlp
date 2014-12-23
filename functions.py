@@ -44,17 +44,23 @@ def strip_celex(text):
     text = re.sub(r'\n+', r'\n', text)
     # double newlines, otherwise the splitter merges the first lines
     text = re.sub(r'\n', r'\n\n', text)
-    # combine single lines consisting of numbers with next line
-    text = re.sub(r'^\s*?(\({0,1}[0-9]+[\.|\)])\n+', r'\1 ', text)
-    # combine single lines consisting of single letters with next line
-    text = re.sub(r'^\s*?(\({0,1}[a-z][\.|\)])\n+', r'\1 ', text)
-    # combine lines consisting of roman numerals to 9 with the next line
-    text = re.sub(r'^\s*?(\({0,1}i{1,3}[\.|\)])\n+', r'\1 ', text)  # 1-3
-    text = re.sub(r'^\s*?(\({0,1}iv[\.|\)])\n+', r'\1 ', text)  # 4
-    text = re.sub(r'^\s*?(\({0,1}vi{0,3}[\.|\)])\n+', r'\1 ', text)  # 5-8
-    text = re.sub(r'^\s*?(\({0,1}ix[\.|\)])\n+', r'\1 ', text)  # 9
-
     return text
+
+
+def paragraph_combiner(input_file, output_file):
+    with codecs.open(input_file, 'r', 'utf-8') as fin:
+        text = fin.read()
+        # combine single lines consisting of numbers with next line
+        text = re.sub(r'\n(\({0,1}[0-9]+[\.|\)])\n', r'\n\1 ', text)
+        # combine single lines consisting of single letters with next line
+        text = re.sub(r'\n(\({0,1}[a-z][\.|\)])\n', r'\n\1 ', text)
+        # combine lines consisting of roman numerals to 9 with the next line
+        text = re.sub(r'\n(\({0,1}i{1,3}[\.|\)])\n', r'\n\1 ', text)  # 1-3
+        text = re.sub(r'\n(\({0,1}iv[\.|\)])\n', r'\n\1 ', text)  # 4
+        text = re.sub(r'\n(\({0,1}vi{0,3}[\.|\)])\n', r'\n\1 ', text)  # 5-8
+        text = re.sub(r'\n(\({0,1}ix[\.|\)])\n', r'\n\1 ', text)  # 9
+        with codecs.open(output_file, 'w', 'utf-8') as fout:
+            fout.write(text)
 
 
 def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False):
@@ -208,12 +214,15 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file):
         check_output(command, shell=True)
     else:
         # let's assume everything else is linux
-        # sentence splitter; resulting file are with the .spl extension
-        splitter_wrapper(s_lang, source_file, source_file[:-4] + '.spl')
-        splitter_wrapper(t_lang, target_file, target_file[:-4] + '.spl')
-        # remove < P > and create files without extension
-        remove_p(source_file[:-4] + ".spl", source_file[:-4])
-        remove_p(target_file[:-4] + ".spl", target_file[:-4])
+        # sentence splitter; resulting file are with the .sp1 extension
+        splitter_wrapper(s_lang, source_file, source_file[:-4] + '.sp1')
+        splitter_wrapper(t_lang, target_file, target_file[:-4] + '.sp1')
+        # remove < P > and create files with extension .sp2
+        remove_p(source_file[:-4] + ".sp1", source_file[:-4] + '.sp2')
+        remove_p(target_file[:-4] + ".sp1", target_file[:-4] + '.sp2')
+        # combine paragraphs and create files without extension
+        paragraph_combiner(source_file[:-4] + '.sp2', source_file[:-4])
+        paragraph_combiner(target_file[:-4] + '.sp2', target_file[:-4])
         # tokenizer and create files with the .tok extension
         tokenizer_wrapper(s_lang, source_file[:-4], source_file[:-4] + '.tok')
         tokenizer_wrapper(t_lang, target_file[:-4], target_file[:-4] + '.tok')
@@ -243,8 +252,11 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file):
         os.remove(source_file[:-4])
         os.remove(target_file[:-4])
         # remove .spl files
-        os.remove(source_file[:-4] + ".spl")
-        os.remove(target_file[:-4] + ".spl")
+        os.remove(source_file[:-4] + ".sp1")
+        os.remove(target_file[:-4] + ".sp1")
+        # remove.sp2 files
+        os.remove(source_file[:-4] + ".sp2")
+        os.remove(target_file[:-4] + ".sp2")
         # remove .tok files
         os.remove(source_file[:-4] + ".tok")
         os.remove(target_file[:-4] + ".tok")
