@@ -202,23 +202,21 @@ def aligner(source_file, target_file, s_lang, t_lang, align_file):
         # remove < P > and create files without extension
         remove_p(source_file[:-4] + ".spl", source_file[:-4])
         remove_p(target_file[:-4] + ".spl", target_file[:-4])
-        # remove .spl files
-        os.remove(source_file[:-4] + ".spl")
-        os.remove(target_file[:-4] + ".spl")
         # tokenizer and create files with the .tok extension
         tokenizer_wrapper(s_lang, source_file[:-4], source_file[:-4] + '.tok')
         tokenizer_wrapper(t_lang, target_file[:-4], target_file[:-4] + '.tok')
         # hunalign
         dictionary = s_lang + t_lang + '.dic'  # TODO if !exist ?
         # create ladder
+        align_file = align_file + '_' + s_lang + '_' + t_lang
         command = 'hunalign-1.1/src/hunalign/hunalign ' + dictionary + ' '  \
                   + source_file[:-4] + '.tok ' + target_file[:-4] + \
                   '.tok > ' + align_file + '.lad'
         check_output(command, shell=True)
         # create aligned output
-        output_lines = ladder2text_new.create_output_lines(align_file + '.lad',
-                                                           source_file[:-4],
-                                                           target_file[:-4])
+        output_lines = ladder2text_new.create_output_lines(
+            align_file + '_' + s_lang + '_' + t_lang + '.lad',
+            source_file[:-4], target_file[:-4])
         with codecs.open(align_file + '.tab', "w", "utf-8") as fout:
             for line in output_lines:
                 fout.write(unicode(line, "utf-8") + '\n')
@@ -230,3 +228,17 @@ def aligner(source_file, target_file, s_lang, t_lang, align_file):
         # remove files without extension
         os.remove(source_file[:-4])
         os.remove(target_file[:-4])
+        # remove .spl files
+        os.remove(source_file[:-4] + ".spl")
+        os.remove(target_file[:-4] + ".spl")
+        # remove .tok files
+        os.remove(source_file[:-4] + ".tok")
+        os.remove(target_file[:-4] + ".tok")
+        # remove .html files
+        os.remove(source_file[:-4] + ".html")
+        os.remove(target_file[:-4] + ".html")
+        # remove .txt files
+        os.remove(source_file[:-4] + ".txt")
+        os.remove(target_file[:-4] + ".txt")
+
+
