@@ -44,6 +44,16 @@ def strip_celex(text):
     text = re.sub(r'\n+', r'\n', text)
     # double newlines, otherwise the splitter merges the first lines
     text = re.sub(r'\n', r'\n\n', text)
+    # combine single lines consisting of numbers with next line
+    text = re.sub(r'^\s*?(\({0,1}[0-9]+[\.|\)])\n+', r'\1 ', text)
+    # combine single lines consisting of single letters with next line
+    text = re.sub(r'^\s*?(\({0,1}[a-z][\.|\)])\n+', r'\1 ', text)
+    # combine lines consisting of roman numerals to 9 with the next line
+    text = re.sub(r'^\s*?(\({0,1}i{1,3}[\.|\)])\n+', r'\1 ', text)  # 1-3
+    text = re.sub(r'^\s*?(\({0,1}iv[\.|\)])\n+', r'\1 ', text)  # 4
+    text = re.sub(r'^\s*?(\({0,1}vi{0,3}[\.|\)])\n+', r'\1 ', text)  # 5-8
+    text = re.sub(r'^\s*?(\({0,1}ix[\.|\)])\n+', r'\1 ', text)  # 9
+
     return text
 
 
