@@ -83,38 +83,6 @@ def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False):
                 print "Error in link " + url_code + " " + lang_code + "."
 
 
-def untokenize(input_file, output_file):
-    # u'\u2026' ellipsis
-    # u'\u2018' single opening quotation mark
-    # u'\u2019' single closing quotation mark
-    # u'\u201c' double opening quotation mark
-    # u'\u201d' double closing quotation mark
-    # u'\u201e' low double opening quotation mark
-    # u'\u00ab' left-pointing double angle quotation mark
-    # u'\u00bb' right-pointing double angle quotation mark
-
-    # Define punctuation marks where spaces should be removed after/before.
-    space_after = ['(', u'\u201e', '[', u'\u2018', u'\u201c', u'\u00ab', "/"]
-    space_before = [')', '.', ',', ":", ";", "?", "!", u'\u201d', u'\u2019',
-                    ']', u'\u2026', u'\u00bb', "/"]
-    with codecs.open(output_file, "w", "utf-8") as fout:
-        with codecs.open(input_file, "r", "utf-8") as fin:
-            for line in fin:
-                apostrophe = u'\u2019'
-                new = apostrophe + "s "
-                old = apostrophe + " s "
-                line = line.replace(old, new)  # English possessive (Saxon)
-                for sign in space_after:
-                    new = sign
-                    old = sign + " "
-                    line = line.replace(old, new)
-                for sign in space_before:
-                    new = sign
-                    old = " " + sign
-                    line = line.replace(old, new)
-                fout.write(line)
-
-
 def remove_p(input_name, output_name):
     empty_line = '<P>\n'
     with codecs.open(output_name, "w", "utf-8") as fout:
