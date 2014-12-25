@@ -174,7 +174,7 @@ def hunalign_wrapper(source_file, target_file, dictionary, align_file,
                      realign=True):
     realign_parameter = ''
     if realign:
-        realign_parameter = '-realign -autodict=' + dictionary + ' '
+        realign_parameter = '-realign '
     command = 'hunalign-1.1/src/hunalign/hunalign -utf ' + realign_parameter + \
               dictionary + ' ' + source_file + ' ' + target_file + ' > ' \
               + align_file
@@ -211,7 +211,7 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file):
         # create hunalign ladder alignment
         align_file = align_file + '_' + s_lang + '_' + t_lang
         hunalign_wrapper(source_file[:-4] + '.tok', target_file[:-4] + '.tok',
-                         dictionary, align_file + '.lad', realign=False)
+                         dictionary, align_file + '.lad', realign=True)
         # create aligned output
         output_lines = ladder2text_new.create_output_lines(align_file + '.lad',
                                                            source_file[:-4],
