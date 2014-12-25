@@ -170,6 +170,16 @@ def tokenizer_wrapper(lang, input_file, output_file):
               + output_file
     check_output(command, shell=True)
 
+def hunalign_wrapper(source_file, target_file, dictionary, align_file,
+                     realign=True):
+    realign_parameter = ''
+    if realign:
+        realign_parameter = '-realign -autodict=' + dictionary + ' '
+    command = 'hunalign-1.1/src/hunalign/hunalign -utf ' + realign_parameter + \
+              dictionary + ' ' + source_file + ' ' + target_file + ' > ' \
+              + align_file
+    check_output(command, shell=True)
+
 
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file):
     # check OS
@@ -200,10 +210,8 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file):
                 pass
         # create hunalign ladder alignment
         align_file = align_file + '_' + s_lang + '_' + t_lang
-        command = 'hunalign-1.1/src/hunalign/hunalign -utf ' + dictionary + \
-                  ' ' + source_file[:-4] + '.tok ' + target_file[:-4] + \
-                  '.tok > ' + align_file + '.lad'
-        check_output(command, shell=True)
+        hunalign_wrapper(source_file[:-4] + '.tok', target_file[:-4] + '.tok',
+                         dictionary, align_file, realign=False)
         # create aligned output
         output_lines = ladder2text_new.create_output_lines(align_file + '.lad',
                                                            source_file[:-4],
