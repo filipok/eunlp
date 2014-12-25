@@ -186,11 +186,11 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file):
         splitter_wrapper(s_lang, source_file, source_file[:-4] + '.sp1')
         splitter_wrapper(t_lang, target_file, target_file[:-4] + '.sp1')
         # remove < P > and create files with extension .sp2
-        # remove_p(source_file[:-4] + ".sp1", source_file[:-4] + '.sp2')
-        # remove_p(target_file[:-4] + ".sp1", target_file[:-4] + '.sp2')
+        remove_p(source_file[:-4] + ".sp1", source_file[:-4] + '.sp2')
+        remove_p(target_file[:-4] + ".sp1", target_file[:-4] + '.sp2')
         # combine paragraphs and create files without extension
-        paragraph_combiner(source_file[:-4] + '.sp1', source_file[:-4])
-        paragraph_combiner(target_file[:-4] + '.sp1', target_file[:-4])
+        paragraph_combiner(source_file[:-4] + '.sp2', source_file[:-4])
+        paragraph_combiner(target_file[:-4] + '.sp2', target_file[:-4])
         # tokenizer and create files with the .tok extension
         tokenizer_wrapper(s_lang, source_file[:-4], source_file[:-4] + '.tok')
         tokenizer_wrapper(t_lang, target_file[:-4], target_file[:-4] + '.tok')
