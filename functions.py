@@ -200,8 +200,8 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file):
                 pass
         # create hunalign ladder alignment
         align_file = align_file + '_' + s_lang + '_' + t_lang
-        command = 'hunalign-1.1/src/hunalign/hunalign ' + dictionary + ' '  \
-                  + source_file[:-4] + '.tok ' + target_file[:-4] + \
+        command = 'hunalign-1.1/src/hunalign/hunalign -utf ' + dictionary + \
+                  ' ' + source_file[:-4] + '.tok ' + target_file[:-4] + \
                   '.tok > ' + align_file + '.lad'
         check_output(command, shell=True)
         # create aligned output
