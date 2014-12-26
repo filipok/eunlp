@@ -44,6 +44,8 @@ def strip_celex(text):
     text = re.sub(r'\n+', r'\n', text)
     # double newlines, otherwise the splitter merges the first lines
     text = re.sub(r'\n', r'\n\n', text)
+    # add whitespace after dot if missing (e.g. ' tasks.The ')
+    text = re.sub(r'([a-z]\.)([A-Z])', r'\1 \2', text)
     return text
 
 
