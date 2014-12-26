@@ -161,33 +161,38 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang):
         fout.write('</tmx>')
 
 
-def splitter_wrapper(lang, input_file, output_file):
-    command = ' perl sentence_splitter/split-sentences.perl -l ' + \
-        lang + ' < ' + input_file + '> ' + output_file
+def splitter_wrapper(lang, input_file, output_file, program_folder):
+    command = 'perl' + program_folder + '/' + \
+              'sentence_splitter/split-sentences.perl -l ' + lang + ' < ' + \
+              input_file + '> ' + output_file
     check_output(command, shell=True)
 
 
-def tokenizer_wrapper(lang, input_file, output_file):
-    command = ' perl tokenizer.perl -l ' + lang + ' < ' + input_file + ' > '\
+def tokenizer_wrapper(lang, input_file, output_file, program_folder):
+    command = 'perl' + program_folder + '/' + \
+              'tokenizer.perl -l ' + lang + ' < ' + input_file + ' > '\
               + output_file
     check_output(command, shell=True)
 
 def hunalign_wrapper(source_file, target_file, dictionary, align_file,
-                     realign=True):
+                     program_folder, realign=True):
     realign_parameter = ''
     if realign:
         realign_parameter = '-realign '
-    command = 'hunalign-1.1/src/hunalign/hunalign -utf ' + realign_parameter + \
-              dictionary + ' ' + source_file + ' ' + target_file + ' > ' \
-              + align_file
+    command = program_folder + '/' + \
+        'hunalign-1.1/src/hunalign/hunalign -utf ' + realign_parameter + \
+        dictionary + ' ' + source_file + ' ' + target_file + ' > ' \
+        + align_file
     check_output(command, shell=True)
 
 
-def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file):
+def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
+            program_folder):
     # check OS
     computer = sys.platform
-    if computer == 'win32':
-        command = 'LFalign\LF_aligner_4.05.exe --filetype="t" --infiles="' \
+    if computer == 'win32': # TODO get rid of windows
+        command = program_folder + '/' + \
+                  'LFalign\LF_aligner_4.05.exe --filetype="t" --infiles="' \
                   + source_file + '","' + target_file + '" --languages="' + \
                   s_lang + '","' + t_lang + \
                   '" --segment="y" --review="n" --tmx="y"'
@@ -195,8 +200,12 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file):
     else:
         # let's assume everything else is linux
         # sentence splitter; resulting file are with the .sp1 extension
-        splitter_wrapper(s_lang, source_file, source_file[:-4] + '.sp1')
-        splitter_wrapper(t_lang, target_file, target_file[:-4] + '.sp1')
+        # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
+        # TODO eventual alt splitter cu supervised learning pt DE?
+        splitter_wrapper(s_lang, source_file, source_file[:-4] + '.sp1',
+                         program_folder)
+        splitter_wrapper(t_lang, target_file, target_file[:-4] + '.sp1',
+                         program_folder)
         # remove < P > and create files with extension .sp2
         remove_p(source_file[:-4] + ".sp1", source_file[:-4] + '.sp2')
         remove_p(target_file[:-4] + ".sp1", target_file[:-4] + '.sp2')
@@ -204,8 +213,10 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file):
         paragraph_combiner(source_file[:-4] + '.sp2', source_file[:-4])
         paragraph_combiner(target_file[:-4] + '.sp2', target_file[:-4])
         # tokenizer and create files with the .tok extension
-        tokenizer_wrapper(s_lang, source_file[:-4], source_file[:-4] + '.tok')
-        tokenizer_wrapper(t_lang, target_file[:-4], target_file[:-4] + '.tok')
+        tokenizer_wrapper(s_lang, source_file[:-4], source_file[:-4] + '.tok',
+                          program_folder)
+        tokenizer_wrapper(t_lang, target_file[:-4], target_file[:-4] + '.tok',
+                          program_folder)
         # create empty hunalign dic if there is none
         if not os.path.exists(dictionary):
             with codecs.open(dictionary, "w", "utf-8"):
@@ -213,7 +224,8 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file):
         # create hunalign ladder alignment
         align_file = align_file + '_' + s_lang + '_' + t_lang
         hunalign_wrapper(source_file[:-4] + '.tok', target_file[:-4] + '.tok',
-                         dictionary, align_file + '.lad', realign=True)
+                         dictionary, align_file + '.lad', program_folder,
+                         realign=True)
         # create aligned output
         output_lines = ladder2text_new.create_output_lines(align_file + '.lad',
                                                            source_file[:-4],
@@ -227,6 +239,7 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file):
         tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
                         target_file[:-4] + '.ali')
         # remove files without extension
+        # TODO separate function to remove files?
         os.remove(source_file[:-4])
         os.remove(target_file[:-4])
         # remove .spl files
