@@ -162,14 +162,14 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang):
 
 
 def splitter_wrapper(lang, input_file, output_file, program_folder):
-    command = 'perl' + program_folder + '/' + \
+    command = 'perl ' + program_folder + '/' + \
               'sentence_splitter/split-sentences.perl -l ' + lang + ' < ' + \
               input_file + '> ' + output_file
     check_output(command, shell=True)
 
 
 def tokenizer_wrapper(lang, input_file, output_file, program_folder):
-    command = 'perl' + program_folder + '/' + \
+    command = 'perl ' + program_folder + '/' + \
               'tokenizer.perl -l ' + lang + ' < ' + input_file + ' > '\
               + output_file
     check_output(command, shell=True)
