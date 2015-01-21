@@ -94,6 +94,24 @@ def remove_p(input_name, output_name):
                     fout.write(line)
 
 
+def create_dictionary(input_source, input_target, output_file):
+    with codecs.open(input_source, "r", "utf-8") as sin:
+        s_list = list(sin)
+    with codecs.open(input_target, "r", "utf-8") as tin:
+        t_list = list(tin)
+    if len(s_list) == len(t_list) and len(s_list) != 0:
+        with codecs.open(output_file, "w", "utf-8") as fout:
+            for i in range(len(s_list)):
+                s_term = s_list[i].rstrip()
+                t_term = t_list[i].rstrip()
+                if len(s_term) > 0 and len(t_term) > 0:
+                    line_to_add = t_term + ' @ ' + s_term + '\r\n'
+                    fout.write(line_to_add)
+    else:
+        print "Dictionary files of different lenght or length = 0. Aborting."
+
+
+
 def tab_to_separate(input_name, output_source, output_target):
     with codecs.open(input_name, "r", "utf-8") as fin:
         with codecs.open(output_source, "w", "utf-8") as out_s:
