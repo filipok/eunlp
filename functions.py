@@ -235,10 +235,11 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
                           program_folder)
         tokenizer_wrapper(t_lang, target_file[:-4], target_file[:-4] + '.tok',
                           program_folder)
-        # create empty hunalign dic if there is none
+        # create empty hunalign dic from program-folder/data_raw files
         if not os.path.exists(dictionary):
-            with codecs.open(dictionary, "w", "utf-8"):
-                pass
+            create_dictionary('program_folder' + '/' + s_lang + '.txt',
+                              'program_folder' + '/' + t_lang + '.txt',
+                              dictionary)
         # create hunalign ladder alignment
         align_file = align_file + '_' + s_lang + '_' + t_lang
         hunalign_wrapper(source_file[:-4] + '.tok', target_file[:-4] + '.tok',
