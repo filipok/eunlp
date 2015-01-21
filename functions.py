@@ -237,8 +237,8 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
                           program_folder)
         # create empty hunalign dic from program-folder/data_raw files
         if not os.path.exists(dictionary):
-            create_dictionary('program_folder' + '/' + s_lang + '.txt',
-                              'program_folder' + '/' + t_lang + '.txt',
+            create_dictionary(program_folder + '/' + s_lang + '.txt',
+                              program_folder + '/' + t_lang + '.txt',
                               dictionary)
         # create hunalign ladder alignment
         align_file = align_file + '_' + s_lang + '_' + t_lang
