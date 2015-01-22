@@ -48,6 +48,11 @@ def strip_celex(text):
     text = re.sub(r'([a-z]\.)([A-Z])', r'\1 \2', text)
     return text
 
+def strip_ep(text):
+    # double newlines, otherwise the splitter merges the first lines
+    text = re.sub(r'\n', r'\n\n', text)
+    return text
+
 
 def paragraph_combiner(input_file, output_file):
     with codecs.open(input_file, 'r', 'utf-8') as fin:
@@ -65,7 +70,8 @@ def paragraph_combiner(input_file, output_file):
             fout.write(text)
 
 
-def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False):
+def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False,
+            is_ep=False):
     for lang_code in langs:
             link = make_link(url_code, lang_code)
             text = download(link)
@@ -80,6 +86,8 @@ def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False):
                     # do some cleanup if is_celex
                     if is_celex:
                         clean_text = strip_celex(clean_text)
+                    elif is_ep:
+                        clean_text = strip_ep(clean_text)
                     f.write(clean_text)
             else:
                 print "Error in link " + url_code + " " + lang_code + "."

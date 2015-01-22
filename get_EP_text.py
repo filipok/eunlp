@@ -50,7 +50,7 @@ if __name__ == '__main__':
     doc_code = make_sub_link(category, year, number)
     # create html and txt files for each language code
     func.scraper(languages, make_link, 'Application Error', doc_code, '',
-                 is_celex=False)
+                 is_ep=True)
     source_file = doc_code + '_' + languages[0] + '.txt'
     target_file = doc_code + '_' + languages[1] + '.txt'
     source_file = os.path.join(path, source_file)
