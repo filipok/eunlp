@@ -1,23 +1,28 @@
 # Name:        get_EP_text
 # Purpose:     Download EP reports, texts adopted and motions for resolutions
-# How to use:   python get_EP_text.py path [A|P|B][7|8] AAAA START STOP EN RO
+# How to use:   python get_EP_text.py [A|P|B][7|8] AAAA NUMBER EN RO
 #
 # Example:
-# python get_EP_text.py C:\Users\Filip\Downloads\EP A7 2012 0001 0002 EN RO FR
+# python ~/eunlp/get_EP_text.py A7 2012 0002 EN RO
 # Author:      Filip
 #
 # Created:     4.11.2014
 
 
 import sys
+import re
 import functions as func
 import os.path
-import codecs
-from bs4 import BeautifulSoup
-from subprocess import check_output
 
 
-def make_link(doc_category, doc_year, doc_code, doc_language):
+def make_sub_link(doc_category, doc_year, doc_code):
+    return doc_category + doc_year + doc_code
+
+
+def make_link(category_year_code, lang):
+    doc_category = category_year_code[0:2]
+    doc_year = category_year_code[2:6]
+    doc_code = category_year_code[6:10]
     a = 'http://www.europarl.europa.eu/sides/getDoc.do?type=REPORT&reference=A'
     p = 'http://www.europarl.europa.eu/sides/getDoc.do?type=TA&reference=P'
     b = 'http://www.europarl.europa.eu/sides/getDoc.do?type=MOTION&reference=B'
@@ -31,44 +36,27 @@ def make_link(doc_category, doc_year, doc_code, doc_language):
         print "make_link error"
         part_1 = 'error'  # dubious
     return part_1 + doc_category[1] + '-' + doc_year + '-' + doc_code + \
-        '&language=' + doc_language
+        '&language=' + lang
 
 if __name__ == '__main__':
-    # be careful, no validation here
-    path = sys.argv[1]
-    # print path
-    category = sys.argv[2]
-    # print category
-    year = sys.argv[3]
-    # print year
-    start = sys.argv[4]
-    # print start
-    stop = sys.argv[5]
-    # print stop
-    languages = sys.argv[6:]
-    # print languages
-    for code in range(int(start), int(stop) + 1):
-        base_name = category + '_' + year + '_' + str(code).zfill(4) + '_'
-        for language in languages:
-            link = make_link(category, year, str(code).zfill(4), language)
-            text = func.download(link)
-            new_name = base_name + language + '.html'
-            new_name = os.path.join(path, new_name)
-            # print html file
-            with open(new_name, 'w') as f:
-                f.write(text)
-            new_name = base_name + language + '.txt'
-            new_name = os.path.join(path, new_name)
-            # print txt file
-            with codecs.open(new_name, "w", "utf-8") as f:
-                soup = BeautifulSoup(text)
-                clean_text = soup.get_text()
-                f.write(clean_text)
-        # get first two language files
-        source = os.path.join(path, base_name + languages[0] + '.txt')
-        target = os.path.join(path, base_name + languages[1] + '.txt')
-        chunk = 'LFalign\LF_aligner_4.05.exe --filetype="t" --infiles="'
-        command = chunk + source + '","' + target + \
-            '" --languages="en","ro" --segment="y" --review="n" --tmx="y"'
-        print command
-        check_output(command, shell=True)  # TODO shell=False
+    # collect parameters
+    path = os.getcwd()
+    program_folder = '/'.join(re.split(r'/', sys.argv[0])[:-1])
+    category = sys.argv[1]
+    year = sys.argv[2]
+    number = sys.argv[3]
+    languages = sys.argv[4:]
+    # create doc_code
+    doc_code = make_sub_link(category, year, number)
+    # create html and txt files for each language code
+    func.scraper(languages, make_link, 'Application Error', doc_code, '',
+                 is_celex=False)
+    source_file = doc_code + '_' + languages[0] + '.txt'
+    target_file = doc_code + '_' + languages[1] + '.txt'
+    source_file = os.path.join(path, source_file)
+    target_file = os.path.join(path, target_file)
+    align_file = os.path.join(path, 'bi_' + doc_code)
+    dictionary = os.path.join(path, languages[0].lower() +
+                              languages[1].lower() + '.dic')
+    func.aligner(source_file, target_file, languages[0].lower(),
+                 languages[1].lower(), dictionary, align_file, program_folder)
