@@ -205,7 +205,7 @@ def hunalign_wrapper(source_file, target_file, dictionary, align_file,
 
 
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
-            program_folder):
+            program_folder, delete_temp=True):
     # check OS
     computer = sys.platform
     if computer == 'win32': # TODO get rid of windows
@@ -258,21 +258,21 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
         tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
                         target_file[:-4] + '.ali')
         # remove files without extension
-        # TODO separate function to remove files?
-        os.remove(source_file[:-4])
-        os.remove(target_file[:-4])
-        # remove .spl files
-        os.remove(source_file[:-4] + ".sp1")
-        os.remove(target_file[:-4] + ".sp1")
-        # remove.sp2 files
-        os.remove(source_file[:-4] + ".sp2")
-        os.remove(target_file[:-4] + ".sp2")
-        # remove .tok files
-        os.remove(source_file[:-4] + ".tok")
-        os.remove(target_file[:-4] + ".tok")
-        # remove .html files
-        os.remove(source_file[:-4] + ".html")
-        os.remove(target_file[:-4] + ".html")
-        # remove .txt files
-        os.remove(source_file[:-4] + ".txt")
-        os.remove(target_file[:-4] + ".txt")
+        if delete_temp:
+            os.remove(source_file[:-4])
+            os.remove(target_file[:-4])
+            # remove .spl files
+            os.remove(source_file[:-4] + ".sp1")
+            os.remove(target_file[:-4] + ".sp1")
+            # remove.sp2 files
+            os.remove(source_file[:-4] + ".sp2")
+            os.remove(target_file[:-4] + ".sp2")
+            # remove .tok files
+            os.remove(source_file[:-4] + ".tok")
+            os.remove(target_file[:-4] + ".tok")
+            # remove .html files
+            os.remove(source_file[:-4] + ".html")
+            os.remove(target_file[:-4] + ".html")
+            # remove .txt files
+            os.remove(source_file[:-4] + ".txt")
+            os.remove(target_file[:-4] + ".txt")
