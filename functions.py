@@ -61,6 +61,9 @@ def paragraph_combiner(input_file, output_file):
         text = re.sub(r'\n(\({0,1}[0-9]+[\.|\)])\n', r'\n\1 ', text)
         # combine single lines consisting of single letters with next line
         text = re.sub(r'\n(\({0,1}[a-z][\.|\)])\n', r'\n\1 ', text)
+        # combine single lines consisting of single number + single letter
+        # with the next line
+        text = re.sub(r'\n(\({0,1}[0-9]+[a-z]+[\.|\)])\n', r'\n\1 ', text)
         # combine lines consisting of roman numerals to 9 with the next line
         text = re.sub(r'\n(\({0,1}i{1,3}[\.|\)])\n', r'\n\1 ', text)  # 1-3
         text = re.sub(r'\n(\({0,1}iv[\.|\)])\n', r'\n\1 ', text)  # 4
