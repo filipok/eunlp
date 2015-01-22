@@ -1,0 +1,88 @@
+﻿-- de eliminat introducerile de la rapoarte
+-- de eliminat enterurile aiurea din celexurile curtii de justitie
+(http://stackoverflow.com/questions/14550288/how-do-i-remove-linebreaks-only-if-they-occur-inside-html-tags)
+-- script de combinat TMX-uri (nu e musai, poate combin întâi txt-urile? deşi ar fi greu pt LF-Aligner pe urmă)
+Model linkuri
+
+***Agendas (nu prea utile)
+http://www.europarl.europa.eu/sides/getDoc.do?pubRef=-//EP//TEXT+PV+20131209+SIT+DOC+XML+V0//EN
+
+** Debates (nu toate traduse)
+http://www.europarl.europa.eu/sides/getDoc.do?pubRef=-//EP//TEXT+CRE+20120119+ITEMS+DOC+XML+V0//EN
+Pare a fi acelaşi calendar ca la PV.
+
+
+***Rapoarte:
+http://www.europarl.europa.eu/sides/getDoc.do?type=REPORT&reference=A7-2011-0013&language=EN
+A7 - sesiunea; 2011 - anul; 0013 - numarul raportului
+
+A7
+2012	437 rapoarte
+2013	482 rapoarte
+2014	277 rapoarte
+A8
+2014	 24 rapoarte (la data de 9 noiembrie 2014; de revăzut)
+
+
+***Texte adoptate:
+http://www.europarl.europa.eu/sides/getDoc.do?type=TA&reference=P8-TA-2014-0001&language=EN
+Similar.
+
+P7
+2012	512 texte
+2013	604 texte
+2014	462 texte
+P8
+2014	 45 texte (la data de 9 noiembrie 2014; de revăzut)
+
+
+***Motions for resolution:
+http://www.europarl.europa.eu/sides/getDoc.do?type=MOTION&reference=B8-2014-0177&language=EN
+Similar. 
+==>Nu au toate traduceri în toate limbile. Trebuie verificat!
+B7
+2012	550 propuneri
+2013	585 propuneri
+2014	453 propuneri
+B8
+2014	226 propuneri (la data de 9 noiembrie 2014; de revăzut)
+
+
+
+***Parliamentary questions: [astea nu prea sunt traduse, cum îmi dau seama oare]
+- written // oral
+Numărătoarea NU e comună, avem fie WQ....P, fie OQ....O, fie WQ....E. Dar nu e cu numere consecutive...
+Atunci când nu există într-o limbă, apare un mesaj de eroare în limba respectivă. De colectat mesajele astea.
+http://www.europarl.europa.eu/sides/getDoc.do?type=WQ&reference=P-2012-000001&language=EN
+http://www.europarl.europa.eu/sides/getDoc.do?type=OQ&reference=O-2012-000001&language=EN
+http://www.europarl.europa.eu/sides/getDoc.do?type=OQ&reference=O-2012-000002&language=EN
+http://www.europarl.europa.eu/sides/getDoc.do?type=WQ&reference=E-2012-011695&language=EN
+2012	
+2013	
+2014	
+
+
+Answers!
+http://www.europarl.europa.eu/sides/getAllAnswers.do?reference=P-2012-000001&language=EN
+http://www.europarl.europa.eu/sides/getAllAnswers.do?reference=E-2012-001695&language=EN
+
+
+###Eurlex###
+
+a) La legislaţie de dat alertă pentru glossary că acolo trebuie aliniat manual.
+
+Types of documents in Eurlex: http://eur-lex.europa.eu/content/tools/TableOfSectors/types_of_documents_in_eurlex.html
+	EU Law and related documents: http://eur-lex.europa.eu/collection/eu-law.html
+		Statistics: http://eur-lex.europa.eu/statistics/2013/legislative-acts-statistics.html
+		Browse by: http://eur-lex.europa.eu/browse/browse-by-index.html
+		Directories: http://eur-lex.europa.eu/browse/directories/directories-intro.html
+			Directory of legislation: http://eur-lex.europa.eu/browse/directories/legislation.html
+	EU case law: http://eur-lex.europa.eu/collection/eu-law/eu-case-law.html (aici sunt probleme cu sfarsiturile de linie)
+	Preparatory acts: http://eur-lex.europa.eu/collection/eu-law/pre-acts.html
+	
+
+############
+un glosar cu titluri de decizii, regulamente şi directive?
+
+####
+comunicate de presă comisie şi consiliu
