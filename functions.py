@@ -51,6 +51,9 @@ def strip_celex(text):
 def strip_ep(text):
     # double newlines, otherwise the splitter merges the first lines
     text = re.sub(r'\n', r'\n\n', text)
+    # discard language list at the beginning (it ends with Swedish/svenska)
+    split = re.split(r'\nsv.{3}svenska.*\n', text)
+    text = split[1]
     return text
 
 
