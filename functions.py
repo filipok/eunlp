@@ -8,7 +8,6 @@
 import urllib2
 import codecs
 import re
-import sys
 import os
 from bs4 import BeautifulSoup
 import datetime
@@ -220,73 +219,62 @@ def hunalign_wrapper(source_file, target_file, dictionary, align_file,
 
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
             program_folder, delete_temp=True):
-    # check OS
-    computer = sys.platform
-    if computer == 'win32': # TODO get rid of windows
-        command = program_folder + '/' + \
-                  'LFalign\LF_aligner_4.05.exe --filetype="t" --infiles="' \
-                  + source_file + '","' + target_file + '" --languages="' + \
-                  s_lang + '","' + t_lang + \
-                  '" --segment="y" --review="n" --tmx="y"'
-        check_output(command, shell=True)
-    else:
-        # let's assume everything else is linux
-        # sentence splitter; resulting file are with the .sp1 extension
-        # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
-        # TODO eventual alt splitter cu supervised learning pt DE?
-        splitter_wrapper(s_lang, source_file, source_file[:-4] + '.sp1',
-                         program_folder)
-        splitter_wrapper(t_lang, target_file, target_file[:-4] + '.sp1',
-                         program_folder)
-        # remove < P > and create files with extension .sp2
-        remove_p(source_file[:-4] + ".sp1", source_file[:-4] + '.sp2')
-        remove_p(target_file[:-4] + ".sp1", target_file[:-4] + '.sp2')
-        # combine paragraphs and create files without extension
-        paragraph_combiner(source_file[:-4] + '.sp2', source_file[:-4])
-        paragraph_combiner(target_file[:-4] + '.sp2', target_file[:-4])
-        # tokenizer and create files with the .tok extension
-        tokenizer_wrapper(s_lang, source_file[:-4], source_file[:-4] + '.tok',
-                          program_folder)
-        tokenizer_wrapper(t_lang, target_file[:-4], target_file[:-4] + '.tok',
-                          program_folder)
-        # create empty hunalign dic from program-folder/data_raw files
-        if not os.path.exists(dictionary):
-            create_dictionary(program_folder + '/data_raw/' + s_lang + '.txt',
-                              program_folder + '/data_raw/' + t_lang + '.txt',
-                              dictionary)
-        # create hunalign ladder alignment
-        align_file = align_file + '_' + s_lang + '_' + t_lang
-        hunalign_wrapper(source_file[:-4] + '.tok', target_file[:-4] + '.tok',
-                         dictionary, align_file + '.lad', program_folder,
-                         realign=True)
-        # create aligned output
-        output_lines = ladder2text_new.create_output_lines(align_file + '.lad',
-                                                           source_file[:-4],
-                                                           target_file[:-4])
-        with codecs.open(align_file + '.tab', "w", "utf-8") as fout:
-            for line in output_lines:
-                fout.write(unicode(line, "utf-8") + '\n')
-        # turn alignment into tmx
-        tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang)
-        # create parallel source and target text files
-        tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
-                        target_file[:-4] + '.ali')
-        # remove files without extension
-        if delete_temp:
-            os.remove(source_file[:-4])
-            os.remove(target_file[:-4])
-            # remove .spl files
-            os.remove(source_file[:-4] + ".sp1")
-            os.remove(target_file[:-4] + ".sp1")
-            # remove.sp2 files
-            os.remove(source_file[:-4] + ".sp2")
-            os.remove(target_file[:-4] + ".sp2")
-            # remove .tok files
-            os.remove(source_file[:-4] + ".tok")
-            os.remove(target_file[:-4] + ".tok")
-            # remove .html files
-            os.remove(source_file[:-4] + ".html")
-            os.remove(target_file[:-4] + ".html")
-            # remove .txt files
-            os.remove(source_file[:-4] + ".txt")
-            os.remove(target_file[:-4] + ".txt")
+    # sentence splitter; resulting file are with the .sp1 extension
+    # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
+    # TODO eventual alt splitter cu supervised learning pt DE?
+    splitter_wrapper(s_lang, source_file, source_file[:-4] + '.sp1',
+                     program_folder)
+    splitter_wrapper(t_lang, target_file, target_file[:-4] + '.sp1',
+                     program_folder)
+    # remove < P > and create files with extension .sp2
+    remove_p(source_file[:-4] + ".sp1", source_file[:-4] + '.sp2')
+    remove_p(target_file[:-4] + ".sp1", target_file[:-4] + '.sp2')
+    # combine paragraphs and create files without extension
+    paragraph_combiner(source_file[:-4] + '.sp2', source_file[:-4])
+    paragraph_combiner(target_file[:-4] + '.sp2', target_file[:-4])
+    # tokenizer and create files with the .tok extension
+    tokenizer_wrapper(s_lang, source_file[:-4], source_file[:-4] + '.tok',
+                      program_folder)
+    tokenizer_wrapper(t_lang, target_file[:-4], target_file[:-4] + '.tok',
+                      program_folder)
+    # create empty hunalign dic from program-folder/data_raw files
+    if not os.path.exists(dictionary):
+        create_dictionary(program_folder + '/data_raw/' + s_lang + '.txt',
+                          program_folder + '/data_raw/' + t_lang + '.txt',
+                          dictionary)
+    # create hunalign ladder alignment
+    align_file = align_file + '_' + s_lang + '_' + t_lang
+    hunalign_wrapper(source_file[:-4] + '.tok', target_file[:-4] + '.tok',
+                     dictionary, align_file + '.lad', program_folder,
+                     realign=True)
+    # create aligned output
+    output_lines = ladder2text_new.create_output_lines(align_file + '.lad',
+                                                       source_file[:-4],
+                                                       target_file[:-4])
+    with codecs.open(align_file + '.tab', "w", "utf-8") as fout:
+        for line in output_lines:
+            fout.write(unicode(line, "utf-8") + '\n')
+    # turn alignment into tmx
+    tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang)
+    # create parallel source and target text files
+    tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
+                    target_file[:-4] + '.ali')
+    # remove files without extension
+    if delete_temp:
+        os.remove(source_file[:-4])
+        os.remove(target_file[:-4])
+        # remove .spl files
+        os.remove(source_file[:-4] + ".sp1")
+        os.remove(target_file[:-4] + ".sp1")
+        # remove.sp2 files
+        os.remove(source_file[:-4] + ".sp2")
+        os.remove(target_file[:-4] + ".sp2")
+        # remove .tok files
+        os.remove(source_file[:-4] + ".tok")
+        os.remove(target_file[:-4] + ".tok")
+        # remove .html files
+        os.remove(source_file[:-4] + ".html")
+        os.remove(target_file[:-4] + ".html")
+        # remove .txt files
+        os.remove(source_file[:-4] + ".txt")
+        os.remove(target_file[:-4] + ".txt")
