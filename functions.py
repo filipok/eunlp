@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 import datetime
 import ladder2text_new
 from subprocess import check_output
+import random
 
 
 def delete_and_rename(file_to_change_name, file_to_delete):
@@ -143,14 +144,13 @@ def tab_to_separate(input_name, output_source, output_target):
                     out_t.write(target + '\n')
 
 
-def tab_to_tmx(input_name, tmx_name, s_lang, t_lang):
+def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
+    # TODO de verificat in Workbench
     # get current date
     current_date = datetime.datetime.now().isoformat()
     current_date = current_date[0:4] + current_date[5:7] + current_date[8:10] \
         + "T" + current_date[11:13] + current_date[14:16] + \
         current_date[17:19] + "Z"
-    # create note id
-    note = input_name[-20:-10]
     # create new TMX file
     with codecs.open(tmx_name, "w", "utf-8") as fout:
         # add tmx header (copied from LF Aligner output)
@@ -172,7 +172,7 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang):
             for line in fin:
                 #   get source and target to temp variables
                 text = re.split(r'\t', line)
-                source = text[2]
+                source = text[2].strip('\n')
                 target = text[1]
                 # remove triple tildas from hunalign
                 source = source.replace('~~~ ', '')
@@ -212,6 +212,7 @@ def tokenizer_wrapper(lang, input_file, output_file, program_folder):
 
 def hunalign_wrapper(source_file, target_file, dictionary, align_file,
                      program_folder, realign=True):
+    # TODO silent hunalign
     realign_parameter = ''
     if realign:
         realign_parameter = '-realign '
@@ -222,8 +223,91 @@ def hunalign_wrapper(source_file, target_file, dictionary, align_file,
     check_output(command, shell=True)
 
 
+def file_to_list(file_name):
+    # clean convert file to list of paragraphs
+    with codecs.open(file_name, "r", "utf-8") as fin:
+        text = fin.read()
+    text = re.sub(r'\n\s+', r'\n', text)  # remove whitespace after newline
+    text = re.sub(r'\n+', r'\n', text)  # remove empty lines
+    text = re.sub(r'^\n+', r'', text)  # remove empty lines at the beginning
+    text = re.sub(r'\n$', r'', text)  # remove empty lines at the end
+    text = re.sub(r',\s\n', r', ', text)  # merge segments separated by comma
+    text = paragraph_combiner_sub(text)  # combine para numbers with text
+    paragraph_list = re.split(r'\n', text)  # split file
+    return paragraph_list
+
+
+def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
+                   align_file, program_folder, note, para_size=1000):
+    # Exemplu in Python console:
+    # ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en", "ro",
+    # "enro.dic", "bi_test", "/home/filip/eunlp", 500)
+    # TODO split lines at the beginning and at the end; language dependent
+    source_list = file_to_list(source_file)
+    target_list = file_to_list(target_file)
+    # If different number of paragraphs
+    if len(source_list) != len(target_list):
+        # call classic aligner
+        print "Different number of paras, yielding to hunalign in ", \
+            source_file
+        aligner(source_file, target_file, s_lang, t_lang, dictionary,
+                align_file, program_folder, note, delete_temp=True)
+        return None
+    # If same number of paragraphs:
+    with codecs.open(align_file + '.tab', "w", "utf-8") as fout:
+        for i in range(len(source_list)):
+            if len(source_list[i]) < para_size:
+                line = "1\t" + target_list[i] + "\t" + source_list[i] + \
+                       "\n"
+                fout.write(line)
+            else:
+                print "Creating temporary file from large paragraph ", i, \
+                    "..."
+                # create temporary files from paragraphs
+                # mkdir /tmp/eunlp
+                if not os.path.exists("/tmp/eunlp"):
+                    os.makedirs("/tmp/eunlp")
+                # create random file names
+                r_num = str(random.randint(0, 100000))
+                temp_source = "/tmp/eunlp/s_" + r_num + ".txt"
+                temp_target = "/tmp/eunlp/t_" + r_num + ".txt"
+                temp_align = "/tmp/eunlp/align_" + r_num
+                # write the two files
+                with codecs.open(temp_source, "w", "utf-8") as sout:
+                    sout.write(source_list[i])
+                with codecs.open(temp_target, "w", "utf-8") as tout:
+                    tout.write(target_list[i])
+                # process them with the classic aligner
+                aligner(temp_source, temp_target, s_lang, t_lang,
+                        dictionary, temp_align, program_folder, "a_" + r_num,
+                        delete_temp=False)
+                # open tab file created by classic aligner
+                with codecs.open(temp_align + '_' + s_lang + '_' + t_lang +
+                                 ".tab", "r", "utf-8") as fin:
+                    lines = list(fin)
+                # and merge resulting alignment into the current tab file
+                # TODO de verificat daca returneaza segmente ok
+                # TODO o problema e cu 1. vs (1); de unificat in preprocesare?
+                # TODO de respins rezultate cu segmente goale
+                # TODO de marit para_size? 500 mult mai bun ca 300!
+                # TODO de verificat daca a ignorat text?
+                # TODO de verificat diferente foarte mari de dimensiune s/t
+                # TODO sentence splitter de la zero?
+                for i in range(len(lines)):
+                    split_line = re.split("\t", lines[i])
+                    if len(split_line) == 3: # avoid out of range errors
+                        new_line = "1\t" + split_line[1] + "\t" + \
+                                   split_line[2]
+                        fout.write(new_line)
+    # turn alignment into tmx
+    tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang, note)
+    # create parallel source and target text files
+    tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
+                    target_file[:-4] + '.ali')
+
+
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
-            program_folder, delete_temp=True):
+            program_folder, note, delete_temp=True):
     # sentence splitter; resulting file are with the .sp1 extension
     # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
     # TODO eventual alt splitter cu supervised learning pt DE?
@@ -260,7 +344,7 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
         for line in output_lines:
             fout.write(unicode(line, "utf-8") + '\n')
     # turn alignment into tmx
-    tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang)
+    tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang, note)
     # create parallel source and target text files
     tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
                     target_file[:-4] + '.ali')

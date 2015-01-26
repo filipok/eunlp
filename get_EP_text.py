@@ -60,5 +60,5 @@ if __name__ == '__main__':
                               languages[1].lower() + '.dic')
     func.aligner(source_file, target_file, languages[0].lower(),
                  languages[1].lower(), dictionary, align_file, program_folder,
-                 delete_temp=False)
+                 doc_code, delete_temp=False)
 #TODO de vazut erorile la aliniere
