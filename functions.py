@@ -59,20 +59,25 @@ def strip_ep(text):
 def paragraph_combiner(input_file, output_file):
     with codecs.open(input_file, 'r', 'utf-8') as fin:
         text = fin.read()
-        # combine single lines consisting of numbers with next line
-        text = re.sub(r'\n(\({0,1}[0-9]+[\.|\)])\n', r'\n\1 ', text)
-        # combine single lines consisting of single letters with next line
-        text = re.sub(r'\n(\({0,1}[a-z][\.|\)])\n', r'\n\1 ', text)
-        # combine single lines consisting of single number + single letter
-        # with the next line
-        text = re.sub(r'\n(\({0,1}[0-9]+[a-z]+[\.|\)])\n', r'\n\1 ', text)
-        # combine lines consisting of roman numerals to 9 with the next line
-        text = re.sub(r'\n(\({0,1}i{1,3}[\.|\)])\n', r'\n\1 ', text)  # 1-3
-        text = re.sub(r'\n(\({0,1}iv[\.|\)])\n', r'\n\1 ', text)  # 4
-        text = re.sub(r'\n(\({0,1}vi{0,3}[\.|\)])\n', r'\n\1 ', text)  # 5-8
-        text = re.sub(r'\n(\({0,1}ix[\.|\)])\n', r'\n\1 ', text)  # 9
+        text = paragraph_combiner_sub(text)
         with codecs.open(output_file, 'w', 'utf-8') as fout:
             fout.write(text)
+
+
+def paragraph_combiner_sub(text):
+    # combine single lines consisting of numbers with next line
+    text = re.sub(r'\n(\({0,1}[0-9]+[\.|\)])\n', r'\n\1 ', text)
+    # combine single lines consisting of single letters with next line
+    text = re.sub(r'\n(\({0,1}[a-z][\.|\)])\n', r'\n\1 ', text)
+    # combine single lines consisting of single number + single letter
+    # with the next line
+    text = re.sub(r'\n(\({0,1}[0-9]+[a-z]+[\.|\)])\n', r'\n\1 ', text)
+    # combine lines consisting of roman numerals to 9 with the next line
+    text = re.sub(r'\n(\({0,1}i{1,3}[\.|\)])\n', r'\n\1 ', text)  # 1-3
+    text = re.sub(r'\n(\({0,1}iv[\.|\)])\n', r'\n\1 ', text)  # 4
+    text = re.sub(r'\n(\({0,1}vi{0,3}[\.|\)])\n', r'\n\1 ', text)  # 5-8
+    text = re.sub(r'\n(\({0,1}ix[\.|\)])\n', r'\n\1 ', text)  # 9
+    return text
 
 
 def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False,
