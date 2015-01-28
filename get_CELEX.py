@@ -12,7 +12,7 @@ import re
 import functions as func
 
 
-def make_link(celex, lang):
+def make_celex_link(celex, lang):
     part_1 = "http://eur-lex.europa.eu/legal-content/"
     part_2 = "/TXT/?uri=CELEX:"
     return part_1 + lang + part_2 + celex
@@ -24,8 +24,9 @@ if __name__ == '__main__':
     celex = sys.argv[1]  # collect celex code
     languages = sys.argv[2:]  # collect language codes
     # create html and txt files for each language code
-    func.scraper(languages, make_link, 'The requested document does not exist',
-                 celex, '', is_celex=True)  # no prefix
+    func.scraper(languages, make_celex_link,
+                 'The requested document does not exist', celex, '',
+                 is_celex=True)  # no prefix
     source_file = celex + '_' + languages[0] + '.txt'
     target_file = celex + '_' + languages[1] + '.txt'
     source_file = os.path.join(path, source_file)

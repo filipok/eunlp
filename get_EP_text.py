@@ -19,7 +19,7 @@ def make_sub_link(doc_category, doc_year, doc_code):
     return doc_category + doc_year + doc_code
 
 
-def make_link(category_year_code, lang):
+def make_ep_link(category_year_code, lang):
     doc_category = category_year_code[0:2]
     doc_year = category_year_code[2:6]
     doc_code = category_year_code[6:10]
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     # create doc_code
     doc_code = make_sub_link(category, year, number)
     # create html and txt files for each language code
-    func.scraper(languages, make_link, 'Application Error', doc_code, '',
+    func.scraper(languages, make_ep_link, 'Application Error', doc_code, '',
                  is_ep=True)
     source_file = doc_code + '_' + languages[0] + '.txt'
     target_file = doc_code + '_' + languages[1] + '.txt'
