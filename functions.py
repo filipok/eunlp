@@ -12,7 +12,7 @@ import os
 from bs4 import BeautifulSoup
 import datetime
 import ladder2text_new
-from subprocess import check_output
+import subprocess
 import random
 # TODO de mutat make_link aici
 
@@ -227,18 +227,17 @@ def splitter_wrapper(lang, input_file, output_file, program_folder):
     command = 'perl ' + program_folder + '/' + \
               'sentence_splitter/split-sentences.perl -l ' + lang + ' < ' + \
               input_file + '> ' + output_file
-    check_output(command, shell=True)
+    subprocess.check_output(command, shell=True)
 
 
 def tokenizer_wrapper(lang, input_file, output_file, program_folder):
     command = 'perl ' + program_folder + '/' + \
               'tokenizer.perl -l ' + lang + ' < ' + input_file + ' > '\
               + output_file
-    check_output(command, shell=True)
+    subprocess.check_output(command, shell=True)
 
 def hunalign_wrapper(source_file, target_file, dictionary, align_file,
                      program_folder, realign=True):
-    # TODO silent hunalign
     realign_parameter = ''
     if realign:
         realign_parameter = '-realign '
@@ -246,7 +245,7 @@ def hunalign_wrapper(source_file, target_file, dictionary, align_file,
         'hunalign-1.1/src/hunalign/hunalign -utf ' + realign_parameter + \
         dictionary + ' ' + source_file + ' ' + target_file + ' > ' \
         + align_file
-    check_output(command, shell=True)
+    subprocess.check_output(command, shell=True)
 
 
 def file_to_list(file_name):
