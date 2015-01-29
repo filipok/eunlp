@@ -194,7 +194,6 @@ def tab_to_separate(input_name, output_source, output_target):
 
 
 def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
-    # TODO de verificat in Workbench
     # get current date
     current_date = datetime.datetime.now().isoformat()
     current_date = current_date[0:4] + current_date[5:7] + current_date[8:10] \
@@ -289,7 +288,8 @@ def file_to_list(file_name):
 def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                    align_file, program_folder, note, para_size=1000):
     # Exemplu in Python console:
-    # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en", "ro", "enro.dic", "bi_test", "/home/filip/eunlp", "A720120002", 500)
+    # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
+    # "ro", "enro.dic", "bi_test", "/home/filip/eunlp", "A720120002", 300)
     # TODO split lines at the beginning and at the end; language dependent
     source_list = file_to_list(source_file)
     target_list = file_to_list(target_file)
@@ -334,13 +334,9 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                                  ".tab", "r", "utf-8") as fin:
                     lines = list(fin)
                 # and merge resulting alignment into the current tab file
-                # TODO de verificat daca returneaza segmente ok
-                # TODO o problema e cu 1. vs (1); de unificat in preprocesare?
                 # TODO de respins rezultate cu segmente goale
-                # TODO de marit para_size? 500 mult mai bun ca 300!
                 # TODO de verificat daca a ignorat text?
                 # TODO de verificat diferente foarte mari de dimensiune s/t
-                # TODO sentence splitter de la zero?
                 for i in range(len(lines)):
                     split_line = re.split("\t", lines[i])
                     if len(split_line) == 3: # avoid out of range errors
@@ -401,6 +397,7 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
                     target_file[:-4] + '.ali')
     # remove files without extension
     if delete_temp:
+        print "Deleting temporary files..."
         os.remove(source_file[:-4])
         os.remove(target_file[:-4])
         # remove .spl files
