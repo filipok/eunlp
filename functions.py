@@ -104,45 +104,24 @@ def paragraph_combiner(input_file, output_file):
             fout.write(text)
 
 
-def paragraph_combiner_sub(text, simplify=True):
-    # TODO eventual si la inceputuri de paragrafe deja unite? "1. The..."
+def paragraph_combiner_sub(text):
     # combine single lines consisting of numbers/letters with next line
-    pattern_1 = \
-        re.compile(r'\n(\(?[0-9]+[\.|\)]|\(?[a-z]+[\.|\)]|\(?[A-Z]+[\.|\)])\n')
+    pattern_1 = re.compile(r'\n\(?([0-9]+|[a-z]+|[A-Z]+)[\.\)][\n\s]')
     # combine single lines consisting of single number + single letter
     # with the next line
-    pattern_3 = re.compile(r'\n(\(?[0-9]+[a-z]+[\.|\)])\n')
+    pattern_3 = re.compile(r'\n\(?([0-9]+[a-z]+)[\.\)][\n\s]')
     # combine lines consisting of Roman numerals to 9 with the next line
-    pattern_4 = re.compile(r'\n(\(?i{1,3}[\.|\)])\n')  # 1-3
-    pattern_5 = re.compile(r'\n(\(?iv[\.|\)])\n')  # 4
-    pattern_6 = re.compile(r'\n(\(?vi{0,3}[\.|\)])\n')  # 5-8
-    pattern_7 = re.compile(r'\n(\(?ix[\.|\)])\n')  # 9
-    # simplification means removal of the dot after numbers
-    if simplify:
-        # combine single lines consisting of numbers/letters with next line
-        pattern_1 = re.compile(r'\n\(?([0-9]+|[a-z]+|[A-Z]+)[\.|\)]\n')
-        # combine single lines consisting of single number + single letter
-        # with the next line
-        pattern_3 = re.compile(r'\n\(?([0-9]+[a-z]+)[\.|\)]\n')
-        # combine lines consisting of Roman numerals to 9 with the next line
-        pattern_4 = re.compile(r'\n\(?(i{1,3})[\.|\)]\n')  # 1-3
-        pattern_5 = re.compile(r'\n\(?(iv)[\.|\)]\n')  # 4
-        pattern_6 = re.compile(r'\n\(?(vi{0,3})[\.|\)]\n')  # 5-8
-        pattern_7 = re.compile(r'\n\(?(ix)[\.|\)]\n')  # 9
-        # the replacements
-        text = re.sub(pattern_1, r'\n(\1) ', text)
-        text = re.sub(pattern_3, r'\n(\1) ', text)
-        text = re.sub(pattern_4, r'\n(\1) ', text)
-        text = re.sub(pattern_5, r'\n(\1) ', text)
-        text = re.sub(pattern_6, r'\n(\1) ', text)
-        text = re.sub(pattern_7, r'\n(\1) ', text)
-    # the replacements:
-    text = re.sub(pattern_1, r'\n\1 ', text)
-    text = re.sub(pattern_3, r'\n\1 ', text)
-    text = re.sub(pattern_4, r'\n\1 ', text)
-    text = re.sub(pattern_5, r'\n\1 ', text)
-    text = re.sub(pattern_6, r'\n\1 ', text)
-    text = re.sub(pattern_7, r'\n\1 ', text)
+    pattern_4 = re.compile(r'\n\(?(i{1,3})[\.\)][\n\s]')  # 1-3
+    pattern_5 = re.compile(r'\n\(?(iv)[\.\)][\n|\s]')  # 4
+    pattern_6 = re.compile(r'\n\(?(vi{0,3})[\.\)][\n\s]')  # 5-8
+    pattern_7 = re.compile(r'\n\(?(ix)[\.\)][\n\s]')  # 9
+    # the replacements
+    text = re.sub(pattern_1, '\n', text)
+    text = re.sub(pattern_3, r'\n', text)
+    text = re.sub(pattern_4, r'\n', text)
+    text = re.sub(pattern_5, r'\n', text)
+    text = re.sub(pattern_6, r'\n', text)
+    text = re.sub(pattern_7, r'\n', text)
     return text
 
 
