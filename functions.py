@@ -272,9 +272,10 @@ def hunalign_wrapper(source_file, target_file, dictionary, align_file,
 
 
 def file_to_list(file_name):
-    # clean convert file to list of paragraphs
+    # clean and convert file to list of paragraphs
     with codecs.open(file_name, "r", "utf-8") as fin:
         text = fin.read()
+    text = re.sub(r'\xa0+', ' ', text)  # replace non-breaking space
     text = re.sub(r'\n\s+', r'\n', text)  # remove whitespace after newline
     text = re.sub(r'\n+', r'\n', text)  # remove empty lines
     text = re.sub(r'^\n+', r'', text)  # remove empty lines at the beginning
