@@ -128,24 +128,29 @@ def paragraph_combiner_sub(text):
 def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False,
             is_ep=False):
     for lang_code in langs:
-            link = make_link(url_code, lang_code)
-            text = download(link)
-            if check_error(text, error_text):
-                new_name = prefix + url_code + '_' + lang_code + '.html'
-                with open(new_name, 'w') as f:
-                    f.write(text)
-                new_name = prefix + url_code + '_' + lang_code + '.txt'
-                with codecs.open(new_name, "w", "utf-8") as f:
-                    soup = BeautifulSoup(text)
-                    clean_text = soup.get_text()
-                    # do some cleanup if is_celex
-                    if is_celex:
-                        clean_text = strip_celex(clean_text)
-                    elif is_ep:
-                        clean_text = strip_ep(clean_text)
-                    f.write(clean_text)
+            new_name = prefix + url_code + '_' + lang_code + '.html'
+            # Only download if not already existing
+            if not os.path.isfile(new_name):
+                link = make_link(url_code, lang_code)
+                text = download(link)
+                if check_error(text, error_text):
+                    #new_name = prefix + url_code + '_' + lang_code + '.html'
+                    with open(new_name, 'w') as f:
+                        f.write(text)
+                    new_name = prefix + url_code + '_' + lang_code + '.txt'
+                    with codecs.open(new_name, "w", "utf-8") as f:
+                        soup = BeautifulSoup(text)
+                        clean_text = soup.get_text()
+                        # do some cleanup if is_celex
+                        if is_celex:
+                            clean_text = strip_celex(clean_text)
+                        elif is_ep:
+                            clean_text = strip_ep(clean_text)
+                        f.write(clean_text)
+                else:
+                    print "Error in link " + url_code + " " + lang_code + "."
             else:
-                print "Error in link " + url_code + " " + lang_code + "."
+                print new_name + ": file already downloaded."
 
 
 def remove_p(input_name, output_name):
