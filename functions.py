@@ -14,7 +14,16 @@ import datetime
 import ladder2text_new
 import subprocess
 import random
-# TODO de mutat make_link aici
+
+
+def make_paths(path, text_id, languages):
+        source_file = os.path.join(path, text_id + '_' + languages[0] + '.txt')
+        target_file = os.path.join(path, text_id + '_' + languages[1] + '.txt')
+        align_file = os.path.join(path, 'bi_' + text_id)
+        dictionary = os.path.join(path, languages[0].lower() +
+                              languages[1].lower() + '.dic')
+        return source_file, target_file, align_file, dictionary
+
 
 def delete_and_rename(file_to_change_name, file_to_delete):
     os.remove(file_to_delete)  # delete file_2
@@ -31,6 +40,36 @@ def check_error(text, error_string):
         print "Link error!"
         return False
     return True
+
+
+def make_ep_sub_link(doc_category, doc_year, doc_code):
+    return doc_category + doc_year + doc_code
+
+
+def make_ep_link(category_year_code, lang):
+    doc_category = category_year_code[0:2]
+    doc_year = category_year_code[2:6]
+    doc_code = category_year_code[6:10]
+    a = 'http://www.europarl.europa.eu/sides/getDoc.do?type=REPORT&reference=A'
+    p = 'http://www.europarl.europa.eu/sides/getDoc.do?type=TA&reference=P'
+    b = 'http://www.europarl.europa.eu/sides/getDoc.do?type=MOTION&reference=B'
+    if doc_category[0] == 'A':
+        part_1 = a
+    elif doc_category[0] == 'P':
+        part_1 = p
+    elif doc_category[0] == 'B':
+        part_1 = b
+    else:
+        print "make_link error"
+        part_1 = 'error'  # dubious
+    return part_1 + doc_category[1] + '-' + doc_year + '-' + doc_code + \
+        '&language=' + lang
+
+
+def make_celex_link(celex, lang):
+    part_1 = "http://eur-lex.europa.eu/legal-content/"
+    part_2 = "/TXT/?uri=CELEX:"
+    return part_1 + lang + part_2 + celex
 
 
 def strip_celex(text):
