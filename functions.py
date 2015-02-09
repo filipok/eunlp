@@ -246,24 +246,25 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
 
 
 def splitter_wrapper(lang, input_file, output_file, program_folder):
-    command = 'perl ' + program_folder + '/' + \
+    command = 'perl ' + program_folder + \
               'sentence_splitter/split-sentences.perl -l ' + lang + ' < ' + \
               input_file + '> ' + output_file
     subprocess.check_output(command, shell=True)
 
 
 def tokenizer_wrapper(lang, input_file, output_file, program_folder):
-    command = 'perl ' + program_folder + '/' + \
+    command = 'perl ' + program_folder + \
               'tokenizer.perl -l ' + lang + ' < ' + input_file + ' > '\
               + output_file
     subprocess.check_output(command, shell=True)
+
 
 def hunalign_wrapper(source_file, target_file, dictionary, align_file,
                      program_folder, realign=True):
     realign_parameter = ''
     if realign:
         realign_parameter = '-realign '
-    command = program_folder + '/' + \
+    command = program_folder + \
         'hunalign-1.1/src/hunalign/hunalign -utf ' + realign_parameter + \
         dictionary + ' ' + source_file + ' ' + target_file + ' > ' \
         + align_file

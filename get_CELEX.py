@@ -14,6 +14,8 @@ import functions as func
 if __name__ == '__main__':
     path = os.getcwd()
     program_folder = '/'.join(re.split(r'/', sys.argv[0])[:-1])
+    if len(program_folder) != 0:
+        program_folder += '/'
     celex = sys.argv[1]  # collect celex code
     languages = sys.argv[2:]  # collect language codes
     # create html and txt files for each language code

@@ -19,6 +19,8 @@ if __name__ == '__main__':
     # collect parameters
     path = os.getcwd()
     program_folder = '/'.join(re.split(r'/', sys.argv[0])[:-1])
+    if len(program_folder) != 0:
+        program_folder += '/'
     category = sys.argv[1]
     year = sys.argv[2]
     number = sys.argv[3]
