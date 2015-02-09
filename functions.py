@@ -21,7 +21,7 @@ def make_paths(path, text_id, languages):
         target_file = os.path.join(path, text_id + '_' + languages[1] + '.txt')
         align_file = os.path.join(path, 'bi_' + text_id)
         dictionary = os.path.join(path, languages[0].lower() +
-                              languages[1].lower() + '.dic')
+                                  languages[1].lower() + '.dic')
         return source_file, target_file, align_file, dictionary
 
 
@@ -51,6 +51,7 @@ def make_ep_link(category_year_code, lang):
     doc_year = category_year_code[2:6]
     doc_code = category_year_code[6:10]
     a = 'http://www.europarl.europa.eu/sides/getDoc.do?type=REPORT&reference=A'
+    # TODO gresit p
     p = 'http://www.europarl.europa.eu/sides/getDoc.do?type=TA&reference=P'
     b = 'http://www.europarl.europa.eu/sides/getDoc.do?type=MOTION&reference=B'
     if doc_category[0] == 'A':
@@ -86,6 +87,7 @@ def strip_celex(text):
     # add whitespace after dot if missing (e.g. ' tasks.The ')
     text = re.sub(r'([a-z]\.)([A-Z])', r'\1 \2', text)
     return text
+
 
 def strip_ep(text):
     # double newlines, otherwise the splitter merges the first lines
@@ -199,7 +201,6 @@ def create_dictionary(input_source, input_target, output_file):
         print "Dictionary files of different lenght or length = 0. Aborting."
 
 
-
 def tab_to_separate(input_name, output_source, output_target):
     with codecs.open(input_name, "r", "utf-8") as fin:
         with codecs.open(output_source, "w", "utf-8") as out_s:
@@ -307,10 +308,11 @@ def file_to_list(file_name):
 
 
 def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
-                   align_file, program_folder, note, para_size=1000):
+               align_file, program_folder, note, para_size=1000):
+    # TODO only align if not existing
     # Exemplu in Python console:
     # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
-    # "ro", "enro.dic", "bi_test", "/home/filip/eunlp", "A720120002", 300)
+    # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002", 300)
     # TODO split lines at the beginning and at the end; language dependent
     source_list = file_to_list(source_file)
     target_list = file_to_list(target_file)
@@ -373,6 +375,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
 
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
             program_folder, note, delete_temp=True):
+    # TODO only align if not existing
     # sentence splitter; resulting file are with the .sp1 extension
     # TODO use pipe where possible, too many files!
     # http://stackoverflow.com/questions/4514751/pipe-subprocess-standard-output-to-a-variable
