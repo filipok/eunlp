@@ -51,20 +51,21 @@ def make_ep_link(category_year_code, lang):
     doc_year = category_year_code[2:6]
     doc_code = category_year_code[6:10]
     a = 'http://www.europarl.europa.eu/sides/getDoc.do?type=REPORT&reference=A'
-    # TODO gresit p
     p = 'http://www.europarl.europa.eu/sides/getDoc.do?type=TA&reference=P'
     b = 'http://www.europarl.europa.eu/sides/getDoc.do?type=MOTION&reference=B'
+    p_specific = ''  # this is specific to P links
     if doc_category[0] == 'A':
         part_1 = a
     elif doc_category[0] == 'P':
         part_1 = p
+        p_specific = 'TA-'
     elif doc_category[0] == 'B':
         part_1 = b
     else:
         print "make_link error"
         part_1 = 'error'  # dubious
-    return part_1 + doc_category[1] + '-' + doc_year + '-' + doc_code + \
-        '&language=' + lang
+    return part_1 + doc_category[1] + '-' + p_specific + doc_year + '-' + \
+        doc_code + '&language=' + lang
 
 
 def make_celex_link(celex, lang):
