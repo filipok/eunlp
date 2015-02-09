@@ -124,33 +124,53 @@ def paragraph_combiner_sub(text):
     text = re.sub(pattern_7, r'\n', text)
     return text
 
+# TODO valabil doar pentru A!
+# remove tag attrs
+# https://gist.github.com/bradmontgomery/673417
+# get first part
+# clean_soup.body.table.table.next_sibling.next_sibling.next_sibling.next_sibling.get_text()
+# get second part
+# clean_soup.body.table.table.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.get_text()
+# get third part
+# clean_soup.body.table.table.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.get_text()
+# get fourth part
+# clean_soup.body.table.table.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.get_text()
+#
+#
+# eventual cu find_next_siblings()?
+
 
 def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False,
             is_ep=False):
     for lang_code in langs:
             new_name = prefix + url_code + '_' + lang_code + '.html'
-            # Only download if not already existing
+            # Only download if not already existing, otherwise open from disk
             if not os.path.isfile(new_name):
                 link = make_link(url_code, lang_code)
                 text = download(link)
                 if check_error(text, error_text):
-                    #new_name = prefix + url_code + '_' + lang_code + '.html'
                     with open(new_name, 'w') as f:
                         f.write(text)
-                    new_name = prefix + url_code + '_' + lang_code + '.txt'
-                    with codecs.open(new_name, "w", "utf-8") as f:
-                        soup = BeautifulSoup(text)
-                        clean_text = soup.get_text()
-                        # do some cleanup if is_celex
-                        if is_celex:
-                            clean_text = strip_celex(clean_text)
-                        elif is_ep:
-                            clean_text = strip_ep(clean_text)
-                        f.write(clean_text)
                 else:
                     print "Error in link " + url_code + " " + lang_code + "."
             else:
-                print new_name + ": file already downloaded."
+                with codecs.open(new_name, "r", "utf-8") as f:
+                    text = f.read()
+                    print new_name + ": html file already downloaded."
+            # Only convert to txt if not already existing
+            new_name = prefix + url_code + '_' + lang_code + '.txt'
+            if not os.path.isfile(new_name):
+                with codecs.open(new_name, "w", "utf-8") as f:
+                    soup = BeautifulSoup(text, "lxml")
+                    clean_text = soup.get_text()
+                    # do some cleanup if is_celex or is_ep
+                    if is_celex:
+                        clean_text = strip_celex(clean_text)
+                    elif is_ep:
+                        clean_text = strip_ep(clean_text)
+                    f.write(clean_text)
+            else:
+                print new_name + ": txt file already existing."
 
 
 def remove_p(input_name, output_name):
