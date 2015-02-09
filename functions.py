@@ -310,11 +310,13 @@ def file_to_list(file_name):
 
 def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                align_file, program_folder, note, para_size=1000):
-    # TODO only align if not existing
     # Exemplu in Python console:
     # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002", 300)
-    # TODO split lines at the beginning and at the end; language dependent
+    if os.path.isfile(align_file + '_' + s_lang + '_' + t_lang + '.tmx'):
+        print "File pair already aligned: " + align_file
+        return  # exit if already aligned
+
     source_list = file_to_list(source_file)
     target_list = file_to_list(target_file)
     # If different number of paragraphs
@@ -376,13 +378,16 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
 
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
             program_folder, note, delete_temp=True):
-    # TODO only align if not existing
     # sentence splitter; resulting file are with the .sp1 extension
     # TODO use pipe where possible, too many files!
     # http://stackoverflow.com/questions/4514751/pipe-subprocess-standard-output-to-a-variable
     #
     # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
     # TODO eventual alt splitter cu supervised learning pt DE?
+    if os.path.isfile(align_file + '_' + s_lang + '_' + t_lang + '.tmx'):
+        print "File pair already aligned: " + align_file
+        return  # exit if already aligned
+
     splitter_wrapper(s_lang, source_file, source_file[:-4] + '.sp1',
                      program_folder)
     splitter_wrapper(t_lang, target_file, target_file[:-4] + '.sp1',
