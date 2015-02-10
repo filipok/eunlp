@@ -328,7 +328,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 # process them with the classic aligner
                 aligner(temp_source, temp_target, s_lang, t_lang,
                         dictionary, temp_align, program_folder, "a_" + r_num,
-                        delete_temp=False)
+                        delete_temp=True)
                 # open tab file created by classic aligner
                 with codecs.open(temp_align + '_' + s_lang + '_' + t_lang +
                                  ".tab", "r", "utf-8") as fin:
@@ -343,6 +343,15 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                         new_line = "1\t" + split_line[1] + "\t" + \
                                    split_line[2]
                         fout.write(new_line)
+                # remove temporary files
+                os.remove(temp_source)
+                os.remove(temp_target)
+                os.remove(temp_source[:-4] + '.ali')
+                os.remove(temp_target[:-4] + '.ali')
+                os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.lad')
+                os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.tab')
+                os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.tmx')
+
     # turn alignment into tmx
     tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang, note)
     # create parallel source and target text files
@@ -407,12 +416,7 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
                     target_file[:-4] + '.ali')
     # remove files without extension
     if delete_temp:
-        print "Deleting temporary files..."
         os.remove(source_file[:-4])
         os.remove(target_file[:-4])
         os.remove(source_file[:-4] + ".tok")
         os.remove(target_file[:-4] + ".tok")
-        os.remove(source_file[:-4] + ".html")
-        os.remove(target_file[:-4] + ".html")
-        os.remove(source_file[:-4] + ".txt")
-        os.remove(target_file[:-4] + ".txt")
