@@ -99,14 +99,6 @@ def strip_ep(text):
     return text
 
 
-def paragraph_combiner(input_file, output_file):
-    with codecs.open(input_file, 'r', 'utf-8') as fin:
-        text = fin.read()
-        text = paragraph_combiner_sub(text)
-        with codecs.open(output_file, 'w', 'utf-8') as fout:
-            fout.write(text)
-
-
 def paragraph_combiner_sub(text):
     # combine single lines consisting of numbers/letters with next line
     pattern_1 = re.compile(r'\n\(?([0-9]+|[a-z]+|[A-Z]+)[\.\)][\n\s]')
@@ -174,15 +166,6 @@ def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False,
                     f.write(clean_text)
             else:
                 print new_name + ": txt file already existing."
-
-
-def remove_p(input_name, output_name):
-    empty_line = '<P>\n'
-    with codecs.open(output_name, "w", "utf-8") as fout:
-        with codecs.open(input_name, "r", "utf-8") as fin:
-            for line in fin:
-                if line != empty_line:
-                    fout.write(line)
 
 
 def create_dictionary(input_source, input_target, output_file):
@@ -265,20 +248,6 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
         fout.write('\n')
         fout.write('</body>\n')
         fout.write('</tmx>')
-
-
-def splitter_wrapper(lang, input_file, output_file, program_folder):
-    command = 'perl ' + program_folder + \
-              'sentence_splitter/split-sentences.perl -l ' + lang + ' < ' + \
-              input_file + '> ' + output_file
-    subprocess.check_output(command, shell=True)
-
-
-def tokenizer_wrapper(lang, input_file, output_file, program_folder):
-    command = 'perl ' + program_folder + \
-              'tokenizer.perl -l ' + lang + ' < ' + input_file + ' > '\
-              + output_file
-    subprocess.check_output(command, shell=True)
 
 
 def hunalign_wrapper(source_file, target_file, dictionary, align_file,
@@ -376,33 +345,39 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                     target_file[:-4] + '.ali')
 
 
+def subprocessing(file_name, lang, program_folder):
+    # sentence splitter
+    with codecs.open(file_name, 'r', 'utf-8') as f:
+        command = ['perl',
+                   program_folder + 'sentence_splitter/split-sentences.perl',
+                   '-l', lang]
+        proc = subprocess.Popen(command, stdin=f, stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+        output, err = proc.communicate()  # output contains the splitter output
+        # remove <P> created by the sentence splitter
+    output = re.sub(r'<P>\n', '', output)
+    # paragraph combiner
+    output = paragraph_combiner_sub(output)
+    with codecs.open(file_name[:-4], 'w', 'utf-8') as f:
+        f.write(unicode(output, 'utf-8'))
+    # tokenizer
+    command = ['perl', program_folder + 'tokenizer.perl', '-l', lang]
+    p = subprocess.Popen(command, stdout=subprocess.PIPE,
+                         stdin=subprocess.PIPE, stderr=subprocess.PIPE)
+    output = p.communicate(output)[0]  # presupun ca [1] e stderr?
+    with codecs.open(file_name[:-4] + '.tok', 'w', 'utf-8') as f:
+        f.write(unicode(output, 'utf-8'))
+
+
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
             program_folder, note, delete_temp=True):
-    # sentence splitter; resulting file are with the .sp1 extension
-    # TODO use pipe where possible, too many files!
-    # http://stackoverflow.com/questions/4514751/pipe-subprocess-standard-output-to-a-variable
-    #
-    # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
+        # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
     # TODO eventual alt splitter cu supervised learning pt DE?
     if os.path.isfile(align_file + '_' + s_lang + '_' + t_lang + '.tmx'):
         print "File pair already aligned: " + align_file
         return  # exit if already aligned
-
-    splitter_wrapper(s_lang, source_file, source_file[:-4] + '.sp1',
-                     program_folder)
-    splitter_wrapper(t_lang, target_file, target_file[:-4] + '.sp1',
-                     program_folder)
-    # remove < P > and create files with extension .sp2
-    remove_p(source_file[:-4] + ".sp1", source_file[:-4] + '.sp2')
-    remove_p(target_file[:-4] + ".sp1", target_file[:-4] + '.sp2')
-    # combine paragraphs and create files without extension
-    paragraph_combiner(source_file[:-4] + '.sp2', source_file[:-4])
-    paragraph_combiner(target_file[:-4] + '.sp2', target_file[:-4])
-    # tokenizer and create files with the .tok extension
-    tokenizer_wrapper(s_lang, source_file[:-4], source_file[:-4] + '.tok',
-                      program_folder)
-    tokenizer_wrapper(t_lang, target_file[:-4], target_file[:-4] + '.tok',
-                      program_folder)
+    subprocessing(source_file, s_lang, program_folder)
+    subprocessing(target_file, t_lang, program_folder)
     # create empty hunalign dic from program-folder/data_raw files
     if not os.path.exists(dictionary):
         create_dictionary(program_folder + '/data_raw/' + s_lang + '.txt',
@@ -430,18 +405,9 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
         print "Deleting temporary files..."
         os.remove(source_file[:-4])
         os.remove(target_file[:-4])
-        # remove .spl files
-        os.remove(source_file[:-4] + ".sp1")
-        os.remove(target_file[:-4] + ".sp1")
-        # remove.sp2 files
-        os.remove(source_file[:-4] + ".sp2")
-        os.remove(target_file[:-4] + ".sp2")
-        # remove .tok files
         os.remove(source_file[:-4] + ".tok")
         os.remove(target_file[:-4] + ".tok")
-        # remove .html files
         os.remove(source_file[:-4] + ".html")
         os.remove(target_file[:-4] + ".html")
-        # remove .txt files
         os.remove(source_file[:-4] + ".txt")
         os.remove(target_file[:-4] + ".txt")
