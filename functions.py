@@ -277,6 +277,8 @@ def file_to_list(file_name):
     text = re.sub(r'^\n+', r'', text)  # remove empty lines at the beginning
     text = re.sub(r'\n$', r'', text)  # remove empty lines at the end
     text = re.sub(r',\s\n', r', ', text)  # merge segments separated by comma
+    text = re.sub(r'\s+\n', r'\n', text)  # remove whitespace before newline
+    text = re.sub(r' +', r' ', text)  # remove double whitespaces
     text = paragraph_combiner_sub(text)  # combine para numbers with text
     paragraph_list = re.split(r'\n', text)  # split file
     return paragraph_list
