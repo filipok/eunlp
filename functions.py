@@ -295,6 +295,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
 
     source_list = file_to_list(source_file)
     target_list = file_to_list(target_file)
+
     # If different number of paragraphs
     if len(source_list) != len(target_list):
         # call classic aligner
@@ -302,63 +303,100 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             source_file
         aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 align_file, program_folder, note, delete_temp=True)
-        return None
+        return
+
     # If same number of paragraphs:
-    with codecs.open(align_file + '.tab', "w", "utf-8") as fout:
-        for i in range(len(source_list)):
-            if len(source_list[i]) < para_size:
-                line = "1\t" + target_list[i] + "\t" + source_list[i] + \
-                       "\n"
-                fout.write(line)
-            else:
-                print "Creating temporary file from large paragraph ", i, \
-                    "..."
-                # create temporary files from paragraphs
-                # mkdir /tmp/eunlp
-                if not os.path.exists("/tmp/eunlp"):
-                    os.makedirs("/tmp/eunlp")
-                # create random file names
-                r_num = str(random.randint(0, 100000))
-                temp_source = "/tmp/eunlp/s_" + r_num + ".txt"
-                temp_target = "/tmp/eunlp/t_" + r_num + ".txt"
-                temp_align = "/tmp/eunlp/align_" + r_num
-                # write the two files
-                with codecs.open(temp_source, "w", "utf-8") as sout:
-                    sout.write(source_list[i])
-                with codecs.open(temp_target, "w", "utf-8") as tout:
-                    tout.write(target_list[i])
-                # process them with the classic aligner
-                aligner(temp_source, temp_target, s_lang, t_lang,
-                        dictionary, temp_align, program_folder, "a_" + r_num,
-                        delete_temp=True)
-                # open tab file created by classic aligner
-                with codecs.open(temp_align + '_' + s_lang + '_' + t_lang +
-                                 ".tab", "r", "utf-8") as fin:
-                    lines = list(fin)
-                # and merge resulting alignment into the current tab file
-                # TODO de respins rezultate cu segmente goale
-                # TODO de verificat daca a ignorat text?
-                # TODO de verificat diferente foarte mari de dimensiune s/t
-                for i in range(len(lines)):
-                    split_line = re.split("\t", lines[i])
-                    if len(split_line) == 3: # avoid out of range errors
+    # mkdir /tmp/eunlp
+    if not os.path.exists("/tmp/eunlp"):
+        os.makedirs("/tmp/eunlp")
+    # open .tab align_file for writing
+    fout = codecs.open(align_file + '.tab', "w", "utf-8")
+    # for each line, write directly or call hunaling according to size
+    for i in range(len(source_list)):
+        if len(source_list[i]) < para_size:
+            line = "1\t" + target_list[i] + "\t" + source_list[i] + \
+                   "\n"
+            fout.write(line)
+        else:
+            print "Creating temporary file from large paragraph ", i, \
+                "..."
+            r_num = str(random.randint(0, 100000))
+            temp_source = "/tmp/eunlp/s_" + r_num + ".txt"
+            temp_target = "/tmp/eunlp/t_" + r_num + ".txt"
+            temp_align = "/tmp/eunlp/align_" + r_num
+            # write the two files
+            with codecs.open(temp_source, "w", "utf-8") as sout:
+                sout.write(source_list[i])
+            with codecs.open(temp_target, "w", "utf-8") as tout:
+                tout.write(target_list[i])
+            # process them with the classic aligner
+            aligner(temp_source, temp_target, s_lang, t_lang,
+                    dictionary, temp_align, program_folder, "a_" + r_num,
+                    delete_temp=True)
+            # open tab file created by classic aligner
+            with codecs.open(temp_align + '_' + s_lang + '_' + t_lang +
+                             ".tab", "r", "utf-8") as fin:
+                lines = list(fin)
+            # do some checks with the hunalign aligment
+            everything_ok = check_hunalign(lines, source_list[i],
+                                           target_list[i])
+            if everything_ok:
+                # merge resulting alignment into the current tab file
+                for j in range(len(lines)):
+                    split_line = re.split("\t", lines[j])
+                    if len(split_line) == 3:  # avoid out of range errors
                         new_line = "1\t" + split_line[1] + "\t" + \
                                    split_line[2]
                         fout.write(new_line)
-                # remove temporary files
-                os.remove(temp_source)
-                os.remove(temp_target)
-                os.remove(temp_source[:-4] + '.ali')
-                os.remove(temp_target[:-4] + '.ali')
-                os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.lad')
-                os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.tab')
-                os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.tmx')
+            else:
+                print source_list[i]
+                print "Hunalign failed to align properly segment " + \
+                      str(i) + '. Reverting to naive alignment.'
+                line = "1\t" + target_list[i] + "\t" + source_list[i] + \
+                       "\n"
+                fout.write(line)
+            # remove temporary files
+            os.remove(temp_source)
+            os.remove(temp_target)
+            os.remove(temp_source[:-4] + '.ali')
+            os.remove(temp_target[:-4] + '.ali')
+            os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.lad')
+            os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.tab')
+            os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.tmx')
 
+    fout.close()
     # turn alignment into tmx
     tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang, note)
     # create parallel source and target text files
     tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
                     target_file[:-4] + '.ali')
+
+def check_hunalign(lines, full_source, full_target):
+    counter_s = 0
+    counter_t = 0
+    everything_ok = True
+    for i in range(len(lines)):
+        split_line = re.split("\t", lines[i])
+        if len(split_line) == 3:  # avoid out of range errors
+            counter_s += len(split_line[2]) + 1
+            counter_t += len(split_line[1]) + 1
+            if len(split_line[1]) > 0:
+                translation_ratio = \
+                    float(len(split_line[2]))/len(split_line[1])
+            else:
+                translation_ratio = 0
+            # check source and target size
+            if not(0.5 < translation_ratio < 2.0):
+                everything_ok = False
+            # check segment length
+            if len(split_line[2]) < 2 or len(split_line[1]) < 2:
+                everything_ok = False
+    # check total characters (hunalign drops text sometimes)
+    if counter_s < len(full_source) or counter_t < len(full_target):
+        print counter_s, len(full_source)
+        print counter_t, len(full_target)
+        everything_ok = False
+    return everything_ok
 
 
 def subprocessing(file_name, lang, program_folder):
