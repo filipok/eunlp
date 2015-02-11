@@ -19,7 +19,9 @@ import random
 def make_paths(path, text_id, languages):
         source_file = os.path.join(path, text_id + '_' + languages[0] + '.txt')
         target_file = os.path.join(path, text_id + '_' + languages[1] + '.txt')
-        align_file = os.path.join(path, 'bi_' + text_id)
+        align_file = os.path.join(path, 'bi_' + text_id + '_' +
+                                  languages[0].lower() + '_' +
+                                  languages[1].lower())
         dictionary = os.path.join(path, languages[0].lower() +
                                   languages[1].lower() + '.dic')
         return source_file, target_file, align_file, dictionary
