@@ -298,7 +298,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     # Example in Python console:
     # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002", 300)
-    if os.path.isfile(align_file + '_' + s_lang + '_' + t_lang + '.tmx'):
+    if (not over) and os.path.isfile(align_file + '.tmx'):
         print "File pair already aligned: " + align_file
         return  # exit if already aligned
 
@@ -438,7 +438,7 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
     # para_size is added only for easy replacement of aligner with ep_aligner
     # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
     # TODO eventual alt splitter cu supervised learning pt DE?
-    if os.path.isfile(align_file + '_' + s_lang + '_' + t_lang + '.tmx'):
+    if (not over) and os.path.isfile(align_file + '.tmx'):
         print "File pair already aligned: " + align_file
         return  # exit if already aligned
     subprocessing(source_file, s_lang, program_folder)
