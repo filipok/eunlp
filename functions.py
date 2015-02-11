@@ -285,8 +285,10 @@ def file_to_list(file_name):
 
 
 def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
-               align_file, program_folder, note, para_size=1000):
-    # Exemplu in Python console:
+               align_file, program_folder, note, para_size=1000,
+               delete_temp=True):
+    # TODO indicate naive/ep_aligner alignment in tmx?
+    # Example in Python console:
     # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002", 300)
     if os.path.isfile(align_file + '_' + s_lang + '_' + t_lang + '.tmx'):
@@ -356,13 +358,14 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                        "\n"
                 fout.write(line)
             # remove temporary files
-            os.remove(temp_source)
-            os.remove(temp_target)
-            os.remove(temp_source[:-4] + '.ali')
-            os.remove(temp_target[:-4] + '.ali')
-            os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.lad')
-            os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.tab')
-            os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.tmx')
+            if delete_temp:
+                os.remove(temp_source)
+                os.remove(temp_target)
+                os.remove(temp_source[:-4] + '.ali')
+                os.remove(temp_target[:-4] + '.ali')
+                os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.lad')
+                os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.tab')
+                os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.tmx')
 
     fout.close()
     # turn alignment into tmx
@@ -424,8 +427,9 @@ def subprocessing(file_name, lang, program_folder):
 
 
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
-            program_folder, note, delete_temp=True):
-        # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
+            program_folder, note, para_size=1000, delete_temp=True):
+    # para_size is added only for easy replacement of aligner with ep_aligner
+    # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
     # TODO eventual alt splitter cu supervised learning pt DE?
     if os.path.isfile(align_file + '_' + s_lang + '_' + t_lang + '.tmx'):
         print "File pair already aligned: " + align_file
@@ -434,8 +438,8 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
     subprocessing(target_file, t_lang, program_folder)
     # create empty hunalign dic from program-folder/data_raw files
     if not os.path.exists(dictionary):
-        create_dictionary(program_folder + '/data_raw/' + s_lang + '.txt',
-                          program_folder + '/data_raw/' + t_lang + '.txt',
+        create_dictionary(program_folder + 'data_raw/' + s_lang + '.txt',
+                          program_folder + 'data_raw/' + t_lang + '.txt',
                           dictionary)
     # create hunalign ladder alignment
     align_file = align_file + '_' + s_lang + '_' + t_lang
