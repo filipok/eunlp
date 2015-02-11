@@ -25,11 +25,6 @@ def make_paths(path, text_id, languages):
         return source_file, target_file, align_file, dictionary
 
 
-def download(link):
-    response = urllib2.urlopen(link)
-    return response.read()
-
-
 def check_error(text, error_string):
     if error_string in text:
         print "Link error!"
@@ -130,37 +125,52 @@ def paragraph_combiner_sub(text):
 # eventual cu find_next_siblings()?
 
 
+def downloader(make_link, error_text, url_code, lang_code, new_name,
+               over=False):
+    # Only download if not already existing, otherwise open from disk
+    # over=True overrides that behavior
+    if over or (not os.path.isfile(new_name)):
+        link = make_link(url_code, lang_code)
+        response = urllib2.urlopen(link)
+        text = response.read()
+        if check_error(text, error_text):
+            with open(new_name, 'w') as f:
+                f.write(text)
+        else:
+            print "Error in link " + url_code + " " + lang_code + "."
+    else:
+        with codecs.open(new_name, "r", "utf-8") as f:
+            text = f.read()
+            print new_name + ": html file already downloaded."
+    return text
+
+
+def souper(new_name, text, is_celex, is_ep, over=False):
+    # Only convert to txt if not already existing
+    # over=True overrides that behavior
+    if over or (not os.path.isfile(new_name)):
+        with codecs.open(new_name, "w", "utf-8") as f:
+            soup = BeautifulSoup(text, "lxml")
+            clean_text = soup.get_text()
+            # do some cleanup if is_celex or is_ep
+            if is_celex:
+                clean_text = strip_celex(clean_text)
+            elif is_ep:
+                clean_text = strip_ep(clean_text)
+            f.write(clean_text)
+    else:
+        print new_name + ": txt file already existing."
+
+
 def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False,
-            is_ep=False):
+            is_ep=False, over_html=False, over_txt=False):
     for lang_code in langs:
             new_name = prefix + url_code + '_' + lang_code + '.html'
-            # Only download if not already existing, otherwise open from disk
-            if not os.path.isfile(new_name):
-                link = make_link(url_code, lang_code)
-                text = download(link)
-                if check_error(text, error_text):
-                    with open(new_name, 'w') as f:
-                        f.write(text)
-                else:
-                    print "Error in link " + url_code + " " + lang_code + "."
-            else:
-                with codecs.open(new_name, "r", "utf-8") as f:
-                    text = f.read()
-                    print new_name + ": html file already downloaded."
-            # Only convert to txt if not already existing
+            text = downloader(make_link, error_text, url_code, lang_code,
+                              new_name, over_html)
+
             new_name = prefix + url_code + '_' + lang_code + '.txt'
-            if not os.path.isfile(new_name):
-                with codecs.open(new_name, "w", "utf-8") as f:
-                    soup = BeautifulSoup(text, "lxml")
-                    clean_text = soup.get_text()
-                    # do some cleanup if is_celex or is_ep
-                    if is_celex:
-                        clean_text = strip_celex(clean_text)
-                    elif is_ep:
-                        clean_text = strip_ep(clean_text)
-                    f.write(clean_text)
-            else:
-                print new_name + ": txt file already existing."
+            souper(new_name, text, is_celex, is_ep, over_txt)
 
 
 def create_dictionary(input_source, input_target, output_file):
