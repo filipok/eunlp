@@ -25,11 +25,6 @@ def make_paths(path, text_id, languages):
         return source_file, target_file, align_file, dictionary
 
 
-def delete_and_rename(file_to_change_name, file_to_delete):
-    os.remove(file_to_delete)  # delete file_2
-    os.rename(file_to_change_name, file_to_delete)  # rename file_1 to file_2
-
-
 def download(link):
     response = urllib2.urlopen(link)
     return response.read()
