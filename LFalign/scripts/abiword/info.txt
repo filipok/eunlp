@@ -1,3 +1,0 @@
-Only used by Windows version, others should install in usr/bin
-
-Downloaded from http://www.abisource.com/download/
