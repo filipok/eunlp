@@ -66,22 +66,6 @@ def make_celex_link(celex, lang):
     return part_1 + lang + part_2 + celex
 
 
-def strip_celex(text):
-    # discard some leftover Javascript and newlines at the beginning
-    split = re.split(r'\n\t{5}Text\n', text)
-    text = split[1]
-    # discard some leftover Javascript and newlines at the end
-    split = re.split(r'\n\s{,6}Top\s{,6}\n', text)
-    text = split[0]
-    # remove empty newlines
-    text = re.sub(r'\n+', r'\n', text)
-    # double newlines, otherwise the splitter merges the first lines
-    text = re.sub(r'\n', r'\n\n', text)
-    # add whitespace after dot if missing (e.g. ' tasks.The ')
-    text = re.sub(r'([a-z]\.)([A-Z])', r'\1 \2', text)
-    return text
-
-
 def strip_ep(text):
     # double newlines, otherwise the splitter merges the first lines
     text = re.sub(r'\n', r'\n\n', text)
@@ -135,6 +119,11 @@ def downloader(make_link, error_text, url_code, lang_code, new_name,
         link = make_link(url_code, lang_code)
         response = urllib2.urlopen(link)
         text = response.read()
+
+        # some celexes have no new line between paras
+        # this confuses get_text() in BeautifulSoup
+        text = re.sub(r'</p><p>', r'</p>\n<p>', text)
+
         if check_error(text, error_text):
             with open(new_name, 'w') as f:
                 f.write(text)
@@ -151,15 +140,26 @@ def souper(new_name, text, is_celex, is_ep, over=False):
     # Only convert to txt if not already existing
     # over=True overrides that behavior
     if over or (not os.path.isfile(new_name)):
-        with codecs.open(new_name, "w", "utf-8") as f:
-            soup = BeautifulSoup(text, "lxml")
-            clean_text = soup.get_text()
-            # do some cleanup if is_celex or is_ep
-            if is_celex:
-                clean_text = strip_celex(clean_text)
-            elif is_ep:
-                clean_text = strip_ep(clean_text)
+        f = codecs.open(new_name, "w", "utf-8")
+        soup = BeautifulSoup(text, "lxml")
+        # separate branches for each document type
+        if is_celex:
+            if soup.txt_te is not None:
+                # for older celexes
+                clean_text = soup.txt_te.get_text()
+            else:
+                # for newer celexes
+                # the hierarchy is rather deep
+                clean_text = soup.body.div.contents[8].contents[5].contents[0]
+                clean_text = clean_text.contents[4].contents[9].contents[3]
+                clean_text = clean_text.contents[1].get_text()
+                clean_text = re.sub(r'\n\nTop $', r'', clean_text)
             f.write(clean_text)
+        elif is_ep:
+            clean_text = soup.get_text()
+            clean_text = strip_ep(clean_text)
+            f.write(clean_text)
+        f.close()
     else:
         print new_name + ": txt file already existing."
 
@@ -284,6 +284,7 @@ def file_to_list(file_name):
     text = re.sub(r'^\n+', r'', text)  # remove empty lines at the beginning
     text = re.sub(r'\n$', r'', text)  # remove empty lines at the end
     text = re.sub(r',\s\n', r', ', text)  # merge segments separated by comma
+    # TODO do not merge segment starting with Whereas, Having regard, In cooperation
     text = re.sub(r'\s+\n', r'\n', text)  # remove whitespace before newline
     text = re.sub(r' +', r' ', text)  # remove double whitespaces
     text = paragraph_combiner_sub(text)  # combine para numbers with text
@@ -292,7 +293,7 @@ def file_to_list(file_name):
 
 
 def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
-               align_file, program_folder, note,delete_temp=True, over=True,
+               align_file, program_folder, note, delete_temp=True, over=True,
                para_size=300):
     # Example in Python console:
     # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
