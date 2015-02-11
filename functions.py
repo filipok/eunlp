@@ -470,3 +470,12 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
         os.remove(target_file[:-4])
         os.remove(source_file[:-4] + ".tok")
         os.remove(target_file[:-4] + ".tok")
+
+
+def merge_tmx(target_file, s_lang, t_lang):
+    # create a list of tmx files in current directory (also test for languages)
+    # for file in list:
+    #    read file
+    #    remove header and footer
+    #    add remaining contents to target_file (if s_lang and t_lang?)
+    pass
