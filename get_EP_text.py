@@ -27,11 +27,11 @@ if __name__ == '__main__':
     doc_code = func.make_ep_sub_link(category, year, number)
     # create html and txt files for each language code
     func.scraper(languages, func.make_ep_link, 'Application Error', doc_code,
-                 '', is_ep=True)
+                 '', is_ep=True, over_html=False, over_txt=False)
     # prepare paths
     source_file, target_file, align_file, dictionary = \
         func.make_paths(path, doc_code, languages)
     # call the aligner
     func.ep_aligner(source_file, target_file, languages[0].lower(),
                  languages[1].lower(), dictionary, align_file, program_folder,
-                 doc_code, 300, False)
+                 doc_code, 300, delete_temp=True, over=False)

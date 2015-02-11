@@ -24,11 +24,11 @@ if __name__ == '__main__':
     # create html and txt files for each language code
     func.scraper(languages, func.make_celex_link,
                  'The requested document does not exist', celex, '',
-                 is_celex=True)  # no prefix
+                 is_celex=True, over_html=False, over_txt=False)  # no prefix
     # prepare paths
     source_file, target_file, align_file, dictionary = \
         func.make_paths(path, celex, languages)
     # call the aligner
     func.ep_aligner(source_file, target_file, languages[0].lower(),
                     languages[1].lower(), dictionary, align_file,
-                    program_folder, celex, 300, False)
+                    program_folder, celex, 300, delete_temp=True, over=False)

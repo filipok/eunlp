@@ -293,14 +293,14 @@ def file_to_list(file_name):
 
 def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                align_file, program_folder, note, para_size=1000,
-               delete_temp=True):
+               delete_temp=True, over=True):
     # TODO indicate naive/ep_aligner alignment in tmx?
     # Example in Python console:
     # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002", 300)
     if (not over) and os.path.isfile(align_file + '.tmx'):
         print "File pair already aligned: " + align_file
-        return  # exit if already aligned
+        return  # exit if already aligned and over=False
 
     source_list = file_to_list(source_file)
     target_list = file_to_list(target_file)
@@ -434,13 +434,13 @@ def subprocessing(file_name, lang, program_folder):
 
 
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
-            program_folder, note, para_size=1000, delete_temp=True):
+            program_folder, note, para_size=1000, delete_temp=True, over=True):
     # para_size is added only for easy replacement of aligner with ep_aligner
     # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
     # TODO eventual alt splitter cu supervised learning pt DE?
     if (not over) and os.path.isfile(align_file + '.tmx'):
         print "File pair already aligned: " + align_file
-        return  # exit if already aligned
+        return  # exit if already aligned and over=False
     subprocessing(source_file, s_lang, program_folder)
     subprocessing(target_file, t_lang, program_folder)
     # create empty hunalign dic from program-folder/data_raw files
