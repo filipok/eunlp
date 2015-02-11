@@ -343,8 +343,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                     dictionary, temp_align, program_folder, "a_" + r_num,
                     delete_temp=True)
             # open tab file created by classic aligner
-            with codecs.open(temp_align + '_' + s_lang + '_' + t_lang +
-                             ".tab", "r", "utf-8") as fin:
+            with codecs.open(temp_align + ".tab", "r", "utf-8") as fin:
                 lines = list(fin)
             # do some checks with the hunalign aligment
             everything_ok = check_hunalign(lines, source_list[i],
@@ -370,9 +369,9 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 os.remove(temp_target)
                 os.remove(temp_source[:-4] + '.ali')
                 os.remove(temp_target[:-4] + '.ali')
-                os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.lad')
-                os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.tab')
-                os.remove(temp_align + '_' + s_lang + '_' + t_lang + '.tmx')
+                os.remove(temp_align + '.lad')
+                os.remove(temp_align + '.tab')
+                os.remove(temp_align + '.tmx')
 
     fout.close()
     # turn alignment into tmx
@@ -380,6 +379,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     # create parallel source and target text files
     tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
                     target_file[:-4] + '.ali')
+
 
 def check_hunalign(lines, full_source, full_target):
     counter_s = 0
@@ -449,7 +449,6 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
                           program_folder + 'data_raw/' + t_lang + '.txt',
                           dictionary)
     # create hunalign ladder alignment
-    align_file = align_file + '_' + s_lang + '_' + t_lang
     hunalign_wrapper(source_file[:-4] + '.tok', target_file[:-4] + '.tok',
                      dictionary, align_file + '.lad', program_folder,
                      realign=True)
