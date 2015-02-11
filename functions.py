@@ -292,9 +292,8 @@ def file_to_list(file_name):
 
 
 def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
-               align_file, program_folder, note, para_size=1000,
-               delete_temp=True, over=True):
-    # TODO indicate naive/ep_aligner alignment in tmx?
+               align_file, program_folder, note,delete_temp=True, over=True,
+               para_size=300):
     # Example in Python console:
     # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002", 300)
@@ -434,7 +433,7 @@ def subprocessing(file_name, lang, program_folder):
 
 
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
-            program_folder, note, para_size=1000, delete_temp=True, over=True):
+            program_folder, note, delete_temp=True, over=True):
     # para_size is added only for easy replacement of aligner with ep_aligner
     # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
     # TODO eventual alt splitter cu supervised learning pt DE?
