@@ -459,6 +459,10 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
     with codecs.open(align_file + '.tab', "w", "utf-8") as fout:
         for line in output_lines:
             fout.write(unicode(line, "utf-8") + '\n')
+    # TODO option to skip tmx and ali creation
+    # TODO create tmx and ali from output_lines
+    # TODO use tempfile.SpooledTemporaryFile
+    # TODO https://docs.python.org/2/library/tempfile.html
     # turn alignment into tmx
     tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang, note)
     # create parallel source and target text files
