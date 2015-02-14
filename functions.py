@@ -347,6 +347,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             with codecs.open(temp_align + ".tab", "r", "utf-8") as fin:
                 lines = list(fin)
             # do some checks with the hunalign aligment
+            # TODO also return text to write if everything_ok
             everything_ok = check_hunalign(lines, source_list[i],
                                            target_list[i])
             if everything_ok:
