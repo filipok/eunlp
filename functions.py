@@ -459,9 +459,6 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
     with codecs.open(align_file + '.tab', "w", "utf-8") as fout:
         for line in output_lines:
             fout.write(unicode(line, "utf-8") + '\n')
-    # TODO create tmx and ali from output_lines
-    # TODO use tempfile.SpooledTemporaryFile
-    # TODO https://docs.python.org/2/library/tempfile.html
     # turn alignment into tmx
     if tmx:
         tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang,
@@ -470,7 +467,7 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
     if sep:
         tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
                         target_file[:-4] + '.ali')
-    # remove files without extension
+    # remove temporary files
     if delete_temp:
         os.remove(source_file[:-4])
         os.remove(target_file[:-4])
