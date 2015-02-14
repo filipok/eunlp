@@ -321,7 +321,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
         os.makedirs("/tmp/eunlp")
     # open .tab align_file for writing
     fout = codecs.open(align_file + '.tab', "w", "utf-8")
-    # for each line, write directly or call hunaling according to size
+    # for each line, write directly or call hunalign according to size
     for i in range(len(source_list)):
         if len(source_list[i]) < para_size:
             line = "1\t" + target_list[i] + "\t" + source_list[i] + \
@@ -342,7 +342,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             # process them with the classic aligner
             aligner(temp_source, temp_target, s_lang, t_lang,
                     dictionary, temp_align, program_folder, "a_" + r_num,
-                    delete_temp=True)
+                    delete_temp=True, tmx=False, sep=False)
             # open tab file created by classic aligner
             with codecs.open(temp_align + ".tab", "r", "utf-8") as fin:
                 lines = list(fin)
@@ -358,6 +358,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                                    split_line[2]
                         fout.write(new_line)
             else:
+                # TODO mark in tmx failed alignment
                 print source_list[i]
                 print "Hunalign failed to align properly segment " + \
                       str(i) + '. Reverting to naive alignment.'
@@ -365,14 +366,11 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                        "\n"
                 fout.write(line)
             # remove temporary files
-            if delete_temp:
-                os.remove(temp_source)
-                os.remove(temp_target)
-                os.remove(temp_source[:-4] + '.ali')
-                os.remove(temp_target[:-4] + '.ali')
-                os.remove(temp_align + '.lad')
-                os.remove(temp_align + '.tab')
-                os.remove(temp_align + '.tmx')
+            os.remove(temp_source)
+            os.remove(temp_target)
+            os.remove(temp_align + '.lad')
+            os.remove(temp_align + '.tab')
+
 
     fout.close()
     # turn alignment into tmx
@@ -435,7 +433,8 @@ def subprocessing(file_name, lang, program_folder):
 
 
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
-            program_folder, note, delete_temp=True, over=True):
+            program_folder, note, delete_temp=True, over=True, tmx=True,
+            sep=True):
     # para_size is added only for easy replacement of aligner with ep_aligner
     # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
     # TODO eventual alt splitter cu supervised learning pt DE?
@@ -460,15 +459,17 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
     with codecs.open(align_file + '.tab', "w", "utf-8") as fout:
         for line in output_lines:
             fout.write(unicode(line, "utf-8") + '\n')
-    # TODO option to skip tmx and ali creation
     # TODO create tmx and ali from output_lines
     # TODO use tempfile.SpooledTemporaryFile
     # TODO https://docs.python.org/2/library/tempfile.html
     # turn alignment into tmx
-    tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang, note)
+    if tmx:
+        tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang,
+                   note)
     # create parallel source and target text files
-    tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
-                    target_file[:-4] + '.ali')
+    if sep:
+        tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
+                        target_file[:-4] + '.ali')
     # remove files without extension
     if delete_temp:
         os.remove(source_file[:-4])
