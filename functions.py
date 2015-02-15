@@ -444,6 +444,14 @@ def subprocessing_nltk(file_name):
         return tokenized_sentences
 
 
+def abbreviation_loader(file_name):
+    abbreviations = []
+    with codecs.open(file_name, 'r', 'utf-8') as f:
+        lines = list(f)
+    for line in lines:
+        if len(line) > 0 and line[0] != '#':
+            abbreviations.append(line.strip('\n'))
+    return abbreviations
 
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
             program_folder, note, delete_temp=True, over=True, tab=True,
