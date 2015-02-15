@@ -340,24 +340,16 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             with codecs.open(temp_target, "w", "utf-8") as tout:
                 tout.write(target_list[i])
             # process them with the classic aligner
-            aligner(temp_source, temp_target, s_lang, t_lang,
+            lines = aligner(temp_source, temp_target, s_lang, t_lang,
                     dictionary, temp_align, program_folder, "a_" + r_num,
-                    delete_temp=True, tmx=False, sep=False)
-            # open tab file created by classic aligner
-            with codecs.open(temp_align + ".tab", "r", "utf-8") as fin:
-                lines = list(fin)
+                    delete_temp=True, tab=False, tmx=False, sep=False)
             # do some checks with the hunalign aligment
-            # TODO also return text to write if everything_ok
+            # and use alignment only if checks are fine
             everything_ok = check_hunalign(lines, source_list[i],
                                            target_list[i])
-            if everything_ok:
+            if everything_ok[0]:
                 # merge resulting alignment into the current tab file
-                for j in range(len(lines)):
-                    split_line = re.split("\t", lines[j])
-                    if len(split_line) == 3:  # avoid out of range errors
-                        new_line = "1\t" + split_line[1] + "\t" + \
-                                   split_line[2]
-                        fout.write(new_line)
+                fout.write(everything_ok[1])
             else:
                 # TODO mark in tmx failed alignment
                 print source_list[i]
@@ -370,7 +362,6 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             os.remove(temp_source)
             os.remove(temp_target)
             os.remove(temp_align + '.lad')
-            os.remove(temp_align + '.tab')
 
 
     fout.close()
@@ -384,10 +375,14 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
 def check_hunalign(lines, full_source, full_target):
     counter_s = 0
     counter_t = 0
+    text = ''
     everything_ok = True
     for i in range(len(lines)):
         split_line = re.split("\t", lines[i])
         if len(split_line) == 3:  # avoid out of range errors
+            new_line = "1\t" + split_line[1] + "\t" + \
+                       split_line[2]
+            text += new_line
             counter_s += len(split_line[2]) + 1
             counter_t += len(split_line[1]) + 1
             if len(split_line[1]) > 0:
@@ -406,10 +401,12 @@ def check_hunalign(lines, full_source, full_target):
         print counter_s, len(full_source)
         print counter_t, len(full_target)
         everything_ok = False
-    return everything_ok
+    return everything_ok, text
 
 
 def subprocessing(file_name, lang, program_folder):
+    # TODO http://search.cpan.org/dist/PersistentPerl/lib/PersistentPerl.pm
+    # TODO nltk http://textminingonline.com/dive-into-nltk-part-ii-sentence-tokenize-and-word-tokenize
     # sentence splitter
     with codecs.open(file_name, 'r', 'utf-8') as f:
         command = ['perl',
@@ -434,8 +431,8 @@ def subprocessing(file_name, lang, program_folder):
 
 
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
-            program_folder, note, delete_temp=True, over=True, tmx=True,
-            sep=True):
+            program_folder, note, delete_temp=True, over=True, tab=True,
+            tmx=True, sep=True):
     # para_size is added only for easy replacement of aligner with ep_aligner
     # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
     # TODO eventual alt splitter cu supervised learning pt DE?
@@ -457,24 +454,27 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
     output_lines = ladder2text_new.create_output_lines(align_file + '.lad',
                                                        source_file[:-4],
                                                        target_file[:-4])
-    with codecs.open(align_file + '.tab', "w", "utf-8") as fout:
-        for line in output_lines:
-            fout.write(unicode(line, "utf-8") + '\n')
-    # turn alignment into tmx
-    if tmx:
-        tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang,
-                   note)
-    # create parallel source and target text files
-    if sep:
-        tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
-                        target_file[:-4] + '.ali')
+    output_lines = [unicode(line, "utf-8") + '\n' for line in output_lines]
+    # writing to disk
+    if tab:
+        with codecs.open(align_file + '.tab', "w", "utf-8") as fout:
+            for line in output_lines:
+                fout.write(line)
+        # turn alignment into tmx
+        if tmx:
+            tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang,
+                       note)
+        # create parallel source and target text files
+        if sep:
+            tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
+                            target_file[:-4] + '.ali')
     # remove temporary files
     if delete_temp:
         os.remove(source_file[:-4])
         os.remove(target_file[:-4])
         os.remove(source_file[:-4] + ".tok")
         os.remove(target_file[:-4] + ".tok")
-
+    return output_lines
 
 def merge_tmx(target_file, s_lang, t_lang):
     # create a list of tmx files in current directory (also test for languages)
