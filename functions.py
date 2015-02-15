@@ -14,6 +14,7 @@ import datetime
 import ladder2text_new
 import subprocess
 import random
+import nltk
 
 
 def make_paths(path, text_id, languages):
@@ -428,6 +429,18 @@ def subprocessing(file_name, lang, program_folder):
     output = p.communicate(output)[0]  # presupun ca [1] e stderr?
     with codecs.open(file_name[:-4] + '.tok', 'w', 'utf-8') as f:
         f.write(unicode(output, 'utf-8'))
+
+def subprocessing_nltk(file_name):
+    with codecs.open(file_name, 'r', 'utf-8') as f:
+        # TODO abbreviations http://stackoverflow.com/questions/14095971/how-to-tweak-the-nltk-sentence-tokenizer
+        text = f.read()
+        # sentence tokenizer
+        sentences = nltk.sent_tokenize(text)
+        #word tokenizer
+        tokenized_sentences = [nltk.word_tokenize(sent) for sent in sentences]
+        # write .tok file
+        return tokenized_sentences
+
 
 
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
