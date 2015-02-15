@@ -160,6 +160,7 @@ def souper(new_name, text, is_celex, is_ep, over=False):
             clean_text = soup.get_text()
             clean_text = strip_ep(clean_text)
             f.write(clean_text)
+        #TODO else
         f.close()
     else:
         print new_name + ": txt file already existing."
@@ -297,6 +298,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                align_file, program_folder, note, delete_temp=True, over=True,
                para_size=300):
     #TODO speed it up
+    # TODO run downloader, souper and ep_aligner in parallel?
     # Example in Python console:
     # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002", 300)
@@ -352,7 +354,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 # merge resulting alignment into the current tab file
                 fout.write(everything_ok[1])
             else:
-                # TODO mark in tmx failed alignment
+                # TODO mark in tmx naive/hun/failed_hun alignment
                 print source_list[i]
                 print "Hunalign failed to align properly segment " + \
                       str(i) + '. Reverting to naive alignment.'
