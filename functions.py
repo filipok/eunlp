@@ -225,13 +225,21 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
                 text = re.split(r'\t', line)
                 source = text[2].strip('\n')
                 target = text[1]
+                if text[0] == 'Err':
+                    tag = '<prop type="Txt::Alignment">Long_failed</prop>'
+                elif text[0] == 'Nai':
+                    tag = '<prop type="Txt::Alignment">Short_naive</prop>'
+                elif text[0] == 'Hun':
+                    tag = '<prop type="Txt::Alignment">Long_Hun</prop>'
+                else:
+                    tag = '<prop type="Txt::Alignment">Unknown</prop>'
                 # remove triple tildas from hunalign
                 source = source.replace('~~~ ', '')
                 target = target.replace('~~~ ', '')
                 #   create TU line
                 tu = '<tu creationdate="' + current_date + \
                      '" creationid="eunlp"><prop type="Txt::Note">' + \
-                     note + '</prop>\n'
+                     note + '</prop>' + tag + '\n'
                 fout.write(tu)
                 #   create TUV source line
                 tuv = '<tuv xml:lang="' + s_lang + '"><seg>' + source\
@@ -315,7 +323,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     # for each line, write directly or call hunalign according to size
     for i in range(len(source_list)):
         if len(source_list[i]) < para_size:
-            line = "1\t" + target_list[i] + "\t" + source_list[i] + \
+            line = "Nai\t" + target_list[i] + "\t" + source_list[i] + \
                    "\n"
             fout.write(line)
         else:
@@ -343,11 +351,10 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 # merge resulting alignment into the current tab file
                 fout.write(everything_ok[1])
             else:
-                # TODO mark in tmx naive/hun/failed_hun alignment
                 print source_list[i]
                 print "Hunalign failed to align properly segment " + \
                       str(i) + '. Reverting to naive alignment.'
-                line = "1\t" + target_list[i] + "\t" + source_list[i] + \
+                line = "Err\t" + target_list[i] + "\t" + source_list[i] + \
                        "\n"
                 fout.write(line)
             # remove temporary files
@@ -371,7 +378,7 @@ def check_hunalign(lines, full_source, full_target):
     for i in range(len(lines)):
         split_line = re.split("\t", lines[i])
         if len(split_line) == 3:  # avoid out of range errors
-            new_line = "1\t" + split_line[1] + "\t" + \
+            new_line = "Hun\t" + split_line[1] + "\t" + \
                        split_line[2]
             text += new_line
             counter_s += len(split_line[2]) + 1
