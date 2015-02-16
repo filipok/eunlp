@@ -411,8 +411,7 @@ def check_hunalign(lines, full_source, full_target):
 
 
 def subprocessing(file_name, lang, program_folder):
-    # TODO http://search.cpan.org/dist/PersistentPerl/lib/PersistentPerl.pm
-    # TODO nltk http://textminingonline.com/dive-into-nltk-part-ii-sentence-tokenize-and-word-tokenize
+    # TO DO http://search.cpan.org/dist/PersistentPerl/lib/PersistentPerl.pm
     # sentence splitter
     with codecs.open(file_name, 'r', 'utf-8') as f:
         command = ['perl',
@@ -436,36 +435,32 @@ def subprocessing(file_name, lang, program_folder):
         f.write(unicode(output, 'utf-8'))
 
 
-def subprocessing_nltk(file_name, lang, program_folder):
+def subprocessing_nltk(file_name, sentence_splitter):
     # Source for sentence tokenizer:
-    #stackoverflow.com/questions/14095971/how-to-tweak-the-nltk-sentence-tokenizer
+    # stackoverflow.com/
+    # questions/14095971/how-to-tweak-the-nltk-sentence-tokenizer
 
     # read file
     with codecs.open(file_name, 'r', 'utf-8') as f:
         text = list(f)
-
-    # prepare sentence splitter
-    punkt_param = PunktParameters()
-    ab_file = program_folder + \
-        'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.' + lang
-    if os.path.isfile(ab_file):
-        punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
-    else:
-        print 'Abbreviation file not found for language: ' + lang + '.'
-    sentence_splitter = PunktSentenceTokenizer(punkt_param)
-
-    # sentence splitter
+    # sentence splitter line by line
     # Source: https://groups.google.com/forum/#!topic/nltk-dev/2eH630nHONI
     # because Punkt ignores line breaks
     sentence_list = []
     for line in text:
         sentences = sentence_splitter.tokenize(line)
         sentence_list.extend(sentences)
+    # write file without extension
+    with codecs.open(file_name[:-4], 'w', 'utf-8') as f:
+        for sent in sentence_list:
+            f.write(sent + '\n')
+        # remove last new line
+        # stackoverflow.com/
+        # questions/18857352/python-remove-very-last-character-in-file
+        f.seek(-1, os.SEEK_END)
+        f.truncate()
 
-    # write file without extension (no other changes)
-    shutil.copyfile(file_name, file_name[:-4])
-
-    #word tokenizer
+    # word tokenizer
     tokenized_sentences = [nltk.word_tokenize(sent) for sent in sentence_list]
     # write .tok file
     with codecs.open(file_name[:-4] + '.tok', 'w', 'utf-8') as f:
@@ -485,14 +480,39 @@ def abbreviation_loader(file_name):
 
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
             program_folder, note, delete_temp=True, over=True, tab=True,
-            tmx=True, sep=True):
+            tmx=True, sep=True, use_nltk=True):
     # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
     # TODO eventual alt splitter cu supervised learning pt DE?
     if (not over) and os.path.isfile(align_file + '.tmx'):
         print "File pair already aligned: " + align_file
         return  # exit if already aligned and over=False
-    subprocessing(source_file, s_lang, program_folder)
-    subprocessing(target_file, t_lang, program_folder)
+    # Nltk is used by default, as it has a 5x speed compared to Perl
+    if use_nltk:
+        # prepare sentence splitters
+        punkt_param = PunktParameters()
+        ab_file = program_folder + \
+            'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.' \
+            + s_lang
+        if os.path.isfile(ab_file):
+            punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
+        else:
+            print 'Abbreviation file not found for language: ' + s_lang + '.'
+        s_sentence_splitter = PunktSentenceTokenizer(punkt_param)
+        punkt_param = PunktParameters()
+        ab_file = program_folder + \
+            'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.' \
+            + t_lang
+        if os.path.isfile(ab_file):
+            punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
+        else:
+            print 'Abbreviation file not found for language: ' + t_lang + '.'
+        t_sentence_splitter = PunktSentenceTokenizer(punkt_param)
+        # call splitter & aligner
+        subprocessing_nltk(source_file, s_sentence_splitter)
+        subprocessing_nltk(target_file, t_sentence_splitter)
+    else:
+        subprocessing(source_file, s_lang, program_folder)
+        subprocessing(target_file, t_lang, program_folder)
     # create empty hunalign dic from program-folder/data_raw files
     if not os.path.exists(dictionary):
         create_dictionary(program_folder + 'data_raw/' + s_lang + '.txt',
