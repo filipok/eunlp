@@ -14,7 +14,9 @@ import datetime
 import ladder2text_new
 import subprocess
 import random
+import shutil
 import nltk
+from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 
 
 def make_paths(path, text_id, languages):
@@ -432,16 +434,42 @@ def subprocessing(file_name, lang, program_folder):
     with codecs.open(file_name[:-4] + '.tok', 'w', 'utf-8') as f:
         f.write(unicode(output, 'utf-8'))
 
-def subprocessing_nltk(file_name):
+
+def subprocessing_nltk(file_name, lang, program_folder):
+    # Source for sentence tokenizer:
+    #stackoverflow.com/questions/14095971/how-to-tweak-the-nltk-sentence-tokenizer
+
+    # read file
     with codecs.open(file_name, 'r', 'utf-8') as f:
-        # TODO abbreviations http://stackoverflow.com/questions/14095971/how-to-tweak-the-nltk-sentence-tokenizer
-        text = f.read()
-        # sentence tokenizer
-        sentences = nltk.sent_tokenize(text)
-        #word tokenizer
-        tokenized_sentences = [nltk.word_tokenize(sent) for sent in sentences]
-        # write .tok file
-        return tokenized_sentences
+        text = list(f)
+
+    # prepare sentence splitter
+    punkt_param = PunktParameters()
+    ab_file = program_folder + \
+        'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.' + lang
+    if os.path.isfile(ab_file):
+        punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
+    else:
+        print 'Abbreviation file not found for language: ' + lang + '.'
+    sentence_splitter = PunktSentenceTokenizer(punkt_param)
+
+    # sentence splitter
+    # Source: https://groups.google.com/forum/#!topic/nltk-dev/2eH630nHONI
+    # because Punkt ignores line breaks
+    sentence_list = []
+    for line in text:
+        sentences = sentence_splitter.tokenize(line)
+        sentence_list.extend(sentences)
+
+    # write file without extension (no other changes)
+    shutil.copyfile(file_name, file_name[:-4])
+
+    #word tokenizer
+    tokenized_sentences = [nltk.word_tokenize(sent) for sent in sentence_list]
+    # write .tok file
+    with codecs.open(file_name[:-4] + '.tok', 'w', 'utf-8') as f:
+        for sent in tokenized_sentences:
+            f.write(' '.join(sent) + '\n')
 
 
 def abbreviation_loader(file_name):
