@@ -339,9 +339,9 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             temp_align = "/tmp/eunlp/align_" + r_num
             # write the two files
             with codecs.open(temp_source, "w", "utf-8") as sout:
-                sout.write(source_list[i])
+                sout.write(source_list[i] + '\n')
             with codecs.open(temp_target, "w", "utf-8") as tout:
-                tout.write(target_list[i])
+                tout.write(target_list[i] + '\n')
             # process them with the classic aligner
             lines = aligner(temp_source, temp_target, s_lang, t_lang,
                     dictionary, temp_align, program_folder, "a_" + r_num,
@@ -418,9 +418,9 @@ def subprocessing(file_name, lang, program_folder):
         proc = subprocess.Popen(command, stdin=f, stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE)
         output, err = proc.communicate()  # output contains the splitter output
-        # remove <P> created by the sentence splitter
-    output = re.sub(r'<P>\n', '', output)
-    # paragraph combiner
+    # remove <P> created by the sentence splitter
+    output = re.sub(r'\n<P>', '', output)
+    # paragraph combiner TODO still needed?
     output = paragraph_combiner_sub(output)
     with codecs.open(file_name[:-4], 'w', 'utf-8') as f:
         f.write(unicode(output, 'utf-8'))
