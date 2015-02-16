@@ -97,21 +97,6 @@ def paragraph_combiner_sub(text):
     text = re.sub(pattern_7, r'\n', text)
     return text
 
-# TODO valabil doar pentru A!
-# remove tag attrs
-# https://gist.github.com/bradmontgomery/673417
-# get first part
-# clean_soup.body.table.table.next_sibling.next_sibling.next_sibling.next_sibling.get_text()
-# get second part
-# clean_soup.body.table.table.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.get_text()
-# get third part
-# clean_soup.body.table.table.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.get_text()
-# get fourth part
-# clean_soup.body.table.table.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.get_text()
-#
-#
-# eventual cu find_next_siblings()?
-
 
 def downloader(make_link, error_text, url_code, lang_code, new_name,
                over=False):
@@ -290,7 +275,8 @@ def file_to_list(file_name):
     text = re.sub(r'^\n+', r'', text)  # remove empty lines at the beginning
     text = re.sub(r'\n$', r'', text)  # remove empty lines at the end
     text = re.sub(r',\s\n', r', ', text)  # merge segments separated by comma
-    # TODO do not merge segments starting with Whereas, Having regard, In cooperation
+    # TODO do not merge segments starting with:
+    # TODO Whereas, Having regard, In cooperation
     text = re.sub(r'\s+\n', r'\n', text)  # remove whitespace before newline
     text = re.sub(r' +', r' ', text)  # remove double whitespaces
     text = paragraph_combiner_sub(text)  # combine para numbers with text
@@ -301,8 +287,6 @@ def file_to_list(file_name):
 def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                align_file, program_folder, note, delete_temp=True, over=True,
                para_size=300):
-    #TODO speed it up
-    # TODO run downloader, souper and ep_aligner in parallel?
     # Example in Python console:
     # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002", 300)
@@ -348,8 +332,9 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 tout.write(target_list[i] + '\n')
             # process them with the classic aligner
             lines = aligner(temp_source, temp_target, s_lang, t_lang,
-                    dictionary, temp_align, program_folder, "a_" + r_num,
-                    delete_temp=True, tab=False, tmx=False, sep=False)
+                            dictionary, temp_align, program_folder,
+                            "a_" + r_num, delete_temp=True, tab=False,
+                            tmx=False, sep=False)
             # do some checks with the hunalign aligment
             # and use alignment only if checks are fine
             everything_ok = check_hunalign(lines, source_list[i],
@@ -483,8 +468,6 @@ def abbreviation_loader(file_name):
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
             program_folder, note, delete_temp=True, over=True, tab=True,
             tmx=True, sep=True, use_nltk=True):
-    # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
-    # TODO eventual alt splitter cu supervised learning pt DE?
     if (not over) and os.path.isfile(align_file + '.tmx'):
         print "File pair already aligned: " + align_file
         return  # exit if already aligned and over=False
@@ -536,8 +519,8 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
                 fout.write(line)
         # turn alignment into tmx
         if tmx:
-            tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang,
-                       note)
+            tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang,
+                       t_lang, note)
         # create parallel source and target text files
         if sep:
             tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
@@ -549,6 +532,7 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
         os.remove(source_file[:-4] + ".tok")
         os.remove(target_file[:-4] + ".tok")
     return output_lines
+
 
 def merge_tmx(target_file, s_lang, t_lang):
     # create a list of tmx files in current directory (also test for languages)
