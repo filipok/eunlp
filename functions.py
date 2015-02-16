@@ -141,31 +141,33 @@ def downloader(make_link, error_text, url_code, lang_code, new_name,
 def souper(new_name, text, is_celex, is_ep, over=False):
     # Only convert to txt if not already existing
     # over=True overrides that behavior
-    if over or (not os.path.isfile(new_name)):
-        f = codecs.open(new_name, "w", "utf-8")
-        soup = BeautifulSoup(text, "lxml")
-        # separate branches for each document type
-        # TODO nu mai face double new lines, asta zapaceste aligner()?
-        if is_celex:
-            if soup.txt_te is not None:
-                # for older celexes
-                clean_text = soup.txt_te.get_text()
-            else:
-                # for newer celexes
-                # the hierarchy is rather deep
-                clean_text = soup.body.div.contents[8].contents[5].contents[0]
-                clean_text = clean_text.contents[4].contents[9].contents[3]
-                clean_text = clean_text.contents[1].get_text()
-                clean_text = re.sub(r'\n\nTop $', r'', clean_text)
-            f.write(clean_text)
-        elif is_ep:
-            clean_text = soup.get_text()
-            clean_text = strip_ep(clean_text)
-            f.write(clean_text)
-        #TODO else
-        f.close()
-    else:
+    if (not over) and os.path.isfile(new_name):
         print new_name + ": txt file already existing."
+        return
+
+    f = codecs.open(new_name, "w", "utf-8")
+    soup = BeautifulSoup(text, "lxml")
+    # separate branches for each document type
+    if is_celex:
+        if soup.txt_te is not None:
+            # for older celexes
+            clean_text = soup.txt_te.get_text()
+        else:
+            # for newer celexes
+            # the hierarchy is rather deep
+            clean_text = soup.body.div.contents[8].contents[5].contents[0]
+            clean_text = clean_text.contents[4].contents[9].contents[3]
+            clean_text = clean_text.contents[1].get_text()
+            clean_text = re.sub(r'\n\nTop $', r'', clean_text)
+        # double \n, otherwise the Perl splitter merges the first lines
+        clean_text = re.sub(r'\n', r'\n\n', clean_text)
+    elif is_ep:
+        clean_text = soup.get_text()
+        clean_text = strip_ep(clean_text)
+    else:
+        clean_text = soup.get_text()
+    f.write(clean_text)
+    f.close()
 
 
 def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False,
