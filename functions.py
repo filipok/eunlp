@@ -14,7 +14,6 @@ import datetime
 import ladder2text_new
 import subprocess
 import random
-import shutil
 import nltk
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 
