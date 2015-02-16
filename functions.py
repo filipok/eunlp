@@ -146,6 +146,7 @@ def souper(new_name, text, is_celex, is_ep, over=False):
         f = codecs.open(new_name, "w", "utf-8")
         soup = BeautifulSoup(text, "lxml")
         # separate branches for each document type
+        # TODO nu mai face double new lines, asta zapaceste aligner()?
         if is_celex:
             if soup.txt_te is not None:
                 # for older celexes
@@ -481,10 +482,10 @@ def abbreviation_loader(file_name):
             abbreviations.append(line.strip('\n'))
     return abbreviations
 
+
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
             program_folder, note, delete_temp=True, over=True, tab=True,
             tmx=True, sep=True):
-    # para_size is added only for easy replacement of aligner with ep_aligner
     # TODO in germana nu separa "... Absaetze 5 und 6. Diese ..."
     # TODO eventual alt splitter cu supervised learning pt DE?
     if (not over) and os.path.isfile(align_file + '.tmx'):
