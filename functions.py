@@ -294,7 +294,7 @@ def file_to_list(file_name):
 
 def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                align_file, program_folder, note, delete_temp=True, over=True,
-               para_size=300):
+               para_size=300, logger='log.txt'):
     # Example in Python console:
     # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002", 300)
@@ -310,6 +310,8 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
         # call classic aligner
         print "Different number of paras, yielding to hunalign in ", \
             source_file
+        with codecs.open(logger, 'a', 'utf-8') as f:
+            f.write('Naive alignment failed in ' + source_file + '.\n')
         aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 align_file, program_folder, note, delete_temp=True)
         return
@@ -327,7 +329,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                    "\n"
             fout.write(line)
         else:
-            print "Creating temporary file from large paragraph ", i, "..."
+            # print "Creating temporary file from large paragraph ", i, "..."
             r_num = str(random.randint(0, 100000))
             temp_source = "/tmp/eunlp/s_" + r_num + ".txt"
             temp_target = "/tmp/eunlp/t_" + r_num + ".txt"
@@ -350,9 +352,10 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 # merge resulting alignment into the current tab file
                 fout.write(everything_ok[1])
             else:
-                print source_list[i]
+                # print source_list[i]
                 print "Hunalign failed to align properly segment " + \
-                      str(i) + '. Reverting to naive alignment.'
+                      str(i) + ' in file ' + source_file + \
+                      '. Reverting to naive alignment.'
                 line = "Err\t" + target_list[i] + "\t" + source_list[i] + \
                        "\n"
                 fout.write(line)
@@ -395,8 +398,8 @@ def check_hunalign(lines, full_source, full_target):
                 everything_ok = False
     # check total characters (hunalign drops text sometimes)
     if counter_s < len(full_source) or counter_t < len(full_target):
-        print counter_s, len(full_source)
-        print counter_t, len(full_target)
+        # print counter_s, len(full_source)
+        # print counter_t, len(full_target)
         everything_ok = False
     return everything_ok, text
 
