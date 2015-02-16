@@ -366,11 +366,10 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                        "\n"
                 fout.write(line)
             # remove temporary files
-            os.remove(temp_source)
-            os.remove(temp_target)
-            os.remove(temp_align + '.lad')
-
-
+            if delete_temp:
+                os.remove(temp_source)
+                os.remove(temp_target)
+                os.remove(temp_align + '.lad')
     fout.close()
     # turn alignment into tmx
     tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang, note)
