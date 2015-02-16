@@ -475,7 +475,9 @@ def abbreviation_loader(file_name):
         lines = list(f)
     for line in lines:
         if len(line) > 0 and line[0] != '#':
-            abbreviations.append(line.strip('\n'))
+            abb = line.strip('\n')
+            abb = re.split(' #', abb)[0]
+            abbreviations.append(abb)
     return abbreviations
 
 
