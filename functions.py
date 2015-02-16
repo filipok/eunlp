@@ -327,8 +327,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                    "\n"
             fout.write(line)
         else:
-            print "Creating temporary file from large paragraph ", i, \
-                "..."
+            print "Creating temporary file from large paragraph ", i, "..."
             r_num = str(random.randint(0, 100000))
             temp_source = "/tmp/eunlp/s_" + r_num + ".txt"
             temp_target = "/tmp/eunlp/t_" + r_num + ".txt"
@@ -414,7 +413,7 @@ def subprocessing(file_name, lang, program_folder):
         output, err = proc.communicate()  # output contains the splitter output
     # remove <P> created by the sentence splitter
     output = re.sub(r'\n<P>', '', output)
-    # paragraph combiner TODO still needed?
+    # paragraph combiner
     output = paragraph_combiner_sub(output)
     with codecs.open(file_name[:-4], 'w', 'utf-8') as f:
         f.write(unicode(output, 'utf-8'))
