@@ -543,6 +543,18 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
     return output_lines
 
 
+def eu_xml_converter(file_name):
+    with codecs.open(file_name, 'r', 'utf-8') as f:
+        text = f.read()
+    soup = BeautifulSoup(text, 'lxml')
+    lista =[]
+    for item in soup.find_all('result'):
+        celex = item.find('id_celex').contents[1].contents[0]
+        title = item.find('expression_title').contents[1].contents[0]
+        lista.append((celex, title))
+    return lista
+
+
 def merge_tmx(target_file, s_lang, t_lang):
     # create a list of tmx files in current directory (also test for languages)
     # for file in list:
