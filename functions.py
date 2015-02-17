@@ -555,7 +555,7 @@ def eu_xml_converter(file_name):
     return lista
 
 
-def celex_scraper(languages, path, celex, program_folder):
+def celex_scraper(languages, path, celex, program_folder, logger):
     # create html and txt files for each language code
     scraper(languages, make_celex_link,
             'The requested document does not exist', celex, '', is_celex=True,
@@ -566,7 +566,7 @@ def celex_scraper(languages, path, celex, program_folder):
     # call the aligner
     ep_aligner(source_file, target_file, languages[0].lower(),
                languages[1].lower(), dictionary, align_file, program_folder,
-               celex, delete_temp=True, over=False)
+               celex, delete_temp=True, over=False, logger=logger)
 
 
 def merge_tmx(target_file, s_lang, t_lang):

@@ -12,6 +12,7 @@ import sys
 import os
 import re
 import functions
+import codecs
 
 if __name__ == '__main__':
     # collect arguments
@@ -26,7 +27,11 @@ if __name__ == '__main__':
     for item in file_list:
         print "Downloading " + item[0] + ' ...'
         try:
-            functions.celex_scraper(languages, path, item[0], program_folder)
+            functions.celex_scraper(languages, path, item[0], program_folder,
+                                    'log.txt')
         except:
-            print "Could not align " + item + ": " + sys.exc_info()[0]
+            message = "Could not align " + item + ": " + sys.exc_info()[0]
+            print message
+            with codecs.open('log.txt', 'a', 'utf-8') as f:
+                f.write(message)
 
