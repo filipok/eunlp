@@ -25,5 +25,8 @@ if __name__ == '__main__':
     file_list = functions.eu_xml_converter(xml_list)
     for item in file_list:
         print "Downloading " + item[0] + ' ...'
-        functions.celex_scraper(languages, path, item[0], program_folder)
+        try:
+            functions.celex_scraper(languages, path, item[0], program_folder)
+        except:
+            print "Could not align " + item + ": " + sys.exc_info()[0]
 
