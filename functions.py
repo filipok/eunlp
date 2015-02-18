@@ -78,7 +78,25 @@ def strip_ep(text):
 
 
 def paragraph_combiner_sub(text):
+    '''
+    #TODO
+    SILENT FAIL in 32014Q0714(03)!!! add warning la diferente mari de dim s/t + punctuatie diferita la final?
+
+    #vezi TODO functions.py rd 97
+    Naive alignment failed in /home/ubuntu/down_europa/32014R0964_EN.txt. tot enteruri si eventual nr de rand de tip X fara punct sau paranteza dupa el (eventual de unit daca si perechea are cu punct?). Eventual de incercat sa elimin/combine_with_next randurile cu un singur spatiu/caracter/cifra.
+    Naive alignment failed in /home/ubuntu/down_europa/32014D0927_EN.txt. e un punct scapat aiurea pe un rand
+    Naive alignment failed in /home/ubuntu/down_europa/32014D0039(01)_EN.txt. aici probleme cu doua puncte aiurea in EN.
+    Naive alignment failed in /home/ubuntu/down_europa/32014O0015_EN.txt. erori/diferente formatare +ARE GLOSAR!
+
+    #vezi TODO functions.py rd 96
+    Naive alignment failed in /home/ubuntu/down_europa/32014Q0714(01)_EN.txt. pare sa fie problema tot cu Enteruri
+    Naive alignment failed in /home/ubuntu/down_europa/32014R0609_EN.txt. hm astea par identice.ce nu i-a placut??
+
+    '''
     # combine single lines consisting of numbers/letters with next line
+    #TODO la pattern_1 max trei litere/cifre ca sa nu elimine '(reformare)'
+    # TODO ce fac cu paragrafe doar numar, fara paranteze ca in 32014R0964, dar ar interfera cu tabelele cu numere
+    # TODO \n\s\n -> \n, n\#\n ->\n
     pattern_1 = re.compile(r'\n\(?([0-9]+|[a-z]+|[A-Z]+)[\.\)][\n\s]')
     # combine single lines consisting of single number + single letter
     # with the next line
