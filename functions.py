@@ -306,7 +306,7 @@ def hunalign_wrapper(source_file, target_file, dictionary, align_file,
         f.write(unicode(output, 'utf-8'))
 
 
-def file_to_list(file_name):
+def file_to_list(file_name, forced=False, forced_again=False):
     # clean and convert file to list of paragraphs
     with codecs.open(file_name, "r", "utf-8") as fin:
         text = fin.read()
@@ -320,6 +320,12 @@ def file_to_list(file_name):
     re.sub(r',\s\n(?!Whereas|Having regard|In cooperation)', r', ', text)
     text = re.sub(r'\s+\n', r'\n', text)  # remove whitespace before newline
     text = re.sub(r' +', r' ', text)  # remove double whitespaces
+    if forced:
+        # remove one-character lines which can make the aligner to fail
+        text = re.sub(r'\n.\n', r'\n', text)
+        # also try to remove two-character lines which can make it to fail
+        if forced_again:
+            text = re.sub(r'\n.{1,2}\n', r'\n', text)
     text = paragraph_combiner_sub(text)  # combine para numbers with text
     paragraph_list = re.split(r'\n', text)  # split file
     return paragraph_list
@@ -328,9 +334,9 @@ def file_to_list(file_name):
 def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                align_file, program_folder, note, delete_temp=True, over=True,
                para_size=300, para_size_small=100, logger='log.txt'):
-    #TODO general: unele docuri mai vechi sunt in engleza, desi limba teoretic e romana!
+    # TODO general: unele docuri mai vechi sunt in EN, desi teoretic lb e RO!
     # TODO general: alea vechi au probleme
-    # TODO general: ignore segmentele doar cu numere, date, liniuta si EN/RO si JO si alea cu 'Articolulul x' ?
+    # TODO general: ignore segm cu nr, date, liniuta, EN/RO,JO,'Articolul x'?
     # Example in Python console:
     # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002", 300)
@@ -343,14 +349,32 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
 
     # If different number of paragraphs
     if len(source_list) != len(target_list):
-        # call classic aligner
-        print "Different number of paras, yielding to hunalign in ", \
-            source_file
-        with codecs.open(logger, 'a', 'utf-8') as f:
-            f.write('Naive alignment failed in ' + source_file + '.\n')
-        aligner(source_file, target_file, s_lang, t_lang, dictionary,
-                align_file, program_folder, note, delete_temp=True)
-        return
+        # make another attempt
+        source_list = file_to_list(source_file, forced=True)
+        target_list = file_to_list(target_file, forced=True)
+        # If still different number of paragraphs:
+        if len(source_list) != len(target_list):
+            # make a third attempt
+            source_list = file_to_list(source_file, forced=True,
+                                       forced_again=True)
+            target_list = file_to_list(target_file, forced=True,
+                                       forced_again=True)
+            # If still different number of paragraphs:
+            if len(source_list) != len(target_list):
+                # call classic aligner
+                print "Different number of paras, yielding to hunalign in ", \
+                    source_file
+                with codecs.open(logger, 'a', 'utf-8') as f:
+                    f.write('Naive alignment failed in ' + source_file + '.\n')
+                aligner(source_file, target_file, s_lang, t_lang, dictionary,
+                        align_file, program_folder, note, delete_temp=True)
+                return
+            else:
+                print 'Naive alignment success at third attempt in ' + \
+                      source_file + '.\n'
+        else:
+            print 'Naive alignment success at second attempt in ' + \
+                  source_file + '.\n'
 
     # If same number of paragraphs:
     # mkdir /tmp/eunlp
