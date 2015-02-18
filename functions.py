@@ -141,6 +141,15 @@ def downloader(make_link, error_text, url_code, lang_code, new_name,
     return text
 
 
+def remove_newlines(soup, tag):
+    length = len(soup.find_all(tag))
+    for i in range(length):
+        cont = len(soup.find_all(tag)[i].contents)
+        for j in range(cont):
+            if soup.find_all(tag)[i].contents[j] == '\n':
+                soup.find_all(tag)[i].contents[j].replace_with(' ')
+
+
 def souper(new_name, text, is_celex, is_ep, over=False):
     # Only convert to txt if not already existing
     # over=True overrides that behavior
@@ -150,6 +159,12 @@ def souper(new_name, text, is_celex, is_ep, over=False):
 
     f = codecs.open(new_name, "w", "utf-8")
     soup = BeautifulSoup(text, "lxml")
+
+    # some celexes have \n inside <a> and <p> tags
+    # unfortunately, this is very slow, in particular the 'p' part
+    remove_newlines(soup, 'a')
+    remove_newlines(soup, 'p')
+
     # separate branches for each document type
     if is_celex:
         if soup.txt_te is not None:
