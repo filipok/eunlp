@@ -313,6 +313,9 @@ def file_to_list(file_name):
 def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                align_file, program_folder, note, delete_temp=True, over=True,
                para_size=300, logger='log.txt'):
+    #TODO general: unele docuri mai vechi sunt in engleza, desi limba teoretic e romana!
+    # TODO general: alea vechi au probleme
+    # TODO general: ignore segmentele doar cu numere, date, liniuta si EN/RO si JO si alea cu 'Articolulul x' ?
     # Example in Python console:
     # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002", 300)
@@ -342,6 +345,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     fout = codecs.open(align_file + '.tab', "w", "utf-8")
     # for each line, write directly or call hunalign according to size
     for i in range(len(source_list)):
+        # TODO la cele sub para_size sa verific totusi daca au punct in ele si sa le trimit la hunalign pentru o dimensiune intre 100 si 350? de testat cu 32015R0003;de verificat si ca tmx-ul respectiv e recunoscut de trados
         if len(source_list[i]) < para_size:
             line = "Nai\t" + target_list[i] + "\t" + source_list[i] + \
                    "\n"
