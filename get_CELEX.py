@@ -23,4 +23,4 @@ if __name__ == '__main__':
     languages = sys.argv[2:]  # collect language codes
 
     # call the celex_scraper
-    functions.celex_scraper(languages, path, celex, program_folder)
+    functions.celex_scraper(languages, path, celex, program_folder, 'log.txt')
