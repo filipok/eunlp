@@ -1,6 +1,4 @@
 ﻿-- de eliminat introducerile de la rapoarte
--- de eliminat enterurile aiurea din celexurile curtii de justitie
-(http://stackoverflow.com/questions/14550288/how-do-i-remove-linebreaks-only-if-they-occur-inside-html-tags)
 -- script de combinat TMX-uri (nu e musai, poate combin întâi txt-urile? deşi ar fi greu pt LF-Aligner pe urmă)
 Model linkuri
 
