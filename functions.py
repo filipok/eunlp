@@ -90,14 +90,14 @@ def paragraph_combiner_sub(text):
 
     #vezi TODO functions.py rd 96
     Naive alignment failed in /home/ubuntu/down_europa/32014Q0714(01)_EN.txt. pare sa fie problema tot cu Enteruri
-    Naive alignment failed in /home/ubuntu/down_europa/32014R0609_EN.txt. hm astea par identice.ce nu i-a placut??
 
     '''
     # combine single lines consisting of numbers/letters with next line
     #TODO la pattern_1 max trei litere/cifre ca sa nu elimine '(reformare)'
     # TODO ce fac cu paragrafe doar numar, fara paranteze ca in 32014R0964, dar ar interfera cu tabelele cu numere
     # TODO \n\s\n -> \n, n\#\n ->\n
-    pattern_1 = re.compile(r'\n\(?([0-9]+|[a-z]+|[A-Z]+)[\.\)][\n\s]')
+    pattern_1 = \
+        re.compile(r'\n\(?([0-9]{1,3}|[a-z]{1,3}|[A-Z]{1,3})[\.\)][\n\s]')
     # combine single lines consisting of single number + single letter
     # with the next line
     pattern_3 = re.compile(r'\n\(?([0-9]+[a-z]+)[\.\)][\n\s]')
