@@ -312,7 +312,7 @@ def file_to_list(file_name):
 
 def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                align_file, program_folder, note, delete_temp=True, over=True,
-               para_size=300, logger='log.txt'):
+               para_size=300, para_size_small=100, logger='log.txt'):
     #TODO general: unele docuri mai vechi sunt in engleza, desi limba teoretic e romana!
     # TODO general: alea vechi au probleme
     # TODO general: ignore segmentele doar cu numere, date, liniuta si EN/RO si JO si alea cu 'Articolulul x' ?
@@ -344,9 +344,18 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     # open .tab align_file for writing
     fout = codecs.open(align_file + '.tab', "w", "utf-8")
     # for each line, write directly or call hunalign according to size
+    patt = re.compile(r'\. ')
     for i in range(len(source_list)):
-        # TODO la cele sub para_size sa verific totusi daca au punct in ele si sa le trimit la hunalign pentru o dimensiune intre 100 si 350? de testat cu 32015R0003;de verificat si ca tmx-ul respectiv e recunoscut de trados
-        if len(source_list[i]) < para_size:
+        # send paragraph to hunalign if larger than para_size or if larger than
+        # parasize_small and both source and target have a dot followed by
+        # whitespace.
+        if (len(source_list[i]) < para_size_small) or \
+                (
+                (len(source_list[i]) < para_size) and
+                (len(source_list[i]) >= para_size_small) and
+                not (re.search(patt, source_list[i]) and
+                     re.search(patt, target_list[i]))
+                ):
             line = "Nai\t" + target_list[i] + "\t" + source_list[i] + \
                    "\n"
             fout.write(line)
