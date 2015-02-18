@@ -31,7 +31,7 @@ if __name__ == '__main__':
                                     'log.txt')
         except:
             message = "Could not align " + item[0] + ": " + \
-                      str(sys.exc_info()[0])
+                      str(sys.exc_info()[0]) + '\n'
             print message
             with codecs.open('log.txt', 'a', 'utf-8') as f:
                 f.write(message)
