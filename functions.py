@@ -299,6 +299,7 @@ def file_to_list(file_name, forced=False, forced_again=False):
         text = fin.read()
     text = re.sub(r'\xa0+', ' ', text)  # replace non-breaking space
     text = re.sub(r'\n\s+', r'\n', text)  # remove whitespace after newline
+    #TODO this is useless, as \s includes \n    
     text = re.sub(r'\n+', r'\n', text)  # remove empty lines
     text = re.sub(r'^\n+', r'', text)  # remove empty lines at the beginning
     text = re.sub(r'\n$', r'', text)  # remove empty lines at the end
@@ -309,6 +310,8 @@ def file_to_list(file_name, forced=False, forced_again=False):
     text = re.sub(r' +', r' ', text)  # remove double whitespaces
     if forced:
         # remove one-character lines which can make the aligner to fail
+        #TODO re.sub replaces 'the leftmost non-overlapping occurrences'
+        #TODO use lookahead instead        
         text = re.sub(r'\n.\n', r'\n', text)
         # also try to remove two-character lines which can make it to fail
         if forced_again:
