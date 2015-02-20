@@ -129,6 +129,9 @@ def downloader(make_link, error_text, url_code, lang_code, new_name,
 
 
 def remove_newlines(soup, tag):
+    # TODO it is very slow, try with map() or list compr?
+    # TODO or replace bs4 with xml.etree?
+    # TODO https://docs.python.org/2/library/xml.etree.elementtree.html
     length = len(soup.find_all(tag))
     for i in range(length):
         cont = len(soup.find_all(tag)[i].contents)
