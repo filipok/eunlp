@@ -84,3 +84,17 @@ un glosar cu titluri de decizii, regulamente şi directive?
 
 ####
 comunicate de presă comisie şi consiliu
+
+
+####
+Levels
+FREE
+    collaborative alignment?
+    online search/concordance
+    multilingual display
+PREMIUM
+    TM server (by domain/all domains)
+    MT (by domain/all domains)
+    TMX small (single file)?
+ROOT
+    TMX large (by domain/all domains)
