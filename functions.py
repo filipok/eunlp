@@ -105,6 +105,7 @@ def paragraph_combiner_sub(text):
 
 def downloader(make_link, error_text, url_code, lang_code, new_name,
                over=False):
+    # TODO sa fac linkul in afara downloaderului?
     # Only download if not already existing, otherwise open from disk
     # over=True overrides that behavior
     if over or (not os.path.isfile(new_name)):
@@ -180,6 +181,7 @@ def souper(new_name, text, is_celex, is_ep, over=False):
 
 def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False,
             is_ep=False, over_html=False, over_txt=False):
+    # TODO sa fac linkul in afara scraperului?    
     for lang_code in langs:
             new_name = prefix + url_code + '_' + lang_code + '.html'
             text = downloader(make_link, error_text, url_code, lang_code,
@@ -327,6 +329,8 @@ def file_to_list(file_name, forced=False, forced_again=False):
 def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                align_file, program_folder, note, delete_temp=True, over=True,
                para_size=300, para_size_small=100, logger='log.txt'):
+    # TODO de schimbat numele functiei
+    # TODO functia are foarte multi parametri
     # TODO general: unele docuri mai vechi sunt in EN, desi teoretic lb e RO!
     # TODO general: alea vechi au probleme
     # TODO general: ignore segm cu nr, date, liniuta, EN/RO,JO,'Articolul x'?
@@ -378,6 +382,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     # for each line, write directly or call hunalign according to size
     patt = re.compile(r'\. ')
     for i in range(len(source_list)):
+        # TODO de incercat cu map() sau pus intr-o subfunctie ceva de aici?        
         # send paragraph to hunalign if larger than para_size or if larger than
         # parasize_small and both source and target have a dot followed by
         # whitespace.
@@ -442,7 +447,8 @@ def check_hunalign(lines, full_source, full_target):
     everything_ok = True
     for i in range(len(lines)):
         split_line = re.split("\t", lines[i])
-        if len(split_line) == 3:  # avoid out of range errors
+        if len(split_line) == 3:  #  TODO do better - avoid out of range errors
+            # TODO move segment verification to a function?            
             new_line = "Hun\t" + split_line[1] + "\t" + \
                        split_line[2]
             text += new_line
@@ -468,6 +474,7 @@ def check_hunalign(lines, full_source, full_target):
 
 
 def subprocessing(file_name, lang, program_folder):
+    # TODO change function name    
     # TO DO http://search.cpan.org/dist/PersistentPerl/lib/PersistentPerl.pm
     # sentence splitter
     with codecs.open(file_name, 'r', 'utf-8') as f:
@@ -493,6 +500,7 @@ def subprocessing(file_name, lang, program_folder):
 
 
 def subprocessing_nltk(file_name, sentence_splitter):
+    # TODO change function name    
     # Source for sentence tokenizer:
     # stackoverflow.com/
     # questions/14095971/how-to-tweak-the-nltk-sentence-tokenizer
@@ -540,6 +548,7 @@ def abbreviation_loader(file_name):
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
             program_folder, note, delete_temp=True, over=True, tab=True,
             tmx=True, sep=True, use_nltk=True):
+    # TODO many parameters                
     if (not over) and os.path.isfile(align_file + '.tmx'):
         print "File pair already aligned: " + align_file
         return  # exit if already aligned and over=False
