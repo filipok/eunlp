@@ -325,7 +325,7 @@ def file_to_list(file_name, forced=False, forced_again=False):
     paragraph_list = re.split(r'\n', text)  # split file
     return paragraph_list
 
-
+# TODO use logging https://docs.python.org/2/howto/logging.html
 def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                align_file, program_folder, note, delete_temp=True, over=True,
                para_size=300, para_size_small=100, logger='log.txt'):
