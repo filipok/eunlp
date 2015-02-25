@@ -616,6 +616,7 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
 
 
 def eu_xml_converter(file_name):
+    #TODO xpath http://docs.python-guide.org/en/latest/scenarios/scrape/    
     with codecs.open(file_name, 'r', 'utf-8') as f:
         text = f.read()
     soup = BeautifulSoup(text, 'lxml')
