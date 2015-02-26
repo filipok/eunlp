@@ -17,6 +17,7 @@ import codecs
 if __name__ == '__main__':
     # collect arguments
     path = os.getcwd()
+    #TODO use os.path to get program_folder?    
     program_folder = '/'.join(re.split(r'/', sys.argv[0])[:-1])
     if len(program_folder) != 0:
         program_folder += '/'
