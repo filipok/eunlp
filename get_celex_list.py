@@ -30,6 +30,7 @@ if __name__ == '__main__':
             functions.celex_scraper(languages, path, item[0], program_folder,
                                     'log.txt')
         except:
+            # TODO except https://docs.python.org/2/howto/doanddont.html            
             message = "Could not align " + item[0] + ": " + \
                       str(sys.exc_info()[0]) + '\n'
             print message
