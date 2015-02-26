@@ -111,6 +111,7 @@ def downloader(make_link, error_text, url_code, lang_code, new_name,
     # Only download if not already existing, otherwise open from disk
     # over=True overrides that behavior
     if over or (not os.path.isfile(new_name)):
+        # TODO exceptions https://docs.python.org/2/howto/urllib2.html        
         link = make_link(url_code, lang_code)
         response = urllib2.urlopen(link)
         text = response.read()
