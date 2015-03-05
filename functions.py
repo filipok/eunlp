@@ -253,6 +253,7 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
                 text = re.split(r'\t', line)
                 source = text[2].strip('\n')
                 target = text[1]
+                #TODO de scurtat denumirile astea                
                 if text[0] == 'Err':
                     tag = '<prop type="Txt::Alignment">Long_failed</prop>'
                 elif text[0] == 'Nai':
