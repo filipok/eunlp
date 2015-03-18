@@ -377,6 +377,7 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             print 'Naive alignment success at second attempt in ' + \
                   source_file + '.\n'
 
+    # TODO make function for same number of para as below    
     # If same number of paragraphs:
     # mkdir /tmp/eunlp
     if not os.path.exists("/tmp/eunlp"):
