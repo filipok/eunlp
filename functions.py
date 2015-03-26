@@ -297,7 +297,7 @@ def hunalign_wrapper(source_file, target_file, dictionary, align_file,
         f.write(unicode(output, 'utf-8'))
 
 
-def file_to_list(file_name, forced=False, forced_again=False):
+def file_to_list(file_name, one=False, two=False):
     # clean and convert file to list of paragraphs
     with codecs.open(file_name, "r", "utf-8") as fin:
         text = fin.read()
@@ -310,11 +310,11 @@ def file_to_list(file_name, forced=False, forced_again=False):
     re.sub(r',\s\n(?!Whereas|Having regard|In cooperation)', r', ', text)
     text = re.sub(r'\s+\n', r'\n', text)  # remove whitespace before newline
     text = re.sub(r' +', r' ', text)  # remove double whitespaces
-    if forced:
+    if one:
         # remove one-character lines which can make the aligner to fail
         text = re.sub(r'\n.(?=\n)', r'\n', text)
         # also try to remove two-character lines which can make it to fail
-        if forced_again:
+        if two:
             text = re.sub(r'\n.{1,2}(?=\n)', r'\n', text)
     text = paragraph_combiner_sub(text)  # combine para numbers with text
     paragraph_list = re.split(r'\n', text)  # split file
@@ -334,19 +334,13 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     source_list = file_to_list(source_file)
     target_list = file_to_list(target_file)
 
-    # If different number of paragraphs
+    # If different No of paragraphs, make 2 more attempts to process the files
     if len(source_list) != len(target_list):
-        # make another attempt
-        source_list = file_to_list(source_file, forced=True)
-        target_list = file_to_list(target_file, forced=True)
-        # If still different number of paragraphs:
+        source_list = file_to_list(source_file, one=True)
+        target_list = file_to_list(target_file, one=True)
         if len(source_list) != len(target_list):
-            # make a third attempt
-            source_list = file_to_list(source_file, forced=True,
-                                       forced_again=True)
-            target_list = file_to_list(target_file, forced=True,
-                                       forced_again=True)
-            # If still different number of paragraphs:
+            source_list = file_to_list(source_file, one=True, two=True)
+            target_list = file_to_list(target_file, one=True, two=True)
             if len(source_list) != len(target_list):
                 # call classic aligner
                 logging.warning(
