@@ -309,12 +309,10 @@ def file_to_list(file_name, forced=False, forced_again=False):
     text = re.sub(r' +', r' ', text)  # remove double whitespaces
     if forced:
         # remove one-character lines which can make the aligner to fail
-        #TODO re.sub replaces 'the leftmost non-overlapping occurrences'
-        #TODO use lookahead instead        
-        text = re.sub(r'\n.\n', r'\n', text)
+        text = re.sub(r'\n.(?=\n)', r'\n', text)
         # also try to remove two-character lines which can make it to fail
         if forced_again:
-            text = re.sub(r'\n.{1,2}\n', r'\n', text)
+            text = re.sub(r'\n.{1,2}(?=\n)', r'\n', text)
     text = paragraph_combiner_sub(text)  # combine para numbers with text
     paragraph_list = re.split(r'\n', text)  # split file
     return paragraph_list
