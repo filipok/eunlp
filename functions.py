@@ -374,20 +374,19 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     # open .tab align_file for writing
     fout = codecs.open(align_file + '.tab', "w", "utf-8")
     # for each line, write directly or call hunalign according to size
-    patt = re.compile(r'\. ') # TODO de pus si punct si virgula?
+    patt = re.compile(r'\. ') # TODO de pus si punct si virgula si doua pcte?
     for i in range(len(source_list)):
         # TODO de incercat cu map() sau pus intr-o subfunctie ceva de aici?        
         # send paragraph to hunalign if larger than para_size or if larger than
         # parasize_small and both source and target have a dot followed by
         # whitespace.
-        # TODO de pus conditiile in variabile separate        
-        if (len(source_list[i]) < para_size_small) or \
-                (
-                (len(source_list[i]) < para_size) and
-                (len(source_list[i]) >= para_size_small) and
-                not (re.search(patt, source_list[i]) and
-                     re.search(patt, target_list[i]))
-                ):
+        small = len(source_list[i]) < para_size_small
+        not_pattern = not (re.search(patt, source_list[i]) and
+                           re.search(patt, target_list[i]))
+        clean_intermediate = ((len(source_list[i]) < para_size) and
+                              (len(source_list[i]) >= para_size_small) and
+                              not_pattern)
+        if small or clean_intermediate:
             line = ''.join(["Nai\t", target_list[i], "\t", source_list[i],
                             "\n"])
             fout.write(line)
