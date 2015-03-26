@@ -114,22 +114,22 @@ def downloader(make_link, error_text, url_code, lang_code, new_name,
         # TODO exceptions https://docs.python.org/2/howto/urllib2.html        
         link = make_link(url_code, lang_code)
         response = urllib2.urlopen(link)
-        text = response.read()
+        html_text = response.read()
 
         # some celexes have no new line between paras
         # this confuses get_text() in BeautifulSoup
-        text = re.sub(r'</p><p>', r'</p>\n<p>', text)
+        html_text = re.sub(r'</p><p>', r'</p>\n<p>', html_text)
 
-        if check_error(text, error_text):
+        if check_error(html_text, error_text):
             with open(new_name, 'w') as f:
-                f.write(text)
+                f.write(html_text)
         else:
             print "Error in link " + url_code + " " + lang_code + "."
     else:
         with codecs.open(new_name, "r", "utf-8") as f:
-            text = f.read()
+            html_text = f.read()
             print new_name + ": html file already downloaded."
-    return text
+    return html_text
 
 
 def remove_newlines(soup, tag):
