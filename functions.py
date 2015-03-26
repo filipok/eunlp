@@ -16,7 +16,11 @@ import subprocess
 import random
 import nltk
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
-
+import logging
+logging.basicConfig(filename='log.txt', level=logging.INFO)
+console = logging.StreamHandler()
+console.setLevel(logging.INFO)
+logging.getLogger('').addHandler(console)
 
 def make_paths(path, text_id, languages):
         source_file = os.path.join(path, text_id + '_' + languages[0] + '.txt')
@@ -31,7 +35,6 @@ def make_paths(path, text_id, languages):
 
 def check_error(text, error_string):
     if error_string in text:
-        print "Link error!"
         return False
     return True
 
@@ -56,7 +59,7 @@ def make_ep_link(category_year_code, lang):
     elif doc_category[0] == 'B':
         part_1 = b
     else:
-        print "make_link error"
+        logging.error("make_link error in %s %s", category_year_code, lang)
         part_1 = 'error'  # dubious
     return "".join([part_1, doc_category[1], '-', p_specific, doc_year, '-',
                     doc_code, '&language=', lang])
@@ -122,11 +125,11 @@ def downloader(make_link, error_text, url_code, lang_code, new_name,
             with open(new_name, 'w') as f:
                 f.write(html_text)
         else:
-            print "Error in link " + url_code + " " + lang_code + "."
+            logging.warning('Error in link %s %s.', url_code, lang_code)
     else:
         with codecs.open(new_name, "r", "utf-8") as f:
             html_text = f.read()
-            print new_name + ": html file already downloaded."
+            logging.debug("%s: html file already downloaded.", new_name)
     return html_text
 
 
@@ -142,7 +145,7 @@ def souper(new_name, html_text, is_celex, is_ep, over=False):
     # Only convert to txt if not already existing
     # over=True overrides that behavior
     if (not over) and os.path.isfile(new_name):
-        print new_name + ": txt file already existing."
+        logging.warning("%s: txt file already existing.", new_name)
         return
 
     f = codecs.open(new_name, "w", "utf-8")
@@ -200,7 +203,8 @@ def create_dictionary(input_source, input_target, output_file):
                     line_to_add = t_term + ' @ ' + s_term + '\r\n'
                     fout.write(line_to_add)
     else:
-        print "Dictionary files of different lenght or length = 0. Aborting."
+        logging.error(
+            "Dictionary files of different length or length = 0. Aborting.")
 
 
 def tab_to_separate(input_name, output_source, output_target):
@@ -317,17 +321,16 @@ def file_to_list(file_name, forced=False, forced_again=False):
     paragraph_list = re.split(r'\n', text)  # split file
     return paragraph_list
 
-# TODO use logging https://docs.python.org/2/howto/logging.html
+
 def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                   align_file, program_folder, note, delete_temp=True,
-                  over=True, para_size=300, para_size_small=100,
-                  logger='log.txt'):
+                  over=True, para_size=300, para_size_small=100):
     # TODO functia are foarte multi parametri
     # Example in Python console:
     # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002", 300)
     if (not over) and os.path.isfile(align_file + '.tmx'):
-        print "File pair already aligned: " + align_file
+        logging.warning("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
 
     source_list = file_to_list(source_file)
@@ -348,20 +351,19 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             # If still different number of paragraphs:
             if len(source_list) != len(target_list):
                 # call classic aligner
-                print ''.join(
-                    ["Different number of paras, yielding to hunalign in ",
-                     source_file])
-                with codecs.open(logger, 'a', 'utf-8') as f:
-                    f.write('Naive alignment failed in ' + source_file + '.\n')
+                logging.warning(
+                    "Smart alignment failed in %s, yielded to Hunalign",
+                    source_file)
                 aligner(source_file, target_file, s_lang, t_lang, dictionary,
                         align_file, program_folder, note, delete_temp=True)
                 return
             else:
-                print ''.join(['Naive alignment success at third attempt in ',
-                               source_file, '.\n'])
+                logging.warning(
+                    'Naive alignment success at third attempt in %s',
+                    source_file)
         else:
-            print ''.join(['Naive alignment success at second attempt in ',
-                           source_file, '.\n'])
+            logging.warning('Naive alignment success at second attempt in %s',
+                            source_file)
 
     # TODO make function for same number of para as below    
     # If same number of paragraphs:
@@ -388,7 +390,6 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                             "\n"])
             fout.write(line)
         else:
-            # print "Creating temporary file from large paragraph ", i, "..."
             r_num = str(random.randint(0, 100000))
             temp_source = "/tmp/eunlp/s_" + r_num + ".txt"
             temp_target = "/tmp/eunlp/t_" + r_num + ".txt"
@@ -411,10 +412,9 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 # merge resulting alignment into the current tab file
                 fout.write(everything_ok[1])
             else:
-                # print source_list[i]
-                print ''.join(["Hunalign failed to align properly segment ",
-                               str(i), ' in file ', source_file,
-                               '. Reverting to naive alignment.'])
+                logging.info(
+                    "Hunalign failed to align properly segment %s in file %s.",
+                    str(i), source_file)
                 line = ''.join(["Err\t", target_list[i], "\t", source_list[i],
                                 "\n"])
                 fout.write(line)
@@ -509,7 +509,7 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
             tmx=True, sep=True):
     # TODO many parameters                
     if (not over) and os.path.isfile(align_file + '.tmx'):
-        print "File pair already aligned: " + align_file
+        logging.warning("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
     # prepare sentence splitters
     punkt_param = PunktParameters()
@@ -520,8 +520,7 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
     if os.path.isfile(ab_file):
         punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
     else:
-        print ''.join(['Abbreviation file not found for language: ',
-                       s_lang, '.'])
+        logging.warning('Abbreviation file not found for language: %s', s_lang)
     s_sentence_splitter = PunktSentenceTokenizer(punkt_param)
     punkt_param = PunktParameters()
     ab_file = ''.join(
@@ -531,8 +530,7 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
     if os.path.isfile(ab_file):
         punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
     else:
-        print ''.join(['Abbreviation file not found for language: ',
-                       t_lang, '.'])
+        logging.warning('Abbreviation file not found for language: %s', t_lang)
     t_sentence_splitter = PunktSentenceTokenizer(punkt_param)
     # call splitter & aligner
     split_token_nltk(source_file, s_sentence_splitter)
@@ -586,7 +584,7 @@ def eu_xml_converter(file_name):
     return lista
 
 
-def celex_scraper(languages, path, celex, program_folder, logger):
+def celex_scraper(languages, path, celex, program_folder):
     # create html and txt files for each language code
     scraper(languages, make_celex_link,
             'The requested document does not exist', celex, '', is_celex=True,
@@ -596,8 +594,8 @@ def celex_scraper(languages, path, celex, program_folder, logger):
                                                                   languages)
     # call the aligner
     smart_aligner(source_file, target_file, languages[0].lower(),
-               languages[1].lower(), dictionary, align_file, program_folder,
-               celex, delete_temp=True, over=False, logger=logger)
+                  languages[1].lower(), dictionary, align_file, program_folder,
+                  celex, delete_temp=True, over=False)
 
 
 def merge_tmx(target_file, s_lang, t_lang):

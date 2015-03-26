@@ -28,8 +28,7 @@ if __name__ == '__main__':
     for item in file_list:
         print "Downloading " + item[0] + ' ...'
         try:
-            functions.celex_scraper(languages, path, item[0], program_folder,
-                                    'log.txt')
+            functions.celex_scraper(languages, path, item[0], program_folder)
         except:
             # TODO except https://docs.python.org/2/howto/doanddont.html            
             message = "Could not align " + item[0] + ": " + \
