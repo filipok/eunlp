@@ -61,7 +61,7 @@ def make_ep_link(category_year_code, lang):
     # TODO backslashes (use implicit continuation inside parenthesis)
     # https://docs.python.org/2/howto/doanddont.html
     return part_1 + doc_category[1] + '-' + p_specific + doc_year + '-' + \
-        doc_code + '&language=' + lang
+        doc_code + '&language=' + lang #TODO join()
 
 
 def make_celex_link(celex, lang):
