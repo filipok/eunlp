@@ -330,10 +330,8 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     if (not over) and os.path.isfile(align_file + '.tab'):
         logging.warning("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
-
     source_list = file_to_list(source_file)
     target_list = file_to_list(target_file)
-
     # If different No of paragraphs, make 2 more attempts to process the files
     if len(source_list) != len(target_list):
         source_list = file_to_list(source_file, one=True)
@@ -342,25 +340,20 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             source_list = file_to_list(source_file, one=True, two=True)
             target_list = file_to_list(target_file, one=True, two=True)
             if len(source_list) != len(target_list):
-                # call classic aligner
-                logging.warning(
-                    "Smart alignment failed in %s, yielded to Hunalign",
-                    source_file)
+                logging.warning("Smart alignment failed in %s, -> Hunalign",
+                                source_file)
                 aligner(source_file, target_file, s_lang, t_lang, dictionary,
                         align_file, program_folder, note, delete_temp=True)
                 return
             else:
-                logging.warning(
-                    'Naive alignment success at third attempt in %s',
-                    source_file)
+                logging.warning('Alignment at 3rd attempt in %s', source_file)
         else:
-            logging.warning('Naive alignment success at second attempt in %s',
-                            source_file)
-    # If same number of paragraphs:
+            logging.warning('Alignment at 2nd attempt in %s', source_file)
+    # If equal number of paragraphs:
     parallel_aligner(source_list, target_list, s_lang, t_lang, dictionary,
-                     align_file, program_folder, delete_temp=True,
+                     align_file, program_folder, delete_temp=delete_temp,
                      para_size=para_size, para_size_small=para_size_small,
-                     project_name='source_file')
+                     prj_name=source_file)
     # turn alignment into tmx
     tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang, note)
     # create parallel source and target text files
@@ -368,66 +361,58 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                     target_file[:-4] + '.ali')
 
 
-def parallel_aligner(source_list, target_list, s_lang, t_lang, dictionary,
+def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
                      align_file, program_folder, delete_temp=True,
-                     para_size=300, para_size_small=100, project_name='temp'):
-    # If same number of paragraphs:
-    # mkdir /tmp/eunlp
+                     para_size=300, para_size_small=100, prj_name='temp'):
     if not os.path.exists("/tmp/eunlp"):
         os.makedirs("/tmp/eunlp")
-    # open .tab align_file for writing
     fout = codecs.open(align_file + '.tab', "w", "utf-8")
-    # for each line, write directly or call hunalign according to size
-    patt = re.compile(r'\. ') # TODO de pus si punct si virgula si doua pcte?
-    for i in range(len(source_list)):
-        # send paragraph to hunalign if larger than para_size or if larger than
-        # parasize_small and both source and target have a dot followed by
-        # whitespace.
-        small = len(source_list[i]) < para_size_small
-        not_pattern = not (re.search(patt, source_list[i]) and
-                           re.search(patt, target_list[i]))
-        clean_intermediate = ((len(source_list[i]) < para_size) and
-                              (len(source_list[i]) >= para_size_small) and
-                              not_pattern)
+    # send paragraph to hunalign if large or if intermediate and
+    # both source and target have a dot followed by whitespace.
+    patt = re.compile(r'\. ')  # TODO de pus si punct si virgula si doua pcte?
+    for i in range(len(s_list)):
+        small = len(s_list[i]) < para_size_small
+        n_pat = not (re.search(patt, s_list[i]) and re.search(patt, t_list[i]))
+        clean_intermediate = ((len(s_list[i]) < para_size) and
+                              (len(s_list[i]) >= para_size_small) and n_pat)
         if small or clean_intermediate:
-            line = ''.join(["Nai\t", target_list[i], "\t", source_list[i],
-                            "\n"])
+            line = ''.join(["Nai\t", t_list[i], "\t", s_list[i], "\n"])
             fout.write(line)
         else:
-            r_num = str(random.randint(0, 100000))
-            temp_source = "/tmp/eunlp/s_" + r_num + ".txt"
-            temp_target = "/tmp/eunlp/t_" + r_num + ".txt"
-            temp_align = "/tmp/eunlp/align_" + r_num
-            # write the two files
-            with codecs.open(temp_source, "w", "utf-8") as sout:
-                sout.write(source_list[i] + '\n')
-            with codecs.open(temp_target, "w", "utf-8") as tout:
-                tout.write(target_list[i] + '\n')
-            # process them with the classic aligner
-            lines = aligner(temp_source, temp_target, s_lang, t_lang,
-                            dictionary, temp_align, program_folder,
-                            "a_" + r_num, delete_temp=True, tab=False,
-                            tmx=False, sep=False)
-            # do some checks with the hunalign aligment
-            # and use alignment only if checks are fine
-            everything_ok = check_hunalign(lines, source_list[i],
-                                           target_list[i])
-            if everything_ok[0]:
-                # merge resulting alignment into the current tab file
-                fout.write(everything_ok[1])
-            else:
-                logging.info(
-                    "Hunalign failed to align properly segment %s in file %s.",
-                    str(i), project_name)
-                line = ''.join(["Err\t", target_list[i], "\t", source_list[i],
-                                "\n"])
-                fout.write(line)
-            # remove temporary files
-            if delete_temp:
-                os.remove(temp_source)
-                os.remove(temp_target)
-                os.remove(temp_align + '.lad')
+            tmp_aligner(s_list[i], t_list[i], s_lang, t_lang, dictionary,
+                        program_folder, fout, prj_name, i, delete_temp)
     fout.close()
+
+
+def tmp_aligner(source, target, s_lang, t_lang, dictionary, program_folder,
+                fout, prj_name, i, delete_temp=True):
+    r_num = str(random.randint(0, 100000))
+    tmp_source = "/tmp/eunlp/s_" + r_num + ".txt"
+    tmp_target = "/tmp/eunlp/t_" + r_num + ".txt"
+    tmp_align = "/tmp/eunlp/align_" + r_num
+    # write the two files
+    with codecs.open(tmp_source, "w", "utf-8") as sout:
+        sout.write(source + '\n')
+    with codecs.open(tmp_target, "w", "utf-8") as tout:
+        tout.write(target + '\n')
+    # process them with the classic aligner
+    lines = aligner(tmp_source, tmp_target, s_lang, t_lang, dictionary,
+                    tmp_align, program_folder, "a_" + r_num,
+                    delete_temp=True, tab=False, tmx=False, sep=False)
+    # do some checks with the hunalign aligment and use only if ok
+    everything_ok = check_hunalign(lines, source, target)
+    if everything_ok[0]:
+        fout.write(everything_ok[1])
+    else:
+        logging.info("Hunalign failed in segment %s in file %s.",
+                     str(i), prj_name)
+        line = ''.join(["Err\t", target, "\t", source, "\n"])
+        fout.write(line)
+    # remove temporary files
+    if delete_temp:
+        os.remove(tmp_source)
+        os.remove(tmp_target)
+        os.remove(tmp_align + '.lad')
 
 
 def check_hunalign(lines, full_source, full_target):
