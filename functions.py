@@ -144,7 +144,7 @@ def remove_newlines(soup, tag):
                 soup.find_all(tag)[i].contents[j].replace_with(' ')
 
 
-def souper(new_name, text, is_celex, is_ep, over=False):
+def souper(new_name, html_text, is_celex, is_ep, over=False):
     # Only convert to txt if not already existing
     # over=True overrides that behavior
     if (not over) and os.path.isfile(new_name):
@@ -152,7 +152,7 @@ def souper(new_name, text, is_celex, is_ep, over=False):
         return
 
     f = codecs.open(new_name, "w", "utf-8")
-    soup = BeautifulSoup(text, "lxml")
+    soup = BeautifulSoup(html_text, "lxml")
 
     # some celexes have \n inside <a> and <p> tags
     # unfortunately, this is very slow, in particular the 'p' part
