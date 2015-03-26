@@ -326,7 +326,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                   over=True, para_size=300, para_size_small=100):
     # functions.smart_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002")
-    if (not over) and os.path.isfile(align_file + '.tmx'):
+    if (not over) and os.path.isfile(align_file + '.tab'):
         logging.warning("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
 
