@@ -58,10 +58,8 @@ def make_ep_link(category_year_code, lang):
     else:
         print "make_link error"
         part_1 = 'error'  # dubious
-    # TODO backslashes (use implicit continuation inside parenthesis)
-    # https://docs.python.org/2/howto/doanddont.html
-    return part_1 + doc_category[1] + '-' + p_specific + doc_year + '-' + \
-        doc_code + '&language=' + lang #TODO join()
+    return "".join([part_1, doc_category[1], '-', p_specific, doc_year, '-',
+                    doc_code, '&language=', lang])
 
 
 def make_celex_link(celex, lang):
@@ -85,8 +83,8 @@ def paragraph_combiner_sub(text):
 
     # Naive alignment failed in /home/ubuntu/down_europa/32014O0015_EN.txt.
     # erori/diferente formatare +ARE GLOSAR!
-    pattern_1 = \
-        re.compile(r'\n\(?([0-9]{1,3}|[a-z]{1,3}|[A-Z]{1,3})[\.\)][\n\s]')
+    pattern_1 = re.compile(
+        r'\n\(?([0-9]{1,3}|[a-z]{1,3}|[A-Z]{1,3})[\.\)][\n\s]')
     # combine single lines consisting of single number + single letter
     # with the next line
     pattern_3 = re.compile(r'\n\(?([0-9]+[a-z]+)[\.\)][\n\s]')
@@ -221,9 +219,9 @@ def tab_to_separate(input_name, output_source, output_target):
 def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
     # get current date
     current_date = datetime.datetime.now().isoformat()
-    current_date = current_date[0:4] + current_date[5:7] + current_date[8:10] \
-        + "T" + current_date[11:13] + current_date[14:16] + \
-        current_date[17:19] + "Z"
+    current_date = "".join([current_date[0:4], current_date[5:7],
+                            current_date[8:10], "T", current_date[11:13],
+                            current_date[14:16], current_date[17:19], "Z"])
     # create new TMX file
     with codecs.open(tmx_name, "w", "utf-8") as fout:
         # add tmx header (copied from LF Aligner output)
@@ -260,17 +258,17 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
                 source = source.replace('~~~ ', '')
                 target = target.replace('~~~ ', '')
                 #   create TU line
-                tu = '<tu creationdate="' + current_date + \
-                     '" creationid="eunlp"><prop type="Txt::Note">' + \
-                     note + '</prop>' + tag + '\n'
+                tu = ''.join(['<tu creationdate="', current_date,
+                              '" creationid="eunlp"><prop type="Txt::Note">',
+                              note, '</prop>', tag, '\n'])
                 fout.write(tu)
                 #   create TUV source line
-                tuv = '<tuv xml:lang="' + s_lang + '"><seg>' + source\
-                      + '</seg></tuv>\n'
+                tuv = ''.join(['<tuv xml:lang="', s_lang, '"><seg>', source,
+                               '</seg></tuv>\n'])
                 fout.write(tuv)
                 #   create TUV target line
-                tuv = '<tuv xml:lang="' + t_lang + '"><seg>' + target\
-                      + '</seg></tuv> </tu>\n'
+                tuv = ''.join(['<tuv xml:lang="', t_lang, '"><seg>', target,
+                               '</seg></tuv> </tu>\n'])
                 fout.write(tuv)
                 fout.write('\n')
         # add tmx footer
@@ -357,19 +355,20 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             # If still different number of paragraphs:
             if len(source_list) != len(target_list):
                 # call classic aligner
-                print "Different number of paras, yielding to hunalign in ", \
-                    source_file
+                print ''.join(
+                    ["Different number of paras, yielding to hunalign in ",
+                     source_file])
                 with codecs.open(logger, 'a', 'utf-8') as f:
                     f.write('Naive alignment failed in ' + source_file + '.\n')
                 aligner(source_file, target_file, s_lang, t_lang, dictionary,
                         align_file, program_folder, note, delete_temp=True)
                 return
             else:
-                print 'Naive alignment success at third attempt in ' + \
-                      source_file + '.\n'
+                print ''.join(['Naive alignment success at third attempt in ',
+                               source_file, '.\n'])
         else:
-            print 'Naive alignment success at second attempt in ' + \
-                  source_file + '.\n'
+            print ''.join(['Naive alignment success at second attempt in ',
+                           source_file, '.\n'])
 
     # TODO make function for same number of para as below    
     # If same number of paragraphs:
@@ -393,8 +392,8 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 not (re.search(patt, source_list[i]) and
                      re.search(patt, target_list[i]))
                 ):
-            line = "Nai\t" + target_list[i] + "\t" + source_list[i] + \
-                   "\n"
+            line = ''.join(["Nai\t", target_list[i], "\t", source_list[i],
+                            "\n"])
             fout.write(line)
         else:
             # print "Creating temporary file from large paragraph ", i, "..."
@@ -421,11 +420,11 @@ def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 fout.write(everything_ok[1])
             else:
                 # print source_list[i]
-                print "Hunalign failed to align properly segment " + \
-                      str(i) + ' in file ' + source_file + \
-                      '. Reverting to naive alignment.'
-                line = "Err\t" + target_list[i] + "\t" + source_list[i] + \
-                       "\n"
+                print ''.join(["Hunalign failed to align properly segment ",
+                               str(i), ' in file ', source_file,
+                               '. Reverting to naive alignment.'])
+                line = ''.join(["Err\t", target_list[i], "\t", source_list[i],
+                                "\n"])
                 fout.write(line)
             # remove temporary files
             if delete_temp:
@@ -449,14 +448,13 @@ def check_hunalign(lines, full_source, full_target):
         split_line = re.split("\t", lines[i])
         if len(split_line) == 3:  #  TODO do better - avoid out of range errors
             # TODO move segment verification to a function?            
-            new_line = "Hun\t" + split_line[1] + "\t" + \
-                       split_line[2]
+            new_line = ''.join(["Hun\t", split_line[1], "\t", split_line[2]])
             text += new_line
             counter_s += len(split_line[2]) + 1
             counter_t += len(split_line[1]) + 1
             if len(split_line[1]) > 0:
-                translation_ratio = \
-                    float(len(split_line[2]))/len(split_line[1])
+                translation_ratio = float(
+                    len(split_line[2]))/len(split_line[1])
             else:
                 translation_ratio = 0
             # check source and target size
@@ -556,22 +554,26 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
     if use_nltk:
         # prepare sentence splitters
         punkt_param = PunktParameters()
-        ab_file = program_folder + \
-            'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.' \
-            + s_lang
+        ab_file = ''.join(
+            [program_folder,
+             'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.',
+             s_lang])
         if os.path.isfile(ab_file):
             punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
         else:
-            print 'Abbreviation file not found for language: ' + s_lang + '.'
+            print ''.join(['Abbreviation file not found for language: ',
+                           s_lang, '.'])
         s_sentence_splitter = PunktSentenceTokenizer(punkt_param)
         punkt_param = PunktParameters()
-        ab_file = program_folder + \
-            'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.' \
-            + t_lang
+        ab_file = ''.join(
+            [program_folder,
+             'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.',
+             t_lang])
         if os.path.isfile(ab_file):
             punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
         else:
-            print 'Abbreviation file not found for language: ' + t_lang + '.'
+            print ''.join(['Abbreviation file not found for language: ',
+                           t_lang, '.'])
         t_sentence_splitter = PunktSentenceTokenizer(punkt_param)
         # call splitter & aligner
         subprocessing_nltk(source_file, s_sentence_splitter)
