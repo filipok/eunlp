@@ -319,12 +319,10 @@ def file_to_list(file_name, forced=False, forced_again=False):
 
 # TODO use logging https://docs.python.org/2/howto/logging.html
 def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
-               align_file, program_folder, note, delete_temp=True, over=True,
-               para_size=300, para_size_small=100, logger='log.txt'):
+                  align_file, program_folder, note, delete_temp=True,
+                  over=True, para_size=300, para_size_small=100,
+                  logger='log.txt'):
     # TODO functia are foarte multi parametri
-    # TODO general: unele docuri mai vechi sunt in EN, desi teoretic lb e RO!
-    # TODO general: alea vechi au probleme
-    # TODO general: ignore segm cu nr, date, liniuta, EN/RO,JO,'Articolul x'?
     # Example in Python console:
     # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002", 300)
