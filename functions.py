@@ -300,8 +300,6 @@ def file_to_list(file_name, forced=False, forced_again=False):
         text = fin.read()
     text = re.sub(r'\xa0+', ' ', text)  # replace non-breaking space
     text = re.sub(r'\n\s+', r'\n', text)  # remove whitespace after newline
-    #TODO this is useless, as \s includes \n    
-    text = re.sub(r'\n+', r'\n', text)  # remove empty lines
     text = re.sub(r'^\n+', r'', text)  # remove empty lines at the beginning
     text = re.sub(r'\n$', r'', text)  # remove empty lines at the end
     # merge segments separated by comma and whitespace, with some exceptions
