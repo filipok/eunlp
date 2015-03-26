@@ -492,8 +492,7 @@ def subprocessing(file_name, lang, program_folder):
         f.write(unicode(output, 'utf-8'))
 
 
-def subprocessing_nltk(file_name, sentence_splitter):
-    # TODO change function name    
+def split_token_nltk(file_name, sentence_splitter):
     # Source for sentence tokenizer:
     # stackoverflow.com/
     # questions/14095971/how-to-tweak-the-nltk-sentence-tokenizer
@@ -571,8 +570,8 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
                            t_lang, '.'])
         t_sentence_splitter = PunktSentenceTokenizer(punkt_param)
         # call splitter & aligner
-        subprocessing_nltk(source_file, s_sentence_splitter)
-        subprocessing_nltk(target_file, t_sentence_splitter)
+        split_token_nltk(source_file, s_sentence_splitter)
+        split_token_nltk(target_file, t_sentence_splitter)
     else:
         subprocessing(source_file, s_lang, program_folder)
         subprocessing(target_file, t_lang, program_folder)
