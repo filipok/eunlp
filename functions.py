@@ -318,10 +318,9 @@ def file_to_list(file_name, forced=False, forced_again=False):
     return paragraph_list
 
 # TODO use logging https://docs.python.org/2/howto/logging.html
-def ep_aligner(source_file, target_file, s_lang, t_lang, dictionary,
+def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                align_file, program_folder, note, delete_temp=True, over=True,
                para_size=300, para_size_small=100, logger='log.txt'):
-    # TODO de schimbat numele functiei
     # TODO functia are foarte multi parametri
     # TODO general: unele docuri mai vechi sunt in EN, desi teoretic lb e RO!
     # TODO general: alea vechi au probleme
@@ -514,7 +513,6 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
     if (not over) and os.path.isfile(align_file + '.tmx'):
         print "File pair already aligned: " + align_file
         return  # exit if already aligned and over=False
-    # Nltk is used by default, as it has a 5x speed compared to Perl
     # prepare sentence splitters
     punkt_param = PunktParameters()
     ab_file = ''.join(
@@ -599,7 +597,7 @@ def celex_scraper(languages, path, celex, program_folder, logger):
     source_file, target_file, align_file, dictionary = make_paths(path, celex,
                                                                   languages)
     # call the aligner
-    ep_aligner(source_file, target_file, languages[0].lower(),
+    smart_aligner(source_file, target_file, languages[0].lower(),
                languages[1].lower(), dictionary, align_file, program_folder,
                celex, delete_temp=True, over=False, logger=logger)
 
