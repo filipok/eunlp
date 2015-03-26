@@ -324,7 +324,6 @@ def file_to_list(file_name, one=False, two=False):
 def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                   align_file, program_folder, note, delete_temp=True,
                   over=True, para_size=300, para_size_small=100):
-    # Example in Python console:
     # functions.smart_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002")
     if (not over) and os.path.isfile(align_file + '.tmx'):
@@ -570,7 +569,7 @@ def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
 
 
 def eu_xml_converter(file_name):
-    #TODO xpath http://docs.python-guide.org/en/latest/scenarios/scrape/    
+    # TODO xpath http://docs.python-guide.org/en/latest/scenarios/scrape/
     with codecs.open(file_name, 'r', 'utf-8') as f:
         text = f.read()
     soup = BeautifulSoup(text, 'lxml')
