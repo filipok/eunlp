@@ -441,27 +441,23 @@ def check_hunalign(lines, full_source, full_target):
     everything_ok = True
     for i in range(len(lines)):
         split_line = re.split("\t", lines[i])
-        if len(split_line) == 3:  #  TODO do better - avoid out of range errors
-            # TODO move segment verification to a function?            
-            new_line = ''.join(["Hun\t", split_line[1], "\t", split_line[2]])
-            text += new_line
-            counter_s += len(split_line[2]) + 1
-            counter_t += len(split_line[1]) + 1
-            if len(split_line[1]) > 0:
-                translation_ratio = float(
-                    len(split_line[2]))/len(split_line[1])
-            else:
-                translation_ratio = 0
-            # check source and target size
-            if not(0.5 < translation_ratio < 2.0):
-                everything_ok = False
-            # check segment length
-            if len(split_line[2]) < 2 or len(split_line[1]) < 2:
-                everything_ok = False
+        new_line = ''.join(["Hun\t", split_line[1], "\t", split_line[2]])
+        text += new_line
+        counter_s += len(split_line[2]) + 1
+        counter_t += len(split_line[1]) + 1
+        if len(split_line[1]) > 0:
+            translation_ratio = float(
+                len(split_line[2]))/len(split_line[1])
+        else:
+            translation_ratio = 0
+        # check source and target size
+        if not(0.5 < translation_ratio < 2.0):
+            everything_ok = False
+        # check segment length
+        if len(split_line[2]) < 2 or len(split_line[1]) < 2:
+            everything_ok = False
     # check total characters (hunalign drops text sometimes)
     if counter_s < len(full_source) or counter_t < len(full_target):
-        # print counter_s, len(full_source)
-        # print counter_t, len(full_target)
         everything_ok = False
     return everything_ok, text
 
