@@ -22,6 +22,7 @@ console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 logging.getLogger('').addHandler(console)
 
+
 def make_paths(path, text_id, languages):
         source_file = os.path.join(path, text_id + '_' + languages[0] + '.txt')
         target_file = os.path.join(path, text_id + '_' + languages[1] + '.txt')
