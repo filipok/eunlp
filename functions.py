@@ -462,32 +462,6 @@ def check_hunalign(lines, full_source, full_target):
     return everything_ok, text
 
 
-def subprocessing(file_name, lang, program_folder):
-    # TODO change function name    
-    # TO DO http://search.cpan.org/dist/PersistentPerl/lib/PersistentPerl.pm
-    # sentence splitter
-    with codecs.open(file_name, 'r', 'utf-8') as f:
-        command = ['perl',
-                   program_folder + 'sentence_splitter/split-sentences.perl',
-                   '-l', lang]
-        proc = subprocess.Popen(command, stdin=f, stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
-        output, err = proc.communicate()  # output contains the splitter output
-    # remove <P> created by the sentence splitter
-    output = re.sub(r'\n<P>', '', output)
-    # paragraph combiner
-    output = paragraph_combiner_sub(output)
-    with codecs.open(file_name[:-4], 'w', 'utf-8') as f:
-        f.write(unicode(output, 'utf-8'))
-    # tokenizer
-    command = ['perl', program_folder + 'tokenizer.perl', '-l', lang]
-    p = subprocess.Popen(command, stdout=subprocess.PIPE,
-                         stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-    output = p.communicate(output)[0]  # presupun ca [1] e stderr?
-    with codecs.open(file_name[:-4] + '.tok', 'w', 'utf-8') as f:
-        f.write(unicode(output, 'utf-8'))
-
-
 def split_token_nltk(file_name, sentence_splitter):
     # Source for sentence tokenizer:
     # stackoverflow.com/
@@ -535,42 +509,38 @@ def abbreviation_loader(file_name):
 
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
             program_folder, note, delete_temp=True, over=True, tab=True,
-            tmx=True, sep=True, use_nltk=True):
+            tmx=True, sep=True):
     # TODO many parameters                
     if (not over) and os.path.isfile(align_file + '.tmx'):
         print "File pair already aligned: " + align_file
         return  # exit if already aligned and over=False
     # Nltk is used by default, as it has a 5x speed compared to Perl
-    if use_nltk:
-        # prepare sentence splitters
-        punkt_param = PunktParameters()
-        ab_file = ''.join(
-            [program_folder,
-             'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.',
-             s_lang])
-        if os.path.isfile(ab_file):
-            punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
-        else:
-            print ''.join(['Abbreviation file not found for language: ',
-                           s_lang, '.'])
-        s_sentence_splitter = PunktSentenceTokenizer(punkt_param)
-        punkt_param = PunktParameters()
-        ab_file = ''.join(
-            [program_folder,
-             'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.',
-             t_lang])
-        if os.path.isfile(ab_file):
-            punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
-        else:
-            print ''.join(['Abbreviation file not found for language: ',
-                           t_lang, '.'])
-        t_sentence_splitter = PunktSentenceTokenizer(punkt_param)
-        # call splitter & aligner
-        split_token_nltk(source_file, s_sentence_splitter)
-        split_token_nltk(target_file, t_sentence_splitter)
+    # prepare sentence splitters
+    punkt_param = PunktParameters()
+    ab_file = ''.join(
+        [program_folder,
+         'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.',
+         s_lang])
+    if os.path.isfile(ab_file):
+        punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
     else:
-        subprocessing(source_file, s_lang, program_folder)
-        subprocessing(target_file, t_lang, program_folder)
+        print ''.join(['Abbreviation file not found for language: ',
+                       s_lang, '.'])
+    s_sentence_splitter = PunktSentenceTokenizer(punkt_param)
+    punkt_param = PunktParameters()
+    ab_file = ''.join(
+        [program_folder,
+         'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.',
+         t_lang])
+    if os.path.isfile(ab_file):
+        punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
+    else:
+        print ''.join(['Abbreviation file not found for language: ',
+                       t_lang, '.'])
+    t_sentence_splitter = PunktSentenceTokenizer(punkt_param)
+    # call splitter & aligner
+    split_token_nltk(source_file, s_sentence_splitter)
+    split_token_nltk(target_file, t_sentence_splitter)
     # create empty hunalign dic from program-folder/data_raw files
     if not os.path.exists(dictionary):
         create_dictionary(program_folder + 'data_raw/' + s_lang + '.txt',
