@@ -325,10 +325,9 @@ def file_to_list(file_name, forced=False, forced_again=False):
 def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                   align_file, program_folder, note, delete_temp=True,
                   over=True, para_size=300, para_size_small=100):
-    # TODO functia are foarte multi parametri
     # Example in Python console:
-    # functions.ep_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
-    # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002", 300)
+    # functions.smart_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
+    # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002")
     if (not over) and os.path.isfile(align_file + '.tmx'):
         logging.warning("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
@@ -364,8 +363,21 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
         else:
             logging.warning('Naive alignment success at second attempt in %s',
                             source_file)
+    # If same number of paragraphs:
+    parallel_aligner(source_list, target_list, s_lang, t_lang, dictionary,
+                     align_file, program_folder, delete_temp=True,
+                     para_size=para_size, para_size_small=para_size_small,
+                     project_name='source_file')
+    # turn alignment into tmx
+    tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang, note)
+    # create parallel source and target text files
+    tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
+                    target_file[:-4] + '.ali')
 
-    # TODO make function for same number of para as below    
+
+def parallel_aligner(source_list, target_list, s_lang, t_lang, dictionary,
+                     align_file, program_folder, delete_temp=True,
+                     para_size=300, para_size_small=100, project_name='temp'):
     # If same number of paragraphs:
     # mkdir /tmp/eunlp
     if not os.path.exists("/tmp/eunlp"):
@@ -375,7 +387,6 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     # for each line, write directly or call hunalign according to size
     patt = re.compile(r'\. ') # TODO de pus si punct si virgula si doua pcte?
     for i in range(len(source_list)):
-        # TODO de incercat cu map() sau pus intr-o subfunctie ceva de aici?        
         # send paragraph to hunalign if larger than para_size or if larger than
         # parasize_small and both source and target have a dot followed by
         # whitespace.
@@ -414,7 +425,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             else:
                 logging.info(
                     "Hunalign failed to align properly segment %s in file %s.",
-                    str(i), source_file)
+                    str(i), project_name)
                 line = ''.join(["Err\t", target_list[i], "\t", source_list[i],
                                 "\n"])
                 fout.write(line)
@@ -424,11 +435,6 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 os.remove(temp_target)
                 os.remove(temp_align + '.lad')
     fout.close()
-    # turn alignment into tmx
-    tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang, note)
-    # create parallel source and target text files
-    tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
-                    target_file[:-4] + '.ali')
 
 
 def check_hunalign(lines, full_source, full_target):
@@ -507,7 +513,6 @@ def abbreviation_loader(file_name):
 def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
             program_folder, note, delete_temp=True, over=True, tab=True,
             tmx=True, sep=True):
-    # TODO many parameters                
     if (not over) and os.path.isfile(align_file + '.tmx'):
         logging.warning("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
