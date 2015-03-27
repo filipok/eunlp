@@ -17,7 +17,7 @@ import random
 import nltk
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 import logging
-logging.basicConfig(filename='log.txt', level=logging.INFO)
+logging.basicConfig(filename='log.txt', level=logging.WARNING)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 logging.getLogger('').addHandler(console)
