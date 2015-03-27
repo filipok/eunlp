@@ -11,7 +11,11 @@
 import sys
 import os
 import functions
-import codecs
+import logging
+logging.basicConfig(filename='log.txt', level=logging.WARNING)
+console = logging.StreamHandler()
+console.setLevel(logging.INFO)
+logging.getLogger('').addHandler(console)
 
 if __name__ == '__main__':
     # collect arguments
@@ -24,13 +28,10 @@ if __name__ == '__main__':
 
     file_list = functions.eu_xml_converter(xml_list)
     for item in file_list:
-        print "Downloading " + item[0] + ' ...'
+        print "Processing " + item[0] + ' ...'
         try:
             functions.celex_scraper(languages, path, item[0], program_folder)
         except:
             # TODO except https://docs.python.org/2/howto/doanddont.html            
-            message = "Could not align " + item[0] + ": " + \
-                      str(sys.exc_info()[0]) + '\n'
-            print message
-            with codecs.open('log.txt', 'a', 'utf-8') as f:
-                f.write(message)
+            logging.error("Could not align %s: %s", item[0],
+                          str(sys.exc_info()[0]))
