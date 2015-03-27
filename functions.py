@@ -85,8 +85,7 @@ def paragraph_combiner_sub(text):
     # TODO SILENT FAIL in 32014Q0714(03)!!!
     # add warning la diferente mari de dim s/t + punctuatie diferita la final?
 
-    # TODO Naive alignment failed in 32014O0015_EN.txt.
-    # erori/diferente formatare +ARE GLOSAR!
+    # TODO fail in 32014O0015 + are glosar.
     pattern_1 = re.compile(
         r'\n\(?([0-9]{1,3}|[a-z]{1,3}|[A-Z]{1,3})[\.\)][\n\s]')
     # combine single lines consisting of single number + single letter
@@ -306,16 +305,16 @@ def file_to_list(file_name, one=False, two=False):
     text = re.sub(r'\n$', r'', text)  # remove empty lines at the end
     # merge segments separated by comma and whitespace, with some exceptions
     # which are language-dependent unfortunately
-    re.sub(r',\s\n(?!Whereas|Having regard|In cooperation)', r', ', text)
+    # re.sub(r',\s\n(?!Whereas|Having regard|In cooperation)', r', ', text)
     text = re.sub(r'\s+\n', r'\n', text)  # remove whitespace before newline
     text = re.sub(r' +', r' ', text)  # remove double whitespaces
+    text = paragraph_combiner_sub(text)  # combine para numbers with text
     if one:
         # remove one-character lines which can make the aligner to fail
-        text = re.sub(r'\n.(?=\n)', r'\n', text)
+        text = re.sub(r'\n.(?=\n)', r'', text)
         # also try to remove two-character lines which can make it to fail
         if two:
-            text = re.sub(r'\n.{1,2}(?=\n)', r'\n', text)
-    text = paragraph_combiner_sub(text)  # combine para numbers with text
+            text = re.sub(r'\n.{1,2}(?=\n)', r'', text)
     paragraph_list = re.split(r'\n', text)  # split file
     return paragraph_list
 
