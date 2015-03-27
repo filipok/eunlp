@@ -10,13 +10,12 @@
 
 import sys
 import os
-import re
 import functions as func
 
 if __name__ == '__main__':
     # collect arguments
     path = os.getcwd()
-    program_folder = '/'.join(re.split(r'/', sys.argv[0])[:-1])
+    program_folder = os.path.dirname(sys.argv[0])
     if len(program_folder) != 0:
         program_folder += '/'
     category = sys.argv[1]
@@ -33,5 +32,5 @@ if __name__ == '__main__':
         func.make_paths(path, doc_code, languages)
     # call the aligner
     func.smart_aligner(source_file, target_file, languages[0].lower(),
-                    languages[1].lower(), dictionary, align_file,
-                    program_folder, doc_code, delete_temp=True, over=False)
+                       languages[1].lower(), dictionary, align_file,
+                       program_folder, doc_code, delete_temp=True, over=False)

@@ -10,15 +10,13 @@
 
 import sys
 import os
-import re
 import functions
 import codecs
 
 if __name__ == '__main__':
     # collect arguments
     path = os.getcwd()
-    #TODO use os.path to get program_folder?    
-    program_folder = '/'.join(re.split(r'/', sys.argv[0])[:-1])
+    program_folder = os.path.dirname(sys.argv[0])
     if len(program_folder) != 0:
         program_folder += '/'
     xml_list = sys.argv[1]  # collect xml list name
@@ -36,4 +34,3 @@ if __name__ == '__main__':
             print message
             with codecs.open('log.txt', 'a', 'utf-8') as f:
                 f.write(message)
-

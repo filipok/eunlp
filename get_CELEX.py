@@ -10,13 +10,12 @@
 
 import sys
 import os
-import re
 import functions
 
 if __name__ == '__main__':
     # collect arguments
     path = os.getcwd()
-    program_folder = '/'.join(re.split(r'/', sys.argv[0])[:-1])
+    program_folder = os.path.dirname(sys.argv[0])
     if len(program_folder) != 0:
         program_folder += '/'
     celex = sys.argv[1]  # collect celex code

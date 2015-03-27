@@ -85,7 +85,7 @@ def paragraph_combiner_sub(text):
     # TODO SILENT FAIL in 32014Q0714(03)!!!
     # add warning la diferente mari de dim s/t + punctuatie diferita la final?
 
-    # Naive alignment failed in /home/ubuntu/down_europa/32014O0015_EN.txt.
+    # TODO Naive alignment failed in 32014O0015_EN.txt.
     # erori/diferente formatare +ARE GLOSAR!
     pattern_1 = re.compile(
         r'\n\(?([0-9]{1,3}|[a-z]{1,3}|[A-Z]{1,3})[\.\)][\n\s]')
@@ -109,7 +109,6 @@ def paragraph_combiner_sub(text):
 
 def downloader(make_link, error_text, url_code, lang_code, new_name,
                over=False):
-    # TODO sa fac linkul in afara downloaderului?
     # Only download if not already existing, otherwise open from disk
     # over=True overrides that behavior
     if over or (not os.path.isfile(new_name)):
@@ -126,7 +125,7 @@ def downloader(make_link, error_text, url_code, lang_code, new_name,
             with open(new_name, 'w') as f:
                 f.write(html_text)
         else:
-            logging.warning('Error in link %s %s.', url_code, lang_code)
+            logging.error('Error in link %s %s.', url_code, lang_code)
     else:
         with codecs.open(new_name, "r", "utf-8") as f:
             html_text = f.read()
@@ -180,7 +179,6 @@ def souper(new_name, html_text, is_celex, is_ep, over=False):
 
 def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False,
             is_ep=False, over_html=False, over_txt=False):
-    # TODO sa fac linkul in afara scraperului?    
     for lang_code in langs:
             new_name = prefix + url_code + '_' + lang_code + '.html'
             text = downloader(make_link, error_text, url_code, lang_code,
@@ -340,8 +338,8 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             source_list = file_to_list(source_file, one=True, two=True)
             target_list = file_to_list(target_file, one=True, two=True)
             if len(source_list) != len(target_list):
-                logging.warning("Smart alignment failed in %s, -> Hunalign",
-                                source_file)
+                logging.error("Smart alignment failed in %s, -> Hunalign",
+                              source_file)
                 aligner(source_file, target_file, s_lang, t_lang, dictionary,
                         align_file, program_folder, note, delete_temp=True)
                 return
