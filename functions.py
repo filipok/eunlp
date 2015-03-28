@@ -342,7 +342,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             if len(source_list) != len(target_list):
                 logging.error("Smart alignment failed in %s -> Hunalign",
                               source_file)
-                #Using Hunalign on the entire file is mostly useless.
+                # Using Hunalign on the entire file is mostly useless.
                 # aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 #         align_file, program_folder, note, delete_temp=True)
                 return
@@ -570,6 +570,7 @@ def eu_xml_converter(file_name):
 
 def celex_scraper(languages, path, celex, program_folder):
     # create html and txt files for each language code
+    # TODO de scos astea cu mesaj text de eroare si pus cu urllib.HTTPError
     scraper(languages, make_celex_link,
             'The requested document does not exist', celex, '', is_celex=True,
             over_html=False, over_txt=False)
