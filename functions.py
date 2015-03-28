@@ -61,7 +61,7 @@ def make_ep_link(category_year_code, lang):
         part_1 = b
     else:
         logging.error("make_link error in %s %s", category_year_code, lang)
-        part_1 = 'error'  # dubious
+        part_1 = 'error'  # TODO raise exception?
     return "".join([part_1, doc_category[1], '-', p_specific, doc_year, '-',
                     doc_code, '&language=', lang])
 
@@ -149,13 +149,10 @@ def souper(new_name, html_text, is_celex, is_ep, over=False):
     if (not over) and os.path.isfile(new_name):
         logging.warning("%s: txt file already existing.", new_name)
         return
-
     f = codecs.open(new_name, "w", "utf-8")
     soup = BeautifulSoup(html_text, "lxml")
-
     # some celexes have \n inside <p> tags
     remove_newlines(soup)
-
     # separate branches for each document type
     if is_celex:
         if soup.txt_te is not None:
@@ -224,6 +221,7 @@ def tab_to_separate(input_name, output_source, output_target):
 def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
     # get current date
     current_date = datetime.datetime.now().isoformat()
+    # TODO simplify this
     current_date = "".join([current_date[0:4], current_date[5:7],
                             current_date[8:10], "T", current_date[11:13],
                             current_date[14:16], current_date[17:19], "Z"])
