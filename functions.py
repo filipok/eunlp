@@ -404,8 +404,8 @@ def tmp_aligner(source, target, s_lang, t_lang, dictionary, program_folder,
     if everything_ok[0]:
         fout.write(everything_ok[1])
     else:
-        logging.info("Hunalign failed in segment %s in file %s.",
-                     str(i), prj_name)
+        logging.info("Hunalign failed in segment %s in file %s.", str(i),
+                     prj_name)
         line = ''.join(["Err\t", target, "\t", source, "\n"])
         fout.write(line)
     # remove temporary files
@@ -512,22 +512,18 @@ def aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder, note,
         path = program_folder + 'data_raw/'
         create_dictionary(path + s_lang + '.txt', path + t_lang + '.txt', dic)
     # create hunalign ladder alignment
-    hunalign_wrapper(s_file[:-4] + '.tok', t_file[:-4] + '.tok',
-                     dic, a_file + '.lad', program_folder,
-                     realign=True)
+    hunalign_wrapper(s_file[:-4] + '.tok', t_file[:-4] + '.tok', dic,
+                     a_file + '.lad', program_folder, realign=True)
     # create aligned output
     output_lines = l2t.make_lines(a_file + '.lad', s_file[:-4], t_file[:-4])
     output_lines = [unicode(line, "utf-8") + '\n' for line in output_lines]
-    # writing to disk
+    # writing .tab, .tmx and parallel .sep source and target files
     if tab:
         with codecs.open(a_file + '.tab', "w", "utf-8") as fout:
             for line in output_lines:
                 fout.write(line)
-        # turn alignment into tmx
         if tmx:
-            tab_to_tmx(a_file + '.tab', a_file + '.tmx', s_lang,
-                       t_lang, note)
-        # create parallel source and target text files
+            tab_to_tmx(a_file + '.tab', a_file + '.tmx', s_lang, t_lang, note)
         if sep:
             tab_to_separate(a_file + '.tab', s_file[:-4] + '.ali',
                             t_file[:-4] + '.ali')
@@ -559,8 +555,7 @@ def celex_scraper(languages, path, celex, program_folder):
             'The requested document does not exist', celex, '', is_celex=True,
             over_html=False, over_txt=False)
     # prepare paths
-    source_file, target_file, align_file, dictionary = make_paths(path, celex,
-                                                                  languages)
+    s_file, t_file, align_file, dic = make_paths(path, celex, languages)
     # call the aligner
     smart_aligner(s_file, t_file, languages[0].lower(), languages[1].lower(),
                   dic, align_file, program_folder, celex, over=False)
