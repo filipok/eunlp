@@ -444,7 +444,7 @@ def check_hunalign(lines, full_source, full_target):
     return everything_ok, text
 
 
-def split_token_nltk(file_name, sentence_splitter):
+def split_token_nltk(file_name, sent_splitter):
     # Source for sentence tokenizer:
     # stackoverflow.com/
     # questions/14095971/how-to-tweak-the-nltk-sentence-tokenizer
@@ -457,7 +457,7 @@ def split_token_nltk(file_name, sentence_splitter):
     # because Punkt ignores line breaks
     sentence_list = []
     for line in text:
-        sentences = sentence_splitter.tokenize(line)
+        sentences = sent_splitter.tokenize(line)
         sentence_list.extend(sentences)
     # write file without extension
     with codecs.open(file_name[:-4], 'w', 'utf-8') as f:
@@ -489,69 +489,57 @@ def abbreviation_loader(file_name):
     return abbreviations
 
 
-def aligner(source_file, target_file, s_lang, t_lang, dictionary, align_file,
+def sentence_splitter(program_folder, lang):
+    punkt_param = PunktParameters()
+    subfolder = 'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.'
+    ab_file = ''.join([program_folder, subfolder, lang])
+    if os.path.isfile(ab_file):
+        punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
+    else:
+        logging.warning('Abbreviation file not found for language: %s', lang)
+    splitter = PunktSentenceTokenizer(punkt_param)
+    return splitter
+
+
+def aligner(s_file, t_file, s_lang, t_lang, dic, a_file,
             program_folder, note, delete_temp=True, over=True, tab=True,
             tmx=True, sep=True):
-    if (not over) and os.path.isfile(align_file + '.tmx'):
-        logging.warning("File pair already aligned: %s", align_file)
-        return  # exit if already aligned and over=False
     # prepare sentence splitters
-    punkt_param = PunktParameters()
-    ab_file = ''.join(
-        [program_folder,
-         'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.',
-         s_lang])
-    if os.path.isfile(ab_file):
-        punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
-    else:
-        logging.warning('Abbreviation file not found for language: %s', s_lang)
-    s_sentence_splitter = PunktSentenceTokenizer(punkt_param)
-    punkt_param = PunktParameters()
-    ab_file = ''.join(
-        [program_folder,
-         'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.',
-         t_lang])
-    if os.path.isfile(ab_file):
-        punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
-    else:
-        logging.warning('Abbreviation file not found for language: %s', t_lang)
-    t_sentence_splitter = PunktSentenceTokenizer(punkt_param)
+    s_sentence_splitter = sentence_splitter(program_folder, s_lang)
+    t_sentence_splitter = sentence_splitter(program_folder, t_lang)
     # call splitter & aligner
-    split_token_nltk(source_file, s_sentence_splitter)
-    split_token_nltk(target_file, t_sentence_splitter)
+    split_token_nltk(s_file, s_sentence_splitter)
+    split_token_nltk(t_file, t_sentence_splitter)
     # create empty hunalign dic from program-folder/data_raw files
-    if not os.path.exists(dictionary):
-        create_dictionary(program_folder + 'data_raw/' + s_lang + '.txt',
-                          program_folder + 'data_raw/' + t_lang + '.txt',
-                          dictionary)
+    if not os.path.exists(dic):
+        path = program_folder + 'data_raw/'
+        create_dictionary(path + s_lang + '.txt', path + t_lang + '.txt', dic)
     # create hunalign ladder alignment
-    hunalign_wrapper(source_file[:-4] + '.tok', target_file[:-4] + '.tok',
-                     dictionary, align_file + '.lad', program_folder,
+    hunalign_wrapper(s_file[:-4] + '.tok', t_file[:-4] + '.tok',
+                     dic, a_file + '.lad', program_folder,
                      realign=True)
     # create aligned output
-    output_lines = ladder2text_new.create_output_lines(align_file + '.lad',
-                                                       source_file[:-4],
-                                                       target_file[:-4])
+    output_lines = l2t.make_lines(a_file + '.lad', s_file[:-4], t_file[:-4])
     output_lines = [unicode(line, "utf-8") + '\n' for line in output_lines]
     # writing to disk
     if tab:
-        with codecs.open(align_file + '.tab', "w", "utf-8") as fout:
+        with codecs.open(a_file + '.tab', "w", "utf-8") as fout:
             for line in output_lines:
                 fout.write(line)
         # turn alignment into tmx
         if tmx:
-            tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang,
+            tab_to_tmx(a_file + '.tab', a_file + '.tmx', s_lang,
                        t_lang, note)
         # create parallel source and target text files
         if sep:
-            tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
-                            target_file[:-4] + '.ali')
+            tab_to_separate(a_file + '.tab', s_file[:-4] + '.ali',
+                            t_file[:-4] + '.ali')
     # remove temporary files
     if delete_temp:
-        os.remove(source_file[:-4])
-        os.remove(target_file[:-4])
-        os.remove(source_file[:-4] + ".tok")
-        os.remove(target_file[:-4] + ".tok")
+        os.remove(s_file[:-4])
+        os.remove(t_file[:-4])
+        os.remove(s_file[:-4] + ".tok")
+        os.remove(t_file[:-4] + ".tok")
     return output_lines
 
 
