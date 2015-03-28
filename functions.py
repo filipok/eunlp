@@ -323,8 +323,8 @@ def file_to_list(file_name, one=False, two=False):
 
 
 def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
-                  align_file, program_folder, note, delete_temp=True,
-                  over=True, para_size=300, para_size_small=100):
+                  align_file, program_folder, note, over=True, para_size=300,
+                  para_size_small=100):
     # functions.smart_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002")
     if (not over) and os.path.isfile(align_file + '.tab'):
@@ -352,9 +352,8 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             logging.warning('Alignment at 2nd attempt in %s', source_file)
     # If equal number of paragraphs:
     parallel_aligner(source_list, target_list, s_lang, t_lang, dictionary,
-                     align_file, program_folder, delete_temp=delete_temp,
-                     para_size=para_size, para_size_small=para_size_small,
-                     prj_name=source_file)
+                     align_file, program_folder, para_size=para_size,
+                     para_size_small=para_size_small, prj_name=source_file)
     # turn alignment into tmx
     tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang, note)
     # create parallel source and target text files
@@ -363,8 +362,8 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
 
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
-                     align_file, program_folder, delete_temp=True,
-                     para_size=300, para_size_small=100, prj_name='temp'):
+                     align_file, program_folder, para_size=300,
+                     para_size_small=100, prj_name='temp'):
     if not os.path.exists("/tmp/eunlp"):
         os.makedirs("/tmp/eunlp")
     fout = codecs.open(align_file + '.tab', "w", "utf-8")
@@ -381,12 +380,12 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
             fout.write(line)
         else:
             tmp_aligner(s_list[i], t_list[i], s_lang, t_lang, dictionary,
-                        program_folder, fout, prj_name, i, delete_temp)
+                        program_folder, fout, prj_name, i)
     fout.close()
 
 
 def tmp_aligner(source, target, s_lang, t_lang, dictionary, program_folder,
-                fout, prj_name, i, delete_temp=True):
+                fout, prj_name, i):
     r_num = str(random.randint(0, 100000))
     tmp_source = "/tmp/eunlp/s_" + r_num + ".txt"
     tmp_target = "/tmp/eunlp/t_" + r_num + ".txt"
@@ -398,8 +397,8 @@ def tmp_aligner(source, target, s_lang, t_lang, dictionary, program_folder,
         tout.write(target + '\n')
     # process them with the classic aligner
     lines = aligner(tmp_source, tmp_target, s_lang, t_lang, dictionary,
-                    tmp_align, program_folder, "a_" + r_num,
-                    delete_temp=True, tab=False, tmx=False, sep=False)
+                    tmp_align, program_folder, "a_" + r_num, tab=False,
+                    tmx=False, sep=False)
     # do some checks with the hunalign aligment and use only if ok
     everything_ok = check_hunalign(lines, source, target)
     if everything_ok[0]:
@@ -410,10 +409,9 @@ def tmp_aligner(source, target, s_lang, t_lang, dictionary, program_folder,
         line = ''.join(["Err\t", target, "\t", source, "\n"])
         fout.write(line)
     # remove temporary files
-    if delete_temp:
-        os.remove(tmp_source)
-        os.remove(tmp_target)
-        os.remove(tmp_align + '.lad')
+    os.remove(tmp_source)
+    os.remove(tmp_target)
+    os.remove(tmp_align + '.lad')
 
 
 def check_hunalign(lines, full_source, full_target):
@@ -501,9 +499,8 @@ def sentence_splitter(program_folder, lang):
     return splitter
 
 
-def aligner(s_file, t_file, s_lang, t_lang, dic, a_file,
-            program_folder, note, delete_temp=True, over=True, tab=True,
-            tmx=True, sep=True):
+def aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder, note,
+            tab=True, tmx=True, sep=True):
     # prepare sentence splitters
     s_sentence_splitter = sentence_splitter(program_folder, s_lang)
     t_sentence_splitter = sentence_splitter(program_folder, t_lang)
@@ -535,11 +532,10 @@ def aligner(s_file, t_file, s_lang, t_lang, dic, a_file,
             tab_to_separate(a_file + '.tab', s_file[:-4] + '.ali',
                             t_file[:-4] + '.ali')
     # remove temporary files
-    if delete_temp:
-        os.remove(s_file[:-4])
-        os.remove(t_file[:-4])
-        os.remove(s_file[:-4] + ".tok")
-        os.remove(t_file[:-4] + ".tok")
+    os.remove(s_file[:-4])
+    os.remove(t_file[:-4])
+    os.remove(s_file[:-4] + ".tok")
+    os.remove(t_file[:-4] + ".tok")
     return output_lines
 
 
@@ -566,9 +562,8 @@ def celex_scraper(languages, path, celex, program_folder):
     source_file, target_file, align_file, dictionary = make_paths(path, celex,
                                                                   languages)
     # call the aligner
-    smart_aligner(source_file, target_file, languages[0].lower(),
-                  languages[1].lower(), dictionary, align_file, program_folder,
-                  celex, delete_temp=True, over=False)
+    smart_aligner(s_file, t_file, languages[0].lower(), languages[1].lower(),
+                  dic, align_file, program_folder, celex, over=False)
 
 
 def merge_tmx(target_file, s_lang, t_lang):
