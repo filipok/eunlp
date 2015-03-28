@@ -38,7 +38,7 @@ The second and third columns are the chunks corresponding to each other.
 '''
 
 
-def create_output_lines(ladder_file, s_file, t_file):
+def make_lines(ladder_file, s_file, t_file):
     ladder_lines = readfile(ladder_file)
     s_lines = readfile(s_file)
     t_lines = readfile(t_file)
@@ -66,7 +66,7 @@ def main():
         hulines = readfile(sys.argv[2])
         enlines = readfile(sys.argv[3])
 
-        outputlines = create_output_lines(ladderlines, enlines, hulines)
+        outputlines = make_lines(ladderlines, enlines, hulines)
 
         for l in outputlines:
             print l

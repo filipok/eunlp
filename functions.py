@@ -11,7 +11,7 @@ import re
 import os
 from bs4 import BeautifulSoup
 import datetime
-import ladder2text_new
+import ladder2text_new as l2t
 import subprocess
 import random
 import nltk
