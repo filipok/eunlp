@@ -34,12 +34,6 @@ def make_paths(path, text_id, languages):
         return source_file, target_file, align_file, dictionary
 
 
-def check_error(text, error_string):
-    if error_string in text:
-        return False
-    return True
-
-
 def make_ep_sub_link(doc_category, doc_year, doc_code):
     return doc_category + doc_year + doc_code
 
@@ -109,7 +103,7 @@ def paragraph_combiner_sub(text):
     return text
 
 
-def downloader(make_link, error_text, url_code, lang_code, new_name,
+def downloader(make_link, url_code, lang_code, new_name,
                over=False):
     # Only download if not already existing, otherwise open from disk
     # over=True overrides that behavior
@@ -123,11 +117,8 @@ def downloader(make_link, error_text, url_code, lang_code, new_name,
         # this confuses get_text() in BeautifulSoup
         html_text = re.sub(r'</p><p>', r'</p>\n<p>', html_text)
 
-        if check_error(html_text, error_text):
-            with open(new_name, 'w') as f:
-                f.write(html_text)
-        else:
-            logging.error('Error in link %s %s.', url_code, lang_code)
+        with open(new_name, 'w') as f:
+            f.write(html_text)
     else:
         with codecs.open(new_name, "r", "utf-8") as f:
             html_text = f.read()
@@ -176,12 +167,12 @@ def souper(new_name, html_text, is_celex, is_ep, over=False):
     f.close()
 
 
-def scraper(langs, make_link, error_text, url_code, prefix, is_celex=False,
+def scraper(langs, make_link, url_code, prefix, is_celex=False,
             is_ep=False, over_html=False, over_txt=False):
     for lang_code in langs:
             new_name = prefix + url_code + '_' + lang_code + '.html'
-            text = downloader(make_link, error_text, url_code, lang_code,
-                              new_name, over_html)
+            text = downloader(make_link, url_code, lang_code, new_name,
+                              over_html)
 
             new_name = prefix + url_code + '_' + lang_code + '.txt'
             souper(new_name, text, is_celex, is_ep, over_txt)
@@ -549,8 +540,7 @@ def eu_xml_converter(file_name):
 def celex_scraper(languages, path, celex, program_folder):
     # create html and txt files for each language code
     # TODO de scos astea cu mesaj text de eroare si pus cu urllib.HTTPError
-    scraper(languages, make_celex_link,
-            'The requested document does not exist', celex, '', is_celex=True,
+    scraper(languages, make_celex_link, celex, '', is_celex=True,
             over_html=False, over_txt=False)
     # prepare paths
     s_file, t_file, align_file, dic = make_paths(path, celex, languages)

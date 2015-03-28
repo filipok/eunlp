@@ -35,5 +35,4 @@ if __name__ == '__main__':
     for i in range(len(ep_dates)):
         ep_dates[i] = ep_dates[i].strip('\n')
         # Or replace make_link_cre with make_link_pv
-        func.scraper(languages, make_link_cre, 'Application error',
-                     ep_dates[i], 'CRE')
+        func.scraper(languages, make_link_cre, ep_dates[i], 'CRE')
