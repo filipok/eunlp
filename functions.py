@@ -108,7 +108,6 @@ def downloader(make_link, url_code, lang_code, new_name,
     # Only download if not already existing, otherwise open from disk
     # over=True overrides that behavior
     if over or (not os.path.isfile(new_name)):
-        # TODO exceptions https://docs.python.org/2/howto/urllib2.html        
         # TODO make link outside the downloader
         link = make_link(url_code, lang_code)
         response = urllib2.urlopen(link)
@@ -178,6 +177,7 @@ def scraper(langs, make_link, url_code, prefix, is_celex=False,
                                   over_html)
             except urllib2.HTTPError:
                 logging.error("Link error in %s_%s", url_code, lang_code)
+                raise
             else:
                 new_name = prefix + url_code + '_' + lang_code + '.txt'
                 souper(new_name, text, is_celex, is_ep, over_txt)
@@ -542,17 +542,20 @@ def eu_xml_converter(file_name):
     return lista
 
 
-def celex_scraper(languages, path, celex, program_folder):
+def celex_scraper(langs, path, celex, program_folder):
     # TODO rename bilingual_aligner?
     # create html and txt files for each language code
-    # TODO de scos astea cu mesaj text de eroare si pus cu urllib.HTTPError
-    scraper(languages, make_celex_link, celex, '', is_celex=True,
-            over_html=False, over_txt=False)
-    # prepare paths
-    s_file, t_file, align_file, dic = make_paths(path, celex, languages)
-    # call the aligner
-    smart_aligner(s_file, t_file, languages[0].lower(), languages[1].lower(),
-                  dic, align_file, program_folder, celex, over=False)
+    try:
+        scraper(langs, make_celex_link, celex, '', is_celex=True,
+                over_html=False, over_txt=False)
+    except urllib2.HTTPError:
+        logging.error("Aborting alignment due to link error in %s.", celex)
+    else:
+        # prepare paths
+        s_file, t_file, align_file, dic = make_paths(path, celex, langs)
+        # call the aligner
+        smart_aligner(s_file, t_file, langs[0].lower(), langs[1].lower(),
+                      dic, align_file, program_folder, celex, over=False)
 
 
 def merge_tmx(target_file, s_lang, t_lang):
