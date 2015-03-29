@@ -21,7 +21,7 @@ logging.basicConfig(filename='log.txt', level=logging.WARNING)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 logging.getLogger('').addHandler(console)
-
+# TODO create proper module
 
 def make_paths(path, text_id, languages):
         source_file = os.path.join(path, text_id + '_' + languages[0] + '.txt')
@@ -109,6 +109,7 @@ def downloader(make_link, url_code, lang_code, new_name,
     # over=True overrides that behavior
     if over or (not os.path.isfile(new_name)):
         # TODO exceptions https://docs.python.org/2/howto/urllib2.html        
+        # TODO make link outside the downloader
         link = make_link(url_code, lang_code)
         response = urllib2.urlopen(link)
         html_text = response.read()
@@ -141,6 +142,7 @@ def souper(new_name, html_text, is_celex, is_ep, over=False):
         logging.warning("%s: txt file already existing.", new_name)
         return
     f = codecs.open(new_name, "w", "utf-8")
+    # TODO html entities
     soup = BeautifulSoup(html_text, "lxml")
     # some celexes have \n inside <p> tags
     remove_newlines(soup)
@@ -538,6 +540,7 @@ def eu_xml_converter(file_name):
 
 
 def celex_scraper(languages, path, celex, program_folder):
+    # TODO rename bilingual_aligner?
     # create html and txt files for each language code
     # TODO de scos astea cu mesaj text de eroare si pus cu urllib.HTTPError
     scraper(languages, make_celex_link, celex, '', is_celex=True,
