@@ -173,11 +173,14 @@ def scraper(langs, make_link, url_code, prefix, is_celex=False,
             is_ep=False, over_html=False, over_txt=False):
     for lang_code in langs:
             new_name = prefix + url_code + '_' + lang_code + '.html'
-            text = downloader(make_link, url_code, lang_code, new_name,
-                              over_html)
-
-            new_name = prefix + url_code + '_' + lang_code + '.txt'
-            souper(new_name, text, is_celex, is_ep, over_txt)
+            try:
+                text = downloader(make_link, url_code, lang_code, new_name,
+                                  over_html)
+            except urllib2.HTTPError:
+                logging.error("Link error in %s_%s", url_code, lang_code)
+            else:
+                new_name = prefix + url_code + '_' + lang_code + '.txt'
+                souper(new_name, text, is_celex, is_ep, over_txt)
 
 
 def create_dictionary(input_source, input_target, output_file):
