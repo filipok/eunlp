@@ -136,7 +136,7 @@ def remove_newlines(soup):
 
 
 def souper(new_name, html_text, is_celex, is_ep, over=False):
-    #TODO merge is_celex and is_ep into a single parameter
+    # TODO merge is_celex and is_ep into a single parameter
     # Only convert to txt if not already existing
     # over=True overrides that behavior
     if (not over) and os.path.isfile(new_name):
@@ -559,7 +559,7 @@ def align(langs, path, celex, program_folder):
                       dic, align_file, program_folder, celex, over=False)
 
 
-def merge_tmx(target_file, s_lang, t_lang):
+def merge_tmx():
     # create a list of tmx files in current directory (also test for languages)
     # for file in list:
     #    read file
