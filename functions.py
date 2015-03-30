@@ -217,11 +217,8 @@ def tab_to_separate(input_name, output_source, output_target):
 
 def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
     # get current date
-    current_date = datetime.datetime.now().isoformat()
-    # TODO simplify this
-    current_date = "".join([current_date[0:4], current_date[5:7],
-                            current_date[8:10], "T", current_date[11:13],
-                            current_date[14:16], current_date[17:19], "Z"])
+    now = datetime.datetime.now().isoformat()
+    now = re.split(r"\.", re.sub(r"[-:]", r"", now))[0] + "Z"
     # create new TMX file
     with codecs.open(tmx_name, "w", "utf-8") as fout:
         # add tmx header (copied from LF Aligner output)
@@ -257,7 +254,7 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
                 source = source.replace('~~~ ', '')
                 target = target.replace('~~~ ', '')
                 #   create TU line
-                tu = ''.join(['<tu creationdate="', current_date,
+                tu = ''.join(['<tu creationdate="', now,
                               '" creationid="eunlp"><prop type="Txt::Note">',
                               note, '</prop>', tag, '\n'])
                 fout.write(tu)
