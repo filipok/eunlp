@@ -21,6 +21,7 @@ logging.basicConfig(filename='log.txt', level=logging.WARNING)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 logging.getLogger('').addHandler(console)
+import xml.sax.saxutils
 # TODO create proper module
 
 def make_paths(path, text_id, languages):
@@ -142,7 +143,6 @@ def souper(new_name, html_text, is_celex, is_ep, over=False):
         logging.warning("%s: txt file already existing.", new_name)
         return
     f = codecs.open(new_name, "w", "utf-8")
-    # TODO html entities
     soup = BeautifulSoup(html_text, "lxml")
     # some celexes have \n inside <p> tags
     remove_newlines(soup)
@@ -254,6 +254,9 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
                 # remove triple tildas from hunalign
                 source = source.replace('~~~ ', '')
                 target = target.replace('~~~ ', '')
+                # escape XML entities '&', '<', and '>'
+                source = xml.sax.saxutils.escape(source)
+                target = xml.sax.saxutils.escape(target)
                 #   create TU line
                 tu = ''.join(['<tu creationdate="', now,
                               '" creationid="eunlp"><prop type="Txt::Note">',
