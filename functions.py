@@ -135,6 +135,7 @@ def remove_newlines(soup):
 
 
 def souper(new_name, html_text, is_celex, is_ep, over=False):
+    #TODO merge is_celex and is_ep into a single parameter
     # Only convert to txt if not already existing
     # over=True overrides that behavior
     if (not over) and os.path.isfile(new_name):
