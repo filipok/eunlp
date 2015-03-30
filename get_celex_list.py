@@ -29,4 +29,4 @@ if __name__ == '__main__':
     file_list = functions.eu_xml_converter(xml_list)
     for item in file_list:
         print "Processing " + item[0] + ' ...'
-        functions.celex_scraper(languages, path, item[0], program_folder)
+        functions.align(languages, path, item[0], program_folder)

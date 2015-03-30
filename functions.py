@@ -543,8 +543,7 @@ def eu_xml_converter(file_name):
     return lista
 
 
-def celex_scraper(langs, path, celex, program_folder):
-    # TODO rename bilingual_aligner?
+def align(langs, path, celex, program_folder):
     # create html and txt files for each language code
     try:
         scraper(langs, make_celex_link, celex, '', is_celex=True,
