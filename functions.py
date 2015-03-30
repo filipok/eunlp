@@ -159,6 +159,7 @@ def souper(new_name, html_text, is_celex, is_ep, over=False):
             clean_text = clean_text.contents[1].get_text()
             clean_text = re.sub(r'\n\nTop $', r'', clean_text)
         # double \n, otherwise the Perl splitter merges the first lines
+        # TODO still needed?
         clean_text = re.sub(r'\n', r'\n\n', clean_text)
     elif is_ep:
         clean_text = soup.get_text()
