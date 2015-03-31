@@ -533,9 +533,14 @@ def eu_xml_converter(file_name):
         text = f.read()
     soup = BeautifulSoup(text, 'lxml')
     lista = []
-    for item in soup.find_all('result'):
-        celex = item.find('id_celex').contents[1].contents[0]
-        title = item.find('expression_title').contents[1].contents[0]
+    x = soup.find_all('result')
+    length = len(x)
+    for i in range(length):
+        if x[i].find('id_celex') is not None:
+            celex = x[i].find('id_celex').contents[1].contents[0]
+        else:
+            celex = 'NoCELEX'
+        title = x[i].find('expression_title').contents[1].contents[0]
         lista.append((celex, title))
     return lista
 
