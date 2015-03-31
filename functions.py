@@ -104,13 +104,10 @@ def paragraph_combiner_sub(text):
     return text
 
 
-def downloader(make_link, url_code, lang_code, new_name,
-               over=False):
+def downloader(link, new_name, over=False):
     # Only download if not already existing, otherwise open from disk
     # over=True overrides that behavior
     if over or (not os.path.isfile(new_name)):
-        # TODO make link outside the downloader
-        link = make_link(url_code, lang_code)
         response = urllib2.urlopen(link)
         html_text = response.read()
 
@@ -175,8 +172,8 @@ def scraper(langs, make_link, url_code, prefix, is_celex=False,
     for lang_code in langs:
             new_name = prefix + url_code + '_' + lang_code + '.html'
             try:
-                text = downloader(make_link, url_code, lang_code, new_name,
-                                  over_html)
+                link = make_link(url_code, lang_code)
+                text = downloader(link, new_name, over_html)
             except urllib2.HTTPError:
                 logging.error("Link error in %s_%s", url_code, lang_code)
                 raise
