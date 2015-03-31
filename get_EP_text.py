@@ -25,7 +25,7 @@ if __name__ == '__main__':
     # create doc_code
     doc_code = func.make_ep_sub_link(category, year, number)
     # create html and txt files for each language code
-    func.scraper(languages, func.make_ep_link, doc_code, '', is_ep=True,
+    func.scraper(languages, func.make_ep_link, doc_code, '', style="europarl",
                  over_html=False, over_txt=False)
     # prepare paths
     source_file, target_file, align_file, dictionary = \

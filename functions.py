@@ -132,8 +132,7 @@ def remove_newlines(soup):
         x[i].replace_with(BeautifulSoup(new_text).p)
 
 
-def souper(new_name, html_text, is_celex, is_ep, over=False):
-    # TODO merge is_celex and is_ep into a single parameter
+def souper(new_name, html_text, style, over=False):
     # Only convert to txt if not already existing
     # over=True overrides that behavior
     if (not over) and os.path.isfile(new_name):
@@ -144,7 +143,7 @@ def souper(new_name, html_text, is_celex, is_ep, over=False):
     # some celexes have \n inside <p> tags
     remove_newlines(soup)
     # separate branches for each document type
-    if is_celex:
+    if style == "celex":
         if soup.txt_te is not None:
             # for older celexes
             clean_text = soup.txt_te.get_text()
@@ -158,7 +157,7 @@ def souper(new_name, html_text, is_celex, is_ep, over=False):
         # double \n, otherwise the Perl splitter merges the first lines
         # TODO still needed?
         clean_text = re.sub(r'\n', r'\n\n', clean_text)
-    elif is_ep:
+    elif style == "europarl":
         clean_text = soup.get_text()
         clean_text = strip_ep(clean_text)
     else:
@@ -167,8 +166,8 @@ def souper(new_name, html_text, is_celex, is_ep, over=False):
     f.close()
 
 
-def scraper(langs, make_link, url_code, prefix, is_celex=False,
-            is_ep=False, over_html=False, over_txt=False):
+def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
+            over_txt=False):
     for lang_code in langs:
             new_name = prefix + url_code + '_' + lang_code + '.html'
             try:
@@ -179,7 +178,7 @@ def scraper(langs, make_link, url_code, prefix, is_celex=False,
                 raise
             else:
                 new_name = prefix + url_code + '_' + lang_code + '.txt'
-                souper(new_name, text, is_celex, is_ep, over_txt)
+                souper(new_name, text, style, over_txt)
 
 
 def create_dictionary(input_source, input_target, output_file):
@@ -544,7 +543,7 @@ def eu_xml_converter(file_name):
 def align(langs, path, celex, program_folder):
     # create html and txt files for each language code
     try:
-        scraper(langs, make_celex_link, celex, '', is_celex=True,
+        scraper(langs, make_celex_link, celex, '', style="celex",
                 over_html=False, over_txt=False)
     except urllib2.HTTPError:
         logging.error("Aborting alignment due to link error in %s.", celex)
