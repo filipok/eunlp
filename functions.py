@@ -39,10 +39,10 @@ def make_ep_sub_link(doc_category, doc_year, doc_code):
     return doc_category + doc_year + doc_code
 
 
-def make_ep_link(category_year_code, lang):
-    doc_category = category_year_code[0:2]
-    doc_year = category_year_code[2:6]
-    doc_code = category_year_code[6:10]
+def make_ep_link(cat_year_code, lang):
+    doc_category = cat_year_code[0:2]
+    doc_year = cat_year_code[2:6]
+    doc_code = cat_year_code[6:10]
     a = 'http://www.europarl.europa.eu/sides/getDoc.do?type=REPORT&reference=A'
     p = 'http://www.europarl.europa.eu/sides/getDoc.do?type=TA&reference=P'
     b = 'http://www.europarl.europa.eu/sides/getDoc.do?type=MOTION&reference=B'
@@ -55,8 +55,8 @@ def make_ep_link(category_year_code, lang):
     elif doc_category[0] == 'B':
         part_1 = b
     else:
-        logging.error("make_link error in %s %s", category_year_code, lang)
-        part_1 = 'error'  # TODO raise exception?
+        logging.error("EP doc_category error in %s %s", cat_year_code, lang)
+        raise IOError("EP link error in doc_category")
     return "".join([part_1, doc_category[1], '-', p_specific, doc_year, '-',
                     doc_code, '&language=', lang])
 
