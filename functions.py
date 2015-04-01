@@ -358,7 +358,7 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
     fout = codecs.open(align_file + '.tab', "w", "utf-8")
     # send paragraph to hunalign if large or if intermediate and
     # both source and target have a dot followed by whitespace.
-    patt = re.compile(r'\. ')  # TODO de pus si punct si virgula si doua pcte?
+    patt = re.compile(r'\. ')
     for i in range(len(s_list)):
         small = len(s_list[i]) < para_size_small
         n_pat = not (re.search(patt, s_list[i]) and re.search(patt, t_list[i]))
