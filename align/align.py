@@ -16,7 +16,7 @@ import logging
 import nltk
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 
-from align import ladder2text_new as l2t
+from . import ladder2text_new as l2t
 from . import util
 from . import convert
 from . import down
