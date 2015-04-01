@@ -8,7 +8,7 @@
 # Created:     4.11.2014
 
 import sys
-import functions as func
+import align as func
 
 
 def load_dates(fname):
@@ -35,4 +35,5 @@ if __name__ == '__main__':
     for i in range(len(ep_dates)):
         ep_dates[i] = ep_dates[i].strip('\n')
         # Or replace make_link_cre with make_link_pv
+        # TODO broken
         func.scraper(languages, make_link_cre, ep_dates[i], 'CRE')

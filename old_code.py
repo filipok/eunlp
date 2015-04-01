@@ -1,7 +1,7 @@
 import subprocess
 import codecs
 import re
-import functions
+import align
 
 def split_token_perl(file_name, lang, program_folder):
     # TO DO http://search.cpan.org/dist/PersistentPerl/lib/PersistentPerl.pm
@@ -16,7 +16,7 @@ def split_token_perl(file_name, lang, program_folder):
     # remove <P> created by the sentence splitter
     output = re.sub(r'\n<P>', '', output)
     # paragraph combiner
-    output = functions.paragraph_combiner_sub(output)
+    output = align.paragraph_combiner_sub(output)
     with codecs.open(file_name[:-4], 'w', 'utf-8') as f:
         f.write(unicode(output, 'utf-8'))
     # tokenizer

@@ -10,7 +10,12 @@
 
 import sys
 import os
-import functions
+import align
+import logging
+logging.basicConfig(filename='log.txt', level=logging.WARNING)
+console = logging.StreamHandler()
+console.setLevel(logging.INFO)
+logging.getLogger('').addHandler(console)
 
 if __name__ == '__main__':
     # collect arguments
@@ -22,4 +27,4 @@ if __name__ == '__main__':
     languages = sys.argv[2:]  # collect language codes
 
     # call the celex_scraper
-    functions.align(languages, path, celex, program_folder)
+    align.celex_aligner(languages, path, celex, program_folder)

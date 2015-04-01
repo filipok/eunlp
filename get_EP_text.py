@@ -10,7 +10,7 @@
 
 import sys
 import os
-import functions as func
+import align as func
 
 if __name__ == '__main__':
     # collect arguments
@@ -23,6 +23,7 @@ if __name__ == '__main__':
     number = sys.argv[3]
     languages = sys.argv[4:]
     # create doc_code
+    # TODO broken
     doc_code = func.make_ep_sub_link(category, year, number)
     # create html and txt files for each language code
     func.scraper(languages, func.make_ep_link, doc_code, '', style="europarl",

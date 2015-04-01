@@ -9,72 +9,15 @@ import urllib2
 import codecs
 import re
 import os
-from bs4 import BeautifulSoup
-import datetime
 import ladder2text_new as l2t
 import subprocess
 import random
 import nltk
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 import logging
-logging.basicConfig(filename='log.txt', level=logging.WARNING)
-console = logging.StreamHandler()
-console.setLevel(logging.INFO)
-logging.getLogger('').addHandler(console)
-import xml.sax.saxutils
-# TODO create proper module
-
-
-def make_paths(path, text_id, languages):
-        source_file = os.path.join(path, text_id + '_' + languages[0] + '.txt')
-        target_file = os.path.join(path, text_id + '_' + languages[1] + '.txt')
-        align_file = os.path.join(path, 'bi_' + text_id + '_' +
-                                  languages[0].lower() + '_' +
-                                  languages[1].lower())
-        dictionary = os.path.join(path, languages[0].lower() +
-                                  languages[1].lower() + '.dic')
-        return source_file, target_file, align_file, dictionary
-
-
-def make_ep_sub_link(doc_category, doc_year, doc_code):
-    return doc_category + doc_year + doc_code
-
-
-def make_ep_link(cat_year_code, lang):
-    doc_category = cat_year_code[0:2]
-    doc_year = cat_year_code[2:6]
-    doc_code = cat_year_code[6:10]
-    a = 'http://www.europarl.europa.eu/sides/getDoc.do?type=REPORT&reference=A'
-    p = 'http://www.europarl.europa.eu/sides/getDoc.do?type=TA&reference=P'
-    b = 'http://www.europarl.europa.eu/sides/getDoc.do?type=MOTION&reference=B'
-    p_specific = ''  # this is specific to P links
-    if doc_category[0] == 'A':
-        part_1 = a
-    elif doc_category[0] == 'P':
-        part_1 = p
-        p_specific = 'TA-'
-    elif doc_category[0] == 'B':
-        part_1 = b
-    else:
-        logging.error("EP doc_category error in %s %s", cat_year_code, lang)
-        raise IOError("EP link error in doc_category")
-    return "".join([part_1, doc_category[1], '-', p_specific, doc_year, '-',
-                    doc_code, '&language=', lang])
-
-
-def make_celex_link(celex, lang):
-    part_1 = "http://eur-lex.europa.eu/legal-content/"
-    part_2 = "/TXT/?uri=CELEX:"
-    return part_1 + lang + part_2 + celex
-
-
-def strip_ep(text):
-    # double newlines, otherwise the splitter merges the first lines
-    text = re.sub(r'\n', r'\n\n', text)
-    # discard language list at the beginning (it ends with Swedish/svenska)
-    split = re.split(r'\nsv.{3}svenska.*\n', text)
-    text = split[1]
-    return text
+from . import util
+from . import convert
+from . import down
 
 
 def paragraph_combiner_sub(text):
@@ -96,172 +39,6 @@ def paragraph_combiner_sub(text):
     text = re.sub(pattern_6, r'\n', text)
     text = re.sub(pattern_7, r'\n', text)
     return text
-
-
-def downloader(link, new_name, over=False):
-    # Only download if not already existing, otherwise open from disk
-    # over=True overrides that behavior
-    if over or (not os.path.isfile(new_name)):
-        response = urllib2.urlopen(link)
-        html_text = response.read()
-
-        # some celexes have no new line between paras
-        # this confuses get_text() in BeautifulSoup
-        html_text = re.sub(r'</p><p>', r'</p>\n<p>', html_text)
-
-        with open(new_name, 'w') as f:
-            f.write(html_text)
-    else:
-        with codecs.open(new_name, "r", "utf-8") as f:
-            html_text = f.read()
-            logging.debug("%s: html file already downloaded.", new_name)
-    return html_text
-
-
-def remove_newlines(soup):
-    x = soup.find_all('p')
-    length = len(x)
-    for i in range(length):
-        new_text = unicode(x[i]).replace('\n', ' ')
-        x[i].replace_with(BeautifulSoup(new_text).p)
-
-
-def souper(new_name, html_text, style, over=False):
-    # Only convert to txt if not already existing
-    # over=True overrides that behavior
-    if (not over) and os.path.isfile(new_name):
-        logging.warning("%s: txt file already existing.", new_name)
-        return
-    f = codecs.open(new_name, "w", "utf-8")
-    soup = BeautifulSoup(html_text, "lxml")
-    # some celexes have \n inside <p> tags
-    remove_newlines(soup)
-    # separate branches for each document type
-    if style == "celex":
-        if soup.txt_te is not None:
-            # for older celexes
-            clean_text = soup.txt_te.get_text()
-        else:
-            # for newer celexes
-            # the hierarchy is rather deep
-            clean_text = soup.body.div.contents[8].contents[5].contents[0]
-            clean_text = clean_text.contents[4].contents[9].contents[3]
-            clean_text = clean_text.contents[1].get_text()
-            clean_text = re.sub(r'\n\nTop $', r'', clean_text)
-    elif style == "europarl":
-        clean_text = soup.get_text()
-        clean_text = strip_ep(clean_text)
-    else:
-        clean_text = soup.get_text()
-    f.write(clean_text)
-    f.close()
-
-
-def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
-            over_txt=False):
-    for lang_code in langs:
-            new_name = prefix + url_code + '_' + lang_code + '.html'
-            try:
-                link = make_link(url_code, lang_code)
-                text = downloader(link, new_name, over_html)
-            except urllib2.HTTPError:
-                logging.error("Link error in %s_%s", url_code, lang_code)
-                raise
-            else:
-                new_name = prefix + url_code + '_' + lang_code + '.txt'
-                souper(new_name, text, style, over_txt)
-
-
-def create_dictionary(input_source, input_target, output_file):
-    with codecs.open(input_source, "r", "utf-8") as sin:
-        s_list = list(sin)
-    with codecs.open(input_target, "r", "utf-8") as tin:
-        t_list = list(tin)
-    if len(s_list) == len(t_list) and len(s_list) != 0:
-        with codecs.open(output_file, "w", "utf-8") as fout:
-            for i in range(len(s_list)):
-                s_term = s_list[i].rstrip()
-                t_term = t_list[i].rstrip()
-                if len(s_term) > 0 and len(t_term) > 0:
-                    line_to_add = t_term + ' @ ' + s_term + '\r\n'
-                    fout.write(line_to_add)
-    else:
-        logging.error(
-            "Dictionary files of different length or length = 0. Aborting.")
-
-
-def tab_to_separate(input_name, output_source, output_target):
-    with codecs.open(input_name, "r", "utf-8") as fin:
-        with codecs.open(output_source, "w", "utf-8") as out_s:
-            with codecs.open(output_target, "w", "utf-8") as out_t:
-                for line in fin:
-                    line = line.strip('\n')
-                    text = re.split(r'\t', line)
-                    source = text[2]
-                    target = text[1]
-                    out_s.write(source + '\n')
-                    out_t.write(target + '\n')
-
-
-def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
-    # get current date
-    now = datetime.datetime.now().isoformat()
-    now = re.split(r"\.", re.sub(r"[-:]", r"", now))[0] + "Z"
-    # create new TMX file
-    with codecs.open(tmx_name, "w", "utf-8") as fout:
-        # add tmx header (copied from LF Aligner output)
-        fout.write('<?xml version="1.0" encoding="utf-8" ?>\n')
-        fout.write('<!DOCTYPE tmx SYSTEM "tmx14.dtd">\n')
-        fout.write('<tmx version="1.4">\n')
-        fout.write('  <header\n')
-        fout.write('    creationtool="eunlp"\n')
-        fout.write('    creationtoolversion="0.01"\n')
-        fout.write('    datatype="unknown"\n')
-        fout.write('    segtype="sentence"\n')
-        fout.write('    adminlang="' + s_lang + '"\n')
-        fout.write('    srclang="' + s_lang + '"\n')
-        fout.write('    o-tmf="TW4Win 2.0 Format"\n')
-        fout.write('  >\n')
-        fout.write('  </header>\n')
-        fout.write('  <body>\n')
-        with codecs.open(input_name, "r", "utf-8") as fin:
-            for line in fin:
-                #   get source and target to temp variables
-                text = re.split(r'\t', line)
-                source = text[2].strip('\n')
-                target = text[1]
-                if text[0] == 'Err':
-                    tag = '<prop type="Txt::Alignment">Long_f</prop>'
-                elif text[0] == 'Nai':
-                    tag = '<prop type="Txt::Alignment">Short</prop>'
-                elif text[0] == 'Hun':
-                    tag = '<prop type="Txt::Alignment">Hun</prop>'
-                else:
-                    tag = '<prop type="Txt::Alignment">Unknown</prop>'
-                # remove triple tildas from hunalign
-                source = source.replace('~~~ ', '')
-                target = target.replace('~~~ ', '')
-                # escape XML entities '&', '<', and '>'
-                source = xml.sax.saxutils.escape(source)
-                target = xml.sax.saxutils.escape(target)
-                #   create TU line
-                tu = ''.join(['<tu creationdate="', now,
-                              '" creationid="eunlp"><prop type="Txt::Note">',
-                              note, '</prop>', tag, '\n'])
-                fout.write(tu)
-                #   create TUV source line
-                tuv = ''.join(['<tuv xml:lang="', s_lang, '"><seg>', source,
-                               '</seg></tuv>\n'])
-                fout.write(tuv)
-                #   create TUV target line
-                tuv = ''.join(['<tuv xml:lang="', t_lang, '"><seg>', target,
-                               '</seg></tuv> </tu>\n'])
-                fout.write(tuv)
-                fout.write('\n')
-        # add tmx footer
-        fout.write('\n')
-        fout.write('</body>\n')
-        fout.write('</tmx>')
 
 
 def hunalign_wrapper(source_file, target_file, dictionary, align_file,
@@ -338,10 +115,11 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                      align_file, program_folder, para_size=para_size,
                      para_size_small=para_size_small, prj_name=source_file)
     # turn alignment into tmx
-    tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang, t_lang, note)
+    convert.tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang,
+                       t_lang, note)
     # create parallel source and target text files
-    tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
-                    target_file[:-4] + '.ali')
+    convert.tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
+                            target_file[:-4] + '.ali')
 
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
@@ -379,9 +157,9 @@ def tmp_aligner(source, target, s_lang, t_lang, dictionary, program_folder,
     with codecs.open(tmp_target, "w", "utf-8") as tout:
         tout.write(target + '\n')
     # process them with the classic aligner
-    lines = aligner(tmp_source, tmp_target, s_lang, t_lang, dictionary,
-                    tmp_align, program_folder, "a_" + r_num, tab=False,
-                    tmx=False, sep=False)
+    lines = basic_aligner(tmp_source, tmp_target, s_lang, t_lang, dictionary,
+                          tmp_align, program_folder, "a_" + r_num, tab=False,
+                          tmx=False, sep=False)
     # do some checks with the hunalign aligment and use only if ok
     everything_ok = check_hunalign(lines, source, target)
     if everything_ok[0]:
@@ -458,32 +236,20 @@ def split_token_nltk(file_name, sent_splitter):
             f.write(' '.join(sent) + '\n')
 
 
-def abbreviation_loader(file_name):
-    abbreviations = []
-    with codecs.open(file_name, 'r', 'utf-8') as f:
-        lines = list(f)
-    for line in lines:
-        if len(line) > 0 and line[0] != '#':
-            abb = line.strip('\n')
-            abb = re.split(' #', abb)[0]
-            abbreviations.append(abb)
-    return abbreviations
-
-
 def sentence_splitter(program_folder, lang):
     punkt_param = PunktParameters()
     subfolder = 'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.'
     ab_file = ''.join([program_folder, subfolder, lang])
     if os.path.isfile(ab_file):
-        punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
+        punkt_param.abbrev_types = set(util.abbreviation_loader(ab_file))
     else:
         logging.warning('Abbreviation file not found for language: %s', lang)
     splitter = PunktSentenceTokenizer(punkt_param)
     return splitter
 
 
-def aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder, note,
-            tab=True, tmx=True, sep=True):
+def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder,
+                  note, tab=True, tmx=True, sep=True):
     # prepare sentence splitters
     s_sentence_splitter = sentence_splitter(program_folder, s_lang)
     t_sentence_splitter = sentence_splitter(program_folder, t_lang)
@@ -493,7 +259,8 @@ def aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder, note,
     # create empty hunalign dic from program-folder/data_raw files
     if not os.path.exists(dic):
         path = program_folder + 'data_raw/'
-        create_dictionary(path + s_lang + '.txt', path + t_lang + '.txt', dic)
+        util.create_dictionary(path + s_lang + '.txt', path + t_lang + '.txt',
+                               dic)
     # create hunalign ladder alignment
     hunalign_wrapper(s_file[:-4] + '.tok', t_file[:-4] + '.tok', dic,
                      a_file + '.lad', program_folder, realign=True)
@@ -506,10 +273,11 @@ def aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder, note,
             for line in output_lines:
                 fout.write(line)
         if tmx:
-            tab_to_tmx(a_file + '.tab', a_file + '.tmx', s_lang, t_lang, note)
+            convert.tab_to_tmx(a_file + '.tab', a_file + '.tmx', s_lang,
+                               t_lang, note)
         if sep:
-            tab_to_separate(a_file + '.tab', s_file[:-4] + '.ali',
-                            t_file[:-4] + '.ali')
+            convert.tab_to_separate(a_file + '.tab', s_file[:-4] + '.ali',
+                                    t_file[:-4] + '.ali')
     # remove temporary files
     os.remove(s_file[:-4])
     os.remove(t_file[:-4])
@@ -518,42 +286,16 @@ def aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder, note,
     return output_lines
 
 
-def eu_xml_converter(file_name):
-    with codecs.open(file_name, 'r', 'utf-8') as f:
-        text = f.read()
-    soup = BeautifulSoup(text, 'lxml')
-    lista = []
-    x = soup.find_all('result')
-    length = len(x)
-    for i in range(length):
-        if x[i].find('id_celex') is not None:
-            celex = x[i].find('id_celex').contents[1].contents[0]
-        else:
-            celex = 'NoCELEX'
-        title = x[i].find('expression_title').contents[1].contents[0]
-        lista.append((celex, title))
-    return lista
-
-
-def align(langs, path, celex, program_folder):
+def celex_aligner(langs, path, celex, program_folder):
     # create html and txt files for each language code
     try:
-        scraper(langs, make_celex_link, celex, '', style="celex",
-                over_html=False, over_txt=False)
+        down.scraper(langs, util.make_celex_link, celex, '', style="celex",
+                     over_html=False, over_txt=False)
     except urllib2.HTTPError:
         logging.error("Aborting alignment due to link error in %s.", celex)
     else:
         # prepare paths
-        s_file, t_file, align_file, dic = make_paths(path, celex, langs)
+        s_file, t_file, align_file, dic = util.make_paths(path, celex, langs)
         # call the aligner
         smart_aligner(s_file, t_file, langs[0].lower(), langs[1].lower(),
                       dic, align_file, program_folder, celex, over=False)
-
-
-def merge_tmx():
-    # create a list of tmx files in current directory (also test for languages)
-    # for file in list:
-    #    read file
-    #    remove header and footer
-    #    add remaining contents to target_file (if s_lang and t_lang?)
-    pass

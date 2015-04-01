@@ -10,7 +10,8 @@
 
 import sys
 import os
-import functions
+import align
+import convert
 import logging
 logging.basicConfig(filename='log.txt', level=logging.WARNING)
 console = logging.StreamHandler()
@@ -26,7 +27,7 @@ if __name__ == '__main__':
     xml_list = sys.argv[1]  # collect xml list name
     languages = sys.argv[2:]  # collect language codes
 
-    file_list = functions.eu_xml_converter(xml_list)
+    file_list = convert.eu_xml_converter(xml_list)
     for item in file_list:
         print "Processing " + item[0] + ' ...'
-        functions.align(languages, path, item[0], program_folder)
+        align.celex_aligner(languages, path, item[0], program_folder)
