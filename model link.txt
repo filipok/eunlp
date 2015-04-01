@@ -1,4 +1,14 @@
-﻿-- de eliminat introducerile de la rapoarte
+﻿***
+Erori la lotul de test celex:
+SILENT FAIL in 32014Q0714(03) EN-RO, dar eroare EN-DE
+add warning la diferente mari de dim s/t + punctuatie diferita la final?
+fail in 32014O0015 + are glosar EN-RO, EN-DE, EN-FR.
+fail in 32014R0964 DE si FR (footnote 9 in plus)
+fail 32014R0609 DE (lipseste segment din preambul)
+fail 32014D0004(01) FR (alineate unite in versiunea FR)
+***
+
+-- de eliminat introducerile de la rapoarte
 -- script de combinat TMX-uri (nu e musai, poate combin întâi txt-urile? deşi ar fi greu pt LF-Aligner pe urmă)
 Model linkuri
 

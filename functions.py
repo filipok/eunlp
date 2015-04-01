@@ -24,6 +24,7 @@ logging.getLogger('').addHandler(console)
 import xml.sax.saxutils
 # TODO create proper module
 
+
 def make_paths(path, text_id, languages):
         source_file = os.path.join(path, text_id + '_' + languages[0] + '.txt')
         target_file = os.path.join(path, text_id + '_' + languages[1] + '.txt')
@@ -77,13 +78,6 @@ def strip_ep(text):
 
 
 def paragraph_combiner_sub(text):
-    # TODO SILENT FAIL in 32014Q0714(03) EN-RO, dar eroare EN-DE
-    # add warning la diferente mari de dim s/t + punctuatie diferita la final?
-
-    # TODO fail in 32014O0015 + are glosar EN-RO, EN-DE, EN-FR.
-    # TODO fail in 32014R0964 DE si FR (footnote 9 in plus)
-    # TODO fail 32014R0609 DE (lipseste segment din preambul)
-    # TODO fail 32014D0004(01) FR (alineate unite in vers FR)
     pattern_1 = re.compile(
         r'\n\(?([0-9]{1,3}|[a-z]{1,3}|[A-Z]{1,3})[\.\)][\n\s]')
     # combine single lines consisting of single number + single letter
