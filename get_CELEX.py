@@ -10,8 +10,10 @@
 
 import sys
 import os
-import align
 import logging
+
+from align import align
+
 logging.basicConfig(filename='log.txt', level=logging.WARNING)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)

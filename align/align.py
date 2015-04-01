@@ -9,12 +9,14 @@ import urllib2
 import codecs
 import re
 import os
-import ladder2text_new as l2t
 import subprocess
 import random
+import logging
+
 import nltk
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
-import logging
+
+from align import ladder2text_new as l2t
 from . import util
 from . import convert
 from . import down

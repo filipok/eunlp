@@ -8,7 +8,8 @@
 # Created:     4.11.2014
 
 import sys
-import align as func
+
+from align import align as func
 
 
 def load_dates(fname):

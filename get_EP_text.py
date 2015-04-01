@@ -10,7 +10,9 @@
 
 import sys
 import os
-import align as func
+
+from align import align as func
+
 
 if __name__ == '__main__':
     # collect arguments

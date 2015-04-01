@@ -1,7 +1,9 @@
 import subprocess
 import codecs
 import re
-import align
+
+from align import align
+
 
 def split_token_perl(file_name, lang, program_folder):
     # TO DO http://search.cpan.org/dist/PersistentPerl/lib/PersistentPerl.pm
