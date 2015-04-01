@@ -102,7 +102,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             source_list = file_to_list(source_file, one=True, two=True)
             target_list = file_to_list(target_file, one=True, two=True)
             if len(source_list) != len(target_list):
-                logging.error("Smart alignment failed in %s -> Hunalign",
+                logging.error("Smart alignment failed in %s.",
                               source_file)
                 # Using Hunalign on the entire file is mostly useless.
                 # aligner(source_file, target_file, s_lang, t_lang, dictionary,
