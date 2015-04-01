@@ -154,9 +154,6 @@ def souper(new_name, html_text, style, over=False):
             clean_text = clean_text.contents[4].contents[9].contents[3]
             clean_text = clean_text.contents[1].get_text()
             clean_text = re.sub(r'\n\nTop $', r'', clean_text)
-        # double \n, otherwise the Perl splitter merges the first lines
-        # TODO still needed?
-        clean_text = re.sub(r'\n', r'\n\n', clean_text)
     elif style == "europarl":
         clean_text = soup.get_text()
         clean_text = strip_ep(clean_text)
