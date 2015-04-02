@@ -20,7 +20,8 @@ from . import ladder2text_new as l2t
 from . import util
 from . import convert
 from . import down
-
+# TODO remove useless folders
+# TODO test test1.xml, test2.xml
 
 def paragraph_combiner_sub(text):
     pattern_1 = re.compile(
