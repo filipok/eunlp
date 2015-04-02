@@ -289,10 +289,10 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder,
     return output_lines
 
 
-def celex_aligner(langs, path, celex, program_folder):
+def celex_aligner(langs, path, celex, prefix, program_folder):
     # create html and txt files for each language code
     try:
-        down.scraper(langs, util.make_celex_link, celex, '', style="celex",
+        down.scraper(langs, util.make_celex_link, celex, prefix, style="celex",
                      over_html=False, over_txt=False)
     except urllib2.HTTPError:
         logging.error("Aborting alignment due to link error in %s.", celex)

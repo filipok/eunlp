@@ -29,4 +29,4 @@ if __name__ == '__main__':
     languages = sys.argv[2:]  # collect language codes
 
     # call the celex_scraper
-    align.celex_aligner(languages, path, celex, program_folder)
+    align.celex_aligner(languages, path, celex, '', program_folder)

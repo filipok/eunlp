@@ -32,4 +32,4 @@ if __name__ == '__main__':
     file_list = convert.eu_xml_converter(xml_list)
     for item in file_list:
         print "Processing " + item[0] + ' ...'
-        align.celex_aligner(languages, path, item[0], program_folder)
+        align.celex_aligner(languages, path, item[0], '', program_folder)
