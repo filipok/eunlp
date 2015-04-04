@@ -54,22 +54,26 @@ def make_paths(path, text_id, languages):
         return source_file, target_file, align_file, dictionary
 
 
-def create_dictionary(input_source, input_target, output_file):
-    with codecs.open(input_source, "r", "utf-8") as sin:
-        s_list = list(sin)
-    with codecs.open(input_target, "r", "utf-8") as tin:
-        t_list = list(tin)
-    if len(s_list) == len(t_list) and len(s_list) != 0:
-        with codecs.open(output_file, "w", "utf-8") as fout:
-            for i in range(len(s_list)):
-                s_term = s_list[i].rstrip()
-                t_term = t_list[i].rstrip()
-                if len(s_term) > 0 and len(t_term) > 0:
-                    line_to_add = t_term + ' @ ' + s_term + '\r\n'
-                    fout.write(line_to_add)
-    else:
-        logging.error(
-            "Dictionary files of different length or length = 0. Aborting.")
+def create_dictionary(s_file, t_file, output_file):
+    try:
+        with codecs.open(s_file, "r", "utf-8") as sin:
+            s_list = list(sin)
+        with codecs.open(t_file, "r", "utf-8") as tin:
+            t_list = list(tin)
+        if len(s_list) == len(t_list) and len(s_list) != 0:
+            with codecs.open(output_file, "w", "utf-8") as fout:
+                for i in range(len(s_list)):
+                    s_term = s_list[i].rstrip()
+                    t_term = t_list[i].rstrip()
+                    if len(s_term) > 0 and len(t_term) > 0:
+                        line_to_add = t_term + ' @ ' + s_term + '\r\n'
+                        fout.write(line_to_add)
+        else:
+            logging.error(
+                "Dictionary files of different length or length = 0.")
+    except IOError:
+        logging.error('Unavailable dictionary files %s or %s.', s_file, t_file)
+        raise
 
 
 def abbreviation_loader(file_name):
