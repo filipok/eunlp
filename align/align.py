@@ -263,8 +263,12 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder,
     # create empty hunalign dic from program-folder/data_raw files
     if not os.path.exists(dic):
         path = program_folder + 'data_raw/'
-        util.create_dictionary(path + s_lang + '.txt', path + t_lang + '.txt',
-                               dic)
+        try:
+            util.create_dictionary(path + s_lang + '.txt',
+                                   path + t_lang + '.txt', dic)
+        except IOError:
+            open(dic, 'a').close()  # create empty dictionary
+            logging.warning('Creating empty dictionary %s', dic)
     # create hunalign ladder alignment
     hunalign_wrapper(s_file[:-4] + '.tok', t_file[:-4] + '.tok', dic,
                      a_file + '.lad', program_folder, realign=True)
