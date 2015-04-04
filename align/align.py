@@ -20,7 +20,6 @@ from . import ladder2text_new as l2t
 from . import util
 from . import convert
 from . import down
-# TODO remove useless folders
 # TODO test test1.xml, test2.xml
 # TODO test simultaneous alignment with all languages
 
@@ -47,14 +46,15 @@ def paragraph_combiner_sub(text):
 
 
 def hunalign_wrapper(source_file, target_file, dictionary, align_file,
-                     program_folder, realign=True):
+                     realign=True):
+    path = os.path.dirname(__file__)
     realign_parameter = '-realign'
     if realign:
-        command = [program_folder + 'hunalign-1.1/src/hunalign/hunalign',
+        command = [path + '/hunalign-1.1/src/hunalign/hunalign',
                    '-utf', realign_parameter, dictionary, source_file,
                    target_file]
     else:
-        command = [program_folder + 'hunalign-1.1/src/hunalign/hunalign',
+        command = [path + '/hunalign-1.1/src/hunalign/hunalign',
                    '-utf', dictionary, source_file, target_file]
     proc = subprocess.Popen(command, stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE)
@@ -88,7 +88,7 @@ def file_to_list(file_name, one=False, two=False):
 
 
 def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
-                  align_file, program_folder, note, over=True, para_size=300,
+                  align_file, note, over=True, para_size=300,
                   para_size_small=100):
     # functions.smart_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002")
@@ -109,7 +109,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                               s_lang, t_lang, source_file, target_file)
                 # Using Hunalign on the entire file is mostly useless.
                 # aligner(source_file, target_file, s_lang, t_lang, dictionary,
-                #         align_file, program_folder, note, delete_temp=True)
+                #         align_file, note, delete_temp=True)
                 return
             else:
                 logging.warning('Alignment at 3rd attempt in %s-%s, %s, %s',
@@ -119,7 +119,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                             t_lang, source_file, target_file)
     # If equal number of paragraphs:
     parallel_aligner(source_list, target_list, s_lang, t_lang, dictionary,
-                     align_file, program_folder, para_size=para_size,
+                     align_file, para_size=para_size,
                      para_size_small=para_size_small, prj_name=source_file)
     # turn alignment into tmx
     convert.tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang,
@@ -131,8 +131,8 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
 
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
-                     align_file, program_folder, para_size=300,
-                     para_size_small=100, prj_name='temp'):
+                     align_file, para_size=300, para_size_small=100,
+                     prj_name='temp'):
     if not os.path.exists("/tmp/eunlp"):
         os.makedirs("/tmp/eunlp")
     fout = codecs.open(align_file + '.tab', "w", "utf-8")
@@ -140,8 +140,8 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
     # both source and target have a dot followed by whitespace.
     patt = re.compile(r'\. ')
     # create sentence splitters
-    s_sentence_splitter = sentence_splitter(program_folder, s_lang)
-    t_sentence_splitter = sentence_splitter(program_folder, t_lang)
+    s_sentence_splitter = sentence_splitter(s_lang)
+    t_sentence_splitter = sentence_splitter(t_lang)
     for i in range(len(s_list)):
         small = len(s_list[i]) < para_size_small
         n_pat = not (re.search(patt, s_list[i]) and re.search(patt, t_list[i]))
@@ -152,13 +152,13 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
             fout.write(line)
         else:
             tmp_aligner(s_list[i], t_list[i], s_lang, t_lang, dictionary,
-                        program_folder, fout, prj_name, i, s_sentence_splitter,
+                        fout, prj_name, i, s_sentence_splitter,
                         t_sentence_splitter)
     fout.close()
 
 
-def tmp_aligner(source, target, s_lang, t_lang, dictionary, program_folder,
-                fout, prj_name, i, s_sentence_splitter, t_sentence_splitter):
+def tmp_aligner(source, target, s_lang, t_lang, dictionary, fout, prj_name, i,
+                s_sentence_splitter, t_sentence_splitter):
     r_num = str(random.randint(0, 100000))
     tmp_source = "/tmp/eunlp/s_" + r_num + ".txt"
     tmp_target = "/tmp/eunlp/t_" + r_num + ".txt"
@@ -170,9 +170,8 @@ def tmp_aligner(source, target, s_lang, t_lang, dictionary, program_folder,
         tout.write(target + '\n')
     # process them with the classic aligner
     lines = basic_aligner(tmp_source, tmp_target, s_lang, t_lang, dictionary,
-                          tmp_align, program_folder, "a_" + r_num,
-                          s_sentence_splitter, t_sentence_splitter, tab=False,
-                          tmx=False, sep=False)
+                          tmp_align, "a_" + r_num, s_sentence_splitter,
+                          t_sentence_splitter, tab=False, tmx=False, sep=False)
     # do some checks with the hunalign aligment and use only if ok
     everything_ok = check_hunalign(lines, source, target)
     if everything_ok[0]:
@@ -249,10 +248,11 @@ def split_token_nltk(file_name, sent_splitter):
             f.write(' '.join(sent) + '\n')
 
 
-def sentence_splitter(program_folder, lang):
+def sentence_splitter(lang):
     punkt_param = PunktParameters()
-    subfolder = 'sentence_splitter/nonbreaking_prefixes/nonbreaking_prefix.'
-    ab_file = ''.join([program_folder, subfolder, lang])
+    path = os.path.dirname(__file__)
+    subfolder = '/nonbreaking_prefixes/nonbreaking_prefix.'
+    ab_file = ''.join([path, subfolder, lang])
     if os.path.isfile(ab_file):
         punkt_param.abbrev_types = set(util.abbreviation_loader(ab_file))
     else:
@@ -261,16 +261,15 @@ def sentence_splitter(program_folder, lang):
     return splitter
 
 
-def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder,
-                  note, s_sentence_splitter, t_sentence_splitter, tab=True,
+def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
+                  s_sentence_splitter, t_sentence_splitter, tab=True,
                   tmx=True, sep=True):
-    # TODO eliminate program_folder
     # call splitter & aligner
     split_token_nltk(s_file, s_sentence_splitter)
     split_token_nltk(t_file, t_sentence_splitter)
-    # create empty hunalign dic from program-folder/data_raw files
+    # create empty hunalign dic from /data_raw files
     if not os.path.exists(dic):
-        path = program_folder + 'data_raw/'
+        path = os.path.dirname(__file__) + '/data_raw/'
         try:
             util.create_dictionary(path + s_lang + '.txt',
                                    path + t_lang + '.txt', dic)
@@ -279,7 +278,7 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder,
             logging.warning('Creating empty dictionary %s', dic)
     # create hunalign ladder alignment
     hunalign_wrapper(s_file[:-4] + '.tok', t_file[:-4] + '.tok', dic,
-                     a_file + '.lad', program_folder, realign=True)
+                     a_file + '.lad', realign=True)
     # create aligned output
     output_lines = l2t.make_lines(a_file + '.lad', s_file[:-4], t_file[:-4])
     output_lines = [unicode(line, "utf-8") + '\n' for line in output_lines]
@@ -303,7 +302,7 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder,
     return output_lines
 
 
-def celex_aligner(langs, path, celex, prefix, program_folder):
+def celex_aligner(langs, path, celex, prefix):
     # create html and txt files for each language code
     try:
         down.scraper(langs, util.make_celex_link, celex, prefix, style="celex",
@@ -316,4 +315,4 @@ def celex_aligner(langs, path, celex, prefix, program_folder):
                                                           langs)
         # call the aligner
         smart_aligner(s_file, t_file, langs[0].lower(), langs[1].lower(),
-                      dic, align_file, program_folder, celex, over=False)
+                      dic, align_file, celex, over=False)
