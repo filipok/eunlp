@@ -246,7 +246,7 @@ def sentence_splitter(program_folder, lang):
     if os.path.isfile(ab_file):
         punkt_param.abbrev_types = set(util.abbreviation_loader(ab_file))
     else:
-        logging.warning('Abbreviation file not found for language: %s', lang)
+        logging.info('Abbreviation file not found for language: %s', lang)
     splitter = PunktSentenceTokenizer(punkt_param)
     return splitter
 
