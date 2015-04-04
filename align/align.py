@@ -139,6 +139,9 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
     # send paragraph to hunalign if large or if intermediate and
     # both source and target have a dot followed by whitespace.
     patt = re.compile(r'\. ')
+    # create sentence splitters
+    s_sentence_splitter = sentence_splitter(program_folder, s_lang)
+    t_sentence_splitter = sentence_splitter(program_folder, t_lang)
     for i in range(len(s_list)):
         small = len(s_list[i]) < para_size_small
         n_pat = not (re.search(patt, s_list[i]) and re.search(patt, t_list[i]))
@@ -149,12 +152,13 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
             fout.write(line)
         else:
             tmp_aligner(s_list[i], t_list[i], s_lang, t_lang, dictionary,
-                        program_folder, fout, prj_name, i)
+                        program_folder, fout, prj_name, i, s_sentence_splitter,
+                        t_sentence_splitter)
     fout.close()
 
 
 def tmp_aligner(source, target, s_lang, t_lang, dictionary, program_folder,
-                fout, prj_name, i):
+                fout, prj_name, i, s_sentence_splitter, t_sentence_splitter):
     r_num = str(random.randint(0, 100000))
     tmp_source = "/tmp/eunlp/s_" + r_num + ".txt"
     tmp_target = "/tmp/eunlp/t_" + r_num + ".txt"
@@ -166,7 +170,8 @@ def tmp_aligner(source, target, s_lang, t_lang, dictionary, program_folder,
         tout.write(target + '\n')
     # process them with the classic aligner
     lines = basic_aligner(tmp_source, tmp_target, s_lang, t_lang, dictionary,
-                          tmp_align, program_folder, "a_" + r_num, tab=False,
+                          tmp_align, program_folder, "a_" + r_num,
+                          s_sentence_splitter, t_sentence_splitter, tab=False,
                           tmx=False, sep=False)
     # do some checks with the hunalign aligment and use only if ok
     everything_ok = check_hunalign(lines, source, target)
@@ -257,11 +262,9 @@ def sentence_splitter(program_folder, lang):
 
 
 def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder,
-                  note, tab=True, tmx=True, sep=True):
+                  note, s_sentence_splitter, t_sentence_splitter, tab=True,
+                  tmx=True, sep=True):
     # TODO eliminate program_folder
-    # prepare sentence splitters
-    s_sentence_splitter = sentence_splitter(program_folder, s_lang)
-    t_sentence_splitter = sentence_splitter(program_folder, t_lang)
     # call splitter & aligner
     split_token_nltk(s_file, s_sentence_splitter)
     split_token_nltk(t_file, t_sentence_splitter)
