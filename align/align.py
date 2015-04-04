@@ -115,8 +115,8 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 logging.warning('Alignment at 3rd attempt in %s-%s, %s, %s',
                                 s_lang, t_lang, source_file, target_file)
         else:
-            logging.warning('Alignment at 2nd attempt in %s-%s, %s', s_lang,
-                            t_lang, source_file, target_file)
+            logging.warning('Alignment at 2nd attempt in %s-%s, %s, %s',
+                            s_lang, t_lang, source_file, target_file)
     # If equal number of paragraphs:
     parallel_aligner(source_list, target_list, s_lang, t_lang, dictionary,
                      align_file, para_size=para_size,
