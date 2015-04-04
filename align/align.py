@@ -23,6 +23,7 @@ from . import down
 # TODO remove useless folders
 # TODO test test1.xml, test2.xml
 
+
 def paragraph_combiner_sub(text):
     pattern_1 = re.compile(
         r'\n\(?([0-9]{1,3}|[a-z]{1,3}|[A-Z]{1,3})[\.\)][\n\s]')
