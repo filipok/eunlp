@@ -22,6 +22,7 @@ from . import convert
 from . import down
 # TODO remove useless folders
 # TODO test test1.xml, test2.xml
+# TODO test simultaneous alignment with all languages
 
 
 def paragraph_combiner_sub(text):
