@@ -21,6 +21,7 @@ from . import util
 from . import convert
 from . import down
 # TODO option not to use dic (faster)
+# TODO attributeerror la souper (pt 32015R0035)
 # TODO test test1.xml, test2.xml
 # TODO test simultaneous alignment with all languages
 
