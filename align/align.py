@@ -309,6 +309,8 @@ def celex_aligner(langs, path, celex, prefix):
                      over_html=False, over_txt=False)
     except urllib2.HTTPError:
         logging.error("Aborting alignment due to link error in %s.", celex)
+    except IndexError:
+        logging.error("Aborting alignment due to format error in %s", celex)
     else:
         # prepare paths
         s_file, t_file, align_file, dic = util.make_paths(path, prefix + celex,

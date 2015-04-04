@@ -51,10 +51,14 @@ def souper(new_name, html_text, style, over=False):
         else:
             # for newer celexes
             # the hierarchy is rather deep
-            clean_text = soup.body.div.contents[8].contents[5].contents[0]
-            clean_text = clean_text.contents[4].contents[9].contents[3]
-            clean_text = clean_text.contents[1].get_text()
-            clean_text = re.sub(r'\n\nTop $', r'', clean_text)
+            try:
+                clean_text = soup.body.div.contents[8].contents[5].contents[0]
+                clean_text = clean_text.contents[4].contents[9].contents[3]
+                clean_text = clean_text.contents[1].get_text()
+                clean_text = re.sub(r'\n\nTop $', r'', clean_text)
+            except IndexError:
+                logging.error('BeautifulSoup could not process %s', new_name)
+                raise
     elif style == "europarl":
         clean_text = soup.get_text()
         clean_text = strip_ep(clean_text)
@@ -76,7 +80,10 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
                 raise
             else:
                 new_name = prefix + url_code + '_' + lang_code + '.txt'
-                souper(new_name, text, style, over_txt)
+                try:
+                    souper(new_name, text, style, over_txt)
+                except IndexError:
+                    raise
 
 
 def strip_ep(text):
