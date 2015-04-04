@@ -253,7 +253,7 @@ def sentence_splitter(program_folder, lang):
 
 def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder,
                   note, tab=True, tmx=True, sep=True):
-    #TODO eliminate program_folder
+    # TODO eliminate program_folder
     # prepare sentence splitters
     s_sentence_splitter = sentence_splitter(program_folder, s_lang)
     t_sentence_splitter = sentence_splitter(program_folder, t_lang)
