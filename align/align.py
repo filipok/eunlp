@@ -105,16 +105,18 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             source_list = file_to_list(source_file, one=True, two=True)
             target_list = file_to_list(target_file, one=True, two=True)
             if len(source_list) != len(target_list):
-                logging.error("Smart alignment failed in %s.",
-                              source_file)
+                logging.error('Smart alignment failed in %s-%s, %s, %s',
+                              s_lang, t_lang, source_file, target_file)
                 # Using Hunalign on the entire file is mostly useless.
                 # aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 #         align_file, program_folder, note, delete_temp=True)
                 return
             else:
-                logging.warning('Alignment at 3rd attempt in %s', source_file)
+                logging.warning('Alignment at 3rd attempt in %s-%s, %s, %s',
+                                s_lang, t_lang, source_file, target_file)
         else:
-            logging.warning('Alignment at 2nd attempt in %s', source_file)
+            logging.warning('Alignment at 2nd attempt in %s-%s, %s', s_lang,
+                            t_lang, source_file, target_file)
     # If equal number of paragraphs:
     parallel_aligner(source_list, target_list, s_lang, t_lang, dictionary,
                      align_file, program_folder, para_size=para_size,
