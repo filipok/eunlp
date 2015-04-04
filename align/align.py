@@ -303,7 +303,8 @@ def celex_aligner(langs, path, celex, prefix, program_folder):
         logging.error("Aborting alignment due to link error in %s.", celex)
     else:
         # prepare paths
-        s_file, t_file, align_file, dic = util.make_paths(path, celex, langs)
+        s_file, t_file, align_file, dic = util.make_paths(path, prefix + celex,
+                                                          langs)
         # call the aligner
         smart_aligner(s_file, t_file, langs[0].lower(), langs[1].lower(),
                       dic, align_file, program_folder, celex, over=False)
