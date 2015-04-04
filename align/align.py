@@ -122,8 +122,9 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     convert.tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang,
                        t_lang, note)
     # create parallel source and target text files
-    convert.tab_to_separate(align_file + '.tab', source_file[:-4] + '.ali',
-                            target_file[:-4] + '.ali')
+    s_ali = source_file[:-4] + '_' + s_lang + t_lang + '.ali'
+    t_ali = target_file[:-4] + '_' + s_lang + t_lang + '.ali'
+    convert.tab_to_separate(align_file + '.tab', s_ali, t_ali)
 
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
@@ -285,8 +286,9 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, program_folder,
             convert.tab_to_tmx(a_file + '.tab', a_file + '.tmx', s_lang,
                                t_lang, note)
         if sep:
-            convert.tab_to_separate(a_file + '.tab', s_file[:-4] + '.ali',
-                                    t_file[:-4] + '.ali')
+            s_ali = s_file[:-4] + '_' + s_lang + t_lang + '.ali'
+            t_ali = t_file[:-4] + '_' + s_lang + t_lang + '.ali'
+            convert.tab_to_separate(a_file + '.tab', s_ali, t_ali)
     # remove temporary files
     os.remove(s_file[:-4])
     os.remove(t_file[:-4])

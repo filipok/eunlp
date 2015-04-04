@@ -46,7 +46,7 @@ if __name__ == '__main__':
                         print "Processing pair {}-{}, document {}".format(
                             s_lang, t_lang, item[0])
                         align.celex_aligner([s_lang, t_lang], path, item[0],
-                                            s_lang + t_lang, program_folder)
+                                            '', program_folder)
 
         else:
             logging.critical('Invalid languages!')
