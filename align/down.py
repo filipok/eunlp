@@ -37,7 +37,7 @@ def souper(new_name, html_text, style, over=False):
     # Only convert to txt if not already existing
     # over=True overrides that behavior
     if (not over) and os.path.isfile(new_name):
-        logging.warning("%s: txt file already existing.", new_name)
+        logging.info("%s: txt file already existing.", new_name)
         return
     f = codecs.open(new_name, "w", "utf-8")
     soup = BeautifulSoup(html_text, "lxml")
