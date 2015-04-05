@@ -34,6 +34,8 @@ def downloader(link, new_name, over=False):
 
 
 def souper(new_name, html_text, style, over=False):
+    # TODO aici uneste coloanele fara spatiu
+    # TODO <td>Interest rate risk sub-module</td><td>105</td>
     # Only convert to txt if not already existing
     # over=True overrides that behavior
     if (not over) and os.path.isfile(new_name):
