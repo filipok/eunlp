@@ -57,7 +57,11 @@ def souper(new_name, html_text, style, over=False):
                 clean_text = clean_text.contents[1].get_text()
                 clean_text = re.sub(r'\n\nTop $', r'', clean_text)
             except IndexError:
-                logging.error('BeautifulSoup could not process %s', new_name)
+                logging.error('IndexError: Bs4 could not process %s', new_name)
+                raise
+            except AttributeError:
+                logging.error('AttributeError: Bs4 could not process %s',
+                              new_name)
                 raise
     elif style == "europarl":
         clean_text = soup.get_text()
@@ -82,7 +86,7 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
                 new_name = prefix + url_code + '_' + lang_code + '.txt'
                 try:
                     souper(new_name, text, style, over_txt)
-                except IndexError:
+                except (IndexError, AttributeError):
                     raise
 
 

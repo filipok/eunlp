@@ -21,7 +21,6 @@ from . import util
 from . import convert
 from . import down
 # TODO option not to use dic (faster)
-# TODO attributeerror la souper (pt 32015R0035)
 # TODO test test1.xml, test2.xml
 # TODO test simultaneous alignment with all languages
 
@@ -311,7 +310,7 @@ def celex_aligner(langs, path, celex, prefix):
                      over_html=False, over_txt=False)
     except urllib2.HTTPError:
         logging.error("Aborting alignment due to link error in %s.", celex)
-    except IndexError:
+    except (IndexError, AttributeError):
         logging.error("Aborting alignment due to format error in %s", celex)
     else:
         # prepare paths
