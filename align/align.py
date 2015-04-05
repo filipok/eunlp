@@ -20,7 +20,6 @@ from . import ladder2text_new as l2t
 from . import util
 from . import convert
 from . import down
-# TODO option not to use dic (faster)
 # TODO test test1.xml, test2.xml
 # TODO test simultaneous alignment with all languages
 
@@ -90,7 +89,7 @@ def file_to_list(file_name, one=False, two=False):
 
 def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                   align_file, note, over=True, para_size=300,
-                  para_size_small=100):
+                  para_size_small=100, make_dic=True):
     # functions.smart_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002")
     if (not over) and os.path.isfile(align_file + '.tab'):
@@ -138,7 +137,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
                      align_file, para_size=300, para_size_small=100,
-                     prj_name='temp'):
+                     prj='temp', make_dic=True):
     if not os.path.exists("/tmp/eunlp"):
         os.makedirs("/tmp/eunlp")
     fout = codecs.open(align_file + '.tab', "w", "utf-8")
@@ -169,7 +168,7 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
 
 
 def tmp_aligner(source, target, s_lang, t_lang, dictionary, fout, prj_name, i,
-                s_sentence_splitter, t_sentence_splitter):
+                s_sentence_splitter, t_sentence_splitter, make_dic=True):
     r_num = str(random.randint(0, 100000))
     tmp_source = "/tmp/eunlp/s_" + r_num + ".txt"
     tmp_target = "/tmp/eunlp/t_" + r_num + ".txt"
@@ -279,19 +278,22 @@ def sentence_splitter(lang):
 
 def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
                   s_sentence_splitter, t_sentence_splitter, tab=True,
-                  tmx=True, sep=True):
+                  tmx=True, sep=True, make_dic=True):
     # call splitter & aligner
     split_token_nltk(s_file, s_sentence_splitter)
     split_token_nltk(t_file, t_sentence_splitter)
-    # create empty hunalign dic from /data_raw files
-    if not os.path.exists(dic):
-        path = os.path.dirname(__file__) + '/data_raw/'
-        try:
-            util.create_dictionary(path + s_lang + '.txt',
-                                   path + t_lang + '.txt', dic)
-        except IOError:
-            open(dic, 'a').close()  # create empty dictionary
-            logging.warning('Creating empty dictionary %s', dic)
+    # create hunalign dic from /data_raw files
+    if make_dic:
+        if not os.path.exists(dic):
+            path = os.path.dirname(__file__) + '/data_raw/'
+            try:
+                util.create_dictionary(path + s_lang + '.txt',
+                                       path + t_lang + '.txt', dic)
+            except IOError:
+                open(dic, 'a').close()  # create empty dictionary
+                logging.warning('Creating empty dictionary %s', dic)
+    else:
+        open(dic, 'w').close()  # create empty dict (and erase current file!)
     # create hunalign ladder alignment
     hunalign_wrapper(s_file[:-4] + '.tok', t_file[:-4] + '.tok', dic,
                      a_file + '.lad', realign=True)
@@ -321,7 +323,7 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
     return lines
 
 
-def celex_aligner(langs, path, celex, prefix):
+def celex_aligner(langs, path, celex, prefix, make_dic=True):
     # create html and txt files for each language code
     try:
         down.scraper(langs, util.make_celex_link, celex, prefix, style="celex",
@@ -336,4 +338,4 @@ def celex_aligner(langs, path, celex, prefix):
                                                           langs)
         # call the aligner
         smart_aligner(s_file, t_file, langs[0].lower(), langs[1].lower(),
-                      dic, align_file, celex, over=False)
+                      dic, align_file, celex, over=False, make_dic=make_dic)

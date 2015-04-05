@@ -35,7 +35,7 @@ if __name__ == '__main__':
             file_list = convert.eu_xml_converter(xml_list)
             for item in file_list:
                 print "Processing " + item[0] + ' ...'
-                align.celex_aligner(langs, path, item[0], '')
+                align.celex_aligner(langs, path, item[0], '', make_dic=False)
         elif len(langs) == 1 and langs[0] == 'all':
             file_list = convert.eu_xml_converter(xml_list)
             for i in range(len(ALL_LANGS)):
@@ -46,7 +46,7 @@ if __name__ == '__main__':
                         print "Processing pair {}-{}, document {}".format(
                             s_lang, t_lang, item[0])
                         align.celex_aligner([s_lang, t_lang], path, item[0],
-                                            '')
+                                            '', make_dic=False)
 
         else:
             logging.critical('Invalid languages!')
