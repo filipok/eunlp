@@ -1,9 +1,11 @@
-# Name:        util.py
-# Purpose:     Various utilities
-#
-# Author:      Filip
-#
-# Created:     1.4.2015
+"""
+Name:        util.py
+Purpose:     Various utilities
+
+Author:      Filip
+
+Created:     1.4.2015
+"""
 
 import codecs
 import logging
@@ -12,10 +14,24 @@ import os
 
 
 def make_ep_sub_link(doc_category, doc_year, doc_code):
+    """
+
+    :param doc_category: string
+    :param doc_year: string
+    :param doc_code: string
+    :return: string
+    """
     return doc_category + doc_year + doc_code
 
 
 def make_ep_link(cat_year_code, lang):
+    """
+
+    :param cat_year_code: string
+    :param lang: string
+    :return: string
+    :raise IOError:
+    """
     doc_category = cat_year_code[0:2]
     doc_year = cat_year_code[2:6]
     doc_code = cat_year_code[6:10]
@@ -38,12 +54,25 @@ def make_ep_link(cat_year_code, lang):
 
 
 def make_celex_link(celex, lang):
+    """
+
+    :param celex: string
+    :param lang: string
+    :return: string
+    """
     part_1 = "http://eur-lex.europa.eu/legal-content/"
     part_2 = "/TXT/?uri=CELEX:"
     return part_1 + lang + part_2 + celex
 
 
 def make_paths(path, text_id, languages):
+        """
+
+        :param path: string
+        :param text_id: string
+        :param languages: list
+        :return: tuple
+        """
         source_file = os.path.join(path, text_id + '_' + languages[0] + '.txt')
         target_file = os.path.join(path, text_id + '_' + languages[1] + '.txt')
         align_file = os.path.join(path, 'bi_' + text_id + '_' +
@@ -55,6 +84,13 @@ def make_paths(path, text_id, languages):
 
 
 def create_dictionary(s_file, t_file, output_file):
+    """
+
+    :param s_file: string
+    :param t_file: string
+    :param output_file: string
+    :raise:
+    """
     try:
         with codecs.open(s_file, "r", "utf-8") as sin:
             s_list = list(sin)
@@ -77,6 +113,11 @@ def create_dictionary(s_file, t_file, output_file):
 
 
 def abbreviation_loader(file_name):
+    """
+
+    :param file_name: string
+    :return: list
+    """
     abbreviations = []
     with codecs.open(file_name, 'r', 'utf-8') as f:
         lines = list(f)
