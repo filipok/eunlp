@@ -15,7 +15,10 @@ def pairwise(iterable):
     # s -> (s0,s1), (s1,s2), (s2, s3), ...
     # see http://docs.python.org/library/itertools.html
     a, b = itertools.tee(iterable)
-    b.next()
+    try:
+        b.next()
+    except StopIteration:
+        raise
     return itertools.izip(a, b)
 
 
@@ -51,13 +54,17 @@ def make_lines(ladder_file, s_file, t_file):
     # the following segment returns an interval of sentences
     # corresponding to a hole:
     # t_lines[int(hole[0][0]):int(hole[1][0])]
-    return map(lambda hole:
-        hole[0][2] + "\t" +
-        " ~~~ ".join(t_lines[int(hole[0][0]):int(hole[1][0])])
-        + "\t" +
-        " ~~~ ".join(s_lines[int(hole[0][1]):int(hole[1][1])])
-        , pairwise(ladder)
-    )
+    try:
+        lines = map(lambda hole:
+                    hole[0][2] + "\t" +
+                    " ~~~ ".join(t_lines[int(hole[0][0]):int(hole[1][0])])
+                    + "\t" +
+                    " ~~~ ".join(s_lines[int(hole[0][1]):int(hole[1][1])])
+                    , pairwise(ladder)
+        )
+    except StopIteration:
+        raise
+    return lines
 
 
 def main():

@@ -119,16 +119,21 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             logging.warning('Alignment at 2nd attempt in %s-%s, %s, %s',
                             s_lang, t_lang, source_file, target_file)
     # If equal number of paragraphs:
-    parallel_aligner(source_list, target_list, s_lang, t_lang, dictionary,
-                     align_file, para_size=para_size,
-                     para_size_small=para_size_small, prj_name=source_file)
-    # turn alignment into tmx
-    convert.tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang,
-                       t_lang, note)
-    # create parallel source and target text files
-    s_ali = source_file[:-4] + '_' + s_lang + t_lang + '.ali'
-    t_ali = target_file[:-4] + '_' + s_lang + t_lang + '.ali'
-    convert.tab_to_separate(align_file + '.tab', s_ali, t_ali)
+    try:
+        parallel_aligner(source_list, target_list, s_lang, t_lang, dictionary,
+                         align_file, para_size=para_size,
+                         para_size_small=para_size_small, prj=source_file,
+                         make_dic=make_dic)
+        # turn alignment into tmx
+        convert.tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang,
+                           t_lang, note)
+        # create parallel source and target text files
+        s_ali = source_file[:-4] + '_' + s_lang + t_lang + '.ali'
+        t_ali = target_file[:-4] + '_' + s_lang + t_lang + '.ali'
+        convert.tab_to_separate(align_file + '.tab', s_ali, t_ali)
+    except StopIteration:
+        logging.error('StopIteration in %s -> %s, %s', note, source_file,
+                      target_file)
 
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
@@ -152,9 +157,14 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
             line = ''.join(["Nai\t", t_list[i], "\t", s_list[i], "\n"])
             fout.write(line)
         else:
-            tmp_aligner(s_list[i], t_list[i], s_lang, t_lang, dictionary,
-                        fout, prj_name, i, s_sentence_splitter,
-                        t_sentence_splitter)
+            try:
+                tmp_aligner(s_list[i], t_list[i], s_lang, t_lang, dictionary,
+                            fout, prj, i, s_sentence_splitter,
+                            t_sentence_splitter, make_dic)
+            except StopIteration:
+                logging.error('StopIteration %s: Source: %s', prj, s_list[i])
+                logging.error('StopIteration %s: Target: %s', prj, t_list[i])
+                raise
     fout.close()
 
 
@@ -170,9 +180,14 @@ def tmp_aligner(source, target, s_lang, t_lang, dictionary, fout, prj_name, i,
     with codecs.open(tmp_target, "w", "utf-8") as tout:
         tout.write(target + '\n')
     # process them with the classic aligner
-    lines = basic_aligner(tmp_source, tmp_target, s_lang, t_lang, dictionary,
-                          tmp_align, "a_" + r_num, s_sentence_splitter,
-                          t_sentence_splitter, tab=False, tmx=False, sep=False)
+    try:
+        lines = basic_aligner(tmp_source, tmp_target, s_lang, t_lang,
+                              dictionary, tmp_align, "a_" + r_num,
+                              s_sentence_splitter, t_sentence_splitter,
+                              tab=False, tmx=False, sep=False,
+                              make_dic=make_dic)
+    except StopIteration:
+        raise
     # do some checks with the hunalign aligment and use only if ok
     everything_ok = check_hunalign(lines, source, target)
     if everything_ok[0]:
@@ -281,12 +296,15 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
     hunalign_wrapper(s_file[:-4] + '.tok', t_file[:-4] + '.tok', dic,
                      a_file + '.lad', realign=True)
     # create aligned output
-    output_lines = l2t.make_lines(a_file + '.lad', s_file[:-4], t_file[:-4])
-    output_lines = [unicode(line, "utf-8") + '\n' for line in output_lines]
+    try:
+        lines = l2t.make_lines(a_file + '.lad', s_file[:-4], t_file[:-4])
+    except StopIteration:
+        raise
+    lines = [unicode(line, "utf-8") + '\n' for line in lines]
     # writing .tab, .tmx and parallel .sep source and target files
     if tab:
         with codecs.open(a_file + '.tab', "w", "utf-8") as fout:
-            for line in output_lines:
+            for line in lines:
                 fout.write(line)
         if tmx:
             convert.tab_to_tmx(a_file + '.tab', a_file + '.tmx', s_lang,
@@ -300,7 +318,7 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
     os.remove(t_file[:-4])
     os.remove(s_file[:-4] + ".tok")
     os.remove(t_file[:-4] + ".tok")
-    return output_lines
+    return lines
 
 
 def celex_aligner(langs, path, celex, prefix):
