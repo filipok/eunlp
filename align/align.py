@@ -86,6 +86,13 @@ def file_to_list(file_name, tries=0):
         text = re.sub(r'\n.(?=\n)', r'', text)
         # also try to remove two-character lines which can make it to fail
         text = re.sub(r'\n.{1,2}(?=\n)', r'', text)
+    elif tries == 3:
+        # remove one-character lines which can make the aligner to fail
+        text = re.sub(r'\n.(?=\n)', r'', text)
+        # also try to remove two-character lines which can make it to fail
+        text = re.sub(r'\n.{1,2}(?=\n)', r'', text)
+        # also try to remove three-character lines which can make it to fail
+        text = re.sub(r'\n.{1,3}(?=\n)', r'', text)
     paragraph_list = re.split(r'\n', text)  # split file
     return paragraph_list
 
@@ -100,7 +107,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
         return  # exit if already aligned and over=False
     source_list = file_to_list(source_file)
     target_list = file_to_list(target_file)
-    # If different No of paragraphs, make 2 more attempts to process the files
+    # If different No of paragraphs, make 3 more attempts to process the files
     if len(source_list) != len(target_list):
         source_list = file_to_list(source_file, tries=1)
         target_list = file_to_list(target_file, tries=1)
@@ -108,17 +115,23 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             source_list = file_to_list(source_file, tries=2)
             target_list = file_to_list(target_file, tries=2)
             if len(source_list) != len(target_list):
-                logging.error('Smart alignment failed in %s-%s, %s, %s',
-                              s_lang, t_lang, source_file, target_file)
-                # Using Hunalign on the entire file is mostly useless.
-                # aligner(source_file, target_file, s_lang, t_lang,
-                #         dictionary, align_file, note, delete_temp=True)
-                return
+                source_list = file_to_list(source_file, tries=3)
+                target_list = file_to_list(target_file, tries=3)
+                if len(source_list) != len(target_list):
+                    logging.error('Smart alignment failed in %s-%s, %s, %s',
+                                  s_lang, t_lang, source_file, target_file)
+                    # Using Hunalign on the entire file is mostly useless.
+                    # aligner(source_file, target_file, s_lang, t_lang,
+                    #         dictionary, align_file, note, delete_temp=True)
+                    return
+                else:
+                    logging.warning('Aligned at 4th attempt in %s-%s, %s, %s',
+                                    s_lang, t_lang, source_file, target_file)
             else:
-                logging.warning('Alignment at 3rd attempt in %s-%s, %s, %s',
+                logging.warning('Aligned at 3rd attempt in %s-%s, %s, %s',
                                 s_lang, t_lang, source_file, target_file)
         else:
-            logging.warning('Alignment at 2nd attempt in %s-%s, %s, %s',
+            logging.warning('Aligned at 2nd attempt in %s-%s, %s, %s',
                             s_lang, t_lang, source_file, target_file)
     # If equal number of paragraphs:
     try:
