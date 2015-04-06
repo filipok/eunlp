@@ -9,6 +9,7 @@ import codecs
 import re
 import datetime
 import xml.sax.saxutils
+import logging
 from bs4 import BeautifulSoup
 
 
@@ -93,6 +94,7 @@ def eu_xml_converter(file_name):
     lista = []
     x = soup.find_all('result')
     length = len(x)
+    logging.warning('Preparing list of %s documents...', length)
     for i in range(length):
         if x[i].find('id_celex') is not None:
             celex = x[i].find('id_celex').contents[1].contents[0]
