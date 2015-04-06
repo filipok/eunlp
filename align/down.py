@@ -23,6 +23,9 @@ def downloader(link, new_name, over=False):
         # some celexes have no new line between paras
         # this confuses get_text() in BeautifulSoup
         html_text = re.sub(r'</p><p>', r'</p>\n<p>', html_text)
+        # some celexes have \n inside <p> tags
+        html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)(.+?)</p>',
+                           r'<p>\1>\2 \4</p>', html_text)
 
         with open(new_name, 'w') as f:
             f.write(html_text)
@@ -30,6 +33,13 @@ def downloader(link, new_name, over=False):
         with codecs.open(new_name, "r", "utf-8") as f:
             html_text = f.read()
             logging.debug("%s: html file already downloaded.", new_name)
+            # This could be redundant
+            # some celexes have no new line between paras
+            # this confuses get_text() in BeautifulSoup
+            html_text = re.sub(r'</p><p>', r'</p>\n<p>', html_text)
+            # some celexes have \n inside <p> tags
+            html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)(.+?)</p>',
+                               r'<p>\1>\2 \4</p>', html_text)
     return html_text
 
 
@@ -44,7 +54,7 @@ def souper(new_name, html_text, style, over=False):
     f = codecs.open(new_name, "w", "utf-8")
     soup = BeautifulSoup(html_text, "lxml")
     # some celexes have \n inside <p> tags
-    remove_newlines(soup)
+    # remove_newlines(soup) #  very slow!
     # separate branches for each document type
     if style == "celex":
         if soup.txt_te is not None:
