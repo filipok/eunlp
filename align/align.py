@@ -1,9 +1,11 @@
-# Name:        functions.py
-# Purpose:     Various project functions
-#
-# Author:      Filip
-#
-# Created:     4.11.2014
+"""
+Name:        functions.py
+Purpose:     Various project functions
+
+Author:      Filip
+
+Created:     4.11.2014
+"""
 
 import urllib2
 import codecs
@@ -16,7 +18,7 @@ import logging
 import nltk
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 
-from . import ladder2text_new as l2t
+from . import l2t_new as l2t
 from . import util
 from . import convert
 from . import down
@@ -25,6 +27,11 @@ from . import down
 
 
 def paragraph_combiner_sub(text):
+    """
+
+    :type text: str
+    :rtype: str
+    """
     pattern_1 = re.compile(
         r'\n\(?([0-9]{1,3}|[a-z]{1,3}|[A-Z]{1,3})[\.\)][\n\s]')
     # combine single lines consisting of single number + single letter
@@ -47,6 +54,14 @@ def paragraph_combiner_sub(text):
 
 def hunalign_wrapper(source_file, target_file, dictionary, align_file,
                      realign=True):
+    """
+
+    :type source_file: str
+    :type target_file: str
+    :type dictionary: str
+    :type align_file: str
+    :type realign: bool
+    """
     path = os.path.dirname(__file__)
     realign_parameter = '-realign'
     if realign:
@@ -59,12 +74,18 @@ def hunalign_wrapper(source_file, target_file, dictionary, align_file,
     proc = subprocess.Popen(command, stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE)
     output, err = proc.communicate()
-    with codecs.open(align_file, 'w', 'utf-8') as f:
-        f.write(unicode(output, 'utf-8'))
+    with codecs.open(align_file, 'w', 'utf-8') as fout:
+        fout.write(unicode(output, 'utf-8'))
 
 
 def file_to_list(file_name, tries=0):
     # clean and convert file to list of paragraphs
+    """
+
+    :type file_name: str
+    :type tries: int
+    :rtype: list
+    """
     with codecs.open(file_name, "r", "utf-8") as fin:
         text = fin.read()
     text = re.sub(r'\xa0+', ' ', text)  # replace non-breaking space
@@ -102,6 +123,21 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                   para_size_small=100, make_dic=True):
     # functions.smart_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002")
+    """
+
+    :type source_file: str
+    :type target_file: str
+    :type s_lang: str
+    :type t_lang: str
+    :type dictionary: str
+    :type align_file: str
+    :type note: str
+    :type over: bool
+    :type para_size: int
+    :type para_size_small: int
+    :type make_dic: bool
+    :rtype: None
+    """
     if (not over) and os.path.isfile(align_file + '.tab'):
         logging.warning("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
@@ -154,6 +190,19 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
                      align_file, para_size=300, para_size_small=100,
                      prj='temp', make_dic=True):
+    """
+
+    :type s_list: list
+    :type t_list: list
+    :type s_lang: str
+    :type t_lang: str
+    :type dictionary: str
+    :type align_file: str
+    :type para_size: int
+    :type para_size_small: int
+    :type prj: str
+    :type make_dic: bool
+    """
     if not os.path.exists("/tmp/eunlp"):
         os.makedirs("/tmp/eunlp")
     fout = codecs.open(align_file + '.tab', "w", "utf-8")
@@ -185,6 +234,20 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
 
 def tmp_aligner(source, target, s_lang, t_lang, dictionary, fout, prj_name, i,
                 s_sentence_splitter, t_sentence_splitter, make_dic=True):
+    """
+
+    :type source: str
+    :type target: str
+    :type s_lang: str
+    :type t_lang: str
+    :type dictionary: str
+    :type fout: file
+    :type prj_name: str
+    :type i: int
+    :type s_sentence_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
+    :type t_sentence_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
+    :type make_dic: bool
+    """
     r_num = str(random.randint(0, 100000))
     tmp_source = "/tmp/eunlp/s_" + r_num + ".txt"
     tmp_target = "/tmp/eunlp/t_" + r_num + ".txt"
@@ -219,6 +282,13 @@ def tmp_aligner(source, target, s_lang, t_lang, dictionary, fout, prj_name, i,
 
 
 def check_hunalign(lines, full_source, full_target):
+    """
+
+    :type lines: list
+    :type full_source: str
+    :type full_target: str
+    :rtype: tuple
+    """
     counter_s = 0
     counter_t = 0
     text = ''
@@ -235,7 +305,7 @@ def check_hunalign(lines, full_source, full_target):
         else:
             translation_ratio = 0
         # check source and target size
-        if not(0.5 < translation_ratio < 2.0):
+        if not (0.5 < translation_ratio < 2.0):
             everything_ok = False
         # check segment length
         if len(split_line[2]) < 2 or len(split_line[1]) < 2:
@@ -247,13 +317,18 @@ def check_hunalign(lines, full_source, full_target):
 
 
 def split_token_nltk(file_name, sent_splitter):
+    """
+
+    :type file_name: str
+    :type sent_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
+    """
     # Source for sentence tokenizer:
     # stackoverflow.com/
     # questions/14095971/how-to-tweak-the-nltk-sentence-tokenizer
 
     # read file
-    with codecs.open(file_name, 'r', 'utf-8') as f:
-        text = list(f)
+    with codecs.open(file_name, 'r', 'utf-8') as fin:
+        text = list(fin)
     # sentence splitter line by line
     # Source: https://groups.google.com/forum/#!topic/nltk-dev/2eH630nHONI
     # because Punkt ignores line breaks
@@ -262,24 +337,29 @@ def split_token_nltk(file_name, sent_splitter):
         sentences = sent_splitter.tokenize(line)
         sentence_list.extend(sentences)
     # write file without extension
-    with codecs.open(file_name[:-4], 'w', 'utf-8') as f:
+    with codecs.open(file_name[:-4], 'w', 'utf-8') as fout:
         for sent in sentence_list:
-            f.write(sent + '\n')
+            fout.write(sent + '\n')
         # remove last new line
         # stackoverflow.com/
         # questions/18857352/python-remove-very-last-character-in-file
-        f.seek(-1, os.SEEK_END)
-        f.truncate()
+        fout.seek(-1, os.SEEK_END)
+        fout.truncate()
 
     # word tokenizer
     tokenized_sentences = [nltk.word_tokenize(sent) for sent in sentence_list]
     # write .tok file
-    with codecs.open(file_name[:-4] + '.tok', 'w', 'utf-8') as f:
+    with codecs.open(file_name[:-4] + '.tok', 'w', 'utf-8') as fout:
         for sent in tokenized_sentences:
-            f.write(' '.join(sent) + '\n')
+            fout.write(' '.join(sent) + '\n')
 
 
 def sentence_splitter(lang):
+    """
+
+    :type lang: str
+    :rtype: nltk.tokenize.punkt.PunktSentenceTokenizer
+    """
     punkt_param = PunktParameters()
     path = os.path.dirname(__file__)
     subfolder = '/nonbreaking_prefixes/nonbreaking_prefix.'
@@ -296,6 +376,23 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
                   s_sentence_splitter, t_sentence_splitter, tab=True,
                   tmx=True, sep=True, make_dic=True):
     # call splitter & aligner
+    """
+
+    :type s_file: str
+    :type t_file: str
+    :type s_lang: str
+    :type t_lang: str
+    :type dic: str
+    :type a_file: str
+    :type note: str
+    :type s_sentence_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
+    :type t_sentence_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
+    :type tab: bool
+    :type tmx: bool
+    :type sep: bool
+    :type make_dic: bool
+    :rtype: list
+    """
     split_token_nltk(s_file, s_sentence_splitter)
     split_token_nltk(t_file, t_sentence_splitter)
     # create hunalign dic from /data_raw files
@@ -340,6 +437,14 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
 
 
 def celex_aligner(langs, path, celex, prefix, make_dic=True):
+    """
+
+    :type langs: list
+    :type path: str
+    :type celex: str
+    :type prefix: str
+    :type make_dic: bool
+    """
     # create html and txt files for each language code
     try:
         down.scraper(langs, util.make_celex_link, celex, prefix, style="celex",

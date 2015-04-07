@@ -16,10 +16,10 @@ import os
 def make_ep_sub_link(doc_category, doc_year, doc_code):
     """
 
-    :param doc_category: string
-    :param doc_year: string
-    :param doc_code: string
-    :return: string
+    :type doc_category: str
+    :type doc_year: str
+    :type doc_code: str
+    :rtype: str
     """
     return doc_category + doc_year + doc_code
 
@@ -27,25 +27,25 @@ def make_ep_sub_link(doc_category, doc_year, doc_code):
 def make_ep_link(cat_year_code, lang):
     """
 
-    :param cat_year_code: string
-    :param lang: string
-    :return: string
-    :raise IOError:
+    :type cat_year_code: str
+    :type lang: str
+    :rtype: str
     """
     doc_category = cat_year_code[0:2]
     doc_year = cat_year_code[2:6]
     doc_code = cat_year_code[6:10]
-    a = 'http://www.europarl.europa.eu/sides/getDoc.do?type=REPORT&reference=A'
-    p = 'http://www.europarl.europa.eu/sides/getDoc.do?type=TA&reference=P'
-    b = 'http://www.europarl.europa.eu/sides/getDoc.do?type=MOTION&reference=B'
+    common_str = 'http://www.europarl.europa.eu/sides/getDoc.do?'
+    a_str = common_str + 'type=REPORT&reference=A'
+    p_str = common_str + 'type=TA&reference=P'
+    b_str = common_str + 'type=MOTION&reference=B'
     p_specific = ''  # this is specific to P links
     if doc_category[0] == 'A':
-        part_1 = a
+        part_1 = a_str
     elif doc_category[0] == 'P':
-        part_1 = p
+        part_1 = p_str
         p_specific = 'TA-'
     elif doc_category[0] == 'B':
-        part_1 = b
+        part_1 = b_str
     else:
         logging.error("EP doc_category error in %s %s", cat_year_code, lang)
         raise IOError("EP link error in doc_category")
@@ -56,9 +56,9 @@ def make_ep_link(cat_year_code, lang):
 def make_celex_link(celex, lang):
     """
 
-    :param celex: string
-    :param lang: string
-    :return: string
+    :type celex: str
+    :type lang: str
+    :rtype: str
     """
     part_1 = "http://eur-lex.europa.eu/legal-content/"
     part_2 = "/TXT/?uri=CELEX:"
@@ -66,30 +66,29 @@ def make_celex_link(celex, lang):
 
 
 def make_paths(path, text_id, languages):
-        """
+    """
 
-        :param path: string
-        :param text_id: string
-        :param languages: list
-        :return: tuple
-        """
-        source_file = os.path.join(path, text_id + '_' + languages[0] + '.txt')
-        target_file = os.path.join(path, text_id + '_' + languages[1] + '.txt')
-        align_file = os.path.join(path, 'bi_' + text_id + '_' +
-                                  languages[0].lower() + '_' +
-                                  languages[1].lower())
-        dictionary = os.path.join(path, languages[0].lower() +
-                                  languages[1].lower() + '.dic')
-        return source_file, target_file, align_file, dictionary
+    :type path: str
+    :type text_id: str
+    :type languages: list
+    :rtype: tuple
+    """
+    source_file = os.path.join(path, text_id + '_' + languages[0] + '.txt')
+    target_file = os.path.join(path, text_id + '_' + languages[1] + '.txt')
+    align_file = os.path.join(path, 'bi_' + text_id + '_' +
+                              languages[0].lower() + '_' +
+                              languages[1].lower())
+    dictionary = os.path.join(path, languages[0].lower() +
+                              languages[1].lower() + '.dic')
+    return source_file, target_file, align_file, dictionary
 
 
 def create_dictionary(s_file, t_file, output_file):
     """
 
-    :param s_file: string
-    :param t_file: string
-    :param output_file: string
-    :raise:
+    :type s_file: str
+    :type t_file: str
+    :type output_file: str
     """
     try:
         with codecs.open(s_file, "r", "utf-8") as sin:
@@ -115,12 +114,12 @@ def create_dictionary(s_file, t_file, output_file):
 def abbreviation_loader(file_name):
     """
 
-    :param file_name: string
-    :return: list
+    :type file_name: str
+    :rtype: list
     """
     abbreviations = []
-    with codecs.open(file_name, 'r', 'utf-8') as f:
-        lines = list(f)
+    with codecs.open(file_name, 'r', 'utf-8') as fin:
+        lines = list(fin)
     for line in lines:
         if len(line) > 0 and line[0] != '#':
             abb = line.strip('\n')

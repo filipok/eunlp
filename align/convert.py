@@ -1,9 +1,12 @@
-# Name:        convert.py
-# Purpose:     Converters
-#
-# Author:      Filip
-#
-# Created:     1.4.2015
+"""
+Name:        convert.py
+Purpose:     Converters
+
+Author:      Filip
+
+Created:     1.4.2015
+"""
+
 
 import codecs
 import re
@@ -14,6 +17,12 @@ from bs4 import BeautifulSoup
 
 
 def tab_to_separate(input_name, output_source, output_target):
+    """
+
+    :type input_name: str
+    :type output_source: str
+    :type output_target: str
+    """
     with codecs.open(input_name, "r", "utf-8") as fin:
         with codecs.open(output_source, "w", "utf-8") as out_s:
             with codecs.open(output_target, "w", "utf-8") as out_t:
@@ -28,6 +37,14 @@ def tab_to_separate(input_name, output_source, output_target):
 
 def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
     # get current date
+    """
+
+    :type input_name: str
+    :type tmx_name: str
+    :type s_lang: str
+    :type t_lang: str
+    :type note: str
+    """
     now = datetime.datetime.now().isoformat()
     now = re.split(r"\.", re.sub(r"[-:]", r"", now))[0] + "Z"
     # create new TMX file
@@ -68,10 +85,10 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
                 source = xml.sax.saxutils.escape(source)
                 target = xml.sax.saxutils.escape(target)
                 #   create TU line
-                tu = ''.join(['<tu creationdate="', now,
-                              '" creationid="eunlp"><prop type="Txt::Note">',
-                              note, '</prop>', tag, '\n'])
-                fout.write(tu)
+                tru = ''.join(['<tu creationdate="', now,
+                               '" creationid="eunlp"><prop type="Txt::Note">',
+                               note, '</prop>', tag, '\n'])
+                fout.write(tru)
                 #   create TUV source line
                 tuv = ''.join(['<tuv xml:lang="', s_lang, '"><seg>', source,
                                '</seg></tuv>\n'])
@@ -88,25 +105,34 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
 
 
 def eu_xml_converter(file_name):
-    with codecs.open(file_name, 'r', 'utf-8') as f:
-        text = f.read()
+    """
+
+    :type file_name: str
+    :rtype: list
+    """
+    with codecs.open(file_name, 'r', 'utf-8') as fin:
+        text = fin.read()
     soup = BeautifulSoup(text, 'lxml')
     lista = []
-    x = soup.find_all('result')
-    length = len(x)
+    res_list = soup.find_all('result')
+    length = len(res_list)
     logging.warning('Preparing list of %s documents...', length)
     for i in range(length):
-        if x[i].find('id_celex') is not None:
-            celex = x[i].find('id_celex').contents[1].contents[0]
+        if res_list[i].find('id_celex') is not None:
+            celex = res_list[i].find('id_celex').contents[1].contents[0]
         else:
             celex = 'NoCELEX'
-        title = x[i].find('expression_title').contents[1].contents[0]
+        title = res_list[i].find('expression_title').contents[1].contents[0]
         lista.append((celex, title))
     return lista
 
 
 def merge_tmx():
-    # create a list of tmx files in current directory (also test for languages)
+    """
+    Create a list of tmx files in current directory (also test for languages)
+
+
+    """
     # for file in list:
     #    read file
     #    remove header and footer
