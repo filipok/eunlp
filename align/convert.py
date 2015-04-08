@@ -35,6 +35,68 @@ def tab_to_separate(input_name, output_source, output_target):
                     out_t.write(target + '\n')
 
 
+def tmx_header(fout, s_lang):
+    # add tmx header (copied from LF Aligner output)
+    """
+
+    :type fout: file
+    :type s_lang: str
+    """
+    fout.write('<?xml version="1.0" encoding="utf-8" ?>\n')
+    fout.write('<!DOCTYPE tmx SYSTEM "tmx14.dtd">\n')
+    fout.write('<tmx version="1.4">\n')
+    fout.write('  <header\n')
+    fout.write('    creationtool="eunlp"\n')
+    fout.write('    creationtoolversion="0.01"\n')
+    fout.write('    datatype="unknown"\n')
+    fout.write('    segtype="sentence"\n')
+    fout.write('    adminlang="' + s_lang + '"\n')
+    fout.write('    srclang="' + s_lang + '"\n')
+    fout.write('    o-tmf="TW4Win 2.0 Format"\n')
+    fout.write('  >\n')
+    fout.write('  </header>\n')
+    fout.write('  <body>\n')
+
+
+def tmx_footer(fout):
+    # add tmx footer
+    """
+
+    :type fout: file
+    """
+    fout.write('\n')
+    fout.write('</body>\n')
+    fout.write('</tmx>')
+
+
+def make_tu_line(fout, s_lang, t_lang, source, target, now, note, tag):
+    # create TU line
+    """
+
+    :type fout: file
+    :type s_lang: str
+    :type t_lang: str
+    :type source: str
+    :type target: str
+    :type now: str
+    :type note: str
+    :type tag: str
+    """
+    tru = ''.join(['<tu creationdate="', now,
+                   '" creationid="eunlp"><prop type="Txt::Note">',
+                   note, '</prop>', tag, '\n'])
+    fout.write(tru)
+    #   create TUV source line
+    tuv = ''.join(['<tuv xml:lang="', s_lang, '"><seg>', source,
+                   '</seg></tuv>\n'])
+    fout.write(tuv)
+    #   create TUV target line
+    tuv = ''.join(['<tuv xml:lang="', t_lang, '"><seg>', target,
+                   '</seg></tuv> </tu>\n'])
+    fout.write(tuv)
+    fout.write('\n')
+
+
 def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
     # get current date
     """
@@ -49,21 +111,7 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
     now = re.split(r"\.", re.sub(r"[-:]", r"", now))[0] + "Z"
     # create new TMX file
     with codecs.open(tmx_name, "w", "utf-8") as fout:
-        # add tmx header (copied from LF Aligner output)
-        fout.write('<?xml version="1.0" encoding="utf-8" ?>\n')
-        fout.write('<!DOCTYPE tmx SYSTEM "tmx14.dtd">\n')
-        fout.write('<tmx version="1.4">\n')
-        fout.write('  <header\n')
-        fout.write('    creationtool="eunlp"\n')
-        fout.write('    creationtoolversion="0.01"\n')
-        fout.write('    datatype="unknown"\n')
-        fout.write('    segtype="sentence"\n')
-        fout.write('    adminlang="' + s_lang + '"\n')
-        fout.write('    srclang="' + s_lang + '"\n')
-        fout.write('    o-tmf="TW4Win 2.0 Format"\n')
-        fout.write('  >\n')
-        fout.write('  </header>\n')
-        fout.write('  <body>\n')
+        tmx_header(fout, s_lang)  # add tmx header
         with codecs.open(input_name, "r", "utf-8") as fin:
             for line in fin:
                 #   get source and target to temp variables
@@ -84,24 +132,10 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
                 # escape XML entities '&', '<', and '>'
                 source = xml.sax.saxutils.escape(source)
                 target = xml.sax.saxutils.escape(target)
-                #   create TU line
-                tru = ''.join(['<tu creationdate="', now,
-                               '" creationid="eunlp"><prop type="Txt::Note">',
-                               note, '</prop>', tag, '\n'])
-                fout.write(tru)
-                #   create TUV source line
-                tuv = ''.join(['<tuv xml:lang="', s_lang, '"><seg>', source,
-                               '</seg></tuv>\n'])
-                fout.write(tuv)
-                #   create TUV target line
-                tuv = ''.join(['<tuv xml:lang="', t_lang, '"><seg>', target,
-                               '</seg></tuv> </tu>\n'])
-                fout.write(tuv)
-                fout.write('\n')
-        # add tmx footer
-        fout.write('\n')
-        fout.write('</body>\n')
-        fout.write('</tmx>')
+                # create TU
+                make_tu_line(fout, s_lang, t_lang, source, target, now, note,
+                             tag)
+        tmx_footer(fout)  # add tmx footer
 
 
 def eu_xml_converter(file_name):
@@ -125,6 +159,53 @@ def eu_xml_converter(file_name):
         title = res_list[i].find('expression_title').contents[1].contents[0]
         lista.append((celex, title))
     return lista
+
+
+def dirty_ttx_to_tmx(ttx_file_name, tmx_file_name, ttx_s_lang, ttx_t_lang,
+                     s_lang, t_lang, note):
+    """
+    Usage: dirty_ttx_to_tmx('test.ttx', 'rez.tmx', "EN-GB", "RO-RO",
+                            'en', 'ro', 'test_note')
+
+    :type ttx_file_name: str
+    :type tmx_file_name: str
+    :type s_lang: str
+    :type t_lang: str
+    :type ttx_s_lang: str
+    :type ttx_t_lang: str
+    :type note: str
+    """
+    with codecs.open(ttx_file_name, 'r', 'utf-16') as fin:
+        text = fin.read()
+    # add newline before Tu tag if missing
+    text = re.sub(r'\t<Tu', r'\r\n<Tu', text)
+    text = re.sub(r'&lt;.+?&gt;', r'', text)
+    # remove all df tags
+    text = re.sub(r'<df.+?>', r'', text)
+    text = re.sub(r'</df>', r'', text)
+    # remove all ut tags
+    text = re.sub(r'<ut.+?>', r'', text)
+    text = re.sub(r'</ut>', r'', text)
+    # convert to list of lines and select those starting with the Tu tag
+    tu_list = re.split('\r\n', text)
+    tu_list = [line for line in tu_list if line[:3] == u'<Tu']
+
+    now = datetime.datetime.now().isoformat()
+    now = re.split(r"\.", re.sub(r"[-:]", r"", now))[0] + "Z"
+    tag = '<prop type="Txt::Alignment">TTX</prop>'
+    with codecs.open(tmx_file_name, 'w', 'utf-16') as fout:
+        tmx_header(fout, s_lang)  # add tmx header
+        for line in tu_list:
+            # fout.write(line + '\n')
+            source = line.split('Tuv Lang="' + ttx_s_lang + '">')[1]
+            source = source.split('</Tuv><Tuv Lang="' + ttx_t_lang + '">')[0]
+            target = line.split('Tuv Lang="' + ttx_s_lang + '">')[1]
+            target = target.split('</Tuv><Tuv Lang="' + ttx_t_lang + '">')[1]
+            target = target.split('</Tuv></Tu>')[0]
+            # create TU
+            make_tu_line(fout, s_lang, t_lang, source, target, now, note,
+                         tag)
+        tmx_footer(fout)  # add tmx footer
 
 
 def merge_tmx():
