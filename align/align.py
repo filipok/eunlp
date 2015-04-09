@@ -1,5 +1,5 @@
 """
-Name:        functions.py
+Name:        align.py
 Purpose:     Various project functions
 
 Author:      Filip
@@ -14,10 +14,8 @@ import os
 import subprocess
 import random
 import logging
-
 import nltk
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
-
 from . import l2t_new as l2t
 from . import util
 from . import convert
