@@ -204,6 +204,7 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
     s_sentence_splitter = sentence_splitter(s_lang)
     t_sentence_splitter = sentence_splitter(t_lang)
     for i in range(len(s_list)):
+        # boolean values (small, pattern not found, intermediate & no pattern)
         small = len(s_list[i]) < para_size_small
         n_pat = not (re.search(patt, s_list[i]) and re.search(patt, t_list[i]))
         clean_intermediate = ((len(s_list[i]) < para_size) and
@@ -384,6 +385,7 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
     :type make_dic: bool
     :rtype: list
     """
+    # create tokenized files for hunalign
     split_token_nltk(s_file, s_sentence_splitter)
     split_token_nltk(t_file, t_sentence_splitter)
     # create hunalign dic from /data_raw files
