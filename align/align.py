@@ -96,20 +96,13 @@ def file_to_list(file_name, tries=0):
     text = re.sub(r'\s+\n', r'\n', text)  # remove whitespace before newline
     text = re.sub(r' +', r' ', text)  # remove double whitespaces
     text = paragraph_combiner_sub(text)  # combine para numbers with text
-    if tries == 1:
+    if tries in [1, 2, 3]:
         # remove one-character lines which can make the aligner to fail
         text = re.sub(r'\n.(?=\n)', r'', text)
-        # also try to remove two-character lines which can make it to fail
-    elif tries == 2:
-        # remove one-character lines which can make the aligner to fail
-        text = re.sub(r'\n.(?=\n)', r'', text)
+    if tries in [2, 3]:
         # also try to remove two-character lines which can make it to fail
         text = re.sub(r'\n.{1,2}(?=\n)', r'', text)
-    elif tries == 3:
-        # remove one-character lines which can make the aligner to fail
-        text = re.sub(r'\n.(?=\n)', r'', text)
-        # also try to remove two-character lines which can make it to fail
-        text = re.sub(r'\n.{1,2}(?=\n)', r'', text)
+    if tries == 3:
         # also try to remove three-character lines which can make it to fail
         text = re.sub(r'\n.{1,3}(?=\n)', r'', text)
     paragraph_list = re.split(r'\n', text)  # split file
