@@ -41,7 +41,7 @@ def paragraph_combiner_sub(text):
     pattern_6 = re.compile(r'\n\(?(vi{0,3})[\.\)][\n\s]')  # 5-8
     pattern_7 = re.compile(r'\n\(?(ix)[\.\)][\n\s]')  # 9
     # the replacements
-    text = re.sub(pattern_1, '\n', text)
+    text = re.sub(pattern_1, r'\n', text)
     text = re.sub(pattern_3, r'\n', text)
     text = re.sub(pattern_4, r'\n', text)
     text = re.sub(pattern_5, r'\n', text)
