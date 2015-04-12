@@ -166,6 +166,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                          align_file, para_size=para_size,
                          para_size_small=para_size_small, prj=source_file,
                          make_dic=make_dic)
+        # TODO tmx si ali ocupa mult spatiu pe disc
         # turn alignment into tmx
         convert.tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang,
                            t_lang, note)
