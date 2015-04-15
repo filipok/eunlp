@@ -130,6 +130,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     :rtype: None
     """
     if (not over) and os.path.isfile(align_file + '.tab'):
+        # TODO de testat si pt tab-failed
         logging.warning("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
     source_list = file_to_list(source_file)
@@ -147,6 +148,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 if len(source_list) != len(target_list):
                     logging.error('Smart alignment failed in %s-%s, %s, %s',
                                   s_lang, t_lang, source_file, target_file)
+                    # TODO de pus un fisier de dim zero tab-failed de ex
                     # Using Hunalign on the entire file is mostly useless.
                     # aligner(source_file, target_file, s_lang, t_lang,
                     #         dictionary, align_file, note, delete_temp=True)
