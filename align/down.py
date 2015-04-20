@@ -114,6 +114,7 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
     :type over_html: bool
     :type over_txt: bool
     """
+    # TODO de utilizat linkurile cu ALL pt celex si de extras clasificarile
     for lang_code in langs:
         new_name = prefix + url_code + '_' + lang_code + '.html'
         try:
