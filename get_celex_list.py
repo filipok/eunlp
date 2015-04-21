@@ -37,6 +37,8 @@ if __name__ == '__main__':
                 print "Processing " + item[0] + ' ...'
                 align.celex_aligner(langs, path, item[0], '', make_dic=False)
         elif len(langs) == 1 and langs[0] == 'all':
+            # TODO resume from where it stopped
+            # TODO result matrix (language x language with percentage)
             file_list = convert.eu_xml_converter(xml_list)
             for i in range(len(ALL_LANGS)):
                 languages = ALL_LANGS[:]
