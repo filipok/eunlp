@@ -14,6 +14,7 @@ import datetime
 import xml.sax.saxutils
 import logging
 from bs4 import BeautifulSoup
+from itertools import izip_longest
 
 
 def tab_to_separate(input_name, output_source, output_target):
@@ -206,6 +207,41 @@ def dirty_ttx_to_tmx(ttx_file_name, tmx_file_name, ttx_s_lang, ttx_t_lang,
             make_tu_line(fout, s_lang, t_lang, source, target, now, note,
                          tag)
         tmx_footer(fout)  # add tmx footer
+
+
+def html_table(source_list, target_list, file_name, page_title='No title'):
+    """
+
+    :type source_list: list
+    :type target_list: list
+    :type file_name: str
+    :type page_title: str
+    """
+    with codecs.open(file_name,  'w', 'utf-8') as fout:
+        fout.write('<!DOCTYPE html>\n')
+        fout.write('<html>\n')
+        fout.write('<head>\n')
+        fout.write('<style>\n'
+                   'table, th, td {\n'
+                   'border: 1px solid black;\n'
+                   '}\n'
+                   '</style>\n')
+        fout.write('<title>' + page_title + '</title>\n')
+        fout.write('</head>\n')
+        fout.write('<body>')
+        fout.write('<table>')
+        for pair in izip_longest(source_list, target_list, fillvalue='N/A'):
+            fout.write('<tr>\n')
+            fout.write('<td>')
+            fout.write(str(pair[0]))
+            fout.write('</td>\n')
+            fout.write('<td>')
+            fout.write(str(pair[1]))
+            fout.write('</td>\n')
+            fout.write('</tr>\n')
+        fout.write('</table>\n')
+        fout.write('</body>\n')
+        fout.write('</html>\n')
 
 
 def merge_tmx():
