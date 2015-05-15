@@ -129,8 +129,9 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     :type make_dic: bool
     :rtype: None
     """
-    if (not over) and os.path.isfile(align_file + '.tab'):
-        # TODO de testat si pt tab-failed
+    if (not over) and (
+            os.path.isfile(align_file + '.tab') or
+            os.path.isfile(align_file + '.err.html')):
         logging.warning("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
     source_list = file_to_list(source_file)
