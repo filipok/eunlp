@@ -221,6 +221,7 @@ def html_table(source_list, target_list, file_name, page_title='No title'):
         fout.write('<!DOCTYPE html>\n')
         fout.write('<html>\n')
         fout.write('<head>\n')
+        fout.write('<meta charset="UTF-8">\n')
         fout.write('<style>\n'
                    'table, th, td {\n'
                    'border: 1px solid black;\n'
@@ -233,10 +234,10 @@ def html_table(source_list, target_list, file_name, page_title='No title'):
         for pair in izip_longest(source_list, target_list, fillvalue='N/A'):
             fout.write('<tr>\n')
             fout.write('<td>')
-            fout.write(str(pair[0]))
+            fout.write(pair[0])
             fout.write('</td>\n')
             fout.write('<td>')
-            fout.write(str(pair[1]))
+            fout.write(pair[1])
             fout.write('</td>\n')
             fout.write('</tr>\n')
         fout.write('</table>\n')
