@@ -148,7 +148,9 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 if len(source_list) != len(target_list):
                     logging.error('Smart alignment failed in %s-%s, %s, %s',
                                   s_lang, t_lang, source_file, target_file)
-                    # TODO de pus un fisier de dim zero tab-failed de ex
+                    convert.html_table(
+                        source_list, target_list, align_file + '.err.html',
+                        page_title=align_file)
                     # Using Hunalign on the entire file is mostly useless.
                     # aligner(source_file, target_file, s_lang, t_lang,
                     #         dictionary, align_file, note, delete_temp=True)
