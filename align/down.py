@@ -74,12 +74,24 @@ def souper(new_name, html_text, style, over=False):
     # some celexes have \n inside <p> tags
     # remove_newlines(soup) #  very slow!
     # separate branches for each document type
+    find_div = soup.find(id='text')
     if style == "celex":
         if soup.txt_te is not None:
-            # for older celexes
+            # for oldest celexes
             clean_text = soup.txt_te.get_text()
+        elif find_div is not None:
+            # for the celex format as of May 2015
+            try:
+                clean_text = find_div.contents[1].contents[1].get_text()
+            except IndexError:
+                logging.error('IndexError: Bs4 could not process %s', new_name)
+                raise
+            except AttributeError:
+                logging.error('AttributeError: Bs4 could not process %s',
+                              new_name)
+                raise
         else:
-            # for newer celexes
+            # for newer celexes, but in a format not valid after May 2015
             # the hierarchy is rather deep
             try:
                 clean_text = soup.body.div.contents[8].contents[5].contents[0]
@@ -94,6 +106,7 @@ def souper(new_name, html_text, style, over=False):
                               new_name)
                 raise
     elif style == "europarl":
+        # TODO currently not maintained
         clean_text = soup.get_text()
         clean_text = strip_ep(clean_text)
     else:
