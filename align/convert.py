@@ -15,6 +15,8 @@ import xml.sax.saxutils
 import logging
 from bs4 import BeautifulSoup
 from itertools import izip_longest
+import os
+import gzip
 
 
 def tab_to_separate(input_name, output_source, output_target):
@@ -137,6 +139,19 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
                 make_tu_line(fout, s_lang, t_lang, source, target, now, note,
                              tag)
         tmx_footer(fout)  # add tmx footer
+
+
+def gzipper(source_file):
+    """
+
+    :type source_file: str
+    """
+    f_in = open(source_file, 'rb')
+    f_out = gzip.open(source_file + '.gz', 'wb')
+    f_out.writelines(f_in)
+    f_out.close()
+    f_in.close()
+    os.remove(source_file)
 
 
 def eu_xml_converter(file_name):

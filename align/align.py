@@ -111,7 +111,7 @@ def file_to_list(file_name, tries=0):
 
 def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                   align_file, note, over=True, para_size=300,
-                  para_size_small=100, make_dic=True):
+                  para_size_small=100, make_dic=True, compress=False):
     # functions.smart_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002")
     """
@@ -131,7 +131,8 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     """
     if (not over) and (
             os.path.isfile(align_file + '.tab') or
-            os.path.isfile(align_file + '.err.html')):
+            os.path.isfile(align_file + '.err.html') or
+            os.path.isfile(align_file + '.tab.gz')):
         logging.warning("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
     source_list = file_to_list(source_file)
@@ -171,7 +172,6 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                          align_file, para_size=para_size,
                          para_size_small=para_size_small, prj=source_file,
                          make_dic=make_dic)
-        # TODO tmx si ali ocupa mult spatiu pe disc
         # turn alignment into tmx
         convert.tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang,
                            t_lang, note)
@@ -179,6 +179,11 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
         s_ali = source_file[:-4] + '_' + s_lang + t_lang + '.ali'
         t_ali = target_file[:-4] + '_' + s_lang + t_lang + '.ali'
         convert.tab_to_separate(align_file + '.tab', s_ali, t_ali)
+        if compress:
+            convert.gzipper(align_file + '.tab')
+            convert.gzipper(align_file + '.tmx')
+            convert.gzipper(s_ali)
+            convert.gzipper(t_ali)
     except StopIteration:
         logging.error('StopIteration in %s -> %s, %s', note, source_file,
                       target_file)
@@ -435,7 +440,7 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
     return lines
 
 
-def celex_aligner(langs, path, celex, prefix, make_dic=True):
+def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False):
     """
 
     :type langs: list
@@ -458,4 +463,5 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True):
                                                           langs)
         # call the aligner
         smart_aligner(s_file, t_file, langs[0].lower(), langs[1].lower(),
-                      dic, align_file, celex, over=False, make_dic=make_dic)
+                      dic, align_file, celex, over=False, make_dic=make_dic,
+                      compress=compress)
