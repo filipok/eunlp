@@ -34,6 +34,10 @@ def downloader(link, new_name, over=False):
         # this confuses get_text() in BeautifulSoup
         html_text = re.sub(r'</p><p>', r'</p>\n<p>', html_text)
         # some celexes have \n inside <p> tags
+        # TODO findall si repeat pana nu mai e nimic
+        # TODO https://docs.python.org/2/library/re.html
+
+        # TODO 1. ar tb sa fie r'<p\1 in loc de r'<p>\1
         html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)(.+?)</p>',
                            r'<p>\1>\2 \4</p>', html_text)
 
