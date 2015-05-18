@@ -28,37 +28,30 @@ def downloader(link, new_name, over=False):
     if over or (not os.path.isfile(new_name)):
         response = urllib2.urlopen(link)
         html_text = response.read()
-
-        # TODO cleanup
-        # some celexes have no new line between paras
-        # this confuses get_text() in BeautifulSoup
-        html_text = re.sub(r'</p><p>', r'</p>\n<p>', html_text)
-        # some celexes have one to three \n's inside <p> tags
-        html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)'
-                           r'(.+?)</p>',
-                           r'<p\1>\2 \4</p>', html_text)  # one
-        html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)'
-                           r'(.+?)(?<!</p>)(\n)'
-                           r'(.+?)</p>',
-                           r'<p\1>\2 \4 \6</p>', html_text)  # two
-        html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)'
-                           r'(.+?)(?<!</p>)(\n)'
-                           r'(.+?)(?<!</p>)(\n)'
-                           r'(.+?)</p>',
-                           r'<p\1>\2 \4 \6 \8</p>', html_text)  # three
         with open(new_name, 'w') as fout:
             fout.write(html_text)
     else:
         with codecs.open(new_name, "r", "utf-8") as fin:
             html_text = fin.read()
             logging.debug("%s: html file already downloaded.", new_name)
-            # This could be redundant
-            # some celexes have no new line between paras
-            # this confuses get_text() in BeautifulSoup
-            html_text = re.sub(r'</p><p>', r'</p>\n<p>', html_text)
-            # some celexes have \n inside <p> tags
-            html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)(.+?)</p>',
-                               r'<p>\1>\2 \4</p>', html_text)
+
+    # Some celexes have no new line between paras
+    # This confuses get_text() in BeautifulSoup
+    html_text = re.sub(r'</p><p>', r'</p>\n<p>', html_text)
+    # some celexes have one to three \n's inside <p> tags
+    html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)'
+                       r'(.+?)</p>',
+                       r'<p\1>\2 \4</p>', html_text)  # one
+    html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)'
+                       r'(.+?)(?<!</p>)(\n)'
+                       r'(.+?)</p>',
+                       r'<p\1>\2 \4 \6</p>', html_text)  # two
+    html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)'
+                       r'(.+?)(?<!</p>)(\n)'
+                       r'(.+?)(?<!</p>)(\n)'
+                       r'(.+?)</p>',
+                       r'<p\1>\2 \4 \6 \8</p>', html_text)  # three
+
     return html_text
 
 
