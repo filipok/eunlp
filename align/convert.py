@@ -232,7 +232,8 @@ def html_table(source_list, target_list, file_name, page_title='No title'):
     :type file_name: str
     :type page_title: str
     """
-    #TODO create editable table (for quick alignment correction)
+    # TODO create editable table (for quick alignment correction)
+    # TODO gen http://www.editablegrid.net/en
     with codecs.open(file_name,  'w', 'utf-8') as fout:
         fout.write('<!DOCTYPE html>\n')
         fout.write('<html>\n')
