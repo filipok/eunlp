@@ -33,14 +33,19 @@ def downloader(link, new_name, over=False):
         # some celexes have no new line between paras
         # this confuses get_text() in BeautifulSoup
         html_text = re.sub(r'</p><p>', r'</p>\n<p>', html_text)
-        # some celexes have \n inside <p> tags
-        # TODO findall si repeat pana nu mai e nimic
-        # TODO https://docs.python.org/2/library/re.html
-
-        # TODO 1. ar tb sa fie r'<p\1 in loc de r'<p>\1
-        html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)(.+?)</p>',
-                           r'<p\1>\2 \4</p>', html_text)
-
+        # some celexes have one to three \n's inside <p> tags
+        html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)'
+                           r'(.+?)</p>',
+                           r'<p\1>\2 \4</p>', html_text)  # one
+        html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)'
+                           r'(.+?)(?<!</p>)(\n)'
+                           r'(.+?)</p>',
+                           r'<p\1>\2 \4 \6</p>', html_text)  # two
+        html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)'
+                           r'(.+?)(?<!</p>)(\n)'
+                           r'(.+?)(?<!</p>)(\n)'
+                           r'(.+?)</p>',
+                           r'<p\1>\2 \4 \6 \8</p>', html_text)  # three
         with open(new_name, 'w') as fout:
             fout.write(html_text)
     else:
