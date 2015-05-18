@@ -39,7 +39,7 @@ def downloader(link, new_name, over=False):
 
         # TODO 1. ar tb sa fie r'<p\1 in loc de r'<p>\1
         html_text = re.sub(r'<p(.*?)>(.+?)(?<!</p>)(\n)(.+?)</p>',
-                           r'<p>\1>\2 \4</p>', html_text)
+                           r'<p\1>\2 \4</p>', html_text)
 
         with open(new_name, 'w') as fout:
             fout.write(html_text)
