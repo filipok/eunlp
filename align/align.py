@@ -127,6 +127,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     :type para_size: int
     :type para_size_small: int
     :type make_dic: bool
+    :type compress: bool
     :rtype: None
     """
     if (not over) and (

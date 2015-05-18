@@ -120,6 +120,10 @@ def souper(new_name, html_text, style, over=False):
 def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
             over_txt=False):
     """
+    It downloads EU documents as html files and converts them to txt.
+    Example usage:
+    align.down.scraper(['bg', 'es'], align.util.make_celex_link, '32014D0390',
+                       '', style='celex')
 
     :type langs: list
     :type make_link: function
