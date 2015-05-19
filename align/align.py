@@ -151,6 +151,8 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                 if len(source_list) != len(target_list):
                     logging.error('Smart alignment failed in %s-%s, %s, %s',
                                   s_lang, t_lang, source_file, target_file)
+                    source_list = file_to_list(source_file)
+                    target_list = file_to_list(target_file)
                     convert.html_table(
                         source_list, target_list, align_file + '.err.html',
                         page_title=align_file)
