@@ -28,19 +28,21 @@ def paragraph_combiner_sub(text):
     :type text: str
     :rtype: str
     """
-    pattern_1 = re.compile(
-        r'\n\(?([0-9]{1,3}|[a-z]{1,3}|[A-Z]{1,3})[\.\)][\n\s]')
-    # combine single lines consisting of single number + single letter
-    # with the next line
-    pattern_3 = re.compile(r'\n\(?([0-9]+[a-z]+)[\.\)][\n\s]')
+    # pattern 1 combines 1-3 letters/numbers with dot/brackets with next line
+    # pattern_1 = re.compile(
+    #     r'\n\(?([0-9]{1,3}|[a-z]{1,3}|[A-Z]{1,3})[\.\)][\n\s]')
+    pattern_1_unicode = re.compile(r'\n\(?(\w{1,3})[\.\)][\n\s]', re.UNICODE)
+    # pattern 3 combines single number + single letter with the next line
+    # pattern_3 = re.compile(r'\n\(?([0-9]+[a-z]+)[\.\)][\n\s]')
+    pattern_3_unicode = re.compile(r'\n\(?([0-9]+\w+)[\.\)][\n\s]', re.UNICODE)
     # combine lines consisting of Roman numerals to 9 with the next line
     pattern_4 = re.compile(r'\n\(?(i{1,3})[\.\)][\n\s]')  # 1-3
     pattern_5 = re.compile(r'\n\(?(iv)[\.\)][\n|\s]')  # 4
     pattern_6 = re.compile(r'\n\(?(vi{0,3})[\.\)][\n\s]')  # 5-8
     pattern_7 = re.compile(r'\n\(?(ix)[\.\)][\n\s]')  # 9
     # the replacements
-    text = re.sub(pattern_1, r'\n', text)
-    text = re.sub(pattern_3, r'\n', text)
+    text = re.sub(pattern_1_unicode, r'\n', text)
+    text = re.sub(pattern_3_unicode, r'\n', text)
     text = re.sub(pattern_4, r'\n', text)
     text = re.sub(pattern_5, r'\n', text)
     text = re.sub(pattern_6, r'\n', text)
