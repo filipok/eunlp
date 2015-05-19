@@ -1,12 +1,14 @@
-# Name:        get_celex_list
-# Purpose:     Download Eurlex documents using the celex codes from an XML file
-# How to use:   python ~/eunlp/get_celex_list.py searchresults.xml EN RO
-#
-# Example:
-# python ~/eunlp/get_celex_list.py searchresults.xml EN RO
-# Author:      Filip
-#
-# Created:     17.02.2015
+"""
+Name:        get_celex_list
+Purpose:     Download Eurlex documents using the celex codes from an XML file
+How to use:
+One language pair: python ~/eunlp/get_celex_list.py searchresults.xml en ro
+All language pairs: python ~/eunlp/get_celex_list.py searchresults.xml all
+
+Author:      Filip
+
+Created:     17.02.2015
+"""
 
 import sys
 import os
@@ -37,8 +39,6 @@ if __name__ == '__main__':
                 print "Processing " + item[0] + ' ...'
                 align.celex_aligner(langs, path, item[0], '', make_dic=False)
         elif len(langs) == 1 and langs[0] == 'all':
-            # TODO resume from where it stopped
-            # TODO result matrix (language x language with percentage)
             file_list = convert.eu_xml_converter(xml_list)
             for i in range(len(ALL_LANGS)):
                 languages = ALL_LANGS[:]

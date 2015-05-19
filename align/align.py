@@ -20,8 +20,6 @@ from . import l2t_new as l2t
 from . import util
 from . import convert
 from . import down
-# TODO test test1.xml, test2.xml
-# TODO test simultaneous alignment with all languages
 
 
 def paragraph_combiner_sub(text):
@@ -449,6 +447,7 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False):
     :type celex: str
     :type prefix: str
     :type make_dic: bool
+    :type compress: bool
     """
     # create html and txt files for each language code
     try:
