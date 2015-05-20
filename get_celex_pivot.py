@@ -42,12 +42,16 @@ if __name__ == '__main__':
     if lang in ALL_LANGS:
         target_langs = ALL_LANGS[:]
         target_langs.remove(lang)  # remove pivot language from list
+        target_no = len(target_langs)
         file_list = convert.eu_xml_converter(xml_list)
-        for item in file_list:
-            for t_language in target_langs:
-                pair = [lang, t_language]
-                print "Processing " + item[0] + ' (' + repr(pair) + ') ...'
-                align.celex_aligner(pair, path, item[0], '', make_dic=False)
+        file_no = len(file_list)
+        for item in enumerate(file_list):
+            for t_language in enumerate(target_langs):
+                pair = [lang, t_language[1]]
+                print str(item[0] + 1) + '/' + str(file_no) + ',',
+                print str(t_language[0] + 1) + '/' + str(target_no) + ':',
+                print "Processing " + item[1][0] + ' (' + repr(pair) + ') ...'
+                align.celex_aligner(pair, path, item[1][0], '', make_dic=False)
     else:
         logging.critical('Invalid language!')
         print "Valid languages:", ALL_LANGS
