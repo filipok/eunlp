@@ -53,6 +53,8 @@ def downloader(link, new_name, over=False):
                        r'(.+?)(?<!</p>)(\n)'
                        r'(.+?)</p>',
                        r'<p\1>\2 \4 \6 \8</p>', html_text)  # three
+    # add whitespace between two adjacent columns
+    html_text = re.sub(r'</td><td', r'</td> <td', html_text)
 
     return html_text
 
@@ -66,8 +68,6 @@ def souper(new_name, html_text, style, over=False):
     :type over: bool
     :rtype:
     """
-    # TODO aici uneste coloanele fara spatiu
-    # TODO <td>Interest rate risk sub-module</td><td>105</td>
     # Only convert to txt if not already existing
     # over=True overrides that behavior
     if (not over) and os.path.isfile(new_name):
