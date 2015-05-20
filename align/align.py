@@ -34,6 +34,7 @@ def paragraph_combiner_sub(text):
     pattern_1_unicode = re.compile(r'\n\(?(\w{1,3})[\.\)][\n\s]', re.UNICODE)
     # pattern 3 combines single number + single letter with the next line
     # pattern_3 = re.compile(r'\n\(?([0-9]+[a-z]+)[\.\)][\n\s]')
+    # TODO asta zapaceste EN-HR 32014D0372 si 32014D0190, \w poa sa fie cifra
     pattern_3_unicode = re.compile(r'\n\(?([0-9]+\w+)[\.\)][\n\s]', re.UNICODE)
     # combine lines consisting of Roman numerals to 9 with the next line
     pattern_4 = re.compile(r'\n\(?(i{1,3})[\.\)][\n\s]')  # 1-3
