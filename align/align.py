@@ -463,9 +463,20 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False):
         logging.error("Aborting alignment due to format error in %s", celex)
     else:
         # prepare paths
+
+        # [example with simple make_paths]
         s_file, t_file, align_file, dic = util.make_paths(path, prefix + celex,
                                                           langs)
         # call the aligner
         smart_aligner(s_file, t_file, langs[0].lower(), langs[1].lower(),
                       dic, align_file, celex, over=False, make_dic=make_dic,
                       compress=compress)
+
+        # [example with make_paths_multi]
+        # langs = [x.lower() for x in langs]
+        #s_file, t_files, align_file, dics = util.make_paths_multi(
+        #    path, prefix + celex, langs[0], langs[1:])
+        #smart_aligner_new(s_file, t_files, langs[0], langs[1:],
+        #              dics, align_file, celex, over=False,
+        #              make_dic=make_dic, compress=compress)
+
