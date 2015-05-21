@@ -262,6 +262,42 @@ def html_table(source_list, target_list, file_name, page_title='No title'):
         fout.write('</html>\n')
 
 
+def m_html_table(source_list, targets, file_name, page_title='No title'):
+    """
+
+    :type source_list: list
+    :type targets: list
+    :type file_name: str
+    :type page_title: str
+    """
+    # TODO create editable table (for quick alignment correction)
+    # TODO gen http://www.editablegrid.net/en
+    with codecs.open(file_name,  'w', 'utf-8') as fout:
+        fout.write('<!DOCTYPE html>\n')
+        fout.write('<html>\n')
+        fout.write('<head>\n')
+        fout.write('<meta charset="UTF-8">\n')
+        fout.write('<style>\n'
+                   'table, th, td {\n'
+                   'border: 1px solid black;\n'
+                   '}\n'
+                   '</style>\n')
+        fout.write('<title>' + page_title + '</title>\n')
+        fout.write('</head>\n')
+        fout.write('<body>')
+        fout.write('<table>')
+        for row in izip_longest(source_list, *targets, fillvalue='N/A'):
+            fout.write('<tr>\n')
+            for cell in row:
+                fout.write('<td>')
+                fout.write(cell)
+                fout.write('</td>\n')
+            fout.write('</tr>\n')
+        fout.write('</table>\n')
+        fout.write('</body>\n')
+        fout.write('</html>\n')
+
+
 def paragraph_combiner_sub(text):
     """
 
