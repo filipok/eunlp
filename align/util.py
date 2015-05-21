@@ -83,6 +83,34 @@ def make_paths(path, text_id, languages):
     return source_file, target_file, align_file, dictionary
 
 
+def make_paths_multi(path, text_id, s_lang, t_langs):
+    """
+
+    :type path: str
+    :type text_id: str
+    :type s_lang: str
+    :type t_langs: list
+    :rtype: tuple
+    """
+    list_of_targets = []
+    list_of_dictionaries = []
+    source_file = os.path.join(path, text_id + '_' + s_lang + '.txt')
+    for t_lang in t_langs:
+        target_file = os.path.join(path, text_id + '_' + t_lang + '.txt')
+        list_of_targets.append(target_file)
+        dictionary = os.path.join(path, s_lang + t_lang + '.dic')
+        list_of_dictionaries.append(dictionary)
+    prefix = 'multi_'
+    postfix = ''
+    if len(t_langs) == 1:
+        prefix = 'bi_'
+        postfix = t_langs[0]
+    align_file = os.path.join(
+        path, prefix + text_id + '_' + s_lang + '_' + postfix)
+
+    return source_file, list_of_targets, align_file, list_of_dictionaries
+
+
 def create_dictionary(s_file, t_file, output_file):
     """
 
