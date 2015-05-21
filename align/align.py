@@ -22,34 +22,6 @@ from . import convert
 from . import down
 
 
-def paragraph_combiner_sub(text):
-    """
-
-    :type text: str
-    :rtype: str
-    """
-    # pattern 1 combines 1-3 letters/numbers with dot/brackets with next line
-    # the negative lookahead (?!cikk) is for Hungarian.
-    pattern_1_unicode = re.compile(r'\n\(?(\w{1,3})[\.\)][\n\s](?!cikk)',
-                                   re.UNICODE)
-    # pattern 3 combines 1-3 numbers + single letter with the next line
-    pattern_3_unicode = re.compile(
-        r'\n\(?([0-9]{1,3}(?![0-9])\w+)[\.\)][\n\s]', re.UNICODE)
-    # combine lines consisting of Roman numerals to 9 with the next line
-    pattern_4 = re.compile(r'\n\(?(i{1,3})[\.\)][\n\s]')  # 1-3
-    pattern_5 = re.compile(r'\n\(?(iv)[\.\)][\n|\s]')  # 4
-    pattern_6 = re.compile(r'\n\(?(vi{0,3})[\.\)][\n\s]')  # 5-8
-    pattern_7 = re.compile(r'\n\(?(ix)[\.\)][\n\s]')  # 9
-    # the replacements
-    text = re.sub(pattern_1_unicode, r'\n', text)
-    text = re.sub(pattern_3_unicode, r'\n', text)
-    text = re.sub(pattern_4, r'\n', text)
-    text = re.sub(pattern_5, r'\n', text)
-    text = re.sub(pattern_6, r'\n', text)
-    text = re.sub(pattern_7, r'\n', text)
-    return text
-
-
 def hunalign_wrapper(source_file, target_file, dictionary, align_file,
                      realign=True):
     """
@@ -74,39 +46,6 @@ def hunalign_wrapper(source_file, target_file, dictionary, align_file,
     output, err = proc.communicate()
     with codecs.open(align_file, 'w', 'utf-8') as fout:
         fout.write(unicode(output, 'utf-8'))
-
-
-def file_to_list(file_name, tries=0):
-    # clean and convert file to list of paragraphs
-    """
-
-    :type file_name: str
-    :type tries: int
-    :rtype: list
-    """
-    with codecs.open(file_name, "r", "utf-8") as fin:
-        text = fin.read()
-    text = re.sub(r'\xa0+', ' ', text)  # replace non-breaking space
-    text = re.sub(r'\n\s+', r'\n', text)  # remove whitespace after newline
-    text = re.sub(r'^\n+', r'', text)  # remove empty lines at the beginning
-    text = re.sub(r'\n$', r'', text)  # remove empty lines at the end
-    # merge segments separated by comma and whitespace, with some exceptions
-    # which are language-dependent unfortunately
-    # re.sub(r',\s\n(?!Whereas|Having regard|In cooperation)', r', ', text)
-    text = re.sub(r'\s+\n', r'\n', text)  # remove whitespace before newline
-    text = re.sub(r' +', r' ', text)  # remove double whitespaces
-    text = paragraph_combiner_sub(text)  # combine para numbers with text
-    if tries in [1, 2, 3]:
-        # remove one-character lines which can make the aligner to fail
-        text = re.sub(r'\n.(?=\n)', r'', text)
-    if tries in [2, 3]:
-        # also try to remove two-character lines which can make it to fail
-        text = re.sub(r'\n.{1,2}(?=\n)', r'', text)
-    if tries == 3:
-        # also try to remove three-character lines which can make it to fail
-        text = re.sub(r'\n.{1,3}(?=\n)', r'', text)
-    paragraph_list = re.split(r'\n', text)  # split file
-    return paragraph_list
 
 
 def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
@@ -136,23 +75,23 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             os.path.isfile(align_file + '.tab.gz')):
         logging.warning("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
-    source_list = file_to_list(source_file)
-    target_list = file_to_list(target_file)
+    source_list = convert.file_to_list(source_file)
+    target_list = convert.file_to_list(target_file)
     # If different No of paragraphs, make 3 more attempts to process the files
     if len(source_list) != len(target_list):
-        source_list = file_to_list(source_file, tries=1)
-        target_list = file_to_list(target_file, tries=1)
+        source_list = convert.file_to_list(source_file, tries=1)
+        target_list = convert.file_to_list(target_file, tries=1)
         if len(source_list) != len(target_list):
-            source_list = file_to_list(source_file, tries=2)
-            target_list = file_to_list(target_file, tries=2)
+            source_list = convert.file_to_list(source_file, tries=2)
+            target_list = convert.file_to_list(target_file, tries=2)
             if len(source_list) != len(target_list):
-                source_list = file_to_list(source_file, tries=3)
-                target_list = file_to_list(target_file, tries=3)
+                source_list = convert.file_to_list(source_file, tries=3)
+                target_list = convert.file_to_list(target_file, tries=3)
                 if len(source_list) != len(target_list):
                     logging.error('Smart alignment failed in %s-%s, %s, %s',
                                   s_lang, t_lang, source_file, target_file)
-                    source_list = file_to_list(source_file)
-                    target_list = file_to_list(target_file)
+                    source_list = convert.file_to_list(source_file)
+                    target_list = convert.file_to_list(target_file)
                     convert.html_table(
                         source_list, target_list, align_file + '.err.html',
                         page_title=align_file)
