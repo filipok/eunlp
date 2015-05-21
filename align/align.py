@@ -73,7 +73,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             os.path.isfile(align_file + '.tab') or
             os.path.isfile(align_file + '.err.html') or
             os.path.isfile(align_file + '.tab.gz')):
-        logging.warning("File pair already aligned: %s", align_file)
+        logging.info("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
     source_list = convert.file_to_list(source_file)
     target_list = convert.file_to_list(target_file)
