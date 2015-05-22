@@ -15,7 +15,6 @@ import subprocess
 import random
 import logging
 import nltk
-from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 from . import l2t_new as l2t
 from . import util
 from . import convert
@@ -154,8 +153,8 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
     # both source and target have a dot followed by whitespace.
     patt = re.compile(r'\. ')
     # create sentence splitters
-    s_sentence_splitter = sentence_splitter(s_lang)
-    t_sentence_splitter = sentence_splitter(t_lang)
+    s_sentence_splitter = util.sentence_splitter(s_lang)
+    t_sentence_splitter = util.sentence_splitter(t_lang)
     for i in range(len(s_list)):
         # boolean values (small, pattern not found, intermediate & no pattern)
         small = len(s_list[i]) < para_size_small
@@ -297,24 +296,6 @@ def split_token_nltk(file_name, sent_splitter):
     with codecs.open(file_name[:-4] + '.tok', 'w', 'utf-8') as fout:
         for sent in tokenized_sentences:
             fout.write(' '.join(sent) + '\n')
-
-
-def sentence_splitter(lang):
-    """
-
-    :type lang: str
-    :rtype: nltk.tokenize.punkt.PunktSentenceTokenizer
-    """
-    punkt_param = PunktParameters()
-    path = os.path.dirname(__file__)
-    subfolder = '/nonbreaking_prefixes/nonbreaking_prefix.'
-    ab_file = ''.join([path, subfolder, lang])
-    if os.path.isfile(ab_file):
-        punkt_param.abbrev_types = set(util.abbreviation_loader(ab_file))
-    else:
-        logging.info('Abbreviation file not found for language: %s', lang)
-    splitter = PunktSentenceTokenizer(punkt_param)
-    return splitter
 
 
 def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,

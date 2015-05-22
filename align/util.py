@@ -11,6 +11,25 @@ import codecs
 import logging
 import re
 import os
+from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
+
+
+def sentence_splitter(lang):
+    """
+
+    :type lang: str
+    :rtype: nltk.tokenize.punkt.PunktSentenceTokenizer
+    """
+    punkt_param = PunktParameters()
+    path = os.path.dirname(__file__)
+    subfolder = '/nonbreaking_prefixes/nonbreaking_prefix.'
+    ab_file = ''.join([path, subfolder, lang])
+    if os.path.isfile(ab_file):
+        punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
+    else:
+        logging.info('Abbreviation file not found for language: %s', lang)
+    splitter = PunktSentenceTokenizer(punkt_param)
+    return splitter
 
 
 def make_ep_sub_link(doc_category, doc_year, doc_code):
