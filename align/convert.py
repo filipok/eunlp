@@ -141,6 +141,50 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
         tmx_footer(fout)  # add tmx footer
 
 
+def m_tab_to_tmx(input_name, tmx_name, s_lang, t_langs, note):
+    # get current date
+    """
+
+    :type input_name: str
+    :type tmx_name: str
+    :type s_lang: str
+    :type t_langs: list
+    :type note: str
+    """
+    now = datetime.datetime.now().isoformat()
+    now = re.split(r"\.", re.sub(r"[-:]", r"", now))[0] + "Z"
+    n_target = len(t_langs)
+    # create new TMX file
+    with codecs.open(tmx_name, "w", "utf-8") as fout:
+        tmx_header(fout, s_lang)  # add tmx header
+        with codecs.open(input_name, "r", "utf-8") as fin:
+            for line in fin:
+                #   get source and target to temp variables
+                text = re.split(r'\t', line)
+                source = text[n_target + 1].strip('\n')
+                targets = text[1:n_target + 1]
+                if text[0] == 'Err':
+                    tag = '<prop type="Txt::Alignment">Long_f</prop>'
+                elif text[0] == 'Nai':
+                    tag = '<prop type="Txt::Alignment">Short</prop>'
+                elif text[0] == 'Hun':
+                    tag = '<prop type="Txt::Alignment">Hun</prop>'
+                else:
+                    tag = '<prop type="Txt::Alignment">Unknown</prop>'
+
+                # remove triple tildas from hunalign
+                # source = source.replace('~~~ ', '')
+                # target = target.replace('~~~ ', '')
+                
+                # escape XML entities '&', '<', and '>'
+                source = xml.sax.saxutils.escape(source)
+                target = xml.sax.saxutils.escape(target)
+                # create TU
+                make_tu_line(fout, s_lang, t_lang, source, target, now, note,
+                             tag)
+        tmx_footer(fout)  # add tmx footer
+
+
 def gzipper(source_file):
     """
 
