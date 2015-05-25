@@ -13,3 +13,6 @@ ALL_LANGS = ['bg', 'es', 'cs', 'da', 'de', 'et', 'el', 'en', 'fr', 'ga', 'hr',
              'fi', 'sv']
 
 PIVOT = 'en'
+
+PARA_MAX = 300
+PARA_MIN = 100

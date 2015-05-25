@@ -19,6 +19,7 @@ from . import l2t_new as l2t
 from . import util
 from . import convert
 from . import down
+from .const import PARA_MAX, PARA_MIN
 
 
 def hunalign_wrapper(source_file, target_file, dictionary, align_file,
@@ -48,8 +49,8 @@ def hunalign_wrapper(source_file, target_file, dictionary, align_file,
 
 
 def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
-                  align_file, note, over=True, para_size=300,
-                  para_size_small=100, make_dic=True, compress=False):
+                  align_file, note, over=True, para_size=PARA_MAX,
+                  para_size_small=PARA_MIN, make_dic=True, compress=False):
     # functions.smart_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002")
     """
@@ -131,7 +132,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
 
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
-                     align_file, para_size=300, para_size_small=100,
+                     align_file, para_size=PARA_MAX, para_size_small=PARA_MIN,
                      prj='temp', make_dic=True):
     """
 
