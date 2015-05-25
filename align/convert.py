@@ -14,7 +14,7 @@ import datetime
 import xml.sax.saxutils
 import logging
 from bs4 import BeautifulSoup
-from itertools import izip_longest
+from itertools import izip_longest, izip
 import os
 import gzip
 
@@ -100,6 +100,35 @@ def make_tu_line(fout, s_lang, t_lang, source, target, now, note, tag):
     fout.write('\n')
 
 
+def m_make_tu_line(fout, s_lang, t_langs, source, targets, now, note, tag):
+    # create TU line
+    """
+
+    :type fout: file
+    :type s_lang: str
+    :type t_langs: list
+    :type source: str
+    :type targets: list
+    :type now: str
+    :type note: str
+    :type tag: str
+    """
+    tru = ''.join(['<tu creationdate="', now,
+                   '" creationid="eunlp"><prop type="Txt::Note">',
+                   note, '</prop>', tag, '\n'])
+    fout.write(tru)
+    #   create TUV source line
+    tuv = ''.join(['<tuv xml:lang="', s_lang, '"><seg>', source,
+                   '</seg></tuv>\n'])
+    fout.write(tuv)
+    #   create TUV target lines
+    for pair in izip(t_langs, targets):
+        tuv = ''.join(['<tuv xml:lang="', pair[0], '"><seg>', pair[1],
+                       '</seg></tuv> </tu>\n'])
+        fout.write(tuv)
+    fout.write('\n')
+
+
 def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
     # get current date
     """
@@ -175,13 +204,13 @@ def m_tab_to_tmx(input_name, tmx_name, s_lang, t_langs, note):
                 # remove triple tildas from hunalign
                 # source = source.replace('~~~ ', '')
                 # target = target.replace('~~~ ', '')
-                
+
                 # escape XML entities '&', '<', and '>'
                 source = xml.sax.saxutils.escape(source)
-                target = xml.sax.saxutils.escape(target)
+                targets = map(xml.sax.saxutils.escape, targets)
                 # create TU
-                make_tu_line(fout, s_lang, t_lang, source, target, now, note,
-                             tag)
+                m_make_tu_line(fout, s_lang, t_langs, source, targets, now,
+                               note, tag)
         tmx_footer(fout)  # add tmx footer
 
 
