@@ -96,26 +96,27 @@ def smart_aligner(source_file, targets, s_lang, t_langs, dics,
             os.path.isfile(align_file + '.tab.gz')):
         logging.warning("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
-    s_list = convert.file_to_list(source_file)
-    t_lists = [convert.file_to_list(target) for target in targets]
+    s_list = convert.file_to_list(s_file)
+    t_lists = [convert.file_to_list(target) for target in t_files]
     # If different No of paragraphs, make 3 more attempts to process the files
-    if not all(len(s_list) == len(target) for target in targets):
-        s_list = convert.file_to_list(source_file, tries=1)
+    if not all(len(s_list) == len(target) for target in t_files):
+        s_list = convert.file_to_list(s_file, tries=1)
         t_lists = [convert.file_to_list(target, tries=1)
-                   for target in targets]
-        if not all(len(s_list) == len(target) for target in targets):
-            s_list = convert.file_to_list(source_file, tries=2)
+                   for target in t_files]
+        if not all(len(s_list) == len(target) for target in t_files):
+            s_list = convert.file_to_list(s_file, tries=2)
             t_lists = [convert.file_to_list(target, tries=2)
-                       for target in targets]
-            if not all(len(s_list) == len(target) for target in targets):
-                s_list = convert.file_to_list(source_file, tries=3)
+                       for target in t_files]
+            if not all(len(s_list) == len(target) for target in t_files):
+                s_list = convert.file_to_list(s_file, tries=3)
                 t_lists = [convert.file_to_list(target, tries=3)
-                           for target in targets]
-                if not all(len(s_list) == len(target) for target in targets):
+                           for target in t_files]
+                if not all(len(s_list) == len(target) for target in t_files):
                     logging.error('Multi-alignment failed in %s-%s', s_lang,
-                                  source_file)
-                    s_list = convert.file_to_list(source_file)
-                    t_lists = [convert.file_to_list(target) for target in targets]
+                                  s_file)
+                    s_list = convert.file_to_list(s_file)
+                    t_lists = [
+                        convert.file_to_list(target) for target in t_files]
                     # TODO perhaps only write down problem languages
                     convert.m_html_table(
                         s_list, t_lists, align_file + '.err.html',
@@ -126,18 +127,18 @@ def smart_aligner(source_file, targets, s_lang, t_langs, dics,
                     return
                 else:
                     logging.warning('Aligned at 4th attempt in %s-%s',
-                                    s_lang, source_file)
+                                    s_lang, s_file)
             else:
                 logging.warning('Aligned at 3rd attempt in %s-%s',
-                                s_lang, source_file)
+                                s_lang, s_file)
         else:
             logging.warning('Aligned at 2nd attempt in %s-%s',
-                            s_lang, source_file)
+                            s_lang, s_file)
     # If equal number of paragraphs:
     try:
         parallel_aligner(s_list, t_lists, s_lang, t_langs, dics,
                          align_file, para_size=para_size,
-                         para_size_small=para_size_small, prj=source_file,
+                         para_size_small=para_size_small, prj=s_file,
                          make_dic=make_dic)
         # turn alignment into tmx
         convert.m_tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang,
