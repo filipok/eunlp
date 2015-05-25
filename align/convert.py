@@ -472,4 +472,15 @@ def merge_tmx():
     #    read file
     #    remove header and footer
     #    add remaining contents to target_file (if s_lang and t_lang?)
+    # TODO function
+    pass
+
+
+def tmx_to_sqlite():
+    """
+    Convert tmx to existing or new sqlite file
+
+
+    """
+    # TODO function
     pass
