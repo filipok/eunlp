@@ -12,6 +12,7 @@ import codecs
 import re
 import os
 import logging
+from itertools import izip
 from . import util
 from . import convert
 from . import down
@@ -71,13 +72,13 @@ def parallel_aligner(s_list, t_lists, s_lang, t_langs, dics,
     fout.close()
 
 
-def smart_aligner(source_file, targets, s_lang, t_langs, dics,
-                  align_file, note, over=True, para_size=300,
-                  para_size_small=100, make_dic=True, compress=False):
+def smart_aligner(s_file, t_files, s_lang, t_langs, dics,
+                  align_file, note, over=True, para_size=PARA_MAX,
+                  para_size_small=PARA_MIN, make_dic=True, compress=False):
     """
 
-    :type source_file: str
-    :type targets: list
+    :type s_file: str
+    :type t_files: list
     :type s_lang: str
     :type t_langs: list
     :type dics: list
@@ -144,16 +145,18 @@ def smart_aligner(source_file, targets, s_lang, t_langs, dics,
         convert.m_tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang,
                              t_langs, note)
         # create parallel source and target text files
-        s_ali = source_file[:-4] + '_' + s_lang + t_lang + '.ali'
-        t_ali = target_file[:-4] + '_' + s_lang + t_lang + '.ali'
-        convert.tab_to_separate(align_file + '.tab', s_ali, t_ali)
+        s_ali = s_file[:-4] + '_' + s_lang + '.ali'
+        t_alis = []
+        for pair in izip(t_files, t_langs):
+            t_alis.append(pair[0][:-4] + '_' + pair[1] + '.ali')
+        convert.m_tab_to_separate(align_file + '.tab', s_ali, t_alis)
         if compress:
             convert.gzipper(align_file + '.tab')
             convert.gzipper(align_file + '.tmx')
             convert.gzipper(s_ali)
-            convert.gzipper(t_ali)
+            convert.m_gzipper(t_alis)
     except StopIteration:
-        logging.error('StopIteration in %s -> %s', note, source_file)
+        logging.error('StopIteration in %s -> %s', note, s_file)
 
 
 def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False):
