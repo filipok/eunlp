@@ -123,9 +123,9 @@ def make_paths_multi(path, text_id, s_lang, t_langs):
     postfix = ''
     if len(t_langs) == 1:
         prefix = 'bi_'
-        postfix = t_langs[0]
+        postfix = '_' + t_langs[0]
     align_file = os.path.join(
-        path, prefix + text_id + '_' + s_lang + '_' + postfix)
+        path, prefix + text_id + '_' + s_lang + postfix)
 
     return source_file, list_of_targets, align_file, list_of_dictionaries
 
