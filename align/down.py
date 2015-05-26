@@ -39,6 +39,7 @@ def downloader(link, new_name, over=False):
     # This confuses get_text() in BeautifulSoup
     html_text = re.sub(r'</p><p>', r'</p>\n<p>', html_text)
     # some celexes have one to three \n's inside <p> tags
+    # TODO in 32014R1286 LT apare un P intr-un alt P
     html_text = re.sub(r'<p(.*?)>(.*?)(?<!</p>)(\n)'
                        r'(.+?)</p>',
                        r'<p\1>\2 \4</p>', html_text)  # one
