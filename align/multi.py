@@ -158,6 +158,11 @@ def smart_aligner(s_file, t_files, s_lang, t_langs, dics,
             convert.m_gzipper(t_alis)
     except StopIteration:
         logging.error('StopIteration in %s -> %s', note, s_file)
+        s_list = convert.file_to_list(s_file)
+        t_lists = [convert.file_to_list(target) for target in t_files]
+        # TODO perhaps only write down problem languages
+        convert.m_html_table(s_list, t_lists, align_file + '.err.html',
+                             page_title=align_file)
 
 
 def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False):

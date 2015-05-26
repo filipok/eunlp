@@ -129,6 +129,10 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     except StopIteration:
         logging.error('StopIteration in %s -> %s, %s', note, source_file,
                       target_file)
+        source_list = convert.file_to_list(source_file)
+        target_list = convert.file_to_list(target_file)
+        convert.html_table(source_list, target_list, align_file + '.err.html',
+                           page_title=align_file)
 
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
