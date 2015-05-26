@@ -149,7 +149,7 @@ def smart_aligner(s_file, t_files, s_lang, t_langs, dics,
         s_ali = s_file[:-4] + '_' + s_lang + '.ali'
         t_alis = []
         for pair in izip(t_files, t_langs):
-            t_alis.append(pair[0][:-4] + '_' + pair[1] + '.ali')
+            t_alis.append(pair[0][:-4] + '_' + s_lang + pair[1] + '.ali')
         convert.m_tab_to_separate(align_file + '.tab', s_ali, t_alis)
         if compress:
             convert.gzipper(align_file + '.tab')
