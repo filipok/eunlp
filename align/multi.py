@@ -100,21 +100,22 @@ def smart_aligner(s_file, t_files, s_lang, t_langs, dics,
     s_list = convert.file_to_list(s_file)
     t_lists = [convert.file_to_list(target) for target in t_files]
     # If different No of paragraphs, make 3 more attempts to process the files
-    if not all(len(s_list) == len(target) for target in t_files):
+    if not all(len(s_list) == len(target) for target in t_lists):
         s_list = convert.file_to_list(s_file, tries=1)
         t_lists = [convert.file_to_list(target, tries=1)
                    for target in t_files]
-        if not all(len(s_list) == len(target) for target in t_files):
+        if not all(len(s_list) == len(target) for target in t_lists):
             s_list = convert.file_to_list(s_file, tries=2)
             t_lists = [convert.file_to_list(target, tries=2)
                        for target in t_files]
-            if not all(len(s_list) == len(target) for target in t_files):
+            if not all(len(s_list) == len(target) for target in t_lists):
                 s_list = convert.file_to_list(s_file, tries=3)
                 t_lists = [convert.file_to_list(target, tries=3)
                            for target in t_files]
-                if not all(len(s_list) == len(target) for target in t_files):
+                if not all(len(s_list) == len(target) for target in t_lists):
                     logging.error('Multi-alignment failed in %s-%s', s_lang,
                                   s_file)
+
                     s_list = convert.file_to_list(s_file)
                     t_lists = [
                         convert.file_to_list(target) for target in t_files]
