@@ -45,14 +45,14 @@ def m_tab_to_separate(input_name, output_source, output_targets):
     :type output_source: str
     :type output_targets: list
     """
-    t_files = [open(t_file, 'w') for t_file in output_targets]
+    t_files = [codecs.open(t_file, 'w', 'utf-8') for t_file in output_targets]
     with codecs.open(input_name, "r", "utf-8") as fin:
-        for line in fin:
-            text = re.split(r'\t', line)
-            segments = len(text)
-            source = text[segments - 1].strip('\n')
-            targets = text[1:segments - 1]
-            with codecs.open(output_source, 'w', 'utf-8') as out_s:
+        with codecs.open(output_source, 'w', 'utf-8') as out_s:
+            for line in fin:
+                text = re.split(r'\t', line)
+                segments = len(text)
+                source = text[segments - 1].strip('\n')
+                targets = text[1:segments - 1]
                 out_s.write(source + '\n')
                 for pair in izip(targets, t_files):
                     pair[1].write(pair[0] + '\n')
