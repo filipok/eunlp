@@ -5,7 +5,7 @@ How to use:
 All language pairs with the default pivot (i.e. English):
 python ~/eunlp/get_celex_pivot.py searchresults.xml
 All language pairs with a different pivot:
-python ~/eunlp/get_celex_list.py searchresults.xml fr
+python ~/eunlp/get_celex_pivot.py searchresults.xml fr
 
 Author:      Filip
 
