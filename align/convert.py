@@ -145,9 +145,9 @@ def m_make_tu_line(fout, s_lang, t_langs, source, targets, now, note, tag):
     #   create TUV target lines
     for pair in izip(t_langs, targets):
         tuv = ''.join(['<tuv xml:lang="', pair[0], '"><seg>', pair[1],
-                       '</seg></tuv> </tu>\n'])
+                       '</seg></tuv>\n'])
         fout.write(tuv)
-    fout.write('\n')
+    fout.write('</tu>\n')
 
 
 def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
