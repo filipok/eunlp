@@ -37,6 +37,7 @@ def downloader(link, new_name, over=False):
 
     # Some celexes have no new line between paras
     # This confuses get_text() in BeautifulSoup
+    # TODO re.sub(r'</p><p ', r'</p>\n<p ', html_text) test with 32014R0596 all
     html_text = re.sub(r'</p><p>', r'</p>\n<p>', html_text)
     # some celexes have one to three \n's inside <p> tags
     # TODO in 32014R1286 LT apare un P intr-un alt P
