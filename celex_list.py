@@ -1,9 +1,9 @@
 """
-Name:        get_celex_list
+Name:        celex_list.py
 Purpose:     Download Eurlex documents using the celex codes from an XML file
 How to use:
-One language pair: python ~/eunlp/get_celex_list.py searchresults.xml en ro
-All language pairs: python ~/eunlp/get_celex_list.py searchresults.xml all
+One language pair: python ~/eunlp/celex_list.py searchresults.xml en ro
+All language pairs: python ~/eunlp/celex_list.py searchresults.xml all
 
 Author:      Filip
 

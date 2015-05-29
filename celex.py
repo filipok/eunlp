@@ -1,9 +1,9 @@
-# Name:        get_CELEX
+# Name:        celex.py
 # Purpose:     Download Eurlex documents using the celex code
-# How to use:   python ~/eunlp/get_CELEX.py 32013R1024 EN RO
+# How to use:   python ~/eunlp/celex.py 32013R1024 EN RO
 #
 # Example:
-# python ~/eunlp/get_CELEX.py 32013R1024 EN RO
+# python ~/eunlp/celex.py 32013R1024 EN RO
 # Author:      Filip
 #
 # Created:     4.11.2014

@@ -1,13 +1,13 @@
 """
-Name:        get_celex_multi
+Name:        celex_multi.py
 Purpose:     Download Eurlex documents using the celex codes from an XML file
 How to use:
 All language pairs with the default pivot (i.e. English):
-python ~/eunlp/get_celex_multi.py 32013R1024
+python ~/eunlp/celex_multi.py 32013R1024
 All language pairs with a different pivot:
-python ~/eunlp/get_celex_multi.py 32013R1024 fr
+python ~/eunlp/celex_multi.py 32013R1024 fr
 Two language pairs
-python ~/eunlp/get_celex_multi.py 32013R1024 en ro
+python ~/eunlp/celex_multi.py 32013R1024 en ro
 
 Author:      Filip
 

@@ -1,11 +1,11 @@
 """
-Name:        get_celex_pivot
+Name:        celex_pivot.py
 Purpose:     Download Eurlex documents using the celex codes from an XML file
 How to use:
 All language pairs with the default pivot (i.e. English):
-python ~/eunlp/get_celex_pivot.py searchresults.xml
+python ~/eunlp/celex_pivot.py searchresults.xml
 All language pairs with a different pivot:
-python ~/eunlp/get_celex_pivot.py searchresults.xml fr
+python ~/eunlp/celex_pivot.py searchresults.xml fr
 
 Author:      Filip
 
