@@ -458,6 +458,7 @@ def file_to_list(file_name, tries=0):
     # re.sub(r',\s\n(?!Whereas|Having regard|In cooperation)', r', ', text)
     text = re.sub(r'\s+\n', r'\n', text)  # remove whitespace before newline
     text = re.sub(r' +', r' ', text)  # remove double whitespaces
+    text = re.sub(r'^ +', r'', text)  # remove whitespace at the beginning
     text = paragraph_combiner_sub(text)  # combine para numbers with text
     if tries in [1, 2, 3]:
         # remove one-character lines which can make the aligner to fail
