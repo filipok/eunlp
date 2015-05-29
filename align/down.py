@@ -35,24 +35,28 @@ def downloader(link, new_name, over=False):
             html_text = fin.read()
             logging.debug("%s: html file already downloaded.", new_name)
 
+    # some celexes have one to three \n's inside <p> tags
+    # remove all new lines and then recreate them after </p>
+    # this hopefully eliminates all \n's inside <p> tags
+    html_text = html_text.replace('\n', ' ')
+    html_text = re.sub(r'</p> +', r'</p>\n', html_text)
     # Some celexes have no new line between paras
     # This confuses get_text() in BeautifulSoup
-    # TODO re.sub(r'</p><p ', r'</p>\n<p ', html_text) test with 32014R0596 all
     html_text = re.sub(r'</p><p>', r'</p>\n<p>', html_text)
+    html_text = re.sub(r'</p><p ', r'</p>\n<p ', html_text)
     # some celexes have one to three \n's inside <p> tags
-    # TODO in 32014R1286 LT apare un P intr-un alt P
-    html_text = re.sub(r'<p(.*?)>(.*?)(?<!</p>)(\n)'
-                       r'(.+?)</p>',
-                       r'<p\1>\2 \4</p>', html_text)  # one
-    html_text = re.sub(r'<p(.*?)>(.*?)(?<!</p>)(\n)'
-                       r'(.+?)(?<!</p>)(\n)'
-                       r'(.+?)</p>',
-                       r'<p\1>\2 \4 \6</p>', html_text)  # two
-    html_text = re.sub(r'<p(.*?)>(.*?)(?<!</p>)(\n)'
-                       r'(.+?)(?<!</p>)(\n)'
-                       r'(.+?)(?<!</p>)(\n)'
-                       r'(.+?)</p>',
-                       r'<p\1>\2 \4 \6 \8</p>', html_text)  # three
+    # html_text = re.sub(r'<p(.*?)>(.*?)(?<!</p>)(\n)'
+    #                    r'(.+?)</p>',
+    #                    r'<p\1>\2 \4</p>', html_text)  # one
+    # html_text = re.sub(r'<p(.*?)>(.*?)(?<!</p>)(\n)'
+    #                    r'(.+?)(?<!</p>)(\n)'
+    #                    r'(.+?)</p>',
+    #                    r'<p\1>\2 \4 \6</p>', html_text)  # two
+    # html_text = re.sub(r'<p(.*?)>(.*?)(?<!</p>)(\n)'
+    #                    r'(.+?)(?<!</p>)(\n)'
+    #                    r'(.+?)(?<!</p>)(\n)'
+    #                    r'(.+?)</p>',
+    #                    r'<p\1>\2 \4 \6 \8</p>', html_text)  # three
     # add whitespace between two adjacent columns
     html_text = re.sub(r'</td><td', r'</td> <td', html_text)
     return html_text
