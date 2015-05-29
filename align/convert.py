@@ -407,31 +407,41 @@ def paragraph_combiner_sub(text):
     :type text: str
     :rtype: str
     """
-    # pattern 1 combines 1-3 letters/numbers with dot/brackets with next line
-    # the negative lookahead (?!cikk) is for Hungarian.
-    pattern_1_unicode = re.compile(r'\n\(?(\w{1,3})[\.\)][\n\s](?!cikk)',
+     # pattern 1 combines 1-3 letters/numbers with dot/brackets with next line
+    # negative lookahead cikk|FEJEZET|szakasz for Hungarian.
+    # negative lookahead pants|ieda\wa for Latvian.
+    # negative lookahead Jagu for Estonian.
+    # negative lookahead for Estonian months:
+    #     jaanuar|veebruar|m\wrts|aprill|mai|juuni|juuli|august|september|
+    #     oktoober|november|detsember
+    pattern_1_unicode = re.compile(
+        r'\n(\(?(\w{1,3})[\.\)])\s+'
+        r'(?!(cikk|FEJEZET|szakasz))'
+        r'(?!(pants|ieda\wa|Jagu))'
+        r'(?!(jaanuar|veebruar|m\wrts|aprill|mai|juuni))'
+        r'(?!(juuli|august|september|oktoober|november|detsember))',
                                    re.UNICODE)
     # pattern 3 combines 1-3 numbers + single letter with the next line
     pattern_3_unicode = re.compile(
-        r'\n\(?([0-9]{1,3}(?![0-9])\w+)[\.\)][\n\s]', re.UNICODE)
+        r'\n(\(?([0-9]{1,3}(?![0-9])\w+)[\.\)])\s+', re.UNICODE)
     # combine lines consisting of Roman numerals to 9 with the next line
-    pattern_4 = re.compile(r'\n\(?(i{1,3})[\.\)][\n\s]')  # 1-3
-    pattern_5 = re.compile(r'\n\(?(iv)[\.\)][\n|\s]')  # 4
-    pattern_6 = re.compile(r'\n\(?(vi{0,3})[\.\)][\n\s]')  # 5-8
-    pattern_7 = re.compile(r'\n\(?(ix)[\.\)][\n\s]')  # 9
+    pattern_4 = re.compile(r'\n(\(?i{1,3}[\.\)])\s+')  # 1-3
+    pattern_5 = re.compile(r'\n(\(?iv[\.\)])\s+')  # 4
+    pattern_6 = re.compile(r'\n(\(?vi{0,3}[\.\)])\s+')  # 5-8
+    pattern_7 = re.compile(r'\n(\(?ix[\.\)])\s+')  # 9
     # the replacements
-    text = re.sub(pattern_1_unicode, r'\n', text)
-    text = re.sub(pattern_3_unicode, r'\n', text)
-    text = re.sub(pattern_4, r'\n', text)
-    text = re.sub(pattern_5, r'\n', text)
-    text = re.sub(pattern_6, r'\n', text)
-    text = re.sub(pattern_7, r'\n', text)
+    text = re.sub(pattern_1_unicode, r'\n\1\n', text)
+    text = re.sub(pattern_3_unicode, r'\n\1\n', text)
+    text = re.sub(pattern_4, r'\n\1\n', text)
+    text = re.sub(pattern_5, r'\n\1\n', text)
+    text = re.sub(pattern_6, r'\n\1\n', text)
+    text = re.sub(pattern_7, r'\n\1\n', text)
     return text
 
 
 def file_to_list(file_name, tries=0):
     # clean and convert file to list of paragraphs
-    """
+    """[\s|\xa0]+
 
     :type file_name: str
     :type tries: int
