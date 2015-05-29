@@ -127,6 +127,7 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             convert.gzipper(s_ali)
             convert.gzipper(t_ali)
     except StopIteration:
+        # TODO de ce atatea StopIteration la CS
         logging.error('StopIteration in %s -> %s, %s', note, source_file,
                       target_file)
         source_list = convert.file_to_list(source_file)
@@ -379,6 +380,7 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False):
     :type compress: bool
     """
     # create html and txt files for each language code
+    # TODO ce fac cu GA care uneori e EN
     try:
         down.scraper(langs, util.make_celex_link, celex, prefix, style="celex",
                      over_html=False, over_txt=False)
