@@ -20,10 +20,10 @@ from align import align
 from align.const import ALL_LANGS
 
 parser = argparse.ArgumentParser(description="Align a Celex document.")
-parser.add_argument("celex", help="the Celex number of the document")
-parser.add_argument("s_lang", type=str.lower, choices=ALL_LANGS,
+parser.add_argument("Celex_number", help="the Celex number of the document")
+parser.add_argument("Source_language", type=str.lower, choices=ALL_LANGS,
                     help="the source language of the document")
-parser.add_argument("t_lang", type=str.lower, choices=ALL_LANGS,
+parser.add_argument("Target_language", type=str.lower, choices=ALL_LANGS,
                     help="the target language of the document")
 
 logging.basicConfig(filename='log.txt', level=logging.WARNING)
@@ -39,8 +39,8 @@ def main():
     """
     args = parser.parse_args()
     # collect arguments
-    celex = args.celex  # collect celex code
-    languages = [args.s_lang, args.t_lang]  # collect language codes
+    celex = args.Celex_number
+    languages = [args.Source_language, args.Target_language]
     # get script path
     path = os.getcwd()
     program_folder = os.path.dirname(sys.argv[0])
