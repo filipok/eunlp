@@ -386,11 +386,11 @@ def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
                    ' src="http://code.jquery.com/jquery-1.9.1.js"></script>\n')
         fout.write('<script class="links" type="text/javascript" ')
         fout.write(
-            'src="https://cdn.rawgit.com/filipok/jsalign/master/jsalign.js">' +
+            'src="https://rawgit.com/filipok/jsalign/master/jsalign.js">' +
             '</script>\n')
         fout.write('<link class="links" rel="stylesheet" type="text/css" href')
         fout.write(
-            '="https://cdn.rawgit.com/filipok/jsalign/master/jsalign.css">\n')
+            '="https://rawgit.com/filipok/jsalign/master/jsalign.css">\n')
         fout.write('<title>' + note + ' - ' + s_lang + ' - ' + t_lang +
                    '</title>\n')
         fout.write('</head>\n')
