@@ -92,9 +92,9 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                                   s_lang, t_lang, source_file, target_file)
                     source_list = convert.file_to_list(source_file)
                     target_list = convert.file_to_list(target_file)
-                    convert.html_table(
-                        source_list, target_list, align_file + '.err.html',
-                        page_title=align_file)
+                    convert.jsalign_table(source_list, target_list,
+                                          align_file + '.err.html', s_lang,
+                                          t_lang, note)
                     # Using Hunalign on the entire file is mostly useless.
                     # aligner(source_file, target_file, s_lang, t_lang,
                     #         dictionary, align_file, note, delete_temp=True)
@@ -132,8 +132,8 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                       target_file)
         source_list = convert.file_to_list(source_file)
         target_list = convert.file_to_list(target_file)
-        convert.html_table(source_list, target_list, align_file + '.err.html',
-                           page_title=align_file)
+        convert.jsalign_table(source_list, target_list,
+                              align_file + '.err.html', s_lang, t_lang, note)
 
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,

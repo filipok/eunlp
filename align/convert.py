@@ -335,8 +335,6 @@ def html_table(source_list, target_list, file_name, page_title='No title'):
     :type file_name: str
     :type page_title: str
     """
-    # TODO create editable table (for quick alignment correction)
-    # TODO gen http://www.editablegrid.net/en
     with codecs.open(file_name,  'w', 'utf-8') as fout:
         fout.write('<!DOCTYPE html>\n')
         fout.write('<html>\n')
@@ -365,6 +363,62 @@ def html_table(source_list, target_list, file_name, page_title='No title'):
         fout.write('</html>\n')
 
 
+def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
+    """
+
+    :type source_list: list
+    :type target_list: list
+    :type file_name: str
+    :type s_lang: str
+    :type t_lang: str
+    :type note: str
+    """
+    with codecs.open(file_name,  'w', 'utf-8') as fout:
+        fout.write('<!DOCTYPE html>\n')
+        fout.write('<html>\n')
+
+        fout.write('<head>\n')
+        fout.write('<meta charset="UTF-8">\n')
+        fout.write('<meta name="source-language" content="' + s_lang + '">\n')
+        fout.write('<meta name="target-language" content="' + t_lang + '">\n')
+        fout.write('<meta name="doc-code" content="' + note + '">\n')
+        fout.write('<script type="text/javascript"' +
+                   ' src="http://code.jquery.com/jquery-1.9.1.js"></script>\n')
+        fout.write('<script type="text/javascript" ')
+        fout.write(
+            'src="https://cdn.rawgit.com/filipok/jsalign/master/jsalign.js">' +
+            '</script>\n')
+        fout.write('<link rel="stylesheet" type="text/css" href=')
+        fout.write(
+            '"https://cdn.rawgit.com/filipok/jsalign/master/jsalign.css">\n')
+        fout.write('<title>' + note + ' - ' + s_lang + ' - ' + t_lang +
+                   '</title>\n')
+        fout.write('</head>\n')
+
+        fout.write('<body>\n')
+        fout.write('<table class="main-table">\n')
+        fout.write('  <tr class="main-row">\n')
+
+        fout.write('    <td id="source-col">\n')
+        for line in source_list:
+            fout.write('      <div class="cell"><span class="celltext">')
+            fout.write(line)
+            fout.write('</span></div>\n')
+        fout.write('    </td>')
+
+        fout.write('    <td id="target-col">\n')
+        for line in target_list:
+            fout.write('      <div class="cell"><span class="celltext">')
+            fout.write(line)
+            fout.write('</span></div>\n')
+        fout.write('    </td>')
+
+        fout.write('  </tr>\n')
+        fout.write('</table>\n')
+        fout.write('</body>\n')
+        fout.write('</html>\n')
+
+
 def m_html_table(source_list, targets, file_name, page_title='No title'):
     """
 
@@ -373,8 +427,6 @@ def m_html_table(source_list, targets, file_name, page_title='No title'):
     :type file_name: str
     :type page_title: str
     """
-    # TODO create editable table (for quick alignment correction)
-    # TODO gen http://www.editablegrid.net/en
     with codecs.open(file_name,  'w', 'utf-8') as fout:
         fout.write('<!DOCTYPE html>\n')
         fout.write('<html>\n')
