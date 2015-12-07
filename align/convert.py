@@ -382,15 +382,15 @@ def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
         fout.write('<meta name="source-language" content="' + s_lang + '">\n')
         fout.write('<meta name="target-language" content="' + t_lang + '">\n')
         fout.write('<meta name="doc-code" content="' + note + '">\n')
-        fout.write('<script type="text/javascript"' +
+        fout.write('<script class="links" type="text/javascript"' +
                    ' src="http://code.jquery.com/jquery-1.9.1.js"></script>\n')
-        fout.write('<script type="text/javascript" ')
+        fout.write('<script class="links" type="text/javascript" ')
         fout.write(
             'src="https://cdn.rawgit.com/filipok/jsalign/master/jsalign.js">' +
             '</script>\n')
-        fout.write('<link rel="stylesheet" type="text/css" href=')
+        fout.write('<link class="links" rel="stylesheet" type="text/css" href')
         fout.write(
-            '"https://cdn.rawgit.com/filipok/jsalign/master/jsalign.css">\n')
+            '="https://cdn.rawgit.com/filipok/jsalign/master/jsalign.css">\n')
         fout.write('<title>' + note + ' - ' + s_lang + ' - ' + t_lang +
                    '</title>\n')
         fout.write('</head>\n')
@@ -415,6 +415,10 @@ def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
 
         fout.write('  </tr>\n')
         fout.write('</table>\n')
+
+        fout.write('<div id="div-button">\n')
+        fout.write('  <button id="save-button">Save alignment</button>\n')
+        fout.write('</div>\n')
         fout.write('</body>\n')
         fout.write('</html>\n')
 
