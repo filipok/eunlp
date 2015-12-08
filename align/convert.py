@@ -396,6 +396,15 @@ def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
         fout.write('</head>\n')
 
         fout.write('<body>\n')
+
+        fout.write('<div id="doc-info">\n')
+        fout.write('<div id="doc-title">Document: ' + note + '</div>\n')
+        fout.write('<div id="doc-source-language">Source language: ' + s_lang
+                   + '</div>\n')
+        fout.write('<div id="doc-target-language">Target language: ' + t_lang
+                   + '</div>\n')
+        fout.write('</div>\n')
+
         fout.write('<table class="main-table">\n')
         fout.write('  <tr class="main-row">\n')
 
@@ -404,14 +413,14 @@ def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
             fout.write('      <div class="cell"><span class="celltext">')
             fout.write(line)
             fout.write('</span></div>\n')
-        fout.write('    </td>')
+        fout.write('    </td>\n')
 
         fout.write('    <td id="target-col">\n')
         for line in target_list:
             fout.write('      <div class="cell"><span class="celltext">')
             fout.write(line)
             fout.write('</span></div>\n')
-        fout.write('    </td>')
+        fout.write('    </td>\n')
 
         fout.write('  </tr>\n')
         fout.write('</table>\n')
