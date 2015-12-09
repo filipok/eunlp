@@ -388,6 +388,9 @@ def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
         fout.write(
             'src="https://rawgit.com/filipok/jsalign/master/jsalign.js">' +
             '</script>\n')
+        fout.write('<script class="links" type="text/javascript" ')
+        fout.write(
+            'src="http://rangy.googlecode.com/svn/trunk/currentrelease/rangy-core.js"></script>\n')
         fout.write('<link class="links" rel="stylesheet" type="text/css" href')
         fout.write(
             '="https://rawgit.com/filipok/jsalign/master/jsalign.css">\n')
@@ -397,6 +400,10 @@ def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
 
         fout.write('<body>\n')
 
+        fout.write('<table id = "header">\n')
+        fout.write('<tr>\n')
+
+        fout.write('<td>\n')
         fout.write('<div id="doc-info">\n')
         fout.write('<div id="doc-title">Document: ' + note + '</div>\n')
         fout.write('<div id="doc-source-language">Source language: ' + s_lang
@@ -404,6 +411,27 @@ def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
         fout.write('<div id="doc-target-language">Target language: ' + t_lang
                    + '</div>\n')
         fout.write('</div>\n')
+
+        fout.write('</td>\n')
+        fout.write('<td>\n')
+        fout.write('<div id="legend">\n')
+        fout.write('<div class="demo"><span class="buttons"><a class="button')
+        fout.write(' add-demo" href="#">+ &#8595</a>  Add new segment</div>\n')
+        fout.write('<div class="demo"><a class="button-demo delete-demo"')
+        fout.write(' href="#">Del</a> Delete segment</div>\n')
+        fout.write('<div class="demo"><a href="#" class="button-demo')
+        fout.write(' edit-demo">Edit</a> Edit segment</div>\n')
+        fout.write('<div class="demo"><a class="button-demo merge-demo"')
+        fout.write(' href="#">&#9939 &#8595</a></span> Merge segment')
+        fout.write(' with next</div>\n')
+        fout.write('<div class="demo"><a class="button-demo split-demo"')
+        fout.write(' href="#">&#9932 &#9932</a></span> Split segment (click')
+        fout.write(' where you want to split)</div>\n')
+        fout.write('<span class="celltext"></span>\n')
+        fout.write('</div>\n')
+        fout.write('</td>\n')
+        fout.write('</tr>\n')
+        fout.write('</table>\n')
 
         fout.write('<table class="main-table">\n')
         fout.write('  <tr class="main-row">\n')
