@@ -438,14 +438,16 @@ def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
 
         fout.write('    <td id="source-col">\n')
         for line in source_list:
-            fout.write('      <div class="cell"><span class="celltext">')
+            fout.write('      <div class="cell"><span class="celltext" ')
+            fout.write(' contenteditable="true">')
             fout.write(line)
             fout.write('</span></div>\n')
         fout.write('    </td>\n')
 
         fout.write('    <td id="target-col">\n')
         for line in target_list:
-            fout.write('      <div class="cell"><span class="celltext">')
+            fout.write('      <div class="cell"><span class="celltext" ')
+            fout.write(' contenteditable="true">')
             fout.write(line)
             fout.write('</span></div>\n')
         fout.write('    </td>\n')
