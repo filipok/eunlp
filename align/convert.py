@@ -382,8 +382,8 @@ def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
         fout.write('<meta name="source-language" content="' + s_lang + '">\n')
         fout.write('<meta name="target-language" content="' + t_lang + '">\n')
         fout.write('<meta name="doc-code" content="' + note + '">\n')
-        fout.write('<script class="links" type="text/javascript"' +
-                   ' src="http://code.jquery.com/jquery-1.9.1.js"></script>\n')
+        fout.write('<!-- <script class="links" type="text/javascript" src=' +
+                   '"http://code.jquery.com/jquery-1.9.1.js"></script> -->\n')
         fout.write('<script class="links" type="text/javascript" ')
         fout.write(
             'src="https://rawgit.com/filipok/jsalign/master/jsalign.js">' +
