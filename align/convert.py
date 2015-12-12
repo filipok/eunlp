@@ -436,9 +436,22 @@ def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
         fout.write('<table class="main-table">\n')
         fout.write('  <tr class="main-row">\n')
 
+        buttons = ''.join(
+            ['\n<span class="buttons">\n',
+                '<a href="#" class="button add" onclick="addFunction(this)">',
+                '+ &#8595</a>\n',
+                '<a href="#" class="button delete"',
+                ' onclick="deleteFunction(this)">Del</a>\n',
+                '<a href="#" class="button merge"',
+                ' onclick="mergeFunction(this)">&#9939 &#8595</a>\n',
+                '<a href="#" class="button split"',
+                ' onclick="splitFunction(this)">&#9932&#9932</a>\n',
+                '</span>\n'])
+
         fout.write('    <td id="source-col">\n')
         for line in source_list:
-            fout.write('      <div class="cell"><span class="celltext" ')
+            fout.write('      <div class="cell">' + buttons +
+                       '<span class="celltext" ')
             fout.write(' contenteditable="true">')
             fout.write(line)
             fout.write('</span></div>\n')
@@ -446,7 +459,8 @@ def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
 
         fout.write('    <td id="target-col">\n')
         for line in target_list:
-            fout.write('      <div class="cell"><span class="celltext" ')
+            fout.write('      <div class="cell">' + buttons +
+                       '<span class="celltext" ')
             fout.write(' contenteditable="true">')
             fout.write(line)
             fout.write('</span></div>\n')
