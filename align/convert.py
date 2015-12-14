@@ -410,6 +410,9 @@ def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
                    + '</div>\n')
         fout.write('<div id="doc-target-language">Target language: ' + t_lang
                    + '</div>\n')
+        fout.write('<div id="help"><br/>Save a backup:<br/>\n')
+        fout.write('<button id="backup-button">Save and continue later')
+        fout.write('</button>\n')
         fout.write('</div>\n')
 
         fout.write('</td>\n')
@@ -469,7 +472,7 @@ def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
         fout.write('  </tr>\n')
         fout.write('</table>\n')
 
-        fout.write('<div id="div-button">\n')
+        fout.write('<div class="div-button">\n')
         fout.write('  <button id="save-button">Save alignment</button>\n')
         fout.write('</div>\n')
         fout.write('</body>\n')
