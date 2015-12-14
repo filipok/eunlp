@@ -15,6 +15,7 @@ import subprocess
 import random
 import logging
 import nltk
+import xml.etree.ElementTree as ET
 from . import l2t_new as l2t
 from . import util
 from . import convert
@@ -398,3 +399,26 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False):
         smart_aligner(s_file, t_file, langs[0].lower(), langs[1].lower(),
                       dic, align_file, celex, over=False, make_dic=make_dic,
                       compress=compress)
+
+
+def bilingual_tmx_realigner(tmx_file):
+    """
+
+    :type tmx_file: str
+    """
+    # open tmx file
+    tree = ET.parse(tmx_file)
+    root = tree.getroot()
+    # convert tmx file to separate files
+    s_list = [element[2][0].text for element in root[1].findall('tu')]
+    t_list = [element[3][0].text for element in root[1].findall('tu')]
+    # get languages and document ID (note)
+    s_lang = root[0].get('srclang')
+    t_lang = root[1][0][3].get('{http://www.w3.org/XML/1998/namespace}lang')
+    note = root[1][0][0].text
+    dictionary = s_lang + t_lang + '.dic'
+    # 3. call parallel aligner
+    parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
+                     'realign_' + tmx_file)
+    convert.tab_to_tmx('realign_' + tmx_file + '.tab',
+                       'realign_' + tmx_file + '.tmx', s_lang, t_lang, note)
