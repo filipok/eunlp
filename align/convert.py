@@ -59,45 +59,48 @@ def m_tab_to_separate(input_name, output_source, output_targets):
     [t_file.close() for t_file in t_files]
 
 
-def tmx_header(fout, s_lang):
+def tmx_header(s_lang):
     # add tmx header (copied from LF Aligner output)
     """
 
-    :type fout: file
     :type s_lang: str
     """
-    fout.write('<?xml version="1.0" encoding="utf-8" ?>\n')
-    fout.write('<!DOCTYPE tmx SYSTEM "tmx14.dtd">\n')
-    fout.write('<tmx version="1.4">\n')
-    fout.write('  <header\n')
-    fout.write('    creationtool="eunlp"\n')
-    fout.write('    creationtoolversion="0.01"\n')
-    fout.write('    datatype="unknown"\n')
-    fout.write('    segtype="sentence"\n')
-    fout.write('    adminlang="' + s_lang + '"\n')
-    fout.write('    srclang="' + s_lang + '"\n')
-    fout.write('    o-tmf="TW4Win 2.0 Format"\n')
-    fout.write('  >\n')
-    fout.write('  </header>\n')
-    fout.write('  <body>\n')
+    header = ''
+    header += '<?xml version="1.0" encoding="utf-8" ?>\n'
+    header += '<!DOCTYPE tmx SYSTEM "tmx14.dtd">\n'
+    header += '<tmx version="1.4">\n'
+    header += '  <header\n'
+    header += '    creationtool="eunlp"\n'
+    header += '    creationtoolversion="0.01"\n'
+    header += '    datatype="unknown"\n'
+    header += '    segtype="sentence"\n'
+    header += '    adminlang="' + s_lang + '"\n'
+    header += '    srclang="' + s_lang + '"\n'
+    header += '    o-tmf="TW4Win 2.0 Format"\n'
+    header += '  >\n'
+    header += '  </header>\n'
+    header += '  <body>\n'
+
+    return header
 
 
-def tmx_footer(fout):
-    # add tmx footer
+def tmx_footer():
     """
 
-    :type fout: file
+    Create tmx footer
     """
-    fout.write('\n')
-    fout.write('</body>\n')
-    fout.write('</tmx>')
+    footer = ''
+    footer += '\n'
+    footer += '</body>\n'
+    footer += '</tmx>'
+
+    return footer
 
 
-def make_tu_line(fout, s_lang, t_lang, source, target, now, note, tag):
+def make_tu_line(s_lang, t_lang, source, target, now, note, tag):
     # create TU line
     """
 
-    :type fout: file
     :type s_lang: str
     :type t_lang: str
     :type source: str
@@ -109,23 +112,19 @@ def make_tu_line(fout, s_lang, t_lang, source, target, now, note, tag):
     tru = ''.join(['<tu creationdate="', now,
                    '" creationid="eunlp"><prop type="Txt::Note">',
                    note, '</prop>', tag, '\n'])
-    fout.write(tru)
     #   create TUV source line
-    tuv = ''.join(['<tuv xml:lang="', s_lang, '"><seg>', source,
-                   '</seg></tuv>\n'])
-    fout.write(tuv)
+    s_tuv = ''.join(['<tuv xml:lang="', s_lang, '"><seg>', source,
+                     '</seg></tuv>\n'])
     #   create TUV target line
-    tuv = ''.join(['<tuv xml:lang="', t_lang, '"><seg>', target,
-                   '</seg></tuv> </tu>\n'])
-    fout.write(tuv)
-    fout.write('\n')
+    t_tuv = ''.join(['<tuv xml:lang="', t_lang, '"><seg>', target,
+                     '</seg></tuv> </tu>\n'])
+    return ''.join([tru, s_tuv, t_tuv, '\n'])
 
 
-def m_make_tu_line(fout, s_lang, t_langs, source, targets, now, note, tag):
+def m_make_tu_line(s_lang, t_langs, source, targets, now, note, tag):
     # create TU line
     """
 
-    :type fout: file
     :type s_lang: str
     :type t_langs: list
     :type source: str
@@ -137,25 +136,23 @@ def m_make_tu_line(fout, s_lang, t_langs, source, targets, now, note, tag):
     tru = ''.join(['<tu creationdate="', now,
                    '" creationid="eunlp"><prop type="Txt::Note">',
                    note, '</prop>', tag, '\n'])
-    fout.write(tru)
     #   create TUV source line
-    tuv = ''.join(['<tuv xml:lang="', s_lang, '"><seg>', source,
-                   '</seg></tuv>\n'])
-    fout.write(tuv)
+    s_tuv = ''.join(['<tuv xml:lang="', s_lang, '"><seg>', source,
+                     '</seg></tuv>\n'])
     #   create TUV target lines
+    t_tuv = ''
     for pair in izip(t_langs, targets):
         tuv = ''.join(['<tuv xml:lang="', pair[0], '"><seg>', pair[1],
                        '</seg></tuv>\n'])
-        fout.write(tuv)
-    fout.write('</tu>\n')
+        t_tuv += tuv
+    return ''.join([tru, s_tuv, t_tuv, '</tu>\n'])
 
 
-def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
+def tab_to_tmx(tab_file, s_lang, t_lang, note):
     # get current date
     """
 
-    :type input_name: str
-    :type tmx_name: str
+    :type tab_file: str
     :type s_lang: str
     :type t_lang: str
     :type note: str
@@ -163,39 +160,45 @@ def tab_to_tmx(input_name, tmx_name, s_lang, t_lang, note):
     now = datetime.datetime.now().isoformat()
     now = re.split(r"\.", re.sub(r"[-:]", r"", now))[0] + "Z"
     # create new TMX file
-    with codecs.open(tmx_name, "w", "utf-8") as fout:
-        tmx_header(fout, s_lang)  # add tmx header
-        with codecs.open(input_name, "r", "utf-8") as fin:
-            for line in fin:
-                #   get source and target to temp variables
-                text = re.split(r'\t', line)
-                source = text[2].strip('\n')
-                target = text[1]
-                if text[0] == 'Err':
-                    tag = '<prop type="Txt::Alignment">Long_f</prop>'
-                elif text[0] == 'Nai':
-                    tag = '<prop type="Txt::Alignment">Short</prop>'
-                elif text[0] == 'Hun':
-                    tag = '<prop type="Txt::Alignment">Hun</prop>'
-                else:
-                    tag = '<prop type="Txt::Alignment">Unknown</prop>'
-                # remove triple tildas from hunalign
-                source = source.replace('~~~ ', '')
-                target = target.replace('~~~ ', '')
-                # escape XML entities '&', '<', and '>'
-                source = xml.sax.saxutils.escape(source)
-                target = xml.sax.saxutils.escape(target)
-                # create TU
-                make_tu_line(fout, s_lang, t_lang, source, target, now, note,
-                             tag)
-        tmx_footer(fout)  # add tmx footer
+    tmx_file = ''
+    tab_file = tab_file.strip('\n')
+    tab_file = re.split(r'\n', tab_file)
+    header = tmx_header(s_lang)  # add tmx header
+    tmx_file += header
+    for line in tab_file:
+        #   get source and target to temp variables
+        text = re.split(r'\t', line)
+        source = text[2].strip('\n')
+        target = text[1]
+        if text[0] == 'Err':
+            tag = '<prop type="Txt::Alignment">Long_f</prop>'
+        elif text[0] == 'Nai':
+            tag = '<prop type="Txt::Alignment">Short</prop>'
+        elif text[0] == 'Hun':
+            tag = '<prop type="Txt::Alignment">Hun</prop>'
+        else:
+            tag = '<prop type="Txt::Alignment">Unknown</prop>'
+        # remove triple tildas from hunalign
+        source = source.replace('~~~ ', '')
+        target = target.replace('~~~ ', '')
+        # escape XML entities '&', '<', and '>'
+        source = xml.sax.saxutils.escape(source)
+        target = xml.sax.saxutils.escape(target)
+        # create TU
+        tu_line = make_tu_line(s_lang, t_lang, source, target, now, note,
+                               tag)
+        tmx_file += tu_line
+
+    footer = tmx_footer()  # add tmx footer
+    tmx_file += footer
+    return tmx_file
 
 
-def m_tab_to_tmx(input_name, tmx_name, s_lang, t_langs, note):
+def m_tab_to_tmx(tab_file, tmx_name, s_lang, t_langs, note):
     # get current date
     """
 
-    :type input_name: str
+    :type tab_file: str
     :type tmx_name: str
     :type s_lang: str
     :type t_langs: list
@@ -205,34 +208,40 @@ def m_tab_to_tmx(input_name, tmx_name, s_lang, t_langs, note):
     now = re.split(r"\.", re.sub(r"[-:]", r"", now))[0] + "Z"
     n_target = len(t_langs)
     # create new TMX file
+    tmx_file = ''
+    tab_file = tab_file.strip('\n')
+    tab_file = re.split(r'\n', tab_file)
     with codecs.open(tmx_name, "w", "utf-8") as fout:
-        tmx_header(fout, s_lang)  # add tmx header
-        with codecs.open(input_name, "r", "utf-8") as fin:
-            for line in fin:
-                #   get source and target to temp variables
-                text = re.split(r'\t', line)
-                source = text[n_target + 1].strip('\n')
-                targets = text[1:n_target + 1]
-                if text[0] == 'Err':
-                    tag = '<prop type="Txt::Alignment">Long_f</prop>'
-                elif text[0] == 'Nai':
-                    tag = '<prop type="Txt::Alignment">Short</prop>'
-                elif text[0] == 'Hun':
-                    tag = '<prop type="Txt::Alignment">Hun</prop>'
-                else:
-                    tag = '<prop type="Txt::Alignment">Unknown</prop>'
+        header = tmx_header(s_lang)  # add tmx header
+        tmx_file += header
+        for line in tab_file:
+            #   get source and target to temp variables
+            text = re.split(r'\t', line)
+            source = text[n_target + 1].strip('\n')
+            targets = text[1:n_target + 1]
+            if text[0] == 'Err':
+                tag = '<prop type="Txt::Alignment">Long_f</prop>'
+            elif text[0] == 'Nai':
+                tag = '<prop type="Txt::Alignment">Short</prop>'
+            elif text[0] == 'Hun':
+                tag = '<prop type="Txt::Alignment">Hun</prop>'
+            else:
+                tag = '<prop type="Txt::Alignment">Unknown</prop>'
 
-                # remove triple tildas from hunalign
-                # source = source.replace('~~~ ', '')
-                # target = target.replace('~~~ ', '')
+            # remove triple tildas from hunalign
+            # source = source.replace('~~~ ', '')
+            # target = target.replace('~~~ ', '')
 
-                # escape XML entities '&', '<', and '>'
-                source = xml.sax.saxutils.escape(source)
-                targets = map(xml.sax.saxutils.escape, targets)
-                # create TU
-                m_make_tu_line(fout, s_lang, t_langs, source, targets, now,
-                               note, tag)
-        tmx_footer(fout)  # add tmx footer
+            # escape XML entities '&', '<', and '>'
+            source = xml.sax.saxutils.escape(source)
+            targets = map(xml.sax.saxutils.escape, targets)
+            # create TU
+            tu_line = m_make_tu_line(s_lang, t_langs, source, targets, now,
+                                     note, tag)
+            tmx_file += tu_line
+        footer = tmx_footer()  # add tmx footer
+        tmx_file += footer
+        fout.write(tmx_file)
 
 
 def gzipper(source_file):
@@ -312,19 +321,24 @@ def dirty_ttx_to_tmx(ttx_file_name, tmx_file_name, ttx_s_lang, ttx_t_lang,
     now = datetime.datetime.now().isoformat()
     now = re.split(r"\.", re.sub(r"[-:]", r"", now))[0] + "Z"
     tag = '<prop type="Txt::Alignment">TTX</prop>'
+    tmx_file = ''
     with codecs.open(tmx_file_name, 'w', 'utf-16') as fout:
-        tmx_header(fout, s_lang)  # add tmx header
+        header = tmx_header(s_lang)  # add tmx header
+        tmx_file += header
         for line in tu_list:
-            # fout.write(line + '\n')
             source = line.split('Tuv Lang="' + ttx_s_lang + '">')[1]
             source = source.split('</Tuv><Tuv Lang="' + ttx_t_lang + '">')[0]
             target = line.split('Tuv Lang="' + ttx_s_lang + '">')[1]
             target = target.split('</Tuv><Tuv Lang="' + ttx_t_lang + '">')[1]
             target = target.split('</Tuv></Tu>')[0]
             # create TU
-            make_tu_line(fout, s_lang, t_lang, source, target, now, note,
-                         tag)
-        tmx_footer(fout)  # add tmx footer
+            tu_line = make_tu_line(s_lang, t_lang, source, target, now, note,
+                                   tag)
+            tmx_file += tu_line
+        footer = tmx_footer()  # add tmx footer
+        tmx_file += footer
+        fout.write(tmx_file)
+    return tmx_file
 
 
 def html_table(source_list, target_list, file_name, page_title='No title'):
@@ -363,120 +377,121 @@ def html_table(source_list, target_list, file_name, page_title='No title'):
         fout.write('</html>\n')
 
 
-def jsalign_table(source_list, target_list, file_name, s_lang, t_lang, note):
+def jsalign_table(source_list, target_list, s_lang, t_lang, note):
     """
 
     :type source_list: list
     :type target_list: list
-    :type file_name: str
     :type s_lang: str
     :type t_lang: str
     :type note: str
     """
-    with codecs.open(file_name,  'w', 'utf-8') as fout:
-        fout.write('<!DOCTYPE html>\n')
-        fout.write('<html>\n')
+    jsalign = ''
+    jsalign += '<!DOCTYPE html>\n'
+    jsalign += '<html>\n'
 
-        fout.write('<head>\n')
-        fout.write('<meta charset="UTF-8">\n')
-        fout.write('<meta name="source-language" content="' + s_lang + '">\n')
-        fout.write('<meta name="target-language" content="' + t_lang + '">\n')
-        fout.write('<meta name="doc-code" content="' + note + '">\n')
-        fout.write('<!-- <script class="links" type="text/javascript" src=' +
-                   '"http://code.jquery.com/jquery-1.9.1.js"></script> -->\n')
-        fout.write('<script class="links" type="text/javascript" ')
-        fout.write(
-            'src="https://rawgit.com/filipok/jsalign/master/jsalign.js">' +
-            '</script>\n')
-        fout.write('<script class="links" type="text/javascript" ')
-        fout.write(
-            'src="http://rangy.googlecode.com/svn/trunk/currentrelease/rangy-core.js"></script>\n')
-        fout.write('<link class="links" rel="stylesheet" type="text/css" href')
-        fout.write(
-            '="https://rawgit.com/filipok/jsalign/master/jsalign.css">\n')
-        fout.write('<title>' + note + ' - ' + s_lang + ' - ' + t_lang +
-                   '</title>\n')
-        fout.write('</head>\n')
+    jsalign += '<head>\n'
+    jsalign += '<meta charset="UTF-8">\n'
+    jsalign += '<meta name="source-language" content="' + s_lang + '">\n'
+    jsalign += '<meta name="target-language" content="' + t_lang + '">\n'
+    jsalign += '<meta name="doc-code" content="' + note + '">\n'
+    jsalign += ''.join(
+        ['<!-- <script class="links" type="text/javascript" src=',
+         '"http://code.jquery.com/jquery-1.9.1.js"></script> -->\n'])
+    jsalign += '<script class="links" type="text/javascript" '
+    jsalign += ''.join(
+        ['src="https://rawgit.com/filipok/jsalign/master/jsalign.js">',
+         '</script>\n'])
+    jsalign += '<script class="links" type="text/javascript" '
+    jsalign += ''.join(['src="http://rangy.googlecode.com/svn/trunk/',
+                        'currentrelease/rangy-core.js"></script>\n'])
+    jsalign += '<link class="links" rel="stylesheet" type="text/css" href'
+    jsalign += '="https://rawgit.com/filipok/jsalign/master/jsalign.css">\n'
+    jsalign += ''.join(['<title>', note, ' - ', s_lang, ' - ', t_lang,
+                        '</title>\n'])
+    jsalign += '</head>\n'
 
-        fout.write('<body>\n')
+    jsalign += '<body>\n'
 
-        fout.write('<table id = "header">\n')
-        fout.write('<tr>\n')
+    jsalign += '<table id = "header">\n'
+    jsalign += '<tr>\n'
 
-        fout.write('<td>\n')
-        fout.write('<div id="doc-info">\n')
-        fout.write('<div id="doc-title">Document: ' + note + '</div>\n')
-        fout.write('<div id="doc-source-language">Source language: ' + s_lang
-                   + '</div>\n')
-        fout.write('<div id="doc-target-language">Target language: ' + t_lang
-                   + '</div>\n')
-        fout.write('<div id="help"><br/>Save a backup:<br/>\n')
-        fout.write('<button id="backup-button">Save and continue later')
-        fout.write('</button>\n')
-        fout.write('</div>\n')
+    jsalign += '<td>\n'
+    jsalign += '<div id="doc-info">\n'
+    jsalign += '<div id="doc-title">Document: ' + note + '</div>\n'
+    jsalign += ''.join(['<div id="doc-source-language">Source language: ',
+                        s_lang, '</div>\n'])
+    jsalign += ''.join(['<div id="doc-target-language">Target language: ',
+                        t_lang, '</div>\n'])
+    jsalign += '<div id="help"><br/>Save a backup:<br/>\n'
+    jsalign += '<button id="backup-button">Save and continue later'
+    jsalign += '</button>\n'
+    jsalign += '</div>\n'
 
-        fout.write('</td>\n')
-        fout.write('<td>\n')
-        fout.write('<div id="legend">\n')
-        fout.write('<div class="demo"><strong>Edit</strong> the text by')
-        fout.write(' clicking into the cell. The text will turn red.</div>\n')
-        fout.write('<div class="demo"><span class="buttons"><a class="button')
-        fout.write(' add-demo" href="#">+ &#8595</a>  Add new segment</div>\n')
-        fout.write('<div class="demo"><a class="button-demo delete-demo"')
-        fout.write(' href="#">Del</a> Delete segment</div>\n')
-        fout.write('<div class="demo"><a class="button-demo merge-demo"')
-        fout.write(' href="#">&#9939 &#8595</a></span> Merge segment')
-        fout.write(' with next</div>\n')
-        fout.write('<div class="demo"><a class="button-demo split-demo"')
-        fout.write(' href="#">&#9932 &#9932</a></span> Split segment (click')
-        fout.write(' where you want to split)</div>\n')
-        fout.write('<span class="celltext"></span>\n')
-        fout.write('</div>\n')
-        fout.write('</td>\n')
-        fout.write('</tr>\n')
-        fout.write('</table>\n')
+    jsalign += '</td>\n'
+    jsalign += '<td>\n'
+    jsalign += '<div id="legend">\n'
+    jsalign += '<div class="demo"><strong>Edit</strong> the text by'
+    jsalign += ' clicking into the cell. The text will turn red.</div>\n'
+    jsalign += '<div class="demo"><span class="buttons"><a class="button'
+    jsalign += ' add-demo" href="#">+ &#8595</a>  Add new segment</div>\n'
+    jsalign += '<div class="demo"><a class="button-demo delete-demo"'
+    jsalign += ' href="#">Del</a> Delete segment</div>\n'
+    jsalign += '<div class="demo"><a class="button-demo merge-demo"'
+    jsalign += ' href="#">&#9939 &#8595</a></span> Merge segment'
+    jsalign += ' with next</div>\n'
+    jsalign += '<div class="demo"><a class="button-demo split-demo"'
+    jsalign += ' href="#">&#9932 &#9932</a></span> Split segment (click'
+    jsalign += ' where you want to split)</div>\n'
+    jsalign += '<span class="celltext"></span>\n'
+    jsalign += '</div>\n'
+    jsalign += '</td>\n'
+    jsalign += '</tr>\n'
+    jsalign += '</table>\n'
 
-        fout.write('<table class="main-table">\n')
-        fout.write('  <tr class="main-row">\n')
+    jsalign += '<table class="main-table">\n'
+    jsalign += '  <tr class="main-row">\n'
 
-        buttons = ''.join(
-            ['\n<span class="buttons">\n',
-                '<a href="#" class="button add" onclick="addFunction(this)">',
-                '+ &#8595</a>\n',
-                '<a href="#" class="button delete"',
-                ' onclick="deleteFunction(this)">Del</a>\n',
-                '<a href="#" class="button merge"',
-                ' onclick="mergeFunction(this)">&#9939 &#8595</a>\n',
-                '<a href="#" class="button split"',
-                ' onclick="splitFunction(this)">&#9932&#9932</a>\n',
-                '</span>\n'])
+    buttons = ''.join(
+        ['\n<span class="buttons">\n',
+            '<a href="#" class="button add" onclick="addFunction(this)">',
+            '+ &#8595</a>\n',
+            '<a href="#" class="button delete"',
+            ' onclick="deleteFunction(this)">Del</a>\n',
+            '<a href="#" class="button merge"',
+            ' onclick="mergeFunction(this)">&#9939 &#8595</a>\n',
+            '<a href="#" class="button split"',
+            ' onclick="splitFunction(this)">&#9932&#9932</a>\n',
+            '</span>\n'])
 
-        fout.write('    <td id="source-col">\n')
-        for line in source_list:
-            fout.write('      <div class="cell">' + buttons +
-                       '<span class="celltext" ')
-            fout.write(' contenteditable="true">')
-            fout.write(line)
-            fout.write('</span></div>\n')
-        fout.write('    </td>\n')
+    jsalign += '    <td id="source-col">\n'
+    for line in source_list:
+        jsalign += ''.join(['      <div class="cell">', buttons,
+                           '<span class="celltext" '])
+        jsalign += ' contenteditable="true">'
+        jsalign += line
+        jsalign += '</span></div>\n'
+    jsalign += '    </td>\n'
 
-        fout.write('    <td id="target-col">\n')
-        for line in target_list:
-            fout.write('      <div class="cell">' + buttons +
-                       '<span class="celltext" ')
-            fout.write(' contenteditable="true">')
-            fout.write(line)
-            fout.write('</span></div>\n')
-        fout.write('    </td>\n')
+    jsalign += '    <td id="target-col">\n'
+    for line in target_list:
+        jsalign += ''.join(['      <div class="cell">', buttons,
+                           '<span class="celltext" '])
+        jsalign += ' contenteditable="true">'
+        jsalign += line
+        jsalign += '</span></div>\n'
+    jsalign += '    </td>\n'
 
-        fout.write('  </tr>\n')
-        fout.write('</table>\n')
+    jsalign += '  </tr>\n'
+    jsalign += '</table>\n'
 
-        fout.write('<div class="div-button">\n')
-        fout.write('  <button id="save-button">Save alignment</button>\n')
-        fout.write('</div>\n')
-        fout.write('</body>\n')
-        fout.write('</html>\n')
+    jsalign += '<div class="div-button">\n'
+    jsalign += '  <button id="save-button">Save alignment</button>\n'
+    jsalign += '</div>\n'
+    jsalign += '</body>\n'
+    jsalign += '</html>\n'
+
+    return jsalign
 
 
 def m_html_table(source_list, targets, file_name, page_title='No title'):

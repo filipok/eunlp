@@ -71,9 +71,9 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
     :rtype: None
     """
     if (not over) and (
-            os.path.isfile(align_file + '.tab') or
-            os.path.isfile(align_file + '.err.html') or
-            os.path.isfile(align_file + '.tab.gz')):
+            os.path.isfile(align_file + '.tmx') or
+            os.path.isfile(align_file + '_manual.html') or
+            os.path.isfile(align_file + '.tmx.gz')):
         logging.info("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
     source_list = convert.file_to_list(source_file)
@@ -93,9 +93,11 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                                   s_lang, t_lang, source_file, target_file)
                     source_list = convert.file_to_list(source_file)
                     target_list = convert.file_to_list(target_file)
-                    convert.jsalign_table(source_list, target_list,
-                                          align_file + '.err.html', s_lang,
-                                          t_lang, note)
+                    jsalign = convert.jsalign_table(source_list, target_list,
+                                                    s_lang, t_lang, note)
+                    with codecs.open(align_file + '_manual.html',
+                                     'w', 'utf-8') as fout:
+                        fout.write(jsalign)
                     # Using Hunalign on the entire file is mostly useless.
                     # aligner(source_file, target_file, s_lang, t_lang,
                     #         dictionary, align_file, note, delete_temp=True)
@@ -111,34 +113,31 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                             s_lang, t_lang, source_file, target_file)
     # If equal number of paragraphs:
     try:
-        parallel_aligner(source_list, target_list, s_lang, t_lang, dictionary,
-                         align_file, para_size=para_size,
-                         para_size_small=para_size_small, prj=source_file,
-                         make_dic=make_dic)
+        tab_file = parallel_aligner(source_list, target_list, s_lang, t_lang,
+                                    dictionary, para_size=para_size,
+                                    para_size_small=para_size_small,
+                                    prj=source_file, make_dic=make_dic)
         # turn alignment into tmx
-        convert.tab_to_tmx(align_file + '.tab', align_file + '.tmx', s_lang,
-                           t_lang, note)
-        # create parallel source and target text files
-        s_ali = source_file[:-4] + '_' + s_lang + t_lang + '.ali'
-        t_ali = target_file[:-4] + '_' + s_lang + t_lang + '.ali'
-        convert.tab_to_separate(align_file + '.tab', s_ali, t_ali)
+        tmx_file = convert.tab_to_tmx(tab_file, s_lang, t_lang, note)
+        with codecs.open(align_file + '.tmx', "w", "utf-8") as fout:
+            fout.write(tmx_file)
         if compress:
-            convert.gzipper(align_file + '.tab')
             convert.gzipper(align_file + '.tmx')
-            convert.gzipper(s_ali)
-            convert.gzipper(t_ali)
+
     except StopIteration:
         # TODO de ce atatea StopIteration la CS
         logging.error('StopIteration in %s -> %s, %s', note, source_file,
                       target_file)
         source_list = convert.file_to_list(source_file)
         target_list = convert.file_to_list(target_file)
-        convert.jsalign_table(source_list, target_list,
-                              align_file + '.err.html', s_lang, t_lang, note)
+    jsalign = convert.jsalign_table(source_list, target_list, s_lang, t_lang,
+                                    note)
+    with codecs.open(align_file + '_manual.html', 'w', 'utf-8') as fout:
+        fout.write(jsalign)
 
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
-                     align_file, para_size=PARA_MAX, para_size_small=PARA_MIN,
+                     para_size=PARA_MAX, para_size_small=PARA_MIN,
                      prj='temp', make_dic=True):
     """
 
@@ -147,7 +146,6 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
     :type s_lang: str
     :type t_lang: str
     :type dictionary: str
-    :type align_file: str
     :type para_size: int
     :type para_size_small: int
     :type prj: str
@@ -155,7 +153,7 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
     """
     if not os.path.exists("/tmp/eunlp"):
         os.makedirs("/tmp/eunlp")
-    fout = codecs.open(align_file + '.tab', "w", "utf-8")
+    tab_file = ''
     # send paragraph to hunalign if large or if intermediate and
     # both source and target have a dot followed by whitespace.
     patt = re.compile(r'\. ')
@@ -170,20 +168,22 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
                               (len(s_list[i]) >= para_size_small) and n_pat)
         if small or clean_intermediate:
             line = ''.join(["Nai\t", t_list[i], "\t", s_list[i], "\n"])
-            fout.write(line)
+            tab_file += line
         else:
             try:
-                tmp_aligner(s_list[i], t_list[i], s_lang, t_lang, dictionary,
-                            fout, prj, i, s_sentence_splitter,
-                            t_sentence_splitter, make_dic)
+                line = tmp_aligner(s_list[i], t_list[i], s_lang, t_lang,
+                                   dictionary, prj, i,
+                                   s_sentence_splitter, t_sentence_splitter,
+                                   make_dic)
+                tab_file += line
             except StopIteration:
                 logging.error('StopIteration %s: Source: %s', prj, s_list[i])
                 logging.error('StopIteration %s: Target: %s', prj, t_list[i])
                 raise
-    fout.close()
+    return tab_file
 
 
-def tmp_aligner(source, target, s_lang, t_lang, dictionary, fout, prj_name, i,
+def tmp_aligner(source, target, s_lang, t_lang, dictionary, prj_name, i,
                 s_sentence_splitter, t_sentence_splitter, make_dic=True):
     """
 
@@ -192,7 +192,6 @@ def tmp_aligner(source, target, s_lang, t_lang, dictionary, fout, prj_name, i,
     :type s_lang: str
     :type t_lang: str
     :type dictionary: str
-    :type fout: file
     :type prj_name: str
     :type i: int
     :type s_sentence_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
@@ -213,23 +212,22 @@ def tmp_aligner(source, target, s_lang, t_lang, dictionary, fout, prj_name, i,
         lines = basic_aligner(tmp_source, tmp_target, s_lang, t_lang,
                               dictionary, tmp_align, "a_" + r_num,
                               s_sentence_splitter, t_sentence_splitter,
-                              tab=False, tmx=False, sep=False,
-                              make_dic=make_dic)
+                              tmx=False, make_dic=make_dic)
     except StopIteration:
         raise
     # do some checks with the hunalign aligment and use only if ok
     everything_ok = check_hunalign(lines, source, target)
     if everything_ok[0]:
-        fout.write(everything_ok[1])
+        line = everything_ok[1]
     else:
         logging.info("Hunalign failed in segment %s in file %s.", str(i),
                      prj_name)
         line = ''.join(["Err\t", target, "\t", source, "\n"])
-        fout.write(line)
     # remove temporary files
     os.remove(tmp_source)
     os.remove(tmp_target)
     os.remove(tmp_align + '.lad')
+    return line
 
 
 def check_hunalign(lines, full_source, full_target):
@@ -306,8 +304,8 @@ def split_token_nltk(file_name, sent_splitter):
 
 
 def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
-                  s_sentence_splitter, t_sentence_splitter, tab=True,
-                  tmx=True, sep=True, make_dic=True):
+                  s_sentence_splitter, t_sentence_splitter, tmx=True,
+                  make_dic=True):
     # call splitter & aligner
     """
 
@@ -320,9 +318,7 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
     :type note: str
     :type s_sentence_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
     :type t_sentence_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
-    :type tab: bool
     :type tmx: bool
-    :type sep: bool
     :type make_dic: bool
     :rtype: list
     """
@@ -350,18 +346,14 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
     except StopIteration:
         raise
     lines = [unicode(line, "utf-8") + '\n' for line in lines]
-    # writing .tab, .tmx and parallel .sep source and target files
-    if tab:
-        with codecs.open(a_file + '.tab', "w", "utf-8") as fout:
-            for line in lines:
-                fout.write(line)
-        if tmx:
-            convert.tab_to_tmx(a_file + '.tab', a_file + '.tmx', s_lang,
-                               t_lang, note)
-        if sep:
-            s_ali = s_file[:-4] + '_' + s_lang + t_lang + '.ali'
-            t_ali = t_file[:-4] + '_' + s_lang + t_lang + '.ali'
-            convert.tab_to_separate(a_file + '.tab', s_ali, t_ali)
+    # writing .tmx and parallel .sep source and target files
+    tab_file = ''
+    for line in lines:
+        tab_file += line
+    if tmx:
+        tmx_file = convert.tab_to_tmx(tab_file, s_lang, t_lang, note)
+        with codecs.open(a_file + '.tmx', 'w', 'utf-8') as fout:
+            fout.write(tmx_file)
     # remove temporary files
     os.remove(s_file[:-4])
     os.remove(t_file[:-4])
@@ -418,7 +410,7 @@ def bilingual_tmx_realigner(tmx_file):
     note = root[1][0][0].text
     dictionary = s_lang + t_lang + '.dic'
     # 3. call parallel aligner
-    parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
-                     'realign_' + tmx_file)
-    convert.tab_to_tmx('realign_' + tmx_file + '.tab',
-                       'realign_' + tmx_file + '.tmx', s_lang, t_lang, note)
+    tab_file = parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
+                                'realign_' + tmx_file)
+    re_tmx_file = convert.tab_to_tmx(tab_file, s_lang, t_lang, note)
+    return re_tmx_file
