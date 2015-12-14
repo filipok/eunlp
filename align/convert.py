@@ -534,7 +534,7 @@ def paragraph_combiner_sub(text):
     :type text: str
     :rtype: str
     """
-     # pattern 1 combines 1-3 letters/numbers with dot/brackets with next line
+    # pattern 1 combines 1-3 letters/numbers with dot/brackets with next line
     # negative lookahead cikk|FEJEZET|szakasz for Hungarian.
     # negative lookahead pants|ieda\wa for Latvian.
     # negative lookahead Jagu for Estonian.
@@ -547,7 +547,7 @@ def paragraph_combiner_sub(text):
         r'(?!(pants|ieda\wa|Jagu))'
         r'(?!(jaanuar|veebruar|m\wrts|aprill|mai|juuni))'
         r'(?!(juuli|august|september|oktoober|november|detsember))',
-                                   re.UNICODE)
+        re.UNICODE)
     # pattern 3 combines 1-3 numbers + single letter with the next line
     pattern_3_unicode = re.compile(
         r'\n(\(?([0-9]{1,3}(?![0-9])\w+)[\.\)])\s+', re.UNICODE)

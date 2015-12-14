@@ -383,8 +383,6 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False):
         logging.error("Aborting alignment due to format error in %s", celex)
     else:
         # prepare paths
-
-        # [example with simple make_paths]
         s_file, t_file, align_file, dic = util.make_paths(path, prefix + celex,
                                                           langs)
         # call the aligner
