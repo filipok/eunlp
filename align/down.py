@@ -15,12 +15,13 @@ import logging
 from bs4 import BeautifulSoup
 
 
-def downloader(link, new_name, over=False):
+def downloader(link, new_name, over=False, save_file=False):
     """
 
     :type link: str
     :type new_name: str
     :type over: bool
+    :type save_file: bool
     :rtype: str
     """
     # Only download if not already existing, otherwise open from disk
@@ -28,8 +29,9 @@ def downloader(link, new_name, over=False):
     if over or (not os.path.isfile(new_name)):
         response = urllib2.urlopen(link)
         html_text = response.read()
-        with open(new_name, 'w') as fout:
-            fout.write(html_text)
+        if save_file:
+            with open(new_name, 'w') as fout:
+                fout.write(html_text)
     else:
         with codecs.open(new_name, "r", "utf-8") as fin:
             html_text = fin.read()
@@ -110,7 +112,7 @@ def souper(new_name, html_text, style, over=False):
 
 
 def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
-            over_txt=False):
+            over_txt=False, save_files=False):
     """
     It downloads EU documents as html files and converts them to txt.
     Example usage:
@@ -124,13 +126,14 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
     :type style: str
     :type over_html: bool
     :type over_txt: bool
+    :type save_files: bool
     """
     # TODO de utilizat linkurile cu ALL pt celex si de extras clasificarile
     for lang_code in langs:
         new_name = prefix + url_code + '_' + lang_code + '.html'
         try:
             link = make_link(url_code, lang_code)
-            text = downloader(link, new_name, over_html)
+            text = downloader(link, new_name, over_html, save_files)
         except urllib2.HTTPError:
             logging.error("Link error in %s_%s", url_code, lang_code)
             raise

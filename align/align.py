@@ -376,7 +376,7 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False):
     # TODO ce fac cu GA care uneori e EN
     try:
         down.scraper(langs, util.make_celex_link, celex, prefix, style="celex",
-                     over_html=False, over_txt=False)
+                     over_html=False, over_txt=False, save_files=False)
     except urllib2.HTTPError:
         logging.error("Aborting alignment due to link error in %s.", celex)
     except (IndexError, AttributeError):
