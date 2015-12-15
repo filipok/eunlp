@@ -44,19 +44,6 @@ def downloader(link, new_name, over=False):
     # This confuses get_text() in BeautifulSoup
     html_text = re.sub(r'</p><p>', r'</p>\n<p>', html_text)
     html_text = re.sub(r'</p><p ', r'</p>\n<p ', html_text)
-    # some celexes have one to three \n's inside <p> tags
-    # html_text = re.sub(r'<p(.*?)>(.*?)(?<!</p>)(\n)'
-    #                    r'(.+?)</p>',
-    #                    r'<p\1>\2 \4</p>', html_text)  # one
-    # html_text = re.sub(r'<p(.*?)>(.*?)(?<!</p>)(\n)'
-    #                    r'(.+?)(?<!</p>)(\n)'
-    #                    r'(.+?)</p>',
-    #                    r'<p\1>\2 \4 \6</p>', html_text)  # two
-    # html_text = re.sub(r'<p(.*?)>(.*?)(?<!</p>)(\n)'
-    #                    r'(.+?)(?<!</p>)(\n)'
-    #                    r'(.+?)(?<!</p>)(\n)'
-    #                    r'(.+?)</p>',
-    #                    r'<p\1>\2 \4 \6 \8</p>', html_text)  # three
     # add whitespace between two adjacent columns
     html_text = re.sub(r'</td><td', r'</td> <td', html_text)
     return html_text
@@ -87,7 +74,7 @@ def souper(new_name, html_text, style, over=False):
             # for oldest celexes
             clean_text = soup.txt_te.get_text()
         elif find_div is not None:
-            # for the celex format as of May 2015
+            # for the celex format as of May 2015 TODO cleanup
             try:
                 clean_text = find_div.contents[1].contents[1].get_text()
             except IndexError:
