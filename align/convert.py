@@ -394,7 +394,7 @@ def jsalign_table(source_list, target_list, s_lang, t_lang, note):
         ['src="https://rawgit.com/filipok/jsalign/master/jsalign.js">',
          '</script>\n'])
     jsalign += '<script class="links" type="text/javascript" '
-    jsalign += ''.join(['src="http://rangy.googlecode.com/svn/trunk/',
+    jsalign += ''.join(['src="https://rangy.googlecode.com/svn/trunk/',
                         'currentrelease/rangy-core.js"></script>\n'])
     jsalign += '<link class="links" rel="stylesheet" type="text/css" href'
     jsalign += '="https://rawgit.com/filipok/jsalign/master/jsalign.css">\n'
