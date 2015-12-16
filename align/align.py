@@ -162,6 +162,7 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
     t_sentence_splitter = util.sentence_splitter(t_lang)
     for i in range(len(s_list)):
         # boolean values (small, pattern not found, intermediate & no pattern)
+        # TODO list comprehension?
         small = len(s_list[i]) < para_size_small
         n_pat = not (re.search(patt, s_list[i]) and re.search(patt, t_list[i]))
         clean_intermediate = ((len(s_list[i]) < para_size) and
@@ -283,6 +284,7 @@ def split_token_nltk(file_name, sent_splitter):
     # because Punkt ignores line breaks
     sentence_list = []
     for line in text:
+        #TODO list comprehension
         sentences = sent_splitter.tokenize(line)
         sentence_list.extend(sentences)
     # write file without extension
