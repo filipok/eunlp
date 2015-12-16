@@ -73,7 +73,7 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
             os.path.isfile(align_file + '.tmx') or
             os.path.isfile(align_file + '_manual.html') or
             os.path.isfile(align_file + '.tmx.gz')):
-        logging.info("File pair already aligned: %s", align_file)
+        logging.warning("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
     source_list = convert.file_to_list(texts[0])
     target_list = convert.file_to_list(texts[1])
@@ -390,6 +390,11 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False):
         smart_aligner(texts, langs[0].lower(), langs[1].lower(),
                       dic, align_file, celex, over=False, make_dic=make_dic,
                       compress=compress)
+        # cleanup
+        if os.path.isfile('translate.txt'):
+            os.remove('translate.txt')
+        if os.path.isfile(dic):
+            os.remove(dic)
 
 
 def bilingual_tmx_realigner(tmx_file):
