@@ -120,6 +120,7 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
     """
     # TODO de utilizat linkurile cu ALL pt celex si de extras clasificarile
     texts = []
+    # TODO move exceptions outside
     for lang_code in langs:
         new_name = prefix + url_code + '_' + lang_code + '.html'
         try:

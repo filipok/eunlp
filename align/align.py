@@ -346,9 +346,10 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
     except StopIteration:
         raise
     lines = [unicode(line, "utf-8") + '\n' for line in lines]
-    # writing .tmx and parallel .sep source and target files
+    # writing .tmx file
     tab_file = ''
     for line in lines:
+        #TODO list comprehension; de pus in IF asta
         tab_file += line
     if tmx:
         tmx_file = convert.tab_to_tmx(tab_file, s_lang, t_lang, note)
