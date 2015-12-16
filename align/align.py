@@ -116,22 +116,29 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
                                     dictionary, para_size=para_size,
                                     para_size_small=para_size_small,
                                     prj=note, make_dic=make_dic)
-        # turn alignment into tmx
+        # turn alignment into tmx and manual html alignment
         tmx_file = convert.tab_to_tmx(tab_file, s_lang, t_lang, note)
+
         with codecs.open(align_file + '.tmx', "w", "utf-8") as fout:
             fout.write(tmx_file)
+        source_list, target_list = convert.tab_to_separate(tab_file)
+        jsalign = convert.jsalign_table(source_list, target_list, s_lang,
+                                        t_lang, note)
+        with codecs.open(align_file + '_manual.html', 'w', 'utf-8') as fout:
+            fout.write(jsalign)
         if compress:
             convert.gzipper(align_file + '.tmx')
+            convert.gzipper(align_file + '_manual.html')
 
     except StopIteration:
         # TODO de ce atatea StopIteration la CS
         logging.error('StopIteration in %s -> %s, %s', note, s_lang, t_lang)
         source_list = convert.file_to_list(texts[0])
         target_list = convert.file_to_list(texts[1])
-    jsalign = convert.jsalign_table(source_list, target_list, s_lang, t_lang,
-                                    note)
-    with codecs.open(align_file + '_manual.html', 'w', 'utf-8') as fout:
-        fout.write(jsalign)
+        jsalign = convert.jsalign_table(source_list, target_list, s_lang,
+                                        t_lang, note)
+        with codecs.open(align_file + '_manual.html', 'w', 'utf-8') as fout:
+            fout.write(jsalign)
 
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,

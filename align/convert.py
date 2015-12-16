@@ -19,25 +19,6 @@ import os
 import gzip
 
 
-def tab_to_separate(input_name, output_source, output_target):
-    """
-
-    :type input_name: str
-    :type output_source: str
-    :type output_target: str
-    """
-    with codecs.open(input_name, "r", "utf-8") as fin:
-        with codecs.open(output_source, "w", "utf-8") as out_s:
-            with codecs.open(output_target, "w", "utf-8") as out_t:
-                for line in fin:
-                    line = line.strip('\n')
-                    text = re.split(r'\t', line)
-                    source = text[2]
-                    target = text[1]
-                    out_s.write(source + '\n')
-                    out_t.write(target + '\n')
-
-
 def m_tab_to_separate(input_name, output_source, output_targets):
     """
 
@@ -200,6 +181,24 @@ def tab_to_tmx(tab_file, s_lang, t_lang, note):
         [tab_line(line, s_lang, t_lang, now, note) for line in tab_file])
     tmx_file += tmx_footer()
     return tmx_file
+
+def tab_to_separate(tab_file):
+    """
+
+    :type tab_file: str
+    :return:
+    """
+    s_list = []
+    t_list = []
+    tab_file = tab_file.strip('\n')
+    tab_file = re.split(r'\n', tab_file)
+    s_list, t_list = zip(*[split_line(line) for line in tab_file])
+    return list(s_list), list(t_list)
+
+
+def split_line(line):
+    text = re.split(r'\t', line)
+    return text[2].strip('\n'), text[1]
 
 
 def m_tab_to_tmx(tab_file, tmx_name, s_lang, t_langs, note):
