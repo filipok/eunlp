@@ -148,6 +148,38 @@ def m_make_tu_line(s_lang, t_langs, source, targets, now, note, tag):
     return ''.join([tru, s_tuv, t_tuv, '</tu>\n'])
 
 
+def tab_line(line, s_lang, t_lang, now, note):
+    """
+
+    :type line: str
+    :type s_lang: str
+    :type t_lang: str
+    :type now: str
+    :type note: str
+    :rtype: str
+    """
+    #   get source and target to temp variables
+    text = re.split(r'\t', line)
+    source = text[2].strip('\n')
+    target = text[1]
+    if text[0] == 'Err':
+        tag = '<prop type="Txt::Alignment">Long_f</prop>'
+    elif text[0] == 'Nai':
+        tag = '<prop type="Txt::Alignment">Short</prop>'
+    elif text[0] == 'Hun':
+        tag = '<prop type="Txt::Alignment">Hun</prop>'
+    else:
+        tag = '<prop type="Txt::Alignment">Unknown</prop>'
+    # remove triple tildas from hunalign
+    source = source.replace('~~~ ', '')
+    target = target.replace('~~~ ', '')
+    # escape XML entities '&', '<', and '>'
+    source = xml.sax.saxutils.escape(source)
+    target = xml.sax.saxutils.escape(target)
+    # create TU
+    return make_tu_line(s_lang, t_lang, source, target, now, note, tag)
+
+
 def tab_to_tmx(tab_file, s_lang, t_lang, note):
     # get current date
     """
@@ -163,34 +195,10 @@ def tab_to_tmx(tab_file, s_lang, t_lang, note):
     tmx_file = ''
     tab_file = tab_file.strip('\n')
     tab_file = re.split(r'\n', tab_file)
-    header = tmx_header(s_lang)  # add tmx header
-    tmx_file += header
-    for line in tab_file:
-        #   get source and target to temp variables
-        text = re.split(r'\t', line)
-        source = text[2].strip('\n')
-        target = text[1]
-        if text[0] == 'Err':
-            tag = '<prop type="Txt::Alignment">Long_f</prop>'
-        elif text[0] == 'Nai':
-            tag = '<prop type="Txt::Alignment">Short</prop>'
-        elif text[0] == 'Hun':
-            tag = '<prop type="Txt::Alignment">Hun</prop>'
-        else:
-            tag = '<prop type="Txt::Alignment">Unknown</prop>'
-        # remove triple tildas from hunalign
-        source = source.replace('~~~ ', '')
-        target = target.replace('~~~ ', '')
-        # escape XML entities '&', '<', and '>'
-        source = xml.sax.saxutils.escape(source)
-        target = xml.sax.saxutils.escape(target)
-        # create TU
-        tu_line = make_tu_line(s_lang, t_lang, source, target, now, note,
-                               tag)
-        tmx_file += tu_line
-
-    footer = tmx_footer()  # add tmx footer
-    tmx_file += footer
+    tmx_file += tmx_header(s_lang)  # add tmx header
+    tmx_file += ''.join(
+        [tab_line(line, s_lang, t_lang, now, note) for line in tab_file])
+    tmx_file += tmx_footer()
     return tmx_file
 
 
@@ -341,40 +349,23 @@ def dirty_ttx_to_tmx(ttx_file_name, tmx_file_name, ttx_s_lang, ttx_t_lang,
     return tmx_file
 
 
-def html_table(source_list, target_list, file_name, page_title='No title'):
+def jsalign_cell(line):
     """
 
-    :type source_list: list
-    :type target_list: list
-    :type file_name: str
-    :type page_title: str
+    :type line: str
     """
-    with codecs.open(file_name,  'w', 'utf-8') as fout:
-        fout.write('<!DOCTYPE html>\n')
-        fout.write('<html>\n')
-        fout.write('<head>\n')
-        fout.write('<meta charset="UTF-8">\n')
-        fout.write('<style>\n'
-                   'table, th, td {\n'
-                   'border: 1px solid black;\n'
-                   '}\n'
-                   '</style>\n')
-        fout.write('<title>' + page_title + '</title>\n')
-        fout.write('</head>\n')
-        fout.write('<body>')
-        fout.write('<table>')
-        for pair in izip_longest(source_list, target_list, fillvalue='N/A'):
-            fout.write('<tr>\n')
-            fout.write('<td>')
-            fout.write(pair[0])
-            fout.write('</td>\n')
-            fout.write('<td>')
-            fout.write(pair[1])
-            fout.write('</td>\n')
-            fout.write('</tr>\n')
-        fout.write('</table>\n')
-        fout.write('</body>\n')
-        fout.write('</html>\n')
+    return ''.join(['      <div class="cell">',
+                    '\n<span class="buttons">\n',
+                    '<a href="#" class="button add" ',
+                    'onclick="addFunction(this)">', '+ &#8595</a>\n',
+                    '<a href="#" class="button delete"',
+                    ' onclick="deleteFunction(this)">Del</a>\n',
+                    '<a href="#" class="button merge"',
+                    ' onclick="mergeFunction(this)">&#9939 &#8595</a>\n',
+                    '<a href="#" class="button split"',
+                    ' onclick="splitFunction(this)">&#9932&#9932</a>\n',
+                    '</span>\n', '<span class="celltext" ',
+                    ' contenteditable="true">', line, '</span></div>\n'])
 
 
 def jsalign_table(source_list, target_list, s_lang, t_lang, note):
@@ -452,34 +443,12 @@ def jsalign_table(source_list, target_list, s_lang, t_lang, note):
     jsalign += '<table class="main-table">\n'
     jsalign += '  <tr class="main-row">\n'
 
-    buttons = ''.join(
-        ['\n<span class="buttons">\n',
-            '<a href="#" class="button add" onclick="addFunction(this)">',
-            '+ &#8595</a>\n',
-            '<a href="#" class="button delete"',
-            ' onclick="deleteFunction(this)">Del</a>\n',
-            '<a href="#" class="button merge"',
-            ' onclick="mergeFunction(this)">&#9939 &#8595</a>\n',
-            '<a href="#" class="button split"',
-            ' onclick="splitFunction(this)">&#9932&#9932</a>\n',
-            '</span>\n'])
-
     jsalign += '    <td id="source-col">\n'
-    for line in source_list:
-        jsalign += ''.join(['      <div class="cell">', buttons,
-                           '<span class="celltext" '])
-        jsalign += ' contenteditable="true">'
-        jsalign += line
-        jsalign += '</span></div>\n'
+    jsalign += ''.join([jsalign_cell(line) for line in source_list])
     jsalign += '    </td>\n'
 
     jsalign += '    <td id="target-col">\n'
-    for line in target_list:
-        jsalign += ''.join(['      <div class="cell">', buttons,
-                           '<span class="celltext" '])
-        jsalign += ' contenteditable="true">'
-        jsalign += line
-        jsalign += '</span></div>\n'
+    jsalign += ''.join([jsalign_cell(line) for line in target_list])
     jsalign += '    </td>\n'
 
     jsalign += '  </tr>\n'
