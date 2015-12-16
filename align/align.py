@@ -103,13 +103,13 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
                     return
                 else:
                     logging.warning('Aligned at 4th attempt in %s: %s-%s',
-                                    note,s_lang, t_lang)
+                                    note, s_lang, t_lang)
             else:
                 logging.warning('Aligned at 3rd attempt in %s: %s-%s', note,
-                                  s_lang, t_lang)
+                                s_lang, t_lang)
         else:
             logging.warning('Aligned at 2nd attempt in %s: %s-%s', note,
-                            s_lang,t_lang)
+                            s_lang, t_lang)
     # If equal number of paragraphs:
     try:
         tab_file = parallel_aligner(source_list, target_list, s_lang, t_lang,
@@ -282,7 +282,7 @@ def split_token_nltk(file_name, sent_splitter):
     # because Punkt ignores line breaks
     sentence_list = []
     for line in text:
-        #TODO list comprehension
+        # TODO list comprehension
         sentences = sent_splitter.tokenize(line)
         sentence_list.extend(sentences)
     # write file without extension
@@ -349,7 +349,7 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
     # writing .tmx file
     tab_file = ''
     for line in lines:
-        #TODO list comprehension; de pus in IF asta
+        # TODO list comprehension; de pus in IF asta
         tab_file += line
     if tmx:
         tmx_file = convert.tab_to_tmx(tab_file, s_lang, t_lang, note)
