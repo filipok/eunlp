@@ -414,7 +414,6 @@ def bilingual_tmx_realigner(tmx_file):
     note = root[1][0][0].text
     dictionary = s_lang + t_lang + '.dic'
     # 3. call parallel aligner
-    tab_file = parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
-                                'realign_' + tmx_file)
+    tab_file = parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary)
     re_tmx_file = convert.tab_to_tmx(tab_file, s_lang, t_lang, note)
     return re_tmx_file
