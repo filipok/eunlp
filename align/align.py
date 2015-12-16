@@ -49,15 +49,14 @@ def hunalign_wrapper(source_file, target_file, dictionary, align_file,
         fout.write(unicode(output, 'utf-8'))
 
 
-def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
+def smart_aligner(texts, s_lang, t_lang, dictionary,
                   align_file, note, over=True, para_size=PARA_MAX,
                   para_size_small=PARA_MIN, make_dic=True, compress=False):
-    # functions.smart_aligner("A720120002_EN.txt", "A720120002_RO.txt", "en",
+    # functions.smart_aligner(texts, "en",
     # "ro", "enro.dic", "bi_test", "/home/filip/eunlp/", "A720120002")
     """
 
-    :type source_file: str
-    :type target_file: str
+    :type texts: list
     :type s_lang: str
     :type t_lang: str
     :type dictionary: str
@@ -76,23 +75,23 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
             os.path.isfile(align_file + '.tmx.gz')):
         logging.info("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
-    source_list = convert.file_to_list(source_file)
-    target_list = convert.file_to_list(target_file)
+    source_list = convert.file_to_list(texts[0])
+    target_list = convert.file_to_list(texts[1])
     # If different No of paragraphs, make 3 more attempts to process the files
     if len(source_list) != len(target_list):
-        source_list = convert.file_to_list(source_file, tries=1)
-        target_list = convert.file_to_list(target_file, tries=1)
+        source_list = convert.file_to_list(texts[0], tries=1)
+        target_list = convert.file_to_list(texts[1], tries=1)
         if len(source_list) != len(target_list):
-            source_list = convert.file_to_list(source_file, tries=2)
-            target_list = convert.file_to_list(target_file, tries=2)
+            source_list = convert.file_to_list(texts[0], tries=2)
+            target_list = convert.file_to_list(texts[1], tries=2)
             if len(source_list) != len(target_list):
-                source_list = convert.file_to_list(source_file, tries=3)
-                target_list = convert.file_to_list(target_file, tries=3)
+                source_list = convert.file_to_list(texts[0], tries=3)
+                target_list = convert.file_to_list(texts[1], tries=3)
                 if len(source_list) != len(target_list):
-                    logging.error('Smart alignment failed in %s-%s, %s, %s',
-                                  s_lang, t_lang, source_file, target_file)
-                    source_list = convert.file_to_list(source_file)
-                    target_list = convert.file_to_list(target_file)
+                    logging.error('Smart alignment failed in %s: %s-%s', note,
+                                  s_lang, t_lang)
+                    source_list = convert.file_to_list(texts[0])
+                    target_list = convert.file_to_list(texts[1])
                     jsalign = convert.jsalign_table(source_list, target_list,
                                                     s_lang, t_lang, note)
                     with codecs.open(align_file + '_manual.html',
@@ -103,20 +102,20 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
                     #         dictionary, align_file, note, delete_temp=True)
                     return
                 else:
-                    logging.warning('Aligned at 4th attempt in %s-%s, %s, %s',
-                                    s_lang, t_lang, source_file, target_file)
+                    logging.warning('Aligned at 4th attempt in %s: %s-%s',
+                                    note,s_lang, t_lang)
             else:
-                logging.warning('Aligned at 3rd attempt in %s-%s, %s, %s',
-                                s_lang, t_lang, source_file, target_file)
+                logging.warning('Aligned at 3rd attempt in %s: %s-%s', note,
+                                  s_lang, t_lang)
         else:
-            logging.warning('Aligned at 2nd attempt in %s-%s, %s, %s',
-                            s_lang, t_lang, source_file, target_file)
+            logging.warning('Aligned at 2nd attempt in %s: %s-%s', note,
+                            s_lang,t_lang)
     # If equal number of paragraphs:
     try:
         tab_file = parallel_aligner(source_list, target_list, s_lang, t_lang,
                                     dictionary, para_size=para_size,
                                     para_size_small=para_size_small,
-                                    prj=source_file, make_dic=make_dic)
+                                    prj=note, make_dic=make_dic)
         # turn alignment into tmx
         tmx_file = convert.tab_to_tmx(tab_file, s_lang, t_lang, note)
         with codecs.open(align_file + '.tmx', "w", "utf-8") as fout:
@@ -126,10 +125,9 @@ def smart_aligner(source_file, target_file, s_lang, t_lang, dictionary,
 
     except StopIteration:
         # TODO de ce atatea StopIteration la CS
-        logging.error('StopIteration in %s -> %s, %s', note, source_file,
-                      target_file)
-        source_list = convert.file_to_list(source_file)
-        target_list = convert.file_to_list(target_file)
+        logging.error('StopIteration in %s -> %s, %s', note, s_lang, t_lang)
+        source_list = convert.file_to_list(texts[0])
+        target_list = convert.file_to_list(texts[1])
     jsalign = convert.jsalign_table(source_list, target_list, s_lang, t_lang,
                                     note)
     with codecs.open(align_file + '_manual.html', 'w', 'utf-8') as fout:
@@ -377,18 +375,18 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False):
     # create html and txt files for each language code
     # TODO ce fac cu GA care uneori e EN
     try:
-        down.scraper(langs, util.make_celex_link, celex, prefix, style="celex",
-                     over_html=False, over_txt=False, save_files=False)
+        texts = down.scraper(langs, util.make_celex_link, celex, prefix,
+                             style="celex", over_html=False, over_txt=False,
+                             save_files=False)
     except urllib2.HTTPError:
         logging.error("Aborting alignment due to link error in %s.", celex)
     except (IndexError, AttributeError):
         logging.error("Aborting alignment due to format error in %s", celex)
     else:
         # prepare paths
-        s_file, t_file, align_file, dic = util.make_paths(path, prefix + celex,
-                                                          langs)
+        align_file, dic = util.make_paths(path, prefix + celex, langs)
         # call the aligner
-        smart_aligner(s_file, t_file, langs[0].lower(), langs[1].lower(),
+        smart_aligner(texts, langs[0].lower(), langs[1].lower(),
                       dic, align_file, celex, over=False, make_dic=make_dic,
                       compress=compress)
 

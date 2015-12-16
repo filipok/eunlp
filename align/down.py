@@ -51,64 +51,54 @@ def downloader(link, new_name, over=False, save_file=False):
     return html_text
 
 
-def souper(new_name, html_text, style, over=False):
+def souper(file_name, html_text, style, over=False, save_file=False):
     """
 
-    :type new_name: str
+    :type file_name: str
     :type html_text: str
     :type style: str
     :type over: bool
+    :type save_file: bool
     :rtype:
     """
     # Only convert to txt if not already existing
     # over=True overrides that behavior
-    if (not over) and os.path.isfile(new_name):
-        logging.info("%s: txt file already existing.", new_name)
+    if (not over) and os.path.isfile(file_name):
+        logging.info("%s: txt file already existing.", file_name)
         return
-    fout = codecs.open(new_name, "w", "utf-8")
     soup = BeautifulSoup(html_text, "lxml")
-    # some celexes have \n inside <p> tags
-    # remove_newlines(soup) #  very slow!
     # separate branches for each document type
     find_div = soup.find(id='text')
     if style == "celex":
-        if soup.txt_te is not None:
-            # for oldest celexes
-            clean_text = soup.txt_te.get_text()
-        elif find_div is not None:
-            # for the celex format as of May 2015 TODO cleanup
-            try:
+        try:
+            if soup.txt_te is not None:
+                # for oldest celexes
+                clean_text = soup.txt_te.get_text()
+            elif find_div is not None:
+                # for the celex format as of May 2015
                 clean_text = find_div.contents[1].contents[1].get_text()
-            except IndexError:
-                logging.error('IndexError: Bs4 could not process %s', new_name)
-                raise
-            except AttributeError:
-                logging.error('AttributeError: Bs4 could not process %s',
-                              new_name)
-                raise
-        else:
-            # for newer celexes, but in a format not valid after May 2015
-            # the hierarchy is rather deep
-            try:
+            else:
+                # for newer celexes, but in a format not valid after May 2015
                 clean_text = soup.body.div.contents[8].contents[5].contents[0]
                 clean_text = clean_text.contents[4].contents[9].contents[3]
                 clean_text = clean_text.contents[1].get_text()
                 clean_text = re.sub(r'\n\nTop $', r'', clean_text)
-            except IndexError:
-                logging.error('IndexError: Bs4 could not process %s', new_name)
-                raise
-            except AttributeError:
-                logging.error('AttributeError: Bs4 could not process %s',
-                              new_name)
-                raise
+        except IndexError:
+            logging.error('IndexError: Bs4 could not process %s', file_name)
+            raise
+        except AttributeError:
+            logging.error('AttributeError: Bs4 could not process %s',file_name)
+            raise
     elif style == "europarl":
         # TODO currently not maintained
         clean_text = soup.get_text()
         clean_text = strip_ep(clean_text)
     else:
         clean_text = soup.get_text()
-    fout.write(clean_text)
-    fout.close()
+    if save_file:
+        with codecs.open(file_name, "w", "utf-8") as fout:
+            fout.write(clean_text)
+    return clean_text
 
 
 def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
@@ -129,6 +119,7 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
     :type save_files: bool
     """
     # TODO de utilizat linkurile cu ALL pt celex si de extras clasificarile
+    texts = []
     for lang_code in langs:
         new_name = prefix + url_code + '_' + lang_code + '.html'
         try:
@@ -140,9 +131,11 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
         else:
             new_name = prefix + url_code + '_' + lang_code + '.txt'
             try:
-                souper(new_name, text, style, over_txt)
+                texts.append(
+                    souper(new_name, text, style, over_txt, save_files))
             except (IndexError, AttributeError):
                 raise
+    return texts
 
 
 def strip_ep(text):

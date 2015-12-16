@@ -535,16 +535,14 @@ def paragraph_combiner_sub(text):
     return text
 
 
-def file_to_list(file_name, tries=0):
+def file_to_list(text, tries=0):
     # clean and convert file to list of paragraphs
     """[\s|\xa0]+
 
-    :type file_name: str
+    :type text: str
     :type tries: int
     :rtype: list
     """
-    with codecs.open(file_name, "r", "utf-8") as fin:
-        text = fin.read()
     text = re.sub(r'\xa0+', ' ', text)  # replace non-breaking space
     text = re.sub(r'\n\s+', r'\n', text)  # remove whitespace after newline
     text = re.sub(r'^\n+', r'', text)  # remove empty lines at the beginning

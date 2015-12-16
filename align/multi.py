@@ -18,7 +18,7 @@ from . import convert
 from . import down
 from .const import PARA_MAX, PARA_MIN
 
-
+#TODO multi.py is broken after changes in align.py
 def parallel_aligner(s_list, t_lists, s_lang, t_langs, dics,
                      align_file, para_size=PARA_MAX, para_size_small=PARA_MIN,
                      prj='temp', make_dic=True):
