@@ -14,30 +14,8 @@ import datetime
 import xml.sax.saxutils
 import logging
 from bs4 import BeautifulSoup
-from itertools import izip_longest, izip
 import os
 import gzip
-
-
-def m_tab_to_separate(input_name, output_source, output_targets):
-    """
-
-    :type input_name: str
-    :type output_source: str
-    :type output_targets: list
-    """
-    t_files = [codecs.open(t_file, 'w', 'utf-8') for t_file in output_targets]
-    with codecs.open(input_name, "r", "utf-8") as fin:
-        with codecs.open(output_source, 'w', 'utf-8') as out_s:
-            for line in fin:
-                text = re.split(r'\t', line)
-                segments = len(text)
-                source = text[segments - 1].strip('\n')
-                targets = text[1:segments - 1]
-                out_s.write(source + '\n')
-                for pair in izip(targets, t_files):
-                    pair[1].write(pair[0] + '\n')
-    [t_file.close() for t_file in t_files]
 
 
 def tmx_header(s_lang):
@@ -102,31 +80,6 @@ def make_tu_line(s_lang, t_lang, source, target, now, note, tag):
     return ''.join([tru, s_tuv, t_tuv, '\n'])
 
 
-def m_make_tu_line(s_lang, t_langs, source, targets, now, note, tag):
-    # create TU line
-    """
-
-    :type s_lang: str
-    :type t_langs: list
-    :type source: str
-    :type targets: list
-    :type now: str
-    :type note: str
-    :type tag: str
-    """
-    tru = ''.join(['<tu creationdate="', now,
-                   '" creationid="eunlp"><prop type="Txt::Note">',
-                   note, '</prop>', tag, '\n'])
-    #   create TUV source line
-    s_tuv = ''.join(['<tuv xml:lang="', s_lang, '"><seg>', source,
-                     '</seg></tuv>\n'])
-    #   create TUV target lines
-    t_tuv = ''
-    for pair in izip(t_langs, targets):
-        tuv = ''.join(['<tuv xml:lang="', pair[0], '"><seg>', pair[1],
-                       '</seg></tuv>\n'])
-        t_tuv += tuv
-    return ''.join([tru, s_tuv, t_tuv, '</tu>\n'])
 
 
 def tab_line(line, s_lang, t_lang, now, note):
@@ -201,56 +154,6 @@ def split_line(line):
     return text[2].strip('\n'), text[1]
 
 
-def m_tab_to_tmx(tab_file, tmx_name, s_lang, t_langs, note):
-    # get current date
-    """
-
-    :type tab_file: str
-    :type tmx_name: str
-    :type s_lang: str
-    :type t_langs: list
-    :type note: str
-    """
-    now = datetime.datetime.now().isoformat()
-    now = re.split(r"\.", re.sub(r"[-:]", r"", now))[0] + "Z"
-    n_target = len(t_langs)
-    # create new TMX file
-    tmx_file = ''
-    tab_file = tab_file.strip('\n')
-    tab_file = re.split(r'\n', tab_file)
-    with codecs.open(tmx_name, "w", "utf-8") as fout:
-        header = tmx_header(s_lang)  # add tmx header
-        tmx_file += header
-        for line in tab_file:
-            #   get source and target to temp variables
-            text = re.split(r'\t', line)
-            source = text[n_target + 1].strip('\n')
-            targets = text[1:n_target + 1]
-            if text[0] == 'Err':
-                tag = '<prop type="Txt::Alignment">Long_f</prop>'
-            elif text[0] == 'Nai':
-                tag = '<prop type="Txt::Alignment">Short</prop>'
-            elif text[0] == 'Hun':
-                tag = '<prop type="Txt::Alignment">Hun</prop>'
-            else:
-                tag = '<prop type="Txt::Alignment">Unknown</prop>'
-
-            # remove triple tildas from hunalign
-            # source = source.replace('~~~ ', '')
-            # target = target.replace('~~~ ', '')
-
-            # escape XML entities '&', '<', and '>'
-            source = xml.sax.saxutils.escape(source)
-            targets = map(xml.sax.saxutils.escape, targets)
-            # create TU
-            tu_line = m_make_tu_line(s_lang, t_langs, source, targets, now,
-                                     note, tag)
-            tmx_file += tu_line
-        footer = tmx_footer()  # add tmx footer
-        tmx_file += footer
-        fout.write(tmx_file)
-
-
 def gzipper(source_file):
     """
 
@@ -262,15 +165,6 @@ def gzipper(source_file):
     f_out.close()
     f_in.close()
     os.remove(source_file)
-
-
-def m_gzipper(files):
-    """
-
-    :type files: list
-    """
-    for text_file in files:
-        gzipper(text_file)
 
 
 def eu_xml_converter(file_name):
@@ -462,40 +356,6 @@ def jsalign_table(source_list, target_list, s_lang, t_lang, note):
     return jsalign
 
 
-def m_html_table(source_list, targets, file_name, page_title='No title'):
-    """
-
-    :type source_list: list
-    :type targets: list
-    :type file_name: str
-    :type page_title: str
-    """
-    with codecs.open(file_name,  'w', 'utf-8') as fout:
-        fout.write('<!DOCTYPE html>\n')
-        fout.write('<html>\n')
-        fout.write('<head>\n')
-        fout.write('<meta charset="UTF-8">\n')
-        fout.write('<style>\n'
-                   'table, th, td {\n'
-                   'border: 1px solid black;\n'
-                   '}\n'
-                   '</style>\n')
-        fout.write('<title>' + page_title + '</title>\n')
-        fout.write('</head>\n')
-        fout.write('<body>')
-        fout.write('<table>')
-        for row in izip_longest(source_list, *targets, fillvalue='N/A'):
-            fout.write('<tr>\n')
-            for cell in row:
-                fout.write('<td>')
-                fout.write(cell)
-                fout.write('</td>\n')
-            fout.write('</tr>\n')
-        fout.write('</table>\n')
-        fout.write('</body>\n')
-        fout.write('</html>\n')
-
-
 def paragraph_combiner_sub(text):
     """
 
@@ -564,27 +424,3 @@ def file_to_list(text, tries=0):
         text = re.sub(r'\n.{1,3}(?=\n)', r'', text)
     paragraph_list = re.split(r'\n', text)  # split file
     return paragraph_list
-
-
-def merge_tmx():
-    """
-    Create a list of tmx files in current directory (also test for languages)
-
-
-    """
-    # for file in list:
-    #    read file
-    #    remove header and footer
-    #    add remaining contents to target_file (if s_lang and t_lang?)
-    # TODO function
-    pass
-
-
-def tmx_to_sqlite():
-    """
-    Convert tmx to existing or new sqlite file
-
-
-    """
-    # TODO function
-    pass
