@@ -16,6 +16,7 @@ import logging
 from bs4 import BeautifulSoup
 import os
 import gzip
+from const import TMX_FOOTER, TMX_HEADER, TRU, TUV
 
 
 def tmx_header(s_lang):
@@ -24,36 +25,7 @@ def tmx_header(s_lang):
 
     :type s_lang: str
     """
-    header = ''
-    header += '<?xml version="1.0" encoding="utf-8" ?>\n'
-    header += '<!DOCTYPE tmx SYSTEM "tmx14.dtd">\n'
-    header += '<tmx version="1.4">\n'
-    header += '  <header\n'
-    header += '    creationtool="eunlp"\n'
-    header += '    creationtoolversion="0.01"\n'
-    header += '    datatype="unknown"\n'
-    header += '    segtype="sentence"\n'
-    header += '    adminlang="' + s_lang + '"\n'
-    header += '    srclang="' + s_lang + '"\n'
-    header += '    o-tmf="TW4Win 2.0 Format"\n'
-    header += '  >\n'
-    header += '  </header>\n'
-    header += '  <body>\n'
-
-    return header
-
-
-def tmx_footer():
-    """
-
-    Create tmx footer
-    """
-    footer = ''
-    footer += '\n'
-    footer += '</body>\n'
-    footer += '</tmx>'
-
-    return footer
+    return TMX_HEADER.format(s_lang, s_lang)
 
 
 def make_tu_line(s_lang, t_lang, source, target, now, note, tag):
@@ -68,18 +40,12 @@ def make_tu_line(s_lang, t_lang, source, target, now, note, tag):
     :type note: str
     :type tag: str
     """
-    tru = ''.join(['<tu creationdate="', now,
-                   '" creationid="eunlp"><prop type="Txt::Note">',
-                   note, '</prop>', tag, '\n'])
+    tru = TRU.format(now, note, tag)
     #   create TUV source line
-    s_tuv = ''.join(['<tuv xml:lang="', s_lang, '"><seg>', source,
-                     '</seg></tuv>\n'])
+    s_tuv = TUV.format(s_lang, source)
     #   create TUV target line
-    t_tuv = ''.join(['<tuv xml:lang="', t_lang, '"><seg>', target,
-                     '</seg></tuv> </tu>\n'])
-    return ''.join([tru, s_tuv, t_tuv, '\n'])
-
-
+    t_tuv = TUV.format(t_lang, target)
+    return ''.join([tru, s_tuv, '\n', t_tuv, ' </tu>\n\n'])
 
 
 def tab_line(line, s_lang, t_lang, now, note):
@@ -132,8 +98,9 @@ def tab_to_tmx(tab_file, s_lang, t_lang, note):
     tmx_file += tmx_header(s_lang)  # add tmx header
     tmx_file += ''.join(
         [tab_line(line, s_lang, t_lang, now, note) for line in tab_file])
-    tmx_file += tmx_footer()
+    tmx_file += TMX_FOOTER
     return tmx_file
+
 
 def tab_to_separate(tab_file):
     """
@@ -141,8 +108,6 @@ def tab_to_separate(tab_file):
     :type tab_file: str
     :return:
     """
-    s_list = []
-    t_list = []
     tab_file = tab_file.strip('\n')
     tab_file = re.split(r'\n', tab_file)
     s_list, t_list = zip(*[split_line(line) for line in tab_file])
@@ -236,8 +201,7 @@ def dirty_ttx_to_tmx(ttx_file_name, tmx_file_name, ttx_s_lang, ttx_t_lang,
             tu_line = make_tu_line(s_lang, t_lang, source, target, now, note,
                                    tag)
             tmx_file += tu_line
-        footer = tmx_footer()  # add tmx footer
-        tmx_file += footer
+        tmx_file += TMX_FOOTER
         fout.write(tmx_file)
     return tmx_file
 
