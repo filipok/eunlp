@@ -115,6 +115,10 @@ def tab_to_separate(tab_file):
 
 
 def split_line(line):
+    """
+
+    :type line: str 
+    """
     text = re.split(r'\t', line)
     return text[2].strip('\n'), text[1]
 
