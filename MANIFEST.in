@@ -1,0 +1,8 @@
+include LICENSE
+include README.rst
+recursive-include align/data_raw *
+recursive-include align/hunalign-1.1 *
+recursive-include align/nonbreaking_prefixes *
+include align/split-sentences.exe
+include align/split-sentences.perl
+include align/tokenizer.perl
