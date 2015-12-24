@@ -305,113 +305,113 @@ class TestConvert(unittest.TestCase):
         self.assertEqual(jsalign, convert.jsalign_table(s_list, t_list, s_lang,
                                                         t_lang, note))
 
-    def test_paragraph_combiner_1(self):
+    def test_paragraph_separator_1(self):
         self.assertEqual(convert.paragraph_separator('\n1. Bla'),
                          '\n1.\nBla')
 
-    def test_paragraph_combiner_2(self):
+    def test_paragraph_separator_2(self):
         self.assertEqual(convert.paragraph_separator('\n1) Bla'),
                          '\n1)\nBla')
 
-    def test_paragraph_combiner_3(self):
+    def test_paragraph_separator_3(self):
         self.assertEqual(convert.paragraph_separator('\n(1) Bla'),
                          '\n(1)\nBla')
 
-    def test_paragraph_combiner_11(self):
+    def test_paragraph_separator_11(self):
         self.assertEqual(convert.paragraph_separator('\n11. Bla'),
                          '\n11.\nBla')
 
-    def test_paragraph_combiner_22(self):
+    def test_paragraph_separator_22(self):
         self.assertEqual(convert.paragraph_separator('\n11) Bla'),
                          '\n11)\nBla')
 
-    def test_paragraph_combiner_33(self):
+    def test_paragraph_separator_33(self):
         self.assertEqual(convert.paragraph_separator('\n(111) Bla'),
                          '\n(111)\nBla')
 
-    def test_paragraph_combiner_1_tab(self):
+    def test_paragraph_separator_1_tab(self):
         self.assertEqual(convert.paragraph_separator('\n1.\tBla'),
                          '\n1.\nBla')
 
-    def test_paragraph_combiner_1_n(self):
+    def test_paragraph_separator_1_n(self):
         self.assertEqual(convert.paragraph_separator('\n1.\nBla'),
                          '\n1.\nBla')
 
-    def test_paragraph_combiner_hun_1(self):
+    def test_paragraph_separator_hun_1(self):
         self.assertEqual(convert.paragraph_separator('\n1. cikk'),
                          '\n1. cikk')
 
-    def test_paragraph_combiner_hun_2(self):
+    def test_paragraph_separator_hun_2(self):
         self.assertEqual(convert.paragraph_separator('\n1. FEJEZET'),
                          '\n1. FEJEZET')
 
-    def test_paragraph_combiner_hun_3(self):
+    def test_paragraph_separator_hun_3(self):
         self.assertEqual(convert.paragraph_separator('\n1. szakasz'),
                          '\n1. szakasz')
 
-    def test_paragraph_combiner_lat_1(self):
+    def test_paragraph_separator_lat_1(self):
         self.assertEqual(convert.paragraph_separator('\n1. pants'),
                          '\n1. pants')
 
-    def test_paragraph_combiner_lat_2(self):
+    def test_paragraph_separator_lat_2(self):
         self.assertEqual(
             convert.paragraph_separator('\n1. ieda' + u"\u013C" + 'a'),
             '\n1. ieda' + u"\u013C" + 'a')
 
-    def test_paragraph_combiner_est_1(self):
+    def test_paragraph_separator_est_1(self):
         self.assertEqual(convert.paragraph_separator('\n1. Jagu'),
                          '\n1. Jagu')
 
-    def test_paragraph_combiner_est_month_1(self):
+    def test_paragraph_separator_est_month_1(self):
         self.assertEqual(convert.paragraph_separator('\n1. jaanuar'),
                          '\n1. jaanuar')
 
-    def test_paragraph_combiner_est_month_2(self):
+    def test_paragraph_separator_est_month_2(self):
         self.assertEqual(convert.paragraph_separator('\n1. veebruar'),
                          '\n1. veebruar')
 
-    def test_paragraph_combiner_est_month_3(self):
+    def test_paragraph_separator_est_month_3(self):
         self.assertEqual(
             convert.paragraph_separator('\n1. m' + u"\u00E4" + 'rts'),
             '\n1. m' + u"\u00E4" + 'rts')
 
-    def test_paragraph_combiner_est_month_4(self):
+    def test_paragraph_separator_est_month_4(self):
         self.assertEqual(convert.paragraph_separator('\n1. aprill'),
                          '\n1. aprill')
 
-    def test_paragraph_combiner_est_month_5(self):
+    def test_paragraph_separator_est_month_5(self):
         self.assertEqual(convert.paragraph_separator('\n1. mai'),
                          '\n1. mai')
 
-    def test_paragraph_combiner_est_month_6(self):
+    def test_paragraph_separator_est_month_6(self):
         self.assertEqual(convert.paragraph_separator('\n1. juuni'),
                          '\n1. juuni')
 
-    def test_paragraph_combiner_est_month_7(self):
+    def test_paragraph_separator_est_month_7(self):
         self.assertEqual(convert.paragraph_separator('\n1. juuli'),
                          '\n1. juuli')
 
-    def test_paragraph_combiner_est_month_8(self):
+    def test_paragraph_separator_est_month_8(self):
         self.assertEqual(convert.paragraph_separator('\n1. august'),
                          '\n1. august')
 
-    def test_paragraph_combiner_est_month_9(self):
+    def test_paragraph_separator_est_month_9(self):
         self.assertEqual(convert.paragraph_separator('\n1. september'),
                          '\n1. september')
 
-    def test_paragraph_combiner_est_month_10(self):
+    def test_paragraph_separator_est_month_10(self):
         self.assertEqual(convert.paragraph_separator('\n1. oktoober'),
                          '\n1. oktoober')
 
-    def test_paragraph_combiner_est_month_11(self):
+    def test_paragraph_separator_est_month_11(self):
         self.assertEqual(convert.paragraph_separator('\n1. november'),
                          '\n1. november')
 
-    def test_paragraph_combiner_est_month_12(self):
+    def test_paragraph_separator_est_month_12(self):
         self.assertEqual(convert.paragraph_separator('\n1. detsember'),
                          '\n1. detsember')
 
-    def test_paragraph_combiner_333c(self):
+    def test_paragraph_separator_333c(self):
         self.assertEqual(convert.paragraph_separator('\n1. 333c'),
                          '\n1.\n333c')
 
