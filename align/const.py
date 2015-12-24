@@ -17,7 +17,7 @@ PIVOT = 'en'
 PARA_MAX = 300
 PARA_MIN = 100
 
-TMX_FOOTER = '\n</body>\n</tmx>'
+TMX_FOOTER = '\n</body>\n</tmx>\n'
 
 # TODO jinja2
 TMX_HEADER = ('<?xml version="1.0" encoding="utf-8" ?>\n'
@@ -38,9 +38,9 @@ TMX_HEADER = ('<?xml version="1.0" encoding="utf-8" ?>\n'
 TRU = ('<tu creationdate="{}" creationid="eunlp">'
        '<prop type="Txt::Note">{}</prop>{}\n')
 
-TUV = '<tuv xml:lang="{}"><seg>{}</seg></tuv>'
+TUV = unicode('<tuv xml:lang="{}"><seg>{}</seg></tuv>')
 
-CELL = ('      <div class="cell">'
+CELL = unicode('      <div class="cell">'
         '\n<span class="buttons">\n'
         '<a href="#" class="button add" '
         'onclick="addFunction(this)">+ &#8595</a>\n'
@@ -53,7 +53,7 @@ CELL = ('      <div class="cell">'
         '</span>\n<span class="celltext" '
         ' contenteditable="true">{}</span></div>\n')
 
-PAGE = ('<!DOCTYPE html>\n'
+PAGE = unicode('<!DOCTYPE html>\n'
         '<html>\n'
         '<head>\n'
         '<meta charset="UTF-8">\n'

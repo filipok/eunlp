@@ -2,7 +2,10 @@ __author__ = 'filip'
 
 import unittest
 import convert
+import align
 import re
+import codecs
+import os
 
 
 class TestConvert(unittest.TestCase):
@@ -164,7 +167,7 @@ class TestConvert(unittest.TestCase):
                 '\n'
                 '\n'
                 '</body>\n'
-                '</tmx>')
+                '</tmx>\n')
         tab_file = ('Err\tAcesta e un rand.\tThis is a line.\n'
                     'Hun\tAcesta e un rand.\tThis is a line.\n'
                     'Nai\tAcesta e un rand.\tThis is a line.\n')
@@ -558,6 +561,29 @@ class TestConvert(unittest.TestCase):
         '    Another  line!\n \n \n \n \n \n \n \n \n \n ')
         result = ['non-breaking space', 'Another line!']
         self.assertEqual(result, convert.file_to_list(text, 3))
+
+    def test_downloadfullfile_01_tmx_file(self):
+        align.celex_aligner(['en', 'ro'], '', '32013R1024', '', make_dic=False)
+        with codecs.open('bi_32013R1024_en_ro.tmx', 'r', 'utf-8') as tmx_in:
+            test_tmx = tmx_in.read()
+        test_tmx = re.sub(r'([0-9]){8}T([0-9]){6}Z', r'00000000T000000Z',
+                          test_tmx)
+        with codecs.open('test_ref/bi_32013R1024_en_ro_ref.tmx', 'r',
+                         'utf-8') as tmx_ref:
+            ref_tmx = tmx_ref.read()
+
+        self.assertEqual(test_tmx, ref_tmx)
+
+    def test_downloadfullfile_02_html_file(self):
+        with codecs.open('bi_32013R1024_en_ro_manual.html', 'r',
+                         'utf-8') as html_in:
+            test_html = html_in.read()
+        with codecs.open('test_ref/bi_32013R1024_en_ro_manual_ref.html', 'r',
+                         'utf-8') as html_ref:
+            ref_html = html_ref.read()
+        os.remove('bi_32013R1024_en_ro.tmx')
+        os.remove('bi_32013R1024_en_ro_manual.html')
+        self.assertEqual(test_html, ref_html)
 
 if __name__ == '__main__':
     unittest.main()

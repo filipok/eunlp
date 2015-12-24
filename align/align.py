@@ -16,11 +16,11 @@ import random
 import logging
 import nltk
 import xml.etree.ElementTree as ET
-from . import l2t_new as l2t
-from . import util
-from . import convert
-from . import down
-from .const import PARA_MAX, PARA_MIN
+import l2t_new as l2t
+import util
+import convert
+import down
+from const import PARA_MAX, PARA_MIN
 
 
 def hunalign_wrapper(source_file, target_file, dictionary, align_file,
