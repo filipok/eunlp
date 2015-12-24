@@ -122,7 +122,7 @@ class TestConvert(unittest.TestCase):
         t_lang = 'ro'
         now = '20151223T190423Z'
         note = '32013R1024'
-        line ='Blabla\t& < > e un rand.\t& < > is a line.\n'
+        line = 'Blabla\t& < > e un rand.\t& < > is a line.\n'
         resu = ('<tu creationdate="20151223T190423Z" creationid="eunlp">'
                 '<prop type="Txt::Note">32013R1024</prop>'
                 '<prop type="Txt::Alignment">Unknown</prop>\n'
@@ -519,10 +519,10 @@ class TestConvert(unittest.TestCase):
         text = (' \t\nnon-breaking'
                 u"\u00A0"
                 'space \n  \t  '
-        'u\n'
-        'uu\n'
-        'uuu\n'
-        '    Another  line!\n \n \n \n \n \n \n \n \n \n ')
+                'u\n'
+                'uu\n'
+                'uuu\n'
+                '    Another  line!\n \n \n \n \n \n \n \n \n \n ')
         result = ['non-breaking space', 'u', 'uu', 'uuu', 'Another line!']
         self.assertEqual(result, convert.file_to_list(text))
 
@@ -531,10 +531,10 @@ class TestConvert(unittest.TestCase):
         text = (' \t\nnon-breaking'
                 u"\u00A0"
                 'space \n  \t  '
-        'u\n'
-        'uu\n'
-        'uuu\n'
-        '    Another  line!\n \n \n \n \n \n \n \n \n \n ')
+                'u\n'
+                'uu\n'
+                'uuu\n'
+                '    Another  line!\n \n \n \n \n \n \n \n \n \n ')
         result = ['non-breaking space', 'uu', 'uuu', 'Another line!']
         self.assertEqual(result, convert.file_to_list(text, 1))
 
@@ -543,10 +543,10 @@ class TestConvert(unittest.TestCase):
         text = (' \t\nnon-breaking'
                 u"\u00A0"
                 'space \n  \t  '
-        'u\n'
-        'uu\n'
-        'uuu\n'
-        '    Another  line!\n \n \n \n \n \n \n \n \n \n ')
+                'u\n'
+                'uu\n'
+                'uuu\n'
+                '    Another  line!\n \n \n \n \n \n \n \n \n \n ')
         result = ['non-breaking space', 'uuu', 'Another line!']
         self.assertEqual(result, convert.file_to_list(text, 2))
 
@@ -555,10 +555,10 @@ class TestConvert(unittest.TestCase):
         text = (' \t\nnon-breaking'
                 u"\u00A0"
                 'space \n  \t  '
-        'u\n'
-        'uu\n'
-        'uuu\n'
-        '    Another  line!\n \n \n \n \n \n \n \n \n \n ')
+                'u\n'
+                'uu\n'
+                'uuu\n'
+                '    Another  line!\n \n \n \n \n \n \n \n \n \n ')
         result = ['non-breaking space', 'Another line!']
         self.assertEqual(result, convert.file_to_list(text, 3))
 
