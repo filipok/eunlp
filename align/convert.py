@@ -234,13 +234,13 @@ def jsalign_table(source_list, target_list, s_lang, t_lang, note):
                        t_lang, s_cells, t_cells)
 
 
-def paragraph_combiner_sub(text):
+def paragraph_separator(text):
     """
 
     :type text: str
     :rtype: str
     """
-    # pattern 1 combines 1-3 letters/numbers with dot/brackets with next line
+    # pattern 1 separate 1-3 letters/numbers with dot/brackets from the line
     # negative lookahead cikk|FEJEZET|szakasz for Hungarian.
     # negative lookahead pants|ieda\wa for Latvian.
     # negative lookahead Jagu for Estonian.
@@ -254,10 +254,10 @@ def paragraph_combiner_sub(text):
         r'(?!(jaanuar|veebruar|m\wrts|aprill|mai|juuni))'
         r'(?!(juuli|august|september|oktoober|november|detsember))',
         re.UNICODE)
-    # pattern 3 combines 1-3 numbers + single letter with the next line
+    # pattern 3 separates 1-3 numbers + single letter from the line
     pattern_3_unicode = re.compile(
         r'\n(\(?([0-9]{1,3}(?![0-9])\w+)[\.\)])\s+', re.UNICODE)
-    # combine lines consisting of Roman numerals to 9 with the next line
+    # separate lines consisting of Roman numerals to 9 from the line
     pattern_4 = re.compile(r'\n(\(?i{1,3}[\.\)])\s+')  # 1-3
     pattern_5 = re.compile(r'\n(\(?iv[\.\)])\s+')  # 4
     pattern_6 = re.compile(r'\n(\(?vi{0,3}[\.\)])\s+')  # 5-8
@@ -290,7 +290,7 @@ def file_to_list(text, tries=0):
     text = re.sub(r'\s+\n', r'\n', text)  # remove whitespace before newline
     text = re.sub(r' +', r' ', text)  # remove double whitespaces
     text = re.sub(r'^ +', r'', text)  # remove whitespace at the beginning
-    text = paragraph_combiner_sub(text)  # combine para numbers with text
+    text = paragraph_separator(text)  # combine para numbers with text
     if tries in [1, 2, 3]:
         # remove one-character lines which can make the aligner to fail
         text = re.sub(r'\n.(?=\n)', r'', text)
