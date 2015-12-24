@@ -19,6 +19,7 @@ PARA_MIN = 100
 
 TMX_FOOTER = '\n</body>\n</tmx>'
 
+# TODO jinja2
 TMX_HEADER = ('<?xml version="1.0" encoding="utf-8" ?>\n'
               '<!DOCTYPE tmx SYSTEM "tmx14.dtd">\n'
               '<tmx version="1.4">\n'

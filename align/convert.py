@@ -233,6 +233,7 @@ def jsalign_table(source_list, target_list, s_lang, t_lang, note):
     return PAGE.format(s_lang, t_lang, note, note, s_lang, t_lang, note, s_lang,
                        t_lang, s_cells, t_cells)
 
+
 def paragraph_combiner_sub(text):
     """
 
