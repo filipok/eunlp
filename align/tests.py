@@ -511,5 +511,53 @@ class TestConvert(unittest.TestCase):
         self.assertEqual(convert.paragraph_separator('\n(viii) Bla'),
                          '\n(viii)\nBla')
 
+    def test_file_to_list_tries_0(self):
+        # Not testing paragraph_separator here.
+        text = (' \t\nnon-breaking'
+                u"\u00A0"
+                'space \n  \t  '
+        'u\n'
+        'uu\n'
+        'uuu\n'
+        '    Another  line!\n \n \n \n \n \n \n \n \n \n ')
+        result = ['non-breaking space', 'u', 'uu', 'uuu', 'Another line!']
+        self.assertEqual(result, convert.file_to_list(text))
+
+    def test_file_to_list_tries_1(self):
+        # Not testing paragraph_separator here.
+        text = (' \t\nnon-breaking'
+                u"\u00A0"
+                'space \n  \t  '
+        'u\n'
+        'uu\n'
+        'uuu\n'
+        '    Another  line!\n \n \n \n \n \n \n \n \n \n ')
+        result = ['non-breaking space', 'uu', 'uuu', 'Another line!']
+        self.assertEqual(result, convert.file_to_list(text, 1))
+
+    def test_file_to_list_tries_2(self):
+        # Not testing paragraph_separator here.
+        text = (' \t\nnon-breaking'
+                u"\u00A0"
+                'space \n  \t  '
+        'u\n'
+        'uu\n'
+        'uuu\n'
+        '    Another  line!\n \n \n \n \n \n \n \n \n \n ')
+        result = ['non-breaking space', 'uuu', 'Another line!']
+        self.assertEqual(result, convert.file_to_list(text, 2))
+
+    def test_file_to_list_tries_3(self):
+        # Not testing paragraph_separator here.
+        text = (' \t\nnon-breaking'
+                u"\u00A0"
+                'space \n  \t  '
+        'u\n'
+        'uu\n'
+        'uuu\n'
+        '    Another  line!\n \n \n \n \n \n \n \n \n \n ')
+        result = ['non-breaking space', 'Another line!']
+        self.assertEqual(result, convert.file_to_list(text, 3))
+
 if __name__ == '__main__':
     unittest.main()
