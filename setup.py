@@ -24,5 +24,5 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Topic :: Text Processing :: Linguistic',
     ],
-    install_requires=['nltk', 'beautifulsoup4', 'lxml'],
+    install_requires=['nltk', 'beautifulsoup4', 'lxml', 'Jinja2'],
 )

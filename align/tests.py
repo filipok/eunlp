@@ -209,8 +209,10 @@ class TestConvert(unittest.TestCase):
                         '<a href="#" class="button split"',
                         ' onclick="splitFunction(this)">&#9932&#9932</a>\n',
                         '</span>\n', '<span class="celltext" ',
-                        ' contenteditable="true">', line, '</span></div>\n'])
+                        ' contenteditable="true">', line, '</span></div>'])
+        cell = unicode(cell)
 
+        self.maxDiff = None
         self.assertEqual(cell, convert.jsalign_cell(line))
 
     def test_jsalign_table(self):
@@ -289,12 +291,12 @@ class TestConvert(unittest.TestCase):
         jsalign += '  <tr class="main-row">\n'
 
         jsalign += '    <td id="source-col">\n'
-        jsalign += ''.join([convert.jsalign_cell(line) for line in s_list])
-        jsalign += '    </td>\n'
+        jsalign += '\n'.join([convert.jsalign_cell(line) for line in s_list])
+        jsalign += '\n    </td>\n'
 
         jsalign += '    <td id="target-col">\n'
-        jsalign += ''.join([convert.jsalign_cell(line) for line in t_list])
-        jsalign += '    </td>\n'
+        jsalign += '\n'.join([convert.jsalign_cell(line) for line in t_list])
+        jsalign += '\n    </td>\n'
 
         jsalign += '  </tr>\n'
         jsalign += '</table>\n'
@@ -305,6 +307,7 @@ class TestConvert(unittest.TestCase):
         jsalign += '</body>\n'
         jsalign += '</html>\n'
 
+        self.maxDiff = None
         self.assertEqual(jsalign, convert.jsalign_table(s_list, t_list, s_lang,
                                                         t_lang, note))
 

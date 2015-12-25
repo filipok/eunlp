@@ -16,6 +16,7 @@ import logging
 from bs4 import BeautifulSoup
 import os
 import gzip
+from jinja2 import Template
 from const import TMX_FOOTER, TMX_HEADER, TRU, TUV, CELL, PAGE
 
 
@@ -215,7 +216,7 @@ def jsalign_cell(line):
 
     :type line: str
     """
-    return CELL.format(line)
+    return Template(CELL).render(text=line)
 
 
 def jsalign_table(source_list, target_list, s_lang, t_lang, note):
@@ -227,8 +228,8 @@ def jsalign_table(source_list, target_list, s_lang, t_lang, note):
     :type t_lang: str
     :type note: str
     """
-    s_cells = ''.join([jsalign_cell(line) for line in source_list])
-    t_cells = ''.join([jsalign_cell(line) for line in target_list])
+    s_cells = '\n'.join([jsalign_cell(line) for line in source_list])
+    t_cells = '\n'.join([jsalign_cell(line) for line in target_list])
 
     return PAGE.format(s_lang, t_lang, note, note, s_lang, t_lang, note, s_lang,
                        t_lang, s_cells, t_cells)

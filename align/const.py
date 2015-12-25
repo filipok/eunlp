@@ -19,7 +19,6 @@ PARA_MIN = 100
 
 TMX_FOOTER = '\n</body>\n</tmx>\n'
 
-# TODO jinja2
 TMX_HEADER = ('<?xml version="1.0" encoding="utf-8" ?>\n'
               '<!DOCTYPE tmx SYSTEM "tmx14.dtd">\n'
               '<tmx version="1.4">\n'
@@ -41,17 +40,17 @@ TRU = ('<tu creationdate="{}" creationid="eunlp">'
 TUV = unicode('<tuv xml:lang="{}"><seg>{}</seg></tuv>')
 
 CELL = unicode('      <div class="cell">'
-        '\n<span class="buttons">\n'
-        '<a href="#" class="button add" '
-        'onclick="addFunction(this)">+ &#8595</a>\n'
-        '<a href="#" class="button delete"'
-        ' onclick="deleteFunction(this)">Del</a>\n'
-        '<a href="#" class="button merge"'
-        ' onclick="mergeFunction(this)">&#9939 &#8595</a>\n'
-        '<a href="#" class="button split"'
-        ' onclick="splitFunction(this)">&#9932&#9932</a>\n'
-        '</span>\n<span class="celltext" '
-        ' contenteditable="true">{}</span></div>\n')
+               '\n<span class="buttons">\n'
+               '<a href="#" class="button add" '
+               'onclick="addFunction(this)">+ &#8595</a>\n'
+               '<a href="#" class="button delete"'
+               ' onclick="deleteFunction(this)">Del</a>\n'
+               '<a href="#" class="button merge"'
+               ' onclick="mergeFunction(this)">&#9939 &#8595</a>\n'
+               '<a href="#" class="button split"'
+               ' onclick="splitFunction(this)">&#9932&#9932</a>\n'
+               '</span>\n<span class="celltext" '
+               ' contenteditable="true">{{text}}</span></div>')
 
 PAGE = unicode('<!DOCTYPE html>\n'
         '<html>\n'
@@ -107,10 +106,10 @@ PAGE = unicode('<!DOCTYPE html>\n'
         '  <tr class="main-row">\n'
         '    <td id="source-col">\n'
         '{}'  # source cells
-        '    </td>\n'
+        '\n    </td>\n'
         '    <td id="target-col">\n'
         '{}'  # target cells
-        '    </td>\n'
+        '\n    </td>\n'
         '  </tr>\n'
         '</table>\n'
         '<div class="div-button">\n'
