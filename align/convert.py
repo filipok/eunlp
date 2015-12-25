@@ -231,8 +231,8 @@ def jsalign_table(source_list, target_list, s_lang, t_lang, note):
     s_cells = '\n'.join([jsalign_cell(line) for line in source_list])
     t_cells = '\n'.join([jsalign_cell(line) for line in target_list])
 
-    return PAGE.format(s_lang, t_lang, note, note, s_lang, t_lang, note, s_lang,
-                       t_lang, s_cells, t_cells)
+    return Template(PAGE).render(s_lang=s_lang, t_lang=t_lang, note=note,
+                                 s_cells=s_cells, t_cells=t_cells)
 
 
 def paragraph_separator(text):

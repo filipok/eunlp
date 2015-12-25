@@ -305,7 +305,7 @@ class TestConvert(unittest.TestCase):
         jsalign += '  <button id="save-button">Save alignment</button>\n'
         jsalign += '</div>\n'
         jsalign += '</body>\n'
-        jsalign += '</html>\n'
+        jsalign += '</html>'
 
         self.maxDiff = None
         self.assertEqual(jsalign, convert.jsalign_table(s_list, t_list, s_lang,
