@@ -238,13 +238,13 @@ class TestConvert(unittest.TestCase):
              '"http://code.jquery.com/jquery-1.9.1.js"></script> -->\n'])
         jsalign += '<script class="links" type="text/javascript" '
         jsalign += ''.join(
-            ['src="https://rawgit.com/filipok/jsalign/master/jsalign.js">',
+            ['src="https://s3.eu-central-1.amazonaws.com/jsalign/0.1/jsalign.js">',
              '</script>\n'])
         jsalign += '<script class="links" type="text/javascript" '
         jsalign += ''.join(['src="https://rangy.googlecode.com/svn/trunk/',
                             'currentrelease/rangy-core.js"></script>\n'])
         jsalign += '<link class="links" rel="stylesheet" type="text/css" href'
-        jsalign += '="https://rawgit.com/filipok/jsalign/master/jsalign.css">\n'
+        jsalign += '="https://s3.eu-central-1.amazonaws.com/jsalign/0.1/jsalign.css">\n'
         jsalign += ''.join(['<title>', note, ' - ', s_lang, ' - ', t_lang,
                             '</title>\n'])
         jsalign += '</head>\n'
