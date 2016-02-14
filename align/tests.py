@@ -200,14 +200,18 @@ class TestConvert(unittest.TestCase):
 
         cell = ''.join(['      <div class="cell">',
                         '\n<span class="buttons">\n',
-                        '<a href="#" class="button add" ',
-                        'onclick="addFunction(this)">', '+ &#8595</a>\n',
-                        '<a href="#" class="button delete"',
-                        ' onclick="deleteFunction(this)">Del</a>\n',
-                        '<a href="#" class="button merge"',
-                        ' onclick="mergeFunction(this)">&#9939 &#8595</a>\n',
-                        '<a href="#" class="button split"',
-                        ' onclick="splitFunction(this)">&#9932&#9932</a>\n',
+                        '<a href="#" class="btn btn-success btn-xs add" ',
+                        'onclick="addFunction(this)">',
+                        '<span class="glyphicon glyphicon-plus"></a>\n',
+                        '<a href="#" class="btn btn-danger btn-xs delete"',
+                        ' onclick="deleteFunction(this)">',
+                        '<span class="glyphicon glyphicon-remove"></a>\n',
+                        '<a href="#" class="btn btn-info btn-xs merge"',
+                        ' onclick="mergeFunction(this)">',
+                        '<span class="glyphicon glyphicon-arrow-down"></a>\n',
+                        '<a href="#" class="btn btn-warning btn-xs split"',
+                        ' onclick="splitFunction(this)">',
+                        '<span class="glyphicon glyphicon-flash"></a>\n',
                         '</span>\n', '<span class="celltext" ',
                         ' contenteditable="true">', line, '</span></div>'])
         cell = unicode(cell)
@@ -238,13 +242,14 @@ class TestConvert(unittest.TestCase):
              '"http://code.jquery.com/jquery-1.9.1.js"></script> -->\n'])
         jsalign += '<script class="links" type="text/javascript" '
         jsalign += ''.join(
-            ['src="https://s3.eu-central-1.amazonaws.com/jsalign/0.1/jsalign.js">',
+            ['src="https://s3.eu-central-1.amazonaws.com/jsalign/0.2/jsalign.js">',
              '</script>\n'])
         jsalign += '<script class="links" type="text/javascript" '
         jsalign += ''.join(['src="https://rangy.googlecode.com/svn/trunk/',
                             'currentrelease/rangy-core.js"></script>\n'])
+        jsalign += '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cosmo/bootstrap.min.css">\n'
         jsalign += '<link class="links" rel="stylesheet" type="text/css" href'
-        jsalign += '="https://s3.eu-central-1.amazonaws.com/jsalign/0.1/jsalign.css">\n'
+        jsalign += '="https://s3.eu-central-1.amazonaws.com/jsalign/0.2/jsalign.css">\n'
         jsalign += ''.join(['<title>', note, ' - ', s_lang, ' - ', t_lang,
                             '</title>\n'])
         jsalign += '</head>\n'
@@ -262,7 +267,7 @@ class TestConvert(unittest.TestCase):
         jsalign += ''.join(['<div id="doc-target-language">Target language: ',
                             t_lang, '</div>\n'])
         jsalign += '<div id="help"><br/>Save a backup:<br/>\n'
-        jsalign += '<button id="backup-button">Save and continue later'
+        jsalign += '<button type="button" class="btn btn-primary" id="backup-button">Save and continue later'
         jsalign += '</button>\n'
         jsalign += '</div>\n'
 
@@ -271,15 +276,15 @@ class TestConvert(unittest.TestCase):
         jsalign += '<div id="legend">\n'
         jsalign += '<div class="demo"><strong>Edit</strong> the text by'
         jsalign += ' clicking into the cell. The text will turn red.</div>\n'
-        jsalign += '<div class="demo"><span class="buttons"><a class="button'
-        jsalign += ' add-demo" href="#">+ &#8595</a>  Add new segment</div>\n'
-        jsalign += '<div class="demo"><a class="button-demo delete-demo"'
-        jsalign += ' href="#">Del</a> Delete segment</div>\n'
-        jsalign += '<div class="demo"><a class="button-demo merge-demo"'
-        jsalign += ' href="#">&#9939 &#8595</a></span> Merge segment'
+        jsalign += '<div class="demo"><span class="buttons"><a class="btn'
+        jsalign += ' btn-success btn-xs" href="#"><span class="glyphicon glyphicon-plus"></a>  Add new segment</div>\n'
+        jsalign += '<div class="demo"><a class="btn btn-danger btn-xs"'
+        jsalign += ' href="#"><span class="glyphicon glyphicon-remove"></a> Delete segment</div>\n'
+        jsalign += '<div class="demo"><a class="btn btn-info btn-xs"'
+        jsalign += ' href="#"><span class="glyphicon glyphicon-arrow-down"></a></span> Merge segment'
         jsalign += ' with next</div>\n'
-        jsalign += '<div class="demo"><a class="button-demo split-demo"'
-        jsalign += ' href="#">&#9932 &#9932</a></span> Split segment (click'
+        jsalign += '<div class="demo"><a class="btn btn-warning btn-xs"'
+        jsalign += ' href="#"><span class="glyphicon glyphicon-flash"></a></span> Split segment (click'
         jsalign += ' where you want to split)</div>\n'
         jsalign += '<span class="celltext"></span>\n'
         jsalign += '</div>\n'
@@ -287,6 +292,7 @@ class TestConvert(unittest.TestCase):
         jsalign += '</tr>\n'
         jsalign += '</table>\n'
 
+        jsalign += '<br/>\n'
         jsalign += '<table class="main-table">\n'
         jsalign += '  <tr class="main-row">\n'
 
@@ -301,8 +307,9 @@ class TestConvert(unittest.TestCase):
         jsalign += '  </tr>\n'
         jsalign += '</table>\n'
 
+        jsalign += '<br/>\n'
         jsalign += '<div class="div-button">\n'
-        jsalign += '  <button id="save-button">Save alignment</button>\n'
+        jsalign += '  <button type="button" class="btn btn-success btn-large" id="save-button">Save alignment</button>\n'
         jsalign += '</div>\n'
         jsalign += '</body>\n'
         jsalign += '</html>'
