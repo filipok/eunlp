@@ -240,6 +240,22 @@ class TestConvert(unittest.TestCase):
         jsalign += ''.join(
             ['<!-- <script class="links" type="text/javascript" src=',
              '"http://code.jquery.com/jquery-1.9.1.js"></script> -->\n'])
+
+        jsalign += '<script type="text/javascript">\n'
+        jsalign += '   // https://developer.mozilla.org/en-US/docs/'
+        jsalign += 'Web/Events/beforeunload\n'
+        jsalign += '   window.addEventListener("beforeunload", function (e) {\n'
+        jsalign += '   var confirmationMessage = '
+        jsalign += '"Do not close/refresh this window without exporting the TMX '
+        jsalign += 'alignment (using the button at the end of the page) or saving '
+        jsalign += 'a backup (using the button at the top of the page), otherwise '
+        jsalign += 'you will lose your work.";\n'
+        jsalign += '   e.returnValue = confirmationMessage;\n'
+        jsalign += '   return confirmationMessage;\n'
+        jsalign += '   });\n'
+        jsalign += '</script>\n'
+
+
         jsalign += '<script class="links" type="text/javascript" '
         jsalign += ''.join(
             ['src="https://s3.eu-central-1.amazonaws.com/jsalign/0.2/jsalign.js">',
