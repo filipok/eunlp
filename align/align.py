@@ -90,16 +90,7 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
                 if len(source_list) != len(target_list):
                     logging.error('Smart alignment failed in %s: %s-%s', note,
                                   s_lang, t_lang)
-                    source_list = convert.file_to_list(texts[0])
-                    target_list = convert.file_to_list(texts[1])
-                    jsalign = convert.jsalign_table(source_list, target_list,
-                                                    s_lang, t_lang, note)
-                    with codecs.open(align_file + '_manual.html',
-                                     'w', 'utf-8') as fout:
-                        fout.write(jsalign)
-                    # Using Hunalign on the entire file is mostly useless.
-                    # aligner(source_file, target_file, s_lang, t_lang,
-                    #         dictionary, align_file, note, delete_temp=True)
+                    jsalign_with_error(texts, s_lang, t_lang, note, align_file)
                     return
                 else:
                     logging.warning('Aligned at 4th attempt in %s: %s-%s',
@@ -133,13 +124,21 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
     except StopIteration:
         # TODO de ce atatea StopIteration la CS
         logging.error('StopIteration in %s -> %s, %s', note, s_lang, t_lang)
-        source_list = convert.file_to_list(texts[0])
-        target_list = convert.file_to_list(texts[1])
-        jsalign = convert.jsalign_table(source_list, target_list, s_lang,
-                                        t_lang, note)
-        with codecs.open(align_file + '_manual.html', 'w', 'utf-8') as fout:
-            fout.write(jsalign)
+        jsalign_with_error(texts, s_lang, t_lang, note, align_file)
 
+
+def jsalign_with_error(texts, s_lang, t_lang, note, align_file):
+    source_list = convert.file_to_list(texts[0])
+    s_sentence_splitter = util.sentence_splitter(s_lang)
+    source_list = text_sent_splitter(source_list, s_sentence_splitter)
+    target_list = convert.file_to_list(texts[1])
+    t_sentence_splitter = util.sentence_splitter(t_lang)
+    target_list = text_sent_splitter(target_list, t_sentence_splitter)
+
+    jsalign = convert.jsalign_table(source_list, target_list, s_lang,
+                                    t_lang, note)
+    with codecs.open(align_file + '_manual.html', 'w', 'utf-8') as fout:
+        fout.write(jsalign)
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
                      para_size=PARA_MAX, para_size_small=PARA_MIN,
@@ -271,6 +270,20 @@ def check_hunalign(lines, full_source, full_target):
     return everything_ok, text
 
 
+def text_sent_splitter(text, sent_splitter):
+    """
+
+    :type text: list
+    :type sent_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
+    """
+    sentence_list = []
+    for line in text:
+        # TODO list comprehension
+        sentences = sent_splitter.tokenize(line)
+        sentence_list.extend(sentences)
+    return sentence_list
+
+
 def split_token_nltk(file_name, sent_splitter):
     """
 
@@ -284,15 +297,12 @@ def split_token_nltk(file_name, sent_splitter):
     # read file
     with codecs.open(file_name, 'r', 'utf-8') as fin:
         text = list(fin)
+
     # sentence splitter line by line
     # Source: https://groups.google.com/forum/#!topic/nltk-dev/2eH630nHONI
     # because Punkt ignores line breaks
-    sentence_list = []
-    for line in text:
-        # TODO list comprehension
-        sentences = sent_splitter.tokenize(line)
-        sentence_list.extend(sentences)
-    # write file without extension
+    sentence_list = text_sent_splitter(text, sent_splitter)
+
     with codecs.open(file_name[:-4], 'w', 'utf-8') as fout:
         for sent in sentence_list:
             fout.write(sent + '\n')
