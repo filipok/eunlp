@@ -90,7 +90,8 @@ def souper(file_name, html_text, style, over=False, save_file=False):
             logging.error('IndexError: Bs4 could not process %s', file_name)
             raise
         except AttributeError:
-            logging.error('AttributeError: Bs4 could not process %s',file_name)
+            logging.error('AttributeError: Bs4 could not process %s',
+                          file_name)
             raise
     elif style == "europarl":
         # TODO currently not maintained
