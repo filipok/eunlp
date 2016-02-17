@@ -106,7 +106,7 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
         tab_file = parallel_aligner(source_list, target_list, s_lang, t_lang,
                                     dictionary, para_size=para_size,
                                     para_size_small=para_size_small,
-                                    prj=note, make_dic=make_dic)
+                                    note=note, make_dic=make_dic)
         # turn alignment into tmx and manual html alignment
         tmx_file = convert.tab_to_tmx(tab_file, s_lang, t_lang, note)
 
@@ -142,7 +142,7 @@ def jsalign_with_error(texts, s_lang, t_lang, note, align_file):
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
                      para_size=PARA_MAX, para_size_small=PARA_MIN,
-                     prj='temp', make_dic=True):
+                     note='temp', make_dic=True):
     """
 
     :type s_list: list
@@ -152,56 +152,72 @@ def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
     :type dictionary: str
     :type para_size: int
     :type para_size_small: int
-    :type prj: str
+    :type note: str
     :type make_dic: bool
     """
     if not os.path.exists("/tmp/eunlp"):
         os.makedirs("/tmp/eunlp")
-    tab_file = ''
+
+        # create hunalign dictionary file
+    if make_dic:
+        if not os.path.exists(dictionary):
+            path = os.path.dirname(__file__) + '/data_raw/'
+            try:
+                util.create_dictionary(path + s_lang + '.txt',
+                                       path + t_lang + '.txt', dictionary)
+            except IOError:
+                open(dictionary, 'a').close()  # create empty dictionary
+                logging.warning('Creating empty dictionary %s', dictionary)
+    else:
+        open(dictionary, 'w').close()  # create empty dict; erase current file
+
     # send paragraph to hunalign if large or if intermediate and
     # both source and target have a dot followed by whitespace.
     patt = re.compile(r'\. ')
     # create sentence splitters
     s_sentence_splitter = util.sentence_splitter(s_lang)
     t_sentence_splitter = util.sentence_splitter(t_lang)
-    for i in range(len(s_list)):
-        # boolean values (small, pattern not found, intermediate & no pattern)
-        # TODO list comprehension?
-        small = len(s_list[i]) < para_size_small
-        n_pat = not (re.search(patt, s_list[i]) and re.search(patt, t_list[i]))
-        clean_intermediate = ((len(s_list[i]) < para_size) and
-                              (len(s_list[i]) >= para_size_small) and n_pat)
-        if small or clean_intermediate:
-            line = ''.join(["Nai\t", t_list[i], "\t", s_list[i], "\n"])
-            tab_file += line
-        else:
-            try:
-                line = tmp_aligner(s_list[i], t_list[i], s_lang, t_lang,
-                                   dictionary, prj, i,
-                                   s_sentence_splitter, t_sentence_splitter,
-                                   make_dic)
-                tab_file += line
-            except StopIteration:
-                logging.error('StopIteration %s: Source: %s', prj, s_list[i])
-                logging.error('StopIteration %s: Target: %s', prj, t_list[i])
-                raise
-    return tab_file
+    try:
+        return ''.join([parallel_line(s_line, t_line, para_size,
+                                      para_size_small, patt,  dictionary,
+                                      note, s_sentence_splitter,
+                                      t_sentence_splitter)
+                        for s_line, t_line in zip(s_list, t_list)])
+    except StopIteration:
+        raise
 
 
-def tmp_aligner(source, target, s_lang, t_lang, dictionary, prj_name, i,
-                s_sentence_splitter, t_sentence_splitter, make_dic=True):
+def parallel_line(s_line, t_line, para_size, para_size_small, patt, dictionary,
+                  note, s_sentence_splitter, t_sentence_splitter):
+    small = len(s_line) < para_size_small
+    n_pat = not (re.search(patt, s_line) and re.search(patt, t_line))
+    clean_intermediate = ((len(s_line) < para_size) and
+                          (len(s_line) >= para_size_small) and n_pat)
+    if small or clean_intermediate:
+        line = ''.join(["Nai\t", t_line, "\t", s_line, "\n"])
+        return line
+    else:
+        try:
+            line = tmp_aligner(s_line, t_line, dictionary, note,
+                               s_sentence_splitter, t_sentence_splitter)
+        except StopIteration:
+            logging.error('StopIteration %s: Source: %s', note, s_line)
+            logging.error('StopIteration %s: Target: %s', note, t_line)
+            raise
+
+        return line
+
+
+def tmp_aligner(source, target, dictionary, note, s_sentence_splitter,
+                t_sentence_splitter):
     """
 
     :type source: str
     :type target: str
-    :type s_lang: str
-    :type t_lang: str
     :type dictionary: str
-    :type prj_name: str
-    :type i: int
+    :type note: str
     :type s_sentence_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
     :type t_sentence_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
-    :type make_dic: bool
     """
     r_num = str(random.randint(0, 100000))
     tmp_source = "/tmp/eunlp/s_" + r_num + ".txt"
@@ -214,10 +230,8 @@ def tmp_aligner(source, target, s_lang, t_lang, dictionary, prj_name, i,
         tout.write(target + '\n')
     # process them with the classic aligner
     try:
-        lines = basic_aligner(tmp_source, tmp_target, s_lang, t_lang,
-                              dictionary, tmp_align,
-                              s_sentence_splitter, t_sentence_splitter,
-                              make_dic=make_dic)
+        lines = basic_aligner(tmp_source, tmp_target, dictionary, tmp_align,
+                              s_sentence_splitter, t_sentence_splitter)
     except StopIteration:
         raise
     # do some checks with the hunalign aligment and use only if ok
@@ -225,8 +239,7 @@ def tmp_aligner(source, target, s_lang, t_lang, dictionary, prj_name, i,
     if everything_ok[0]:
         line = everything_ok[1]
     else:
-        logging.info("Hunalign failed in segment %s in file %s.", str(i),
-                     prj_name)
+        logging.info("Hunalign failed in a segment in file %s.", note)
         line = ''.join(["Err\t", target, "\t", source, "\n"])
     # remove temporary files
     os.remove(tmp_source)
@@ -317,37 +330,22 @@ def split_token_nltk(file_name, sent_splitter):
             fout.write(' '.join(sent) + '\n')
 
 
-def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file,
-                  s_sentence_splitter, t_sentence_splitter, make_dic=True):
+def basic_aligner(s_file, t_file, dic, a_file, s_sentence_splitter,
+                  t_sentence_splitter):
     # call splitter & aligner
     """
 
     :type s_file: str
     :type t_file: str
-    :type s_lang: str
-    :type t_lang: str
     :type dic: str
     :type a_file: str
     :type s_sentence_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
     :type t_sentence_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
-    :type make_dic: bool
     :rtype: list
     """
     # create tokenized files for hunalign
     split_token_nltk(s_file, s_sentence_splitter)
     split_token_nltk(t_file, t_sentence_splitter)
-    # create hunalign dic from /data_raw files
-    if make_dic:
-        if not os.path.exists(dic):
-            path = os.path.dirname(__file__) + '/data_raw/'
-            try:
-                util.create_dictionary(path + s_lang + '.txt',
-                                       path + t_lang + '.txt', dic)
-            except IOError:
-                open(dic, 'a').close()  # create empty dictionary
-                logging.warning('Creating empty dictionary %s', dic)
-    else:
-        open(dic, 'w').close()  # create empty dict (and erase current file!)
     # create hunalign ladder alignment
     hunalign_wrapper(s_file[:-4] + '.tok', t_file[:-4] + '.tok', dic,
                      a_file + '.lad', realign=True)
