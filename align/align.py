@@ -277,10 +277,7 @@ def text_sent_splitter(text, sent_splitter):
     :type sent_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
     """
     sentence_list = []
-    for line in text:
-        # TODO list comprehension
-        sentences = sent_splitter.tokenize(line)
-        sentence_list.extend(sentences)
+    [sentence_list.extend(sent_splitter.tokenize(line)) for line in text]
     return sentence_list
 
 
