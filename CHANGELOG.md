@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.1] - 2016-02-17
+### Added
+- remove jsalign_cell function to vastly improve html file generation speed
+- use list comprehensions instead of for loops
+- some refactoring in basic aligner, tmp aligner and parallel aligner
+
 ## [0.4.0] - 2016-02-16
 ### Added
 - better segment manual alignments in case of alignment errors 
