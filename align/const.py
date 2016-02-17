@@ -54,7 +54,7 @@ CELL = unicode('      <div class="cell">'
                ' onclick="splitFunction(this)"><span class="glyphicon '
                'glyphicon-flash"></a>\n'
                '</span>\n<span class="celltext" '
-               ' contenteditable="true">{{text}}</span></div>')
+               ' contenteditable="true">{}</span></div>')
 
 PAGE = unicode('<!DOCTYPE html>\n'
                '<html>\n'

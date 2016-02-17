@@ -6,7 +6,7 @@ import align
 import re
 import codecs
 import os
-
+from const import CELL
 
 class TestConvert(unittest.TestCase):
     def test_tmx_header(self):
@@ -217,7 +217,7 @@ class TestConvert(unittest.TestCase):
         cell = unicode(cell)
 
         self.maxDiff = None
-        self.assertEqual(cell, convert.jsalign_cell(line))
+        self.assertEqual(cell, CELL.format(line))
 
     def test_jsalign_table(self):
 
@@ -313,11 +313,11 @@ class TestConvert(unittest.TestCase):
         jsalign += '  <tr class="main-row">\n'
 
         jsalign += '    <td id="source-col">\n'
-        jsalign += '\n'.join([convert.jsalign_cell(line) for line in s_list])
+        jsalign += '\n'.join([CELL.format(line) for line in s_list])
         jsalign += '\n    </td>\n'
 
         jsalign += '    <td id="target-col">\n'
-        jsalign += '\n'.join([convert.jsalign_cell(line) for line in t_list])
+        jsalign += '\n'.join([CELL.format(line) for line in t_list])
         jsalign += '\n    </td>\n'
 
         jsalign += '  </tr>\n'
