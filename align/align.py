@@ -215,9 +215,9 @@ def tmp_aligner(source, target, s_lang, t_lang, dictionary, prj_name, i,
     # process them with the classic aligner
     try:
         lines = basic_aligner(tmp_source, tmp_target, s_lang, t_lang,
-                              dictionary, tmp_align, "a_" + r_num,
+                              dictionary, tmp_align,
                               s_sentence_splitter, t_sentence_splitter,
-                              tmx=False, make_dic=make_dic)
+                              make_dic=make_dic)
     except StopIteration:
         raise
     # do some checks with the hunalign aligment and use only if ok
@@ -317,9 +317,8 @@ def split_token_nltk(file_name, sent_splitter):
             fout.write(' '.join(sent) + '\n')
 
 
-def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
-                  s_sentence_splitter, t_sentence_splitter, tmx=True,
-                  make_dic=True):
+def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file,
+                  s_sentence_splitter, t_sentence_splitter, make_dic=True):
     # call splitter & aligner
     """
 
@@ -329,10 +328,8 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
     :type t_lang: str
     :type dic: str
     :type a_file: str
-    :type note: str
     :type s_sentence_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
     :type t_sentence_splitter: nltk.tokenize.punkt.PunktSentenceTokenizer
-    :type tmx: bool
     :type make_dic: bool
     :rtype: list
     """
@@ -360,15 +357,6 @@ def basic_aligner(s_file, t_file, s_lang, t_lang, dic, a_file, note,
     except StopIteration:
         raise
     lines = [unicode(line, "utf-8") + '\n' for line in lines]
-    # writing .tmx file
-    tab_file = ''
-    for line in lines:
-        # TODO list comprehension; de pus in IF asta
-        tab_file += line
-    if tmx:
-        tmx_file = convert.tab_to_tmx(tab_file, s_lang, t_lang, note)
-        with codecs.open(a_file + '.tmx', 'w', 'utf-8') as fout:
-            fout.write(tmx_file)
     # remove temporary files
     os.remove(s_file[:-4])
     os.remove(t_file[:-4])
