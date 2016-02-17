@@ -15,7 +15,7 @@ import subprocess
 import random
 import logging
 import nltk
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as ElementTree
 import l2t_new as l2t
 import util
 import convert
@@ -139,6 +139,7 @@ def jsalign_with_error(texts, s_lang, t_lang, note, align_file):
                                     t_lang, note)
     with codecs.open(align_file + '_manual.html', 'w', 'utf-8') as fout:
         fout.write(jsalign)
+
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
                      para_size=PARA_MAX, para_size_small=PARA_MIN,
@@ -403,7 +404,7 @@ def bilingual_tmx_realigner(tmx_file):
     :type tmx_file: str
     """
     # open tmx file
-    tree = ET.parse(tmx_file)
+    tree = ElementTree.parse(tmx_file)
     root = tree.getroot()
     # convert tmx file to separate files
     s_list = [element[2][0].text for element in root[1].findall('tu')]
