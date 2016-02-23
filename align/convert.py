@@ -220,8 +220,8 @@ def jsalign_table(source_list, target_list, s_lang, t_lang, note):
     :type t_lang: str
     :type note: str
     """
-    s_cells = '\n'.join([CELL.format(line) for line in source_list])
-    t_cells = '\n'.join([CELL.format(line) for line in target_list])
+    s_cells = ''.join([CELL.format(line) for line in source_list])
+    t_cells = ''.join([CELL.format(line) for line in target_list])
 
     return Template(PAGE).render(s_lang=s_lang, t_lang=t_lang, note=note,
                                  s_cells=s_cells, t_cells=t_cells)
