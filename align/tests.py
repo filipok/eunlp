@@ -198,21 +198,11 @@ class TestConvert(unittest.TestCase):
 
         line = 'This is a line.'
 
-        cell = ''.join(['      <div class="cell">',
-                        '\n<span class="buttons">\n',
-                        '<a href="#" class="btn btn-success btn-xs add" ',
-                        'onclick="addFunction(this)">',
-                        '<span class="glyphicon glyphicon-plus"></a>\n',
-                        '<a href="#" class="btn btn-danger btn-xs delete"',
-                        ' onclick="deleteFunction(this)">',
-                        '<span class="glyphicon glyphicon-remove"></a>\n',
-                        '<a href="#" class="btn btn-info btn-xs merge"',
-                        ' onclick="mergeFunction(this)">',
-                        '<span class="glyphicon glyphicon-arrow-down"></a>\n',
-                        '<a href="#" class="btn btn-warning btn-xs split"',
-                        ' onclick="splitFunction(this)">',
-                        '<span class="glyphicon glyphicon-flash"></a>\n',
-                        '</span>\n', '<span class="celltext" ',
+        cell = ''.join(['<div class="cell" draggable="true" '
+                        'ondragstart="drag(event)" ',
+                        'onmouseover="addId(this)" ',
+                        'onmouseout="removeId(this, event)">\n',
+                        '<span class="celltext" ',
                         ' contenteditable="true">', line, '</span></div>'])
         cell = unicode(cell)
 
@@ -258,14 +248,14 @@ class TestConvert(unittest.TestCase):
 
         jsalign += '<script class="links" type="text/javascript" '
         jsalign += ''.join(
-            ['src="https://s3.eu-central-1.amazonaws.com/jsalign/0.2/jsalign.js">',
+            ['src="https://s3.eu-central-1.amazonaws.com/jsalign/0.4/jsalign.js">',
              '</script>\n'])
         jsalign += '<script class="links" type="text/javascript" '
         jsalign += ''.join(['src="https://rangy.googlecode.com/svn/trunk/',
                             'currentrelease/rangy-core.js"></script>\n'])
         jsalign += '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cosmo/bootstrap.min.css">\n'
         jsalign += '<link class="links" rel="stylesheet" type="text/css" href'
-        jsalign += '="https://s3.eu-central-1.amazonaws.com/jsalign/0.2/jsalign.css">\n'
+        jsalign += '="https://s3.eu-central-1.amazonaws.com/jsalign/0.4/jsalign.css">\n'
         jsalign += ''.join(['<title>', note, ' - ', s_lang, ' - ', t_lang,
                             '</title>\n'])
         jsalign += '</head>\n'
@@ -312,12 +302,14 @@ class TestConvert(unittest.TestCase):
         jsalign += '<table class="main-table">\n'
         jsalign += '  <tr class="main-row">\n'
 
-        jsalign += '    <td id="source-col">\n'
-        jsalign += '\n'.join([CELL.format(line) for line in s_list])
+        jsalign += '    <td id="source-col"  ondrop="drop(event)" '
+        jsalign += 'ondragover="allowDrop(event)">\n'
+        jsalign += ''.join([CELL.format(line) for line in s_list])
         jsalign += '\n    </td>\n'
 
-        jsalign += '    <td id="target-col">\n'
-        jsalign += '\n'.join([CELL.format(line) for line in t_list])
+        jsalign += '    <td id="target-col"  ondrop="drop(event)" '
+        jsalign += 'ondragover="allowDrop(event)">\n'
+        jsalign += ''.join([CELL.format(line) for line in t_list])
         jsalign += '\n    </td>\n'
 
         jsalign += '  </tr>\n'
@@ -325,7 +317,8 @@ class TestConvert(unittest.TestCase):
 
         jsalign += '<br/>\n'
         jsalign += '<div class="div-button">\n'
-        jsalign += '  <button type="button" class="btn btn-success btn-large" id="save-button">Save alignment</button>\n'
+        jsalign += '  <button type="button" class="btn btn-success btn-large" '
+        jsalign += 'id="save-button">Save alignment</button>\n'
         jsalign += '</div>\n'
         jsalign += '</body>\n'
         jsalign += '</html>'
