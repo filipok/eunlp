@@ -335,6 +335,7 @@ os
 p
 par
 perf
+písm
 plk
 pod
 podst.jm
@@ -380,6 +381,8 @@ tlf
 tzn
 tzv
 ul
+úř
+věst
 vl.jm
 vr
 vt
