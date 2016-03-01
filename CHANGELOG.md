@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.0] - 2016-03-xx
+### Added
+- resolved bug for Czech acronyms
+
 ## [0.4.5] - 2016-03-01
 ### Added
 - add cut and paste buttons to the legend
