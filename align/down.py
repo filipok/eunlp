@@ -37,6 +37,8 @@ def downloader(link, new_name, over=False, save_file=False):
             html_text = fin.read()
             logging.debug("%s: html file already downloaded.", new_name)
 
+    # currently useful for Czech texts
+    html_text = html_text.replace('&nbsp;', ' ')
     # some celexes have one to three \n's inside <p> tags
     # remove all new lines and then recreate them after </p>
     # this hopefully eliminates all \n's inside <p> tags
