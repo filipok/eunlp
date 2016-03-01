@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.5.0] - 2016-03-xx
 ### Added
 - resolved bug for Czech acronyms
+- create Danish abbreviation file
 
 ## [0.4.5] - 2016-03-01
 ### Added
