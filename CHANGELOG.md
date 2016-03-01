@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.4.5] - 2016-03-01
 ### Added
-- use Jsalign 0.5
+- add cut and paste buttons to the legend
 
 ## [0.4.4] - 2016-03-01
 ### Added
