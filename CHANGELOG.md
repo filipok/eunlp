@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - resolved bug for Czech acronyms
 - create Danish abbreviation file
+- resolved bug for paragraph_separator with quotes
 
 ## [0.4.5] - 2016-03-01
 ### Added

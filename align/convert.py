@@ -241,7 +241,7 @@ def paragraph_separator(text):
     #     jaanuar|veebruar|m\wrts|aprill|mai|juuni|juuli|august|september|
     #     oktoober|november|detsember
     pattern_1_unicode = re.compile(
-        r'\n(\(?(\w{1,3})[\.\)])\s+'
+        r'\n(\W?\(?(\w{1,3})[\.\)])\s+'
         r'(?!(cikk|FEJEZET|szakasz))'
         r'(?!(pants|ieda\wa|Jagu))'
         r'(?!(jaanuar|veebruar|m\wrts|aprill|mai|juuni))'
@@ -249,12 +249,12 @@ def paragraph_separator(text):
         re.UNICODE)
     # pattern 3 separates 1-3 numbers + single letter from the line
     pattern_3_unicode = re.compile(
-        r'\n(\(?([0-9]{1,3}(?![0-9])\w+)[\.\)])\s+', re.UNICODE)
+        r'\n(\W?\(?([0-9]{1,3}(?![0-9])\w+)[\.\)])\s+', re.UNICODE)
     # separate lines consisting of Roman numerals to 9 from the line
-    pattern_4 = re.compile(r'\n(\(?i{1,3}[\.\)])\s+')  # 1-3
-    pattern_5 = re.compile(r'\n(\(?iv[\.\)])\s+')  # 4
-    pattern_6 = re.compile(r'\n(\(?vi{0,3}[\.\)])\s+')  # 5-8
-    pattern_7 = re.compile(r'\n(\(?ix[\.\)])\s+')  # 9
+    pattern_4 = re.compile(r'\n(\W?\(?i{1,3}[\.\)])\s+')  # 1-3
+    pattern_5 = re.compile(r'\n(\W?\(?iv[\.\)])\s+')  # 4
+    pattern_6 = re.compile(r'\n(\W?\(?vi{0,3}[\.\)])\s+')  # 5-8
+    pattern_7 = re.compile(r'\n(\W?\(?ix[\.\)])\s+')  # 9
     # the replacements
     text = re.sub(pattern_1_unicode, r'\n\1\n', text)
     text = re.sub(pattern_3_unicode, r'\n\1\n', text)
