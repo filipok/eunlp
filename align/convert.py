@@ -241,6 +241,7 @@ def paragraph_separator(text, lang):
     # negative lookahead for Estonian months:
     #     jaanuar|veebruar|m\wrts|aprill|mai|juuni|juuli|august|september|
     #     oktoober|november|detsember
+    #TODO de scos literele V, X din listele de abrevieri din toate limbile
     pattern_1_unicode = re.compile(
         r'\n(\W?\(?(\w{1,3})[\.\)])\s+'
         r'(?!(cikk|FEJEZET|szakasz))'
