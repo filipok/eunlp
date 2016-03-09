@@ -653,6 +653,7 @@ class TestConvert(unittest.TestCase):
     def test_paragraph_separator_abbrev(self):
         self.assertEqual(convert.paragraph_separator("\nRegulamentul\nnr. 575/2013\n", 'ro'),
                          "\nRegulamentul\nnr. 575/2013\n")
+
     def test_file_to_list_tries_0(self):
         # Not testing paragraph_separator here.
         text = (' \t\nnon-breaking'
