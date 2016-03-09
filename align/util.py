@@ -12,7 +12,7 @@ import logging
 import re
 import os
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
-
+from const import SUBFOLDER
 
 def sentence_splitter(lang):
     """
@@ -22,8 +22,7 @@ def sentence_splitter(lang):
     """
     punkt_param = PunktParameters()
     path = os.path.dirname(__file__)
-    subfolder = '/nonbreaking_prefixes/nonbreaking_prefix.'
-    ab_file = ''.join([path, subfolder, lang])
+    ab_file = ''.join([path, SUBFOLDER, lang])
     if os.path.isfile(ab_file):
         punkt_param.abbrev_types = set(abbreviation_loader(ab_file))
     else:

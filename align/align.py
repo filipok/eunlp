@@ -75,18 +75,18 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
             os.path.isfile(align_file + '.tmx.gz')):
         logging.warning("File pair already aligned: %s", align_file)
         return  # exit if already aligned and over=False
-    source_list = convert.file_to_list(texts[0])
-    target_list = convert.file_to_list(texts[1])
+    source_list = convert.file_to_list(texts[0], s_lang)
+    target_list = convert.file_to_list(texts[1], t_lang)
     # If different No of paragraphs, make 3 more attempts to process the files
     if len(source_list) != len(target_list):
-        source_list = convert.file_to_list(texts[0], tries=1)
-        target_list = convert.file_to_list(texts[1], tries=1)
+        source_list = convert.file_to_list(texts[0], s_lang, tries=1)
+        target_list = convert.file_to_list(texts[1], t_lang, tries=1)
         if len(source_list) != len(target_list):
-            source_list = convert.file_to_list(texts[0], tries=2)
-            target_list = convert.file_to_list(texts[1], tries=2)
+            source_list = convert.file_to_list(texts[0], s_lang, tries=2)
+            target_list = convert.file_to_list(texts[1], t_lang, tries=2)
             if len(source_list) != len(target_list):
-                source_list = convert.file_to_list(texts[0], tries=3)
-                target_list = convert.file_to_list(texts[1], tries=3)
+                source_list = convert.file_to_list(texts[0], s_lang, tries=3)
+                target_list = convert.file_to_list(texts[1], t_lang, tries=3)
                 if len(source_list) != len(target_list):
                     logging.error('Smart alignment failed in %s: %s-%s', note,
                                   s_lang, t_lang)
@@ -128,10 +128,10 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
 
 
 def jsalign_with_error(texts, s_lang, t_lang, note, align_file):
-    source_list = convert.file_to_list(texts[0])
+    source_list = convert.file_to_list(texts[0], s_lang)
     s_sentence_splitter = util.sentence_splitter(s_lang)
     source_list = text_sent_splitter(source_list, s_sentence_splitter)
-    target_list = convert.file_to_list(texts[1])
+    target_list = convert.file_to_list(texts[1], t_lang)
     t_sentence_splitter = util.sentence_splitter(t_lang)
     target_list = text_sent_splitter(target_list, t_sentence_splitter)
 

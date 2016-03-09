@@ -17,8 +17,8 @@ from bs4 import BeautifulSoup
 import os
 import gzip
 from jinja2 import Template
-from const import TMX_FOOTER, TMX_HEADER, TRU, TUV, CELL, PAGE
-
+from const import TMX_FOOTER, TMX_HEADER, TRU, TUV, CELL, PAGE, SUBFOLDER
+import util
 
 def tmx_header(s_lang):
     # add tmx header (copied from LF Aligner output)
@@ -227,10 +227,11 @@ def jsalign_table(source_list, target_list, s_lang, t_lang, note):
                                  s_cells=s_cells, t_cells=t_cells)
 
 
-def paragraph_separator(text):
+def paragraph_separator(text, lang):
     """
 
     :type text: str
+    :type lang: str
     :rtype: str
     """
     # pattern 1 separate 1-3 letters/numbers with dot/brackets from the line
@@ -262,14 +263,21 @@ def paragraph_separator(text):
     text = re.sub(pattern_5, r'\n\1\n', text)
     text = re.sub(pattern_6, r'\n\1\n', text)
     text = re.sub(pattern_7, r'\n\1\n', text)
+    # restore abbreviations damaged by patterns 1 and 3
+    path = os.path.dirname(__file__)
+    ab_file = ''.join([path, SUBFOLDER, lang])
+    abbrevs = util.abbreviation_loader(ab_file)
+    for abb in abbrevs:
+        text = re.sub(r'\n' + abb + r'(\.\n)', r'\n' + abb + r'. ', text)
     return text
 
 
-def file_to_list(text, tries=0):
+def file_to_list(text, lang, tries=0):
     # clean and convert file to list of paragraphs
     """[\s|\xa0]+
 
     :type text: str
+    :type lang: str
     :type tries: int
     :rtype: list
     """
@@ -283,7 +291,7 @@ def file_to_list(text, tries=0):
     text = re.sub(r'\s+\n', r'\n', text)  # remove whitespace before newline
     text = re.sub(r' +', r' ', text)  # remove double whitespaces
     text = re.sub(r'^\s+', r'', text)  # remove whitespace at the beginning
-    text = paragraph_separator(text)  # separate para numbers from text
+    text = paragraph_separator(text, lang)  # separate para numbers from text
     if tries in [1, 2, 3]:
         # remove one-character lines which can make the aligner to fail
         text = re.sub(r'\n.(?=\n)', r'', text)
