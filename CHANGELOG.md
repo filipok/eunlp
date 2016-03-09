@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - add/change BG, RO, EN abbreviations
 - restore abbreviations damaged by patterns 1 and 3 and
 - add language parameter to paragraph_separator
+- add Latin single upper case letters to BG abbreviations
 
 ## [0.4.5] - 2016-03-01
 ### Added
