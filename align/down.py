@@ -53,8 +53,8 @@ def downloader(link, new_name, over=False, save_file=False):
     html_text = re.sub(r'</p><p ', r'</p>\n<p ', html_text)
     # add whitespace between two adjacent columns
     html_text = re.sub(r'</td><td', r'</td> <td', html_text)
-    # TODO de pus enter la chestii gen '>                            <p'
-    # TODO de testat cu 32014L0095
+    # add new lines also before paras preceded by other tags (such as table)
+    html_text = re.sub(r'> +<p', r'>\n<p', html_text)
     # TODO abort when server error
     return html_text
 
