@@ -286,9 +286,6 @@ def file_to_list(text, lang, tries=0):
     text = re.sub(r'\n\s+', r'\n', text)  # remove whitespace after newline
     text = re.sub(r'^\n+', r'', text)  # remove empty lines at the beginning
     text = re.sub(r'\n$', r'', text)  # remove empty lines at the end
-    # merge segments separated by comma and whitespace, with some exceptions
-    # which are language-dependent unfortunately
-    # re.sub(r',\s\n(?!Whereas|Having regard|In cooperation)', r', ', text)
     text = re.sub(r'\s+\n', r'\n', text)  # remove whitespace before newline
     text = re.sub(r' +', r' ', text)  # remove double whitespaces
     text = re.sub(r'^\s+', r'', text)  # remove whitespace at the beginning
