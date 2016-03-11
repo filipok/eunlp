@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - resolved bug for paragraph_separator with quotes
 - change line endings to LF in BG, CA, ET, HU, RU, SL
 - add/change BG, RO, EN abbreviations
-- restore abbreviations damaged by patterns 1 and 3 and
+- restore (two or more character) abbreviations damaged by patterns 1 and 3
 - add language parameter to paragraph_separator
 - add Latin single upper case letters to BG abbreviations
 - transform nested ifs into while loop in align.py
