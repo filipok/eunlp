@@ -165,7 +165,7 @@ def abbreviation_loader(file_name):
     with codecs.open(file_name, 'r', 'utf-8') as fin:
         lines = list(fin)
     for line in lines:
-        if len(line) > 0 and line[0] != '#':
+        if len(line) > 1 and line[0] != '#':
             abb = line.strip('\n')
             abb = re.split(' #', abb)[0]
             abbreviations.append(abb)

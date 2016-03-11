@@ -12,6 +12,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - restore abbreviations damaged by patterns 1 and 3 and
 - add language parameter to paragraph_separator
 - add Latin single upper case letters to BG abbreviations
+- transform nested ifs into while loop in align.py
+- in downloader, add new lines also before paras preceded by other tags
+- bug in abbreviation loader
 
 ## [0.4.5] - 2016-03-01
 ### Added
