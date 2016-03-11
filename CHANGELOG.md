@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - transform nested ifs into while loop in align.py
 - in downloader, add new lines also before paras preceded by other tags
 - bug in abbreviation loader
+- join single full stop to previous paragraph
 
 ## [0.4.5] - 2016-03-01
 ### Added
