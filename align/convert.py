@@ -241,7 +241,6 @@ def paragraph_separator(text, lang):
     # negative lookahead for Estonian months:
     #     jaanuar|veebruar|m\wrts|aprill|mai|juuni|juuli|august|september|
     #     oktoober|november|detsember
-    #TODO de scos literele V, X din listele de abrevieri din toate limbile
     pattern_1_unicode = re.compile(
         r'\n(\W?\(?(\w{1,3})[\.\)])\s+'
         r'(?!(cikk|FEJEZET|szakasz))'
@@ -303,4 +302,7 @@ def file_to_list(text, lang, tries=0):
         # also try to remove three-character lines which can make it to fail
         text = re.sub(r'\n.{1,3}(?=\n)', r'', text)
     paragraph_list = re.split(r'\n', text)  # split file
+    # TODO split 'Bla bla bla V. Bla bla' because nltk ignores them.
+    # TODO split 'Bla bla bla.Bla bla'
+    # TODO verificator de abrevieri noi.
     return paragraph_list

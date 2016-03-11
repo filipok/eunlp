@@ -367,7 +367,6 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False):
     :type compress: bool
     """
     # create html and txt files for each language code
-    # TODO ce fac cu GA care uneori e EN
     try:
         texts = down.scraper(langs, util.make_celex_link, celex, prefix,
                              style="celex", over_html=False, over_txt=False,
