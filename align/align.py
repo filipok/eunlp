@@ -77,31 +77,24 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
         return  # exit if already aligned and over=False
     source_list = convert.file_to_list(texts[0], s_lang)
     target_list = convert.file_to_list(texts[1], t_lang)
+
     # If different No of paragraphs, make 3 more attempts to process the files
+    tries = 0
+    while len(source_list) != len(target_list) and tries < 3:
+        tries += 1
+        source_list = convert.file_to_list(texts[0], s_lang, tries=tries)
+        target_list = convert.file_to_list(texts[1], t_lang, tries=tries)
+
     if len(source_list) != len(target_list):
-        source_list = convert.file_to_list(texts[0], s_lang, tries=1)
-        target_list = convert.file_to_list(texts[1], t_lang, tries=1)
-        if len(source_list) != len(target_list):
-            source_list = convert.file_to_list(texts[0], s_lang, tries=2)
-            target_list = convert.file_to_list(texts[1], t_lang, tries=2)
-            if len(source_list) != len(target_list):
-                source_list = convert.file_to_list(texts[0], s_lang, tries=3)
-                target_list = convert.file_to_list(texts[1], t_lang, tries=3)
-                if len(source_list) != len(target_list):
-                    logging.error('Smart alignment failed in %s: %s-%s', note,
-                                  s_lang, t_lang)
-                    jsalign_with_error(texts, s_lang, t_lang, note, align_file)
-                    return
-                else:
-                    logging.warning('Aligned at 4th attempt in %s: %s-%s',
-                                    note, s_lang, t_lang)
-            else:
-                logging.warning('Aligned at 3rd attempt in %s: %s-%s', note,
-                                s_lang, t_lang)
-        else:
-            logging.warning('Aligned at 2nd attempt in %s: %s-%s', note,
-                            s_lang, t_lang)
-    # If equal number of paragraphs:
+        logging.error('Smart alignment failed in %s: %s-%s', note,
+                      s_lang, t_lang)
+        jsalign_with_error(texts, s_lang, t_lang, note, align_file)
+        return
+
+    if tries > 0:
+        logging.warning('Aligned at attempt %s in %s: %s-%s',
+                        tries + 1, note, s_lang, t_lang)
+
     try:
         tab_file = parallel_aligner(source_list, target_list, s_lang, t_lang,
                                     dictionary, para_size=para_size,
@@ -122,7 +115,6 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
             convert.gzipper(align_file + '_manual.html')
 
     except StopIteration:
-        # TODO de ce atatea StopIteration la CS
         logging.error('StopIteration in %s -> %s, %s', note, s_lang, t_lang)
         jsalign_with_error(texts, s_lang, t_lang, note, align_file)
 
