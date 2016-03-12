@@ -69,8 +69,10 @@ def souper(file_name, html_text, style, over=False, save_file=False):
     # Only convert to txt if not already existing
     # over=True overrides that behavior
     if (not over) and os.path.isfile(file_name):
-        logging.info("%s: txt file already existing.", file_name)
-        return
+        with codecs.open(file_name, "r", "utf-8") as fin:
+            clean_text = fin.read()
+            logging.info("%s: txt file already existing.", file_name)
+        return clean_text
     soup = BeautifulSoup(html_text, "lxml")
     # separate branches for each document type
     find_div = soup.find(id='text')
