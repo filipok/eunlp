@@ -356,7 +356,8 @@ def basic_aligner(s_file, t_file, dic, a_file, s_sentence_splitter,
     return lines
 
 
-def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False):
+def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False,
+                  save_intermediates=False):
     """
 
     :type langs: list
@@ -365,12 +366,13 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False):
     :type prefix: str
     :type make_dic: bool
     :type compress: bool
+    :type save_intermediates: bool
     """
     # create html and txt files for each language code
     try:
         texts = down.scraper(langs, util.make_celex_link, celex, prefix,
                              style="celex", over_html=False, over_txt=False,
-                             save_files=False)
+                             save_intermediates=save_intermediates)
     except urllib2.HTTPError:
         logging.error("Aborting alignment due to link error in %s.", celex)
     except (IndexError, AttributeError):

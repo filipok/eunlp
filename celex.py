@@ -48,7 +48,8 @@ def main():
         program_folder += '/'
 
     # call the celex_scraper
-    align.celex_aligner(languages, path, celex, '', make_dic=False)
+    align.celex_aligner(languages, path, celex, '', make_dic=False,
+                        save_intermediates=False)
 
 if __name__ == '__main__':
     sys.exit(main())

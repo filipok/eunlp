@@ -15,13 +15,13 @@ import logging
 from bs4 import BeautifulSoup
 
 
-def downloader(link, new_name, over=False, save_file=False):
+def downloader(link, new_name, over=False, save_intermediates=False):
     """
 
     :type link: str
     :type new_name: str
     :type over: bool
-    :type save_file: bool
+    :type save_intermediates: bool
     :rtype: str
     """
     # Only download if not already existing, otherwise open from disk
@@ -29,7 +29,7 @@ def downloader(link, new_name, over=False, save_file=False):
     if over or (not os.path.isfile(new_name)):
         response = urllib2.urlopen(link)
         html_text = response.read()
-        if save_file:
+        if save_intermediates:
             with open(new_name, 'w') as fout:
                 fout.write(html_text)
     else:
@@ -56,14 +56,14 @@ def downloader(link, new_name, over=False, save_file=False):
     return html_text
 
 
-def souper(file_name, html_text, style, over=False, save_file=False):
+def souper(file_name, html_text, style, over=False, save_intermediates=False):
     """
 
     :type file_name: str
     :type html_text: str
     :type style: str
     :type over: bool
-    :type save_file: bool
+    :type save_intermediates: bool
     :rtype:
     """
     # Only convert to txt if not already existing
@@ -103,14 +103,14 @@ def souper(file_name, html_text, style, over=False, save_file=False):
         clean_text = strip_ep(clean_text)
     else:
         clean_text = soup.get_text()
-    if save_file:
+    if save_intermediates:
         with codecs.open(file_name, "w", "utf-8") as fout:
             fout.write(clean_text)
     return clean_text
 
 
 def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
-            over_txt=False, save_files=False):
+            over_txt=False, save_intermediates=False):
     """
     It downloads EU documents as html files and converts them to txt.
     Example usage:
@@ -124,7 +124,7 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
     :type style: str
     :type over_html: bool
     :type over_txt: bool
-    :type save_files: bool
+    :type save_intermediates: bool
     """
     # TODO de utilizat linkurile cu ALL pt celex si de extras clasificarile
     texts = []
@@ -133,7 +133,7 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
         new_name = prefix + url_code + '_' + lang_code + '.html'
         try:
             link = make_link(url_code, lang_code)
-            text = downloader(link, new_name, over_html, save_files)
+            text = downloader(link, new_name, over_html, save_intermediates)
         except urllib2.HTTPError:
             logging.error("Link error in %s_%s", url_code, lang_code)
             raise
@@ -141,7 +141,7 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
             new_name = prefix + url_code + '_' + lang_code + '.txt'
             try:
                 texts.append(
-                    souper(new_name, text, style, over_txt, save_files))
+                    souper(new_name, text, style, over_txt, save_intermediates))
             except (IndexError, AttributeError):
                 raise
     return texts
