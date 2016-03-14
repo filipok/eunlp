@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - bug in abbreviation loader
 - join single full stop to previous paragraph
 - use save_intermediates parameter in celex_aligner
+- change logging level to info in eu_xml_converter
 
 ## [0.4.5] - 2016-03-01
 ### Added

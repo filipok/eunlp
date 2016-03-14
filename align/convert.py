@@ -149,7 +149,7 @@ def eu_xml_converter(file_name):
     lista = []
     res_list = soup.find_all('result')
     length = len(res_list)
-    logging.warning('Preparing list of %s documents...', length)
+    logging.info('Preparing list of %s documents...', length)
     for i in range(length):
         if res_list[i].find('id_celex') is not None:
             celex = res_list[i].find('id_celex').contents[1].contents[0]
