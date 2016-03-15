@@ -235,22 +235,25 @@ def paragraph_separator(text, lang):
     :rtype: str
     """
     # pattern 1 separate 1-3 letters/numbers with dot/brackets from the line
-    # negative lookahead cikk|FEJEZET|szakasz for Hungarian.
-    # negative lookahead pants|ieda\wa for Latvian.
-    # negative lookahead Jagu for Estonian.
+    # negative lookahead cikk|FEJEZET|szakasz etc. for Hungarian.
+    # negative lookahead pants|ieda\wa etc. for Latvian.
+    # negative lookahead Jagu etc. for Estonian.
     # negative lookahead for Estonian months:
     #     jaanuar|veebruar|m\wrts|aprill|mai|juuni|juuli|august|september|
     #     oktoober|november|detsember
     pattern_1_unicode = re.compile(
         r'\n(\W?\(?(\w{1,3})[\.\)])\s+'
-        r'(?!(cikk|FEJEZET|szakasz))'
-        r'(?!(pants|ieda\wa|Jagu))'
+        r'(?!(cikk|FEJEZET|szakasz|SZAKASZ|MELL\wKLET))'
+        r'(?!(pants|ieda\wa|IEDA\wA|panta|Jagu|JAGU))'
         r'(?!(jaanuar|veebruar|m\wrts|aprill|mai|juuni))'
         r'(?!(juuli|august|september|oktoober|november|detsember))',
         re.UNICODE)
     # pattern 3 separates 1-3 numbers + single letter from the line
+    # negative lookahead cikk for Hungarian.
     pattern_3_unicode = re.compile(
-        r'\n(\W?\(?([0-9]{1,3}(?![0-9])\w+)[\.\)])\s+', re.UNICODE)
+        r'\n(\W?\(?([0-9]{1,3}(?![0-9])\w+)[\.\)])\s+'
+        r'(?!(cikk))',
+        re.UNICODE)
     # separate lines consisting of Roman numerals to 9 from the line
     pattern_4 = re.compile(r'\n(\W?\(?i{1,3}[\.\)])\s+')  # 1-3
     pattern_5 = re.compile(r'\n(\W?\(?iv[\.\)])\s+')  # 4

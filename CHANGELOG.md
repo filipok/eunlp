@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - use save_intermediates parameter in celex_aligner
 - change logging level to info in eu_xml_converter
 - add FI, GA, HR, LT, LV, MT prefix lists
+- update HU, ET, LV negative lookaheads in paragraph_separator
 
 ## [0.4.5] - 2016-03-01
 ### Added
