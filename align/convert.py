@@ -271,8 +271,9 @@ def paragraph_separator(text, lang):
     ab_file = ''.join([path, SUBFOLDER, lang])
     abbrevs = util.abbreviation_loader(ab_file)
     for abb in abbrevs:
-        # only restore abbreviations of two or more characters
-        if len(abb) > 1:
+        # only restore abbreviations of two or more characters, if not numeric
+        roman_num = ['ii', 'iii','iv', 'vi', 'vii', 'viii', 'ix']
+        if len(abb) > 1 and not abb.isdigit() and abb not in roman_num:
             text = re.sub(r'\n' + abb + r'(\.\n)', r'\n' + abb + r'. ', text)
     return text
 
