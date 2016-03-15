@@ -4,6 +4,7 @@ Purpose:     Download Eurlex documents using the celex codes from an XML file
 How to use:
 One language pair: python ~/eunlp/celex_list.py searchresults.xml en ro
 All language pairs: python ~/eunlp/celex_list.py searchresults.xml all
+Pivot language: python ~/eunlp/celex_list.py searchresults.xml en
 
 Author:      Filip
 
@@ -13,46 +14,103 @@ Created:     17.02.2015
 import sys
 import os
 import logging
+import argparse
+import urllib2
 
 from align import align, convert
 from align.const import ALL_LANGS
 
+parser = argparse.ArgumentParser(
+    description="Align a list of Celex documents.")
+parser.add_argument("XML_list", help="the XML list with Celex numbers")
+parser.add_argument("Source_language", type=str.lower,
+                    choices=ALL_LANGS + ['all'],
+                    help="the source languages of the document; "
+                         "ALL if all possible language pairs")
+parser.add_argument("-t", "--target",  type=str.lower, choices=ALL_LANGS,
+                    help="the target language of the document "
+                         "(incompatible with using ALL for source language)")
 
-logging.basicConfig(filename='log.txt', level=logging.WARNING)
+logging.basicConfig(filename='log.txt', level=logging.INFO)
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 logging.getLogger('').addHandler(console)
 
-if __name__ == '__main__':
-    # collect arguments
-    path = os.getcwd()
-    if len(sys.argv) > 2:
-        program_folder = os.path.dirname(sys.argv[0])
-        if len(program_folder) != 0:
-            program_folder += '/'
-        xml_list = sys.argv[1]  # collect xml list name
-        langs = [x.lower() for x in sys.argv[2:]]  # collect language codes
-        if (len(langs) == 2 and len(set(langs)) == 2 and
-                set(langs).issubset(set(ALL_LANGS))):
-            file_list = convert.eu_xml_converter(xml_list)
-            for item in file_list:
-                print "Processing " + item[0] + ' ...'
-                align.celex_aligner(langs, path, item[0], '', make_dic=False)
-        elif len(langs) == 1 and langs[0] == 'all':
-            file_list = convert.eu_xml_converter(xml_list)
-            for i in range(len(ALL_LANGS)):
-                languages = ALL_LANGS[:]
-                s_lang = languages.pop(i)
-                for t_lang in languages:
-                    for item in file_list:
-                        print "Processing pair {}-{}, document {}".format(
-                            s_lang, t_lang, item[0])
-                        align.celex_aligner([s_lang, t_lang], path, item[0],
-                                            '', make_dic=False)
 
-        else:
-            logging.critical('Invalid languages!')
-            print "Either pass 'ALL' or a pair of valid languages."
-            print "Valid languages:", ALL_LANGS
+def main():
+    """
+
+    :return:
+    """
+    args = parser.parse_args()
+    # get script path
+    path = os.getcwd()
+    program_folder = os.path.dirname(sys.argv[0])
+    if len(program_folder) != 0:
+        program_folder += '/'
+    # collect xml list name
+    xml_list = args.XML_list
+    try:
+        response = urllib2.urlopen(xml_list)
+    except ValueError:
+        logging.error('ValueError: invalid file url %s', xml_list)
+        raise
+    xml_text = response.read()
+    with open('file_list.xml', 'w') as fout:
+        fout.write(xml_text)
+    file_list = convert.eu_xml_converter('file_list.xml')
+    # collect source language
+    s_lang = args.Source_language
+    # collect target language, if any, and run alignments
+
+    # one language pair
+    if args.target is not None and args.Source_language != 'all':
+        t_lang = args.target
+        logging.info('Aligning one language pair: %s - %s ...', s_lang,
+                     t_lang)
+        for item in file_list:
+            logging.info("Processing %s ...", item[0])
+            align.celex_aligner([s_lang, t_lang], path, item[0], '',
+                                make_dic=False, save_intermediates=True)
+    # all language pairs
+    elif s_lang == 'all':
+        logging.info('Aligning all language pairs')
+        langs_no = len(ALL_LANGS)
+        for i in range(langs_no):
+            languages = ALL_LANGS[:]
+            s_lang = languages.pop(i)
+            target_no = len(languages)
+            file_no = len(file_list)
+            for item in enumerate(file_list):
+                for t_lang in enumerate(languages):
+                    pair = [s_lang, t_lang[1]]
+                    logging.info(
+                        "S: %s/%s F: %s/%s T: %s/%s: Processing %s (%s) ...",
+                        str(i + 1), str(langs_no),
+                        str(item[0] + 1), str(file_no),
+                        str(t_lang[0] + 1), str(target_no),
+                        item[1][0], repr(pair))
+                    align.celex_aligner(pair, path, item[1][0],
+                                        '', make_dic=False,
+                                        save_intermediates=True)
+
+    # pivot source language
     else:
-        logging.critical('Too few parameters!')
+        logging.info('Aligning with pivot language: %s ...', s_lang)
+        target_langs = ALL_LANGS[:]
+        target_langs.remove(s_lang)  # remove pivot language from list
+        target_no = len(target_langs)
+        file_no = len(file_list)
+        for item in enumerate(file_list):
+            for t_language in enumerate(target_langs):
+                pair = [s_lang, t_language[1]]
+                logging.info("F: %s/%s T: %s/%s: Processing %s (%s) ...",
+                             str(item[0] + 1), str(file_no),
+                             str(t_language[0] + 1), str(target_no),
+                             item[1][0], repr(pair))
+                align.celex_aligner(pair, path, item[1][0], '',
+                                    make_dic=False,
+                                    save_intermediates=True)
+
+if __name__ == '__main__':
+    sys.exit(main())
