@@ -4292,6 +4292,10 @@
 <tuv xml:lang="en"><seg>OJ L 35, 11.2.2003, p. 1.</seg></tuv>
 <tuv xml:lang="ro"><seg>JO L 35, 11.2.2003, p. 1.</seg></tuv> </tu>
 
+<tu creationdate="00000000T000000Z" creationid="eunlp"><prop type="Txt::Note">32013R1024</prop><prop type="Txt::Alignment">Short</prop>
+<tuv xml:lang="en"><seg>Top </seg></tuv>
+<tuv xml:lang="ro"><seg>Top </seg></tuv> </tu>
+
 
 </body>
 </tmx>
