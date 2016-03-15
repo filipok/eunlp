@@ -232,7 +232,7 @@ def tmp_aligner(source, target, dictionary, note, s_sentence_splitter,
     if everything_ok[0]:
         line = everything_ok[1]
     else:
-        logging.info("Hunalign failed in a segment in file %s.", note)
+        logging.debug("Hunalign failed in a segment in file %s.", note)
         line = ''.join(["Err\t", target, "\t", source, "\n"])
     # remove temporary files
     os.remove(tmp_source)

@@ -71,7 +71,7 @@ def souper(file_name, html_text, style, over=False, save_intermediates=False):
     if (not over) and os.path.isfile(file_name):
         with codecs.open(file_name, "r", "utf-8") as fin:
             clean_text = fin.read()
-            logging.info("%s: txt file already existing.", file_name)
+            logging.debug("%s: txt file already existing.", file_name)
         return clean_text
     soup = BeautifulSoup(html_text, "lxml")
     # separate branches for each document type
