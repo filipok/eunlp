@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - join single full stop to previous paragraph
 - use save_intermediates parameter in celex_aligner
 - change logging level to info in eu_xml_converter
+- add FI, GA, HR, LT, LV, MT prefix lists
 
 ## [0.4.5] - 2016-03-01
 ### Added
