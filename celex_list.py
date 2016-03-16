@@ -16,6 +16,8 @@ import os
 import logging
 import argparse
 import urllib2
+import datetime
+import re
 
 from align import align, convert
 from align.const import ALL_LANGS
@@ -48,6 +50,12 @@ def main():
     program_folder = os.path.dirname(sys.argv[0])
     if len(program_folder) != 0:
         program_folder += '/'
+
+    # Add starting time to log file
+    now = datetime.datetime.now().isoformat()
+    now = re.split(r"\.", re.sub(r"[-:]", r"", now))[0]
+    logging.info("Starting job time: %s", now)
+
     # collect xml list name
     xml_list = args.XML_list
     try:
@@ -60,9 +68,9 @@ def main():
         fout.write(xml_text)
     file_list = convert.eu_xml_converter('file_list.xml')
     file_no = len(file_list)
+
     # collect source language
     s_lang = args.Source_language
-    # collect target language, if any, and run alignments
 
     # one language pair
     if args.target is not None and args.Source_language != 'all':
@@ -70,7 +78,7 @@ def main():
         logging.info('Aligning one language pair: %s - %s ...', s_lang,
                      t_lang)
         for item in enumerate(file_list):
-            logging.info("F: %s/%s: Processing %s ...", str(item[0] + 1),
+            logging.info("F:%s/%s: Processing %s ...", str(item[0] + 1),
                          str(file_no), item[1][0])
             align.celex_aligner([s_lang, t_lang], path, item[1][0], '',
                                 make_dic=False, save_intermediates=True)
@@ -86,7 +94,7 @@ def main():
                 for t_lang in enumerate(languages):
                     pair = [s_lang, t_lang[1]]
                     logging.info(
-                        "F: %s/%s S: %s/%s T: %s/%s: Processing %s (%s) ...",
+                        "F:%s/%s S:%s/%s T:%s/%s: Processing %s (%s) ...",
                         str(item[0] + 1), str(file_no),
                         str(i + 1), str(langs_no),
                         str(t_lang[0] + 1), str(target_no),
@@ -104,13 +112,18 @@ def main():
         for item in enumerate(file_list):
             for t_language in enumerate(target_langs):
                 pair = [s_lang, t_language[1]]
-                logging.info("F: %s/%s T: %s/%s: Processing %s (%s) ...",
+                logging.info("F:%s/%s T:%s/%s: Processing %s (%s) ...",
                              str(item[0] + 1), str(file_no),
                              str(t_language[0] + 1), str(target_no),
                              item[1][0], repr(pair))
                 align.celex_aligner(pair, path, item[1][0], '',
                                     make_dic=False,
                                     save_intermediates=True)
+    # Add end time to log file
+    now = datetime.datetime.now().isoformat()
+    now = re.split(r"\.", re.sub(r"[-:]", r"", now))[0]
+    logging.info("End time job time: %s", now)
+
 
 if __name__ == '__main__':
     sys.exit(main())
