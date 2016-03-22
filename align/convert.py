@@ -261,22 +261,27 @@ def numbering_separator(text, lang):
     pattern_5 = re.compile(r'\n(\W?\(?iv[\.\)])\s+')  # 4
     pattern_6 = re.compile(r'\n(\W?\(?vi{0,3}[\.\)])\s+')  # 5-8
     pattern_7 = re.compile(r'\n(\W?\(?ix[\.\)])\s+')  # 9
+
     # the replacements
-    text = re.sub(pattern_1_unicode, r'\n\1\n', text)
-    text = re.sub(pattern_3_unicode, r'\n\1\n', text)
-    text = re.sub(pattern_4, r'\n\1\n', text)
-    text = re.sub(pattern_5, r'\n\1\n', text)
-    text = re.sub(pattern_6, r'\n\1\n', text)
-    text = re.sub(pattern_7, r'\n\1\n', text)
-    # restore abbreviations damaged by patterns 1 and 3
+    text = re.sub(pattern_1_unicode, r'\n\1' + u'\xa0', text)
+    text = re.sub(pattern_3_unicode, r'\n\1' + u'\xa0', text)
+    text = re.sub(pattern_4, r'\n\1' + u'\xa0', text)
+    text = re.sub(pattern_5, r'\n\1' + u'\xa0', text)
+    text = re.sub(pattern_6, r'\n\1' + u'\xa0', text)
+    text = re.sub(pattern_7, r'\n\1' + u'\xa0', text)
+    # restore start-of-the-line abbreviations damaged by pattern 1
     path = os.path.dirname(__file__)
     ab_file = ''.join([path, SUBFOLDER, lang])
     abbrevs = util.abbreviation_loader(ab_file)
     for abb in abbrevs:
+        # TODO pentru HU sa restaurez si alea gen '3.'?
+        # TODO test 32015R0003_en_hu
+        # TODO daca in HU nu incep alineate cu cifra plus punct, ar fi ok.
         # only restore abbreviations of two or more characters, if not numeric
         roman_num = ['ii', 'iii', 'iv', 'vi', 'vii', 'viii', 'ix']
         if len(abb) > 1 and not abb.isdigit() and abb not in roman_num:
-            text = re.sub(r'\n' + abb + r'(\.\n)', r'\n' + abb + r'. ', text)
+            text = re.sub(r'\n' + abb + r'(\.\xa0)', r'\n' + abb + r'. ', text)
+    text = re.sub(r'\xa0', r'\n', text)
     return text
 
 
