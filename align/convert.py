@@ -227,7 +227,7 @@ def jsalign_table(source_list, target_list, s_lang, t_lang, note):
                                  s_cells=s_cells, t_cells=t_cells)
 
 
-def paragraph_separator(text, lang):
+def numbering_separator(text, lang):
     """
 
     :type text: str
@@ -295,7 +295,7 @@ def file_to_list(text, lang, tries=0):
     text = re.sub(r' +', r' ', text)  # remove double whitespaces
     text = re.sub(r'^\s+', r'', text)  # remove whitespace at the beginning
     text = re.sub(r'\n\.\n', r'.\n', text)  # single full stop to prev. para.
-    text = paragraph_separator(text, lang)  # separate para numbers from text
+    text = numbering_separator(text, lang)  # separate para numbers from text
     if tries in [1, 2, 3]:
         # remove one-character lines which can make the aligner to fail
         text = re.sub(r'\n.(?=\n)', r'', text)

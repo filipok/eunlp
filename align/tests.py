@@ -337,325 +337,325 @@ class TestConvert(unittest.TestCase):
                                                         t_lang, note))
 
     def test_paragraph_separator_1(self):
-        self.assertEqual(convert.paragraph_separator('\n1. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. Bla', 'ro'),
                          '\n1.\nBla')
 
     def test_paragraph_separator_2(self):
-        self.assertEqual(convert.paragraph_separator('\n1) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1) Bla', 'ro'),
                          '\n1)\nBla')
 
     def test_paragraph_separator_3(self):
-        self.assertEqual(convert.paragraph_separator('\n(1) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n(1) Bla', 'ro'),
                          '\n(1)\nBla')
 
     def test_paragraph_separator_11(self):
-        self.assertEqual(convert.paragraph_separator('\n1a. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1a. Bla', 'ro'),
                          '\n1a.\nBla')
 
     def test_paragraph_separator_22(self):
-        self.assertEqual(convert.paragraph_separator('\n11) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n11) Bla', 'ro'),
                          '\n11)\nBla')
 
     def test_paragraph_separator_33(self):
-        self.assertEqual(convert.paragraph_separator('\n(11b) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n(11b) Bla', 'ro'),
                          '\n(11b)\nBla')
 
     def test_paragraph_separator_33_lett(self):
-        self.assertEqual(convert.paragraph_separator('\n(ABC) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n(ABC) Bla', 'ro'),
                          '\n(ABC)\nBla')
 
     def test_paragraph_separator_33_lett_2(self):
-        self.assertEqual(convert.paragraph_separator('\n(AB2) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n(AB2) Bla', 'ro'),
                          '\n(AB2)\nBla')
 
     def test_paragraph_separator_11_quote(self):
-        self.assertEqual(convert.paragraph_separator("\n" + u"\u201e" +"1a. Bla", 'ro'),
+        self.assertEqual(convert.numbering_separator("\n" + u"\u201e" + "1a. Bla", 'ro'),
                          "\n" + u"\u201e" + "1a.\nBla")
 
     def test_paragraph_separator_22_quote(self):
-        self.assertEqual(convert.paragraph_separator("\n" + u"\u201e" +"11) Bla", 'ro'),
+        self.assertEqual(convert.numbering_separator("\n" + u"\u201e" + "11) Bla", 'ro'),
                          "\n" + u"\u201e" + "11)\nBla")
 
     def test_paragraph_separator_33_quote(self):
-        self.assertEqual(convert.paragraph_separator("\n" + u"\u201e" +"(11b) Bla", 'ro'),
+        self.assertEqual(convert.numbering_separator("\n" + u"\u201e" + "(11b) Bla", 'ro'),
                          "\n" + u"\u201e" + "(11b)\nBla")
 
     def test_paragraph_separator_33_lett_quote(self):
-        self.assertEqual(convert.paragraph_separator("\n" + u"\u201e" +"(ABC) Bla", 'ro'),
+        self.assertEqual(convert.numbering_separator("\n" + u"\u201e" + "(ABC) Bla", 'ro'),
                          "\n" + u"\u201e" + "(ABC)\nBla")
 
     def test_paragraph_separator_33_lett_2_quote(self):
-        self.assertEqual(convert.paragraph_separator("\n" + u"\u201e" +"(AB2) Bla", 'ro'),
+        self.assertEqual(convert.numbering_separator("\n" + u"\u201e" + "(AB2) Bla", 'ro'),
                          "\n" + u"\u201e" + "(AB2)\nBla")
 
     def test_paragraph_separator_1_tab(self):
-        self.assertEqual(convert.paragraph_separator('\n1.\tBla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1.\tBla', 'ro'),
                          '\n1.\nBla')
 
     def test_paragraph_separator_1_n(self):
-        self.assertEqual(convert.paragraph_separator('\n1.\nBla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1.\nBla', 'ro'),
                          '\n1.\nBla')
 
     def test_paragraph_separator_1_tab_quote(self):
-        self.assertEqual(convert.paragraph_separator("\n" + u"\u201e" +"1.\tBla", 'ro'),
+        self.assertEqual(convert.numbering_separator("\n" + u"\u201e" + "1.\tBla", 'ro'),
                          "\n" + u"\u201e" + "1.\nBla")
 
     def test_paragraph_separator_1_n_quote(self):
-        self.assertEqual(convert.paragraph_separator("\n" + u"\u201e" + "1.\nBla", 'ro'),
+        self.assertEqual(convert.numbering_separator("\n" + u"\u201e" + "1.\nBla", 'ro'),
                          "\n" + u"\u201e" + "1.\nBla")
 
     def test_paragraph_separator_hun_1(self):
-        self.assertEqual(convert.paragraph_separator('\n1. cikk', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. cikk', 'ro'),
                          '\n1. cikk')
 
     def test_paragraph_separator_hun_2(self):
-        self.assertEqual(convert.paragraph_separator('\n1. FEJEZET', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. FEJEZET', 'ro'),
                          '\n1. FEJEZET')
 
     def test_paragraph_separator_hun_3(self):
-        self.assertEqual(convert.paragraph_separator('\n1. szakasz', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. szakasz', 'ro'),
                          '\n1. szakasz')
 
     def test_paragraph_separator_lat_1(self):
-        self.assertEqual(convert.paragraph_separator('\n1. pants', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. pants', 'ro'),
                          '\n1. pants')
 
     def test_paragraph_separator_lat_2(self):
         self.assertEqual(
-            convert.paragraph_separator('\n1. ieda' + u"\u013C" + 'a', 'ro'),
+            convert.numbering_separator('\n1. ieda' + u"\u013C" + 'a', 'ro'),
             '\n1. ieda' + u"\u013C" + 'a')
 
     def test_paragraph_separator_est_1(self):
-        self.assertEqual(convert.paragraph_separator('\n1. Jagu', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. Jagu', 'ro'),
                          '\n1. Jagu')
 
     def test_paragraph_separator_est_month_1(self):
-        self.assertEqual(convert.paragraph_separator('\n1. jaanuar', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. jaanuar', 'ro'),
                          '\n1. jaanuar')
 
     def test_paragraph_separator_est_month_2(self):
-        self.assertEqual(convert.paragraph_separator('\n1. veebruar', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. veebruar', 'ro'),
                          '\n1. veebruar')
 
     def test_paragraph_separator_est_month_3(self):
         self.assertEqual(
-            convert.paragraph_separator('\n1. m' + u"\u00E4" + 'rts', 'ro'),
+            convert.numbering_separator('\n1. m' + u"\u00E4" + 'rts', 'ro'),
             '\n1. m' + u"\u00E4" + 'rts')
 
     def test_paragraph_separator_est_month_4(self):
-        self.assertEqual(convert.paragraph_separator('\n1. aprill', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. aprill', 'ro'),
                          '\n1. aprill')
 
     def test_paragraph_separator_est_month_5(self):
-        self.assertEqual(convert.paragraph_separator('\n1. mai', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. mai', 'ro'),
                          '\n1. mai')
 
     def test_paragraph_separator_est_month_6(self):
-        self.assertEqual(convert.paragraph_separator('\n1. juuni', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. juuni', 'ro'),
                          '\n1. juuni')
 
     def test_paragraph_separator_est_month_7(self):
-        self.assertEqual(convert.paragraph_separator('\n1. juuli', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. juuli', 'ro'),
                          '\n1. juuli')
 
     def test_paragraph_separator_est_month_8(self):
-        self.assertEqual(convert.paragraph_separator('\n1. august', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. august', 'ro'),
                          '\n1. august')
 
     def test_paragraph_separator_est_month_9(self):
-        self.assertEqual(convert.paragraph_separator('\n1. september', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. september', 'ro'),
                          '\n1. september')
 
     def test_paragraph_separator_est_month_10(self):
-        self.assertEqual(convert.paragraph_separator('\n1. oktoober', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. oktoober', 'ro'),
                          '\n1. oktoober')
 
     def test_paragraph_separator_est_month_11(self):
-        self.assertEqual(convert.paragraph_separator('\n1. november', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. november', 'ro'),
                          '\n1. november')
 
     def test_paragraph_separator_est_month_12(self):
-        self.assertEqual(convert.paragraph_separator('\n1. detsember', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n1. detsember', 'ro'),
                          '\n1. detsember')
 
     def test_paragraph_separator_333c_1_quote(self):
-        self.assertEqual(convert.paragraph_separator("\n" + u"\u201e" +'1. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator("\n" + u"\u201e" + '1. Bla', 'ro'),
                          "\n" + u"\u201e" + '1.\nBla')
 
     def test_paragraph_separator_333c_2_quote(self):
-        self.assertEqual(convert.paragraph_separator("\n" + u"\u201e" +'1) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator("\n" + u"\u201e" + '1) Bla', 'ro'),
                          "\n" + u"\u201e" +'1)\nBla')
 
     def test_paragraph_separator_333c_3_quote(self):
-        self.assertEqual(convert.paragraph_separator("\n" + u"\u201e" +'(1) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator("\n" + u"\u201e" + '(1) Bla', 'ro'),
                          "\n" + u"\u201e" +'(1)\nBla')
 
     def test_paragraph_separator_roman_1(self):
-        self.assertEqual(convert.paragraph_separator('\ni. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\ni. Bla', 'ro'),
                          '\ni.\nBla')
 
     def test_paragraph_separator_roman_2(self):
-        self.assertEqual(convert.paragraph_separator('\nii. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\nii. Bla', 'ro'),
                          '\nii.\nBla')
 
     def test_paragraph_separator_roman_3(self):
-        self.assertEqual(convert.paragraph_separator('\niii. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\niii. Bla', 'ro'),
                          '\niii.\nBla')
 
     def test_paragraph_separator_roman_4(self):
-        self.assertEqual(convert.paragraph_separator('\niii) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\niii) Bla', 'ro'),
                          '\niii)\nBla')
 
     def test_paragraph_separator_roman_5(self):
-        self.assertEqual(convert.paragraph_separator('\n(iii) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n(iii) Bla', 'ro'),
                          '\n(iii)\nBla')
 
     def test_paragraph_separator_roman_6(self):
-        self.assertEqual(convert.paragraph_separator('\niv. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\niv. Bla', 'ro'),
                          '\niv.\nBla')
 
     def test_paragraph_separator_roman_7(self):
-        self.assertEqual(convert.paragraph_separator('\niv) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\niv) Bla', 'ro'),
                          '\niv)\nBla')
 
     def test_paragraph_separator_roman_8(self):
-        self.assertEqual(convert.paragraph_separator('\n(iv) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n(iv) Bla', 'ro'),
                          '\n(iv)\nBla')
 
     def test_paragraph_separator_roman_9(self):
-        self.assertEqual(convert.paragraph_separator('\nv. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\nv. Bla', 'ro'),
                          '\nv.\nBla')
 
     def test_paragraph_separator_roman_10(self):
-        self.assertEqual(convert.paragraph_separator('\nv) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\nv) Bla', 'ro'),
                          '\nv)\nBla')
 
     def test_paragraph_separator_roman_11(self):
-        self.assertEqual(convert.paragraph_separator('\n(v) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n(v) Bla', 'ro'),
                          '\n(v)\nBla')
 
     def test_paragraph_separator_roman_12(self):
-        self.assertEqual(convert.paragraph_separator('\nvi. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\nvi. Bla', 'ro'),
                          '\nvi.\nBla')
 
     def test_paragraph_separator_roman_13(self):
-        self.assertEqual(convert.paragraph_separator('\nvi) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\nvi) Bla', 'ro'),
                          '\nvi)\nBla')
 
     def test_paragraph_separator_roman_14(self):
-        self.assertEqual(convert.paragraph_separator('\n(vi) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n(vi) Bla', 'ro'),
                          '\n(vi)\nBla')
 
     def test_paragraph_separator_roman_15(self):
-        self.assertEqual(convert.paragraph_separator('\nix. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\nix. Bla', 'ro'),
                          '\nix.\nBla')
 
     def test_paragraph_separator_roman_16(self):
-        self.assertEqual(convert.paragraph_separator('\nix) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\nix) Bla', 'ro'),
                          '\nix)\nBla')
 
     def test_paragraph_separator_roman_17(self):
-        self.assertEqual(convert.paragraph_separator('\n(ix) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n(ix) Bla', 'ro'),
                          '\n(ix)\nBla')
 
     def test_paragraph_separator_roman_18(self):
-        self.assertEqual(convert.paragraph_separator('\nviii. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\nviii. Bla', 'ro'),
                          '\nviii.\nBla')
 
     def test_paragraph_separator_roman_19(self):
-        self.assertEqual(convert.paragraph_separator('\nviii) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\nviii) Bla', 'ro'),
                          '\nviii)\nBla')
 
     def test_paragraph_separator_roman_20(self):
-        self.assertEqual(convert.paragraph_separator('\n(viii) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n(viii) Bla', 'ro'),
                          '\n(viii)\nBla')
 
     def test_paragraph_separator_roman_1_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + 'i. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + 'i. Bla', 'ro'),
                          '\n' + u"\u201e" + 'i.\nBla')
 
     def test_paragraph_separator_roman_2_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + 'ii. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + 'ii. Bla', 'ro'),
                          '\n' + u"\u201e" + 'ii.\nBla')
 
     def test_paragraph_separator_roman_3_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + 'iii. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + 'iii. Bla', 'ro'),
                          '\n' + u"\u201e" + 'iii.\nBla')
 
     def test_paragraph_separator_roman_4_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + 'iii) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + 'iii) Bla', 'ro'),
                          '\n' + u"\u201e" + 'iii)\nBla')
 
     def test_paragraph_separator_roman_5_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + '(iii) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + '(iii) Bla', 'ro'),
                          '\n' + u"\u201e" + '(iii)\nBla')
 
     def test_paragraph_separator_roman_6_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + 'iv. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + 'iv. Bla', 'ro'),
                          '\n' + u"\u201e" + 'iv.\nBla')
 
     def test_paragraph_separator_roman_7_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + 'iv) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + 'iv) Bla', 'ro'),
                          '\n' + u"\u201e" + 'iv)\nBla')
 
     def test_paragraph_separator_roman_8_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + '(iv) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + '(iv) Bla', 'ro'),
                          '\n' + u"\u201e" + '(iv)\nBla')
 
     def test_paragraph_separator_roman_9_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + 'v. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + 'v. Bla', 'ro'),
                          '\n' + u"\u201e" + 'v.\nBla')
 
     def test_paragraph_separator_roman_10_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + 'v) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + 'v) Bla', 'ro'),
                          '\n' + u"\u201e" + 'v)\nBla')
 
     def test_paragraph_separator_roman_11_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + '(v) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + '(v) Bla', 'ro'),
                          '\n' + u"\u201e" + '(v)\nBla')
 
     def test_paragraph_separator_roman_12_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + 'vi. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + 'vi. Bla', 'ro'),
                          '\n' + u"\u201e" + 'vi.\nBla')
 
     def test_paragraph_separator_roman_13_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + 'vi) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + 'vi) Bla', 'ro'),
                          '\n' + u"\u201e" + 'vi)\nBla')
 
     def test_paragraph_separator_roman_14_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + '(vi) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + '(vi) Bla', 'ro'),
                          '\n' + u"\u201e" + '(vi)\nBla')
 
     def test_paragraph_separator_roman_15_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + 'ix. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + 'ix. Bla', 'ro'),
                          '\n' + u"\u201e" + 'ix.\nBla')
 
     def test_paragraph_separator_roman_16_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + 'ix) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + 'ix) Bla', 'ro'),
                          '\n' + u"\u201e" + 'ix)\nBla')
 
     def test_paragraph_separator_roman_17_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + '(ix) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + '(ix) Bla', 'ro'),
                          '\n' + u"\u201e" + '(ix)\nBla')
 
     def test_paragraph_separator_roman_18_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + 'viii. Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + 'viii. Bla', 'ro'),
                          '\n' + u"\u201e" + 'viii.\nBla')
 
     def test_paragraph_separator_roman_19_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + 'viii) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + 'viii) Bla', 'ro'),
                          '\n' + u"\u201e" + 'viii)\nBla')
 
     def test_paragraph_separator_roman_20_quote(self):
-        self.assertEqual(convert.paragraph_separator('\n' + u"\u201e" + '(viii) Bla', 'ro'),
+        self.assertEqual(convert.numbering_separator('\n' + u"\u201e" + '(viii) Bla', 'ro'),
                          '\n' + u"\u201e" + '(viii)\nBla')
 
     def test_paragraph_separator_abbrev(self):
-        self.assertEqual(convert.paragraph_separator("\nRegulamentul\nnr. 575/2013\n", 'ro'),
+        self.assertEqual(convert.numbering_separator("\nRegulamentul\nnr. 575/2013\n", 'ro'),
                          "\nRegulamentul\nnr. 575/2013\n")
 
     def test_file_to_list_tries_0(self):
-        # Not testing paragraph_separator here.
+        # Not testing numbering_separator here.
         text = (' \t\nnon-breaking'
                 u"\u00A0"
                 'space \n  \t  '
@@ -667,7 +667,7 @@ class TestConvert(unittest.TestCase):
         self.assertEqual(result, convert.file_to_list(text, 'ro'))
 
     def test_file_to_list_tries_1(self):
-        # Not testing paragraph_separator here.
+        # Not testing numbering_separator here.
         text = (' \t\nnon-breaking'
                 u"\u00A0"
                 'space \n  \t  '
@@ -679,7 +679,7 @@ class TestConvert(unittest.TestCase):
         self.assertEqual(result, convert.file_to_list(text, 'ro', 1))
 
     def test_file_to_list_tries_2(self):
-        # Not testing paragraph_separator here.
+        # Not testing numbering_separator here.
         text = (' \t\nnon-breaking'
                 u"\u00A0"
                 'space \n  \t  '
@@ -691,7 +691,7 @@ class TestConvert(unittest.TestCase):
         self.assertEqual(result, convert.file_to_list(text, 'ro', 2))
 
     def test_file_to_list_tries_3(self):
-        # Not testing paragraph_separator here.
+        # Not testing numbering_separator here.
         text = (' \t\nnon-breaking'
                 u"\u00A0"
                 'space \n  \t  '

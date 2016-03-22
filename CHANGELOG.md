@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - add FI, GA, HR, LT, LV, MT prefix lists
 - update HU, ET, LV negative lookaheads in paragraph_separator
 - use argparse with celex_list and combine it with celex_pivot
+- rename paragraph_separator to numbering_separator
 
 ## [0.4.5] - 2016-03-01
 ### Added
