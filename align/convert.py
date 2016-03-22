@@ -244,6 +244,7 @@ def numbering_separator(text, lang):
     #     jaanuar|veebruar|m\wrts|aprill|mai|juuni|juuli|august|september|
     #     oktoober|november|detsember
     # TODO eventual de rulat doar pentru limba respectiva
+    # TODO http://stackoverflow.com/questions/5900683/using-variables-in-python-regular-expression
     pattern_1_unicode = re.compile(
         r'\n(\W?\(?(\w{1,3})[\.\)])(?!\n)\s+'
         r'(?!(cikk|FEJEZET|szakasz|SZAKASZ|MELL\wKLET|R\wSZ|t\wbl\wzat))'  # HU
