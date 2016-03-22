@@ -79,6 +79,7 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
     target_list = convert.file_to_list(texts[1], t_lang)
 
     # If different No of paragraphs, make 3 more attempts to process the files
+    # TODO sa renunt eventual la etapa asta? se pierde text si uneori da erori
     tries = 0
     while len(source_list) != len(target_list) and tries < 3:
         tries += 1

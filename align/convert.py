@@ -241,6 +241,7 @@ def numbering_separator(text, lang):
     # negative lookahead for Estonian months:
     #     jaanuar|veebruar|m\wrts|aprill|mai|juuni|juuli|august|september|
     #     oktoober|november|detsember
+    # TODO eventual de rulat doar pentru limba respectiva
     pattern_1_unicode = re.compile(
         r'\n(\W?\(?(\w{1,3})[\.\)])\s+'
         r'(?!(cikk|FEJEZET|szakasz|SZAKASZ|MELL\wKLET))'
@@ -250,6 +251,7 @@ def numbering_separator(text, lang):
         re.UNICODE)
     # pattern 3 separates 1-3 numbers + single letter from the line
     # negative lookahead cikk for Hungarian.
+    # TODO acelasi negativ lookahead ca la pattern 1
     pattern_3_unicode = re.compile(
         r'\n(\W?\(?([0-9]{1,3}(?![0-9])\w+)[\.\)])\s+'
         r'(?!(cikk))',
@@ -272,7 +274,7 @@ def numbering_separator(text, lang):
     abbrevs = util.abbreviation_loader(ab_file)
     for abb in abbrevs:
         # only restore abbreviations of two or more characters, if not numeric
-        roman_num = ['ii', 'iii','iv', 'vi', 'vii', 'viii', 'ix']
+        roman_num = ['ii', 'iii', 'iv', 'vi', 'vii', 'viii', 'ix']
         if len(abb) > 1 and not abb.isdigit() and abb not in roman_num:
             text = re.sub(r'\n' + abb + r'(\.\n)', r'\n' + abb + r'. ', text)
     return text
