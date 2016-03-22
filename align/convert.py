@@ -234,28 +234,34 @@ def numbering_separator(text, lang):
     :type lang: str
     :rtype: str
     """
-    # pattern 1 separate 1-3 letters/numbers with dot/brackets from the line
+    # pattern 1 separate 1-3 letters/numbers with dot/brackets from the line.
+    # they can be preceded by one quotation mark (W?)
     # negative lookahead cikk|FEJEZET|szakasz etc. for Hungarian.
     # negative lookahead pants|ieda\wa etc. for Latvian.
-    # negative lookahead Jagu etc. for Estonian.
+    # negative lookahead Jagu, detsembriks etc. for Estonian.
     # negative lookahead for Estonian months:
     #     jaanuar|veebruar|m\wrts|aprill|mai|juuni|juuli|august|september|
     #     oktoober|november|detsember
     # TODO eventual de rulat doar pentru limba respectiva
     pattern_1_unicode = re.compile(
-        r'\n(\W?\(?(\w{1,3})[\.\)])\s+'
-        r'(?!(cikk|FEJEZET|szakasz|SZAKASZ|MELL\wKLET))'
-        r'(?!(pants|ieda\wa|IEDA\wA|panta|Jagu|JAGU))'
-        r'(?!(jaanuar|veebruar|m\wrts|aprill|mai|juuni))'
-        r'(?!(juuli|august|september|oktoober|november|detsember))',
+        r'\n(\W?\(?(\w{1,3})[\.\)])(?!\n)\s+'
+        r'(?!(cikk|FEJEZET|szakasz|SZAKASZ|MELL\wKLET|R\wSZ|t\wbl\wzat))'  # HU
+        r'(?!(T\wbl\wzat|sablon|C\wM|fejezet|mell\wklet))'  # HU
+        r'(?!(pants|ieda\wa|IEDA\wA|panta|DA\wA|tabula|sk|sada\wa))'  # LV
+        r'(?!(Tabula|posms|NODA\wA|l\wdz ))'  # LV'
+        r'(?!(Jagu|JAGU|jagu|detsembriks|OSA|etapp|PEAT\wKK))'  # ET
+        r'(?!(jaanuar|veebruar|m\wrts|aprill|mai|juuni))'  # ET
+        r'(?!(juuli|august|september|oktoober|november|detsember))',  # ET
         re.UNICODE)
     # pattern 3 separates 1-3 numbers + single letter from the line
+    # they can be preceded by one quotation mark (W?)
     # negative lookahead cikk for Hungarian.
     # TODO acelasi negativ lookahead ca la pattern 1
     pattern_3_unicode = re.compile(
         r'\n(\W?\(?([0-9]{1,3}(?![0-9])\w+)[\.\)])\s+'
-        r'(?!(cikk))',
+        r'(?!(cikk|t\wbl\wzat))',  # HU
         re.UNICODE)
+
     # separate lines consisting of Roman numerals to 9 from the line
     pattern_4 = re.compile(r'\n(\W?\(?i{1,3}[\.\)])\s+')  # 1-3
     pattern_5 = re.compile(r'\n(\W?\(?iv[\.\)])\s+')  # 4
