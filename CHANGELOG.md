@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - create Danish abbreviation file
 - resolved bug for paragraph_separator with quotes
 - change line endings to LF in BG, CA, ET, HU, RU, SL
-- add/change BG, RO, EN abbreviations
+- add BG, DA, DE, EL, ES, FI, FR, HR, HU, IT, LT, MT, PL, PT, RO, SV, EN abbvs
 - restore (two or more character) abbreviations damaged by patterns 1 and 3
 - add language parameter to paragraph_separator
 - add Latin single upper case letters to BG abbreviations

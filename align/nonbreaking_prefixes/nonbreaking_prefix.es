@@ -196,6 +196,7 @@ al
 am
 apdo
 art
+Art
 c.c
 c/
 c/c
@@ -356,3 +357,8 @@ E.E.U.U
 Entlo
 Esc
 C.E.E
+
+Adm
+adm
+Ent
+ent

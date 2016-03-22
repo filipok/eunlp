@@ -128,6 +128,7 @@ tzw
 Tzw
 tzn
 zob
+Zob
 ang
 ub
 ul
@@ -281,3 +282,6 @@ Z
 Ż
 Ź
 Dz
+
+reg
+Reg
