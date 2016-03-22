@@ -77,6 +77,11 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
         return  # exit if already aligned and over=False
     source_list = convert.file_to_list(texts[0], s_lang)
     target_list = convert.file_to_list(texts[1], t_lang)
+    # when debugging:
+    # jsalign = convert.jsalign_table(source_list, target_list, s_lang,
+    #                                 t_lang, note)
+    # with codecs.open(align_file + '_manual_0.html', 'w', 'utf-8') as fout:
+    #     fout.write(jsalign)
 
     # If different No of paragraphs, make 3 more attempts to process the files
     # TODO sa renunt eventual la etapa asta? se pierde text si uneori da erori
@@ -118,6 +123,11 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
     except StopIteration:
         logging.error('StopIteration in %s -> %s, %s', note, s_lang, t_lang)
         jsalign_with_error(texts, s_lang, t_lang, note, align_file)
+        # when debugging:
+        # jsalign = convert.jsalign_table(source_list, target_list, s_lang,
+        #                             t_lang, note)
+        # with codecs.open(align_file + '_stop_iter.html', 'w', 'utf-8') as fout:
+        #     fout.write(jsalign)
 
 
 def jsalign_with_error(texts, s_lang, t_lang, note, align_file):
