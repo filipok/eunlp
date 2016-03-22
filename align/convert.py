@@ -20,6 +20,7 @@ from jinja2 import Template
 from const import TMX_FOOTER, TMX_HEADER, TRU, TUV, CELL, PAGE, SUBFOLDER
 import util
 
+
 def tmx_header(s_lang):
     # add tmx header (copied from LF Aligner output)
     """
