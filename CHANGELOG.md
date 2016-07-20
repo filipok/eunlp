@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.0] - 2016-07-20
+### Added
+- moved rangy-core 1.3.0 Javascript link to S3
+
 ## [0.5.0] - 2016-03-23
 ### Added
 - resolved bug for Czech acronyms
