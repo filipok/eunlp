@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.7.0] - 2017-12-27
+### Added
+- use Jsalign 0.6
+- change development status from 3 Alpha to 4 Beta
+
 ## [0.6.0] - 2016-07-20
 ### Added
 - moved rangy-core 1.3.0 Javascript link to S3

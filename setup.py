@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='align',
-    version='0.6.0',
+    version='0.7.0',
     packages=['align'],
     include_package_data=True,
     description='Align EU legislation.',
@@ -17,9 +17,10 @@ setup(
     author='Filip Gadiuta',
     author_email='filip.gadiuta@gmail.com',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Operating System :: POSIX :: Linux',
+        'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Topic :: Text Processing :: Linguistic',
