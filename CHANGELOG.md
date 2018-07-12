@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.8.0] - 2018-07-12
+### Added
+- resolved bug for Curia documents
+- updated download link for Eurlex (https)
+
 ## [0.7.0] - 2017-12-27
 ### Added
 - use Jsalign 0.6
