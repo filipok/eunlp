@@ -78,7 +78,7 @@ def make_celex_link(celex, lang):
     :type lang: str
     :rtype: str
     """
-    part_1 = "http://eur-lex.europa.eu/legal-content/"
+    part_1 = "https://eur-lex.europa.eu/legal-content/"
     part_2 = "/TXT/?uri=CELEX:"
     return part_1 + lang + part_2 + celex
 
