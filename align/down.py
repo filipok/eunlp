@@ -39,6 +39,10 @@ def downloader(link, new_name, over=False, save_intermediates=False):
 
     # currently useful for Czech texts
     html_text = html_text.replace('&nbsp;', ' ')
+    # Curia documents use upper-case tags
+    html_text = html_text.replace(r'</P>', r'</p>')
+    html_text = html_text.replace(r'<P>', r'<p>')
+    html_text = html_text.replace(r'<P >', r'<p >')
     # some celexes have one to three \n's inside <p> tags
     # remove all new lines and then recreate them after </p>
     # this hopefully eliminates all \n's inside <p> tags
