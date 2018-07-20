@@ -8,6 +8,7 @@ import codecs
 import os
 from const import CELL
 
+
 class TestConvert(unittest.TestCase):
     def test_tmx_header(self):
         header_en = ('<?xml version="1.0" encoding="utf-8" ?>\n'
@@ -248,14 +249,14 @@ class TestConvert(unittest.TestCase):
 
         jsalign += '<script class="links" type="text/javascript" '
         jsalign += ''.join(
-            ['src="https://s3.eu-central-1.amazonaws.com/jsalign/0.6/jsalign.js">',
+            ['src="https://s3.eu-central-1.amazonaws.com/jsalign/0.7/jsalign.js">',
              '</script>\n'])
         jsalign += '<script class="links" type="text/javascript" '
         jsalign += ''.join(['src="https://s3.eu-central-1.amazonaws.com/rangy/',
                             'rangy-1.3.0/rangy-core.js"></script>\n'])
         jsalign += '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cosmo/bootstrap.min.css">\n'
         jsalign += '<link class="links" rel="stylesheet" type="text/css" href'
-        jsalign += '="https://s3.eu-central-1.amazonaws.com/jsalign/0.6/jsalign.css">\n'
+        jsalign += '="https://s3.eu-central-1.amazonaws.com/jsalign/0.7/jsalign.css">\n'
         jsalign += ''.join(['<title>', note, ' - ', s_lang, ' - ', t_lang,
                             '</title>\n'])
         jsalign += '</head>\n'
