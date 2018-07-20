@@ -2,7 +2,7 @@ __author__ = 'filip'
 
 import unittest
 import convert
-import align
+from align import align
 import re
 import codecs
 import os
