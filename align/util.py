@@ -91,6 +91,7 @@ def make_paths(path, text_id, languages):
     :type languages: list
     :rtype: tuple
     """
+    text_id = re.sub(r'/', r'_', text_id)
     align_file = os.path.join(path, 'bi_' + text_id + '_' +
                               languages[0].lower() + '_' +
                               languages[1].lower())
