@@ -83,23 +83,12 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
     # with codecs.open(align_file + '_manual_0.html', 'w', 'utf-8') as fout:
     #     fout.write(jsalign)
 
-    # If different No of paragraphs, make 3 more attempts to process the files
-    # TODO sa renunt eventual la etapa asta? se pierde text si uneori da erori
-    tries = 0
-    while len(source_list) != len(target_list) and tries < 3:
-        tries += 1
-        source_list = convert.file_to_list(texts[0], s_lang, tries=tries)
-        target_list = convert.file_to_list(texts[1], t_lang, tries=tries)
-
     if len(source_list) != len(target_list):
         logging.error('Smart alignment failed in %s: %s-%s', note,
                       s_lang, t_lang)
         jsalign_with_error(texts, s_lang, t_lang, note, align_file)
         return
 
-    if tries > 0:
-        logging.warning('Aligned at attempt %s in %s: %s-%s',
-                        tries + 1, note, s_lang, t_lang)
 
     try:
         tab_file = parallel_aligner(source_list, target_list, s_lang, t_lang,
