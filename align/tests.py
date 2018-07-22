@@ -188,18 +188,20 @@ class TestConvert(unittest.TestCase):
         s_list = ['This is a line.', 'This is a line.', 'This is a line.']
         t_list = ['Acesta e un rand.', 'Acesta e un rand.',
                   'Acesta e un rand.']
-        self.assertEqual((s_list, t_list), convert.tab_to_separate(tab_file))
+        tag_list = ['Err', 'Hun', 'Nai']
+        self.assertEqual((s_list, t_list, tag_list), convert.tab_to_separate(tab_file))
 
     def test_split_line(self):
         line = 'Err\tAcesta e un rand.\tThis is a line.\n'
-        self.assertEqual(('This is a line.', 'Acesta e un rand.'),
+        self.assertEqual(('This is a line.', 'Acesta e un rand.', 'Err'),
                          convert.split_line(line))
 
     def test_jsalign_cell(self):
 
         line = 'This is a line.'
+        tag = 'Hun'
 
-        cell = ''.join(['<div class="cell" draggable="true" '
+        cell = ''.join(['<div class="cell" data-align="', tag, '" draggable="true" '
                         'ondragstart="drag(event)" ',
                         'onmouseover="addId(this)" ',
                         'onmouseout="removeId(this, event)">\n',
@@ -208,13 +210,14 @@ class TestConvert(unittest.TestCase):
         cell = unicode(cell)
 
         self.maxDiff = None
-        self.assertEqual(cell, CELL.format(line))
+        self.assertEqual(cell, CELL.format(tag, line))
 
     def test_jsalign_table(self):
 
         s_list = ['This is a line.', 'This is a line.', 'This is a line.']
         t_list = ['Acesta e un rand.', 'Acesta e un rand.',
                   'Acesta e un rand.']
+        tag_list = ['Hun', 'Nai', 'Err']
         s_lang = 'en'
         t_lang = 'ro'
         note = '32013R1024'
@@ -314,12 +317,12 @@ class TestConvert(unittest.TestCase):
 
         jsalign += '    <td id="source-col"  ondrop="drop(event)" '
         jsalign += 'ondragover="allowDrop(event)">\n'
-        jsalign += ''.join([CELL.format(line) for line in s_list])
+        jsalign += ''.join([CELL.format(tag, line) for (tag, line) in zip(tag_list, s_list)])
         jsalign += '\n    </td>\n'
 
         jsalign += '    <td id="target-col"  ondrop="drop(event)" '
         jsalign += 'ondragover="allowDrop(event)">\n'
-        jsalign += ''.join([CELL.format(line) for line in t_list])
+        jsalign += ''.join([CELL.format(tag, line) for (tag, line) in zip(tag_list, t_list)])
         jsalign += '\n    </td>\n'
 
         jsalign += '  </tr>\n'
@@ -334,7 +337,7 @@ class TestConvert(unittest.TestCase):
         jsalign += '</html>'
 
         self.maxDiff = None
-        self.assertEqual(jsalign, convert.jsalign_table(s_list, t_list, s_lang,
+        self.assertEqual(jsalign, convert.jsalign_table(s_list, t_list, tag_list, s_lang,
                                                         t_lang, note))
 
     def test_paragraph_separator_1(self):

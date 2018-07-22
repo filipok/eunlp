@@ -89,7 +89,6 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
         jsalign_with_error(texts, s_lang, t_lang, note, align_file)
         return
 
-
     try:
         tab_file = parallel_aligner(source_list, target_list, s_lang, t_lang,
                                     dictionary, para_size=para_size,
@@ -100,9 +99,9 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
 
         with codecs.open(align_file + '.tmx', "w", "utf-8") as fout:
             fout.write(tmx_file)
-        source_list, target_list = convert.tab_to_separate(tab_file)
-        jsalign = convert.jsalign_table(source_list, target_list, s_lang,
-                                        t_lang, note)
+        source_list, target_list, tag_list = convert.tab_to_separate(tab_file)
+        jsalign = convert.jsalign_table(source_list, target_list, tag_list,
+                                        s_lang, t_lang, note)
         with codecs.open(align_file + '_manual.html', 'w', 'utf-8') as fout:
             fout.write(jsalign)
         if compress:
@@ -126,8 +125,9 @@ def jsalign_with_error(texts, s_lang, t_lang, note, align_file):
     target_list = convert.file_to_list(texts[1], t_lang)
     t_sentence_splitter = util.sentence_splitter(t_lang)
     target_list = text_sent_splitter(target_list, t_sentence_splitter)
+    tag_list = ['none'] * max(len(source_list), len(target_list))
 
-    jsalign = convert.jsalign_table(source_list, target_list, s_lang,
+    jsalign = convert.jsalign_table(source_list, target_list, tag_list, s_lang,
                                     t_lang, note)
     with codecs.open(align_file + '_manual.html', 'w', 'utf-8') as fout:
         fout.write(jsalign)

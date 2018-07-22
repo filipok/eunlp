@@ -41,8 +41,10 @@ TRU = unicode('<tu creationdate="{}" creationid="eunlp">'
 
 TUV = unicode('<tuv xml:lang="{}"><seg>{}</seg></tuv>')
 
-CELL = unicode('<div class="cell" draggable="true" ondragstart="drag(event)" '
-               'onmouseover="addId(this)" onmouseout="removeId(this, event)">'
+CELL = unicode('<div class="cell" data-align="{}" '
+               'draggable="true" ondragstart="drag(event)" '
+               'onmouseover="addId(this)" '
+               'onmouseout="removeId(this, event)">'
                '\n<span class="celltext" '
                ' contenteditable="true">{}</span></div>')
 

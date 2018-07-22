@@ -112,8 +112,8 @@ def tab_to_separate(tab_file):
     """
     tab_file = tab_file.strip('\n')
     tab_file = re.split(r'\n', tab_file)
-    s_list, t_list = zip(*[split_line(line) for line in tab_file])
-    return list(s_list), list(t_list)
+    s_list, t_list, tag_list = zip(*[split_line(line) for line in tab_file])
+    return list(s_list), list(t_list), list(tag_list)
 
 
 def split_line(line):
@@ -122,7 +122,7 @@ def split_line(line):
     :type line: str
     """
     text = re.split(r'\t', line)
-    return text[2].strip('\n'), text[1]
+    return text[2].strip('\n'), text[1], text[0]
 
 
 def gzipper(source_file):
@@ -212,17 +212,20 @@ def dirty_ttx_to_tmx(ttx_file_name, tmx_file_name, ttx_s_lang, ttx_t_lang,
     return tmx_file
 
 
-def jsalign_table(source_list, target_list, s_lang, t_lang, note):
+def jsalign_table(source_list, target_list, tag_list, s_lang, t_lang, note):
     """
 
     :type source_list: list
     :type target_list: list
+    :type tag_list: list
     :type s_lang: str
     :type t_lang: str
     :type note: str
     """
-    s_cells = ''.join([CELL.format(line) for line in source_list])
-    t_cells = ''.join([CELL.format(line) for line in target_list])
+    s_cells = ''.join(
+        [CELL.format(tag, line) for (tag, line) in zip(tag_list, source_list)])
+    t_cells = ''.join(
+        [CELL.format(tag, line) for (tag, line) in zip(tag_list, target_list)])
 
     return Template(PAGE).render(s_lang=s_lang, t_lang=t_lang, note=note,
                                  s_cells=s_cells, t_cells=t_cells)
