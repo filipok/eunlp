@@ -41,6 +41,14 @@ def downloader(link, new_name, over=False, save_intermediates=False):
     html_text = re.sub(
         r'<span style="word-spacing: [0-9]{2}pt">\xa0</span>', r'</p><p>',
         html_text)
+    html_text = re.sub(r'<p class="arrow">.+?</p>', r'', html_text,
+                       flags=re.DOTALL)
+    html_text = re.sub(r'<p class="modref">.+?</p>', r'', html_text,
+                       flags=re.DOTALL)
+    html_text = re.sub(r'<p class="title-fam-member">.+?</p>', r'', html_text,
+                       flags=re.DOTALL)
+    html_text = re.sub(r'<p class="hd-modifiers">.+?</p>', r'', html_text,
+                       flags=re.DOTALL)
     # currently useful for Czech texts
     html_text = html_text.replace('&nbsp;', ' ')
     # Curia documents use upper-case tags
