@@ -37,6 +37,10 @@ def downloader(link, new_name, over=False, save_intermediates=False):
             html_text = fin.read()
             logging.debug("%s: html file already downloaded.", new_name)
 
+    # for consolidated versions; hopefully it does not break anything
+    html_text = re.sub(
+        r'<span style="word-spacing: [0-9]{2}pt">\xa0</span>', r'</p><p>',
+        html_text)
     # currently useful for Czech texts
     html_text = html_text.replace('&nbsp;', ' ')
     # Curia documents use upper-case tags
