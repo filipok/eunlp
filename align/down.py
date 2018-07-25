@@ -49,6 +49,17 @@ def downloader(link, new_name, over=False, save_intermediates=False):
                        flags=re.DOTALL)
     html_text = re.sub(r'<p class="hd-modifiers">.+?</p>', r'', html_text,
                        flags=re.DOTALL)
+    # mostly for special edition OJ texts
+    html_text = re.sub(r'<p class="hd-date">.+?</p>', r'', html_text,
+                       flags=re.DOTALL)
+    html_text = re.sub(r'<p class="hd-lg">.+?</p>', r'', html_text,
+                       flags=re.DOTALL)
+    html_text = re.sub(r'<p class="hd-ti">.+?</p>', r'', html_text,
+                       flags=re.DOTALL)
+    html_text = re.sub(r'<p class="hd-oj">.+?</p>', r'', html_text,
+                       flags=re.DOTALL)
+    html_text = re.sub(r'<hr class="separator"/>\n\s+<p class="normal">.+?</p>',
+                       r'', html_text, flags=re.DOTALL)
     # currently useful for Czech texts
     html_text = html_text.replace('&nbsp;', ' ')
     # Curia documents use upper-case tags
