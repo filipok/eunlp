@@ -111,6 +111,15 @@ def souper(file_name, html_text, style, over=False, save_intermediates=False):
             elif find_div is not None:
                 # for the celex format as of May 2015
                 clean_text = find_div.contents[1].contents[1].get_text()
+            elif len(soup.findAll("div", {"class": "usermsgWarning"}))>0:
+                logging.warning(
+                    "File is very big, manual alignment might crash browser!")
+                big_file_link = \
+                    soup.findAll("div", {"class": "usermsgWarning"})[0].contents[1]['href']
+                new_html_text = downloader(
+                    big_file_link, file_name + '_big.html')
+                new_soup = BeautifulSoup(new_html_text, "lxml")
+                clean_text = new_soup.find('body').get_text()
             else:
                 # for newer celexes, but in a format not valid after May 2015
                 clean_text = soup.body.div.contents[8].contents[5].contents[0]
