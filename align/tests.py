@@ -304,7 +304,10 @@ class TestConvert(unittest.TestCase):
         jsalign += ' href="#"><span class="glyphicon '
         jsalign += 'glyphicon-paste"></a></span> Paste the segments you want to '
         jsalign += 'move below the current segment</div>\n'
-
+        jsalign += '<div class="demo"><a class="btn btn-warning btn-xs"'
+        jsalign += ' href="#"><span class="glyphicon '
+        jsalign += 'glyphicon-cog"></a></span> Quality check '
+        jsalign += '(segment length)</div>\n'
         jsalign += '<span class="celltext"></span>\n'
         jsalign += '</div>\n'
         jsalign += '</td>\n'
