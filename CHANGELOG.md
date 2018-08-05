@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.8.3] - 2018-08-05
+### Added
+- improve segmentation of consolidated versions
+- remove amendments indicators (M1 etc) in consolidated versions
+- better segmentation of Special Edition OJs
+- enable processing of very large Eurlex files (e.g. 32014R0680)
+- add Jsalign QC button to HTML file legend
+
 ## [0.8.2] - 2018-07-22
 ### Added
 - use Jsalign 0.8 (with basic QC included)
@@ -10,7 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.8.1] - 2018-07-20
 ### Added
-- use Jsalign 0.7)
+- use Jsalign 0.7
 
 ## [0.8.0] - 2018-07-12
 ### Added
