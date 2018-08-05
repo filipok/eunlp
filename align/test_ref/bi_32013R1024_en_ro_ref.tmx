@@ -13,22 +13,6 @@
   </header>
   <body>
 <tu creationdate="00000000T000000Z" creationid="eunlp"><prop type="Txt::Note">32013R1024</prop><prop type="Txt::Alignment">Short</prop>
-<tuv xml:lang="en"><seg>29.10.2013</seg></tuv>
-<tuv xml:lang="ro"><seg>29.10.2013</seg></tuv> </tu>
-
-<tu creationdate="00000000T000000Z" creationid="eunlp"><prop type="Txt::Note">32013R1024</prop><prop type="Txt::Alignment">Short</prop>
-<tuv xml:lang="en"><seg>EN</seg></tuv>
-<tuv xml:lang="ro"><seg>RO</seg></tuv> </tu>
-
-<tu creationdate="00000000T000000Z" creationid="eunlp"><prop type="Txt::Note">32013R1024</prop><prop type="Txt::Alignment">Short</prop>
-<tuv xml:lang="en"><seg>Official Journal of the European Union</seg></tuv>
-<tuv xml:lang="ro"><seg>Jurnalul Oficial al Uniunii Europene</seg></tuv> </tu>
-
-<tu creationdate="00000000T000000Z" creationid="eunlp"><prop type="Txt::Note">32013R1024</prop><prop type="Txt::Alignment">Short</prop>
-<tuv xml:lang="en"><seg>L 287/63</seg></tuv>
-<tuv xml:lang="ro"><seg>L 287/63</seg></tuv> </tu>
-
-<tu creationdate="00000000T000000Z" creationid="eunlp"><prop type="Txt::Note">32013R1024</prop><prop type="Txt::Alignment">Short</prop>
 <tuv xml:lang="en"><seg>COUNCIL REGULATION (EU) No 1024/2013</seg></tuv>
 <tuv xml:lang="ro"><seg>REGULAMENTUL (UE) NR. 1024/2013 AL CONSILIULUI</seg></tuv> </tu>
 
