@@ -122,16 +122,26 @@ def jsalign_with_error(texts, s_lang, t_lang, note, align_file):
     source_list = convert.file_to_list(texts[0], s_lang)
     s_sentence_splitter = util.sentence_splitter(s_lang)
     source_list = text_sent_splitter(source_list, s_sentence_splitter)
+    if s_lang == 'fr'and note[0] == '6':
+        french_quotes(source_list)
     target_list = convert.file_to_list(texts[1], t_lang)
     t_sentence_splitter = util.sentence_splitter(t_lang)
     target_list = text_sent_splitter(target_list, t_sentence_splitter)
+    if t_lang == 'fr'and note[0] == 6:
+        french_quotes(target_list)
     tag_list = ['none'] * max(len(source_list), len(target_list))
-
     jsalign = convert.jsalign_table(source_list, target_list, tag_list, s_lang,
                                     t_lang, note)
     with codecs.open(align_file + '_manual.html', 'w', 'utf-8') as fout:
         fout.write(jsalign)
 
+def french_quotes(sentence_list):
+    counter = len(sentence_list)
+    for i in range(counter):
+        if i < counter - 1 and sentence_list[i + 1] == u'\xbb':
+            sentence_list[i] += ' ' + u'\xbb'
+            sentence_list[i + 1] = None
+    sentence_list[:] = [x for x in sentence_list if x is not None]
 
 def parallel_aligner(s_list, t_list, s_lang, t_lang, dictionary,
                      para_size=PARA_MAX, para_size_small=PARA_MIN,
