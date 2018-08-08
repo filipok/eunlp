@@ -315,6 +315,8 @@ def file_to_list(text, lang, tries=0):
     text = re.sub(r'\n\.\n', r'.\n', text)  # single full stop to prev. para.
     #missing spaces after footnote references
     text = re.sub(r'(\([0-9]{1,3}\)\.)([A-Z])', r'\1 \2', text)
+    #missing spaces after footnote references
+    text = re.sub(r'(\([0-9]{1,3}\)\.)(\S+?\s)', r'\1 \2', text, re.UNICODE)
 
     text = numbering_separator(text, lang)  # separate para numbers from text
     if tries in [1, 2, 3]:
