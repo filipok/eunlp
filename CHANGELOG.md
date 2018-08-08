@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.8.4] - 2018-08-08
+### Added
+- improve segmentation
+- alignment of treaties
+
 ## [0.8.3] - 2018-08-05
 ### Added
 - improve segmentation of consolidated versions
