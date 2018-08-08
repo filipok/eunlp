@@ -249,7 +249,7 @@ def numbering_separator(text, lang):
     # TODO eventual de rulat doar pentru limba respectiva
     # TODO http://stackoverflow.com/questions/5900683/using-variables-in-python-regular-expression
     pattern_1_unicode = re.compile(
-        r'\n(\W?\(?(\w{1,3})[\.\)])(?!\n)\s+'
+        r'\n(\W?\s?\(?(\w{1,3})[\.\)])(?!\n)\s+'
         r'(?!(cikk|FEJEZET|szakasz|SZAKASZ|MELL\wKLET|R\wSZ|t\wbl\wzat))'  # HU
         r'(?!(T\wbl\wzat|sablon|C\wM|fejezet|mell\wklet))'  # HU
         r'(?!(pants|ieda\wa|IEDA\wA|panta|DA\wA|tabula|sk|sada\wa))'  # LV
