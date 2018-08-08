@@ -167,6 +167,7 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
     # TODO move exceptions outside
     for lang_code in langs:
         new_name = prefix + url_code + '_' + lang_code + '.html'
+        new_name = re.sub(r'/', r'_', new_name)
         try:
             link = make_link(url_code, lang_code)
             text = downloader(link, new_name, over_html, save_intermediates)
@@ -175,6 +176,7 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
             raise
         else:
             new_name = prefix + url_code + '_' + lang_code + '.txt'
+            new_name = re.sub(r'/', r'_', new_name)
             try:
                 texts.append(
                     souper(new_name, text, style, over_txt, save_intermediates))
