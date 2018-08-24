@@ -3744,9 +3744,13 @@
 <tuv xml:lang="en"><seg>2.</seg></tuv>
 <tuv xml:lang="ro"><seg>(2)</seg></tuv> </tu>
 
-<tu creationdate="00000000T000000Z" creationid="eunlp"><prop type="Txt::Note">32013R1024</prop><prop type="Txt::Alignment">Long_f</prop>
-<tuv xml:lang="en"><seg>The ECB shall, as part of the report referred to in Article 20, report in detail on the budget for its supervisory tasks.The annual accounts of the ECB drawn up and published in accordance with Article 26.2 of the Statute of the ESCB and of the ECB shall include the income and expenses related to the supervisory tasks.</seg></tuv>
-<tuv xml:lang="ro"><seg>Ca parte a raportului menționat la articolul 20, BCE prezintă un raport detaliat cu privire la bugetul alocat pentru exercitarea atribuțiilor sale în materie de supraveghere. Conturile anuale ale BCE întocmite și publicate în conformitate cu articolul 26 alineatul (2) din Statutul SEBC și al BCE includ veniturile și cheltuielile legate de atribuțiile de supraveghere.</seg></tuv> </tu>
+<tu creationdate="00000000T000000Z" creationid="eunlp"><prop type="Txt::Note">32013R1024</prop><prop type="Txt::Alignment">Hun</prop>
+<tuv xml:lang="en"><seg>The ECB shall, as part of the report referred to in Article 20, report in detail on the budget for its supervisory tasks.</seg></tuv>
+<tuv xml:lang="ro"><seg>Ca parte a raportului menționat la articolul 20, BCE prezintă un raport detaliat cu privire la bugetul alocat pentru exercitarea atribuțiilor sale în materie de supraveghere.</seg></tuv> </tu>
+
+<tu creationdate="00000000T000000Z" creationid="eunlp"><prop type="Txt::Note">32013R1024</prop><prop type="Txt::Alignment">Hun</prop>
+<tuv xml:lang="en"><seg>The annual accounts of the ECB drawn up and published in accordance with Article 26.2 of the Statute of the ESCB and of the ECB shall include the income and expenses related to the supervisory tasks.</seg></tuv>
+<tuv xml:lang="ro"><seg>Conturile anuale ale BCE întocmite și publicate în conformitate cu articolul 26 alineatul (2) din Statutul SEBC și al BCE includ veniturile și cheltuielile legate de atribuțiile de supraveghere.</seg></tuv> </tu>
 
 <tu creationdate="00000000T000000Z" creationid="eunlp"><prop type="Txt::Note">32013R1024</prop><prop type="Txt::Alignment">Short</prop>
 <tuv xml:lang="en"><seg>3.</seg></tuv>

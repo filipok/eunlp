@@ -242,8 +242,31 @@ def tmp_aligner(source, target, dictionary, note, s_sentence_splitter,
     if everything_ok[0]:
         line = everything_ok[1]
     else:
-        logging.debug("Hunalign failed in a segment in file %s.", note)
-        line = ''.join(["Err\t", target, "\t", source, "\n"])
+        # try to find dots that separate sentences but not followed by a space character
+        # and try again to align the segments
+        source = re.sub(r'(\D{3,20})\.(\D{3,20})', r'\1. \2', source)
+        target = re.sub(r'(\D{3,20})\.(\D{3,20})', r'\1. \2', target)
+        print source
+        print target
+
+        # write the two files
+        with codecs.open(tmp_source, "w", "utf-8") as sout:
+            sout.write(source + '\n')
+        with codecs.open(tmp_target, "w", "utf-8") as tout:
+            tout.write(target + '\n')
+        # process them with the classic aligner
+        try:
+            lines = basic_aligner(tmp_source, tmp_target, dictionary, tmp_align,
+                                  s_sentence_splitter, t_sentence_splitter)
+        except StopIteration:
+            raise
+        # do some checks with the hunalign aligment and use only if ok
+        everything_ok = check_hunalign(lines, source, target)
+        if everything_ok[0]:
+            line = everything_ok[1]
+        else:
+            logging.debug("Hunalign failed in a segment in file %s.", note)
+            line = ''.join(["Err\t", target, "\t", source, "\n"])
     # remove temporary files
     os.remove(tmp_source)
     os.remove(tmp_target)
