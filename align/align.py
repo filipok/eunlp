@@ -246,8 +246,6 @@ def tmp_aligner(source, target, dictionary, note, s_sentence_splitter,
         # and try again to align the segments
         source = re.sub(r'(\D{3,20})\.(\D{3,20})', r'\1. \2', source)
         target = re.sub(r'(\D{3,20})\.(\D{3,20})', r'\1. \2', target)
-        print source
-        print target
 
         # write the two files
         with codecs.open(tmp_source, "w", "utf-8") as sout:
