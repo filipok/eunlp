@@ -41,6 +41,8 @@ def downloader(link, new_name, over=False, save_intermediates=False):
     html_text = re.sub(
         r'<span style="word-spacing: [0-9]{2}pt">\xa0</span>', r'</p><p>',
         html_text)
+    html_text = re.sub(r'<p class="disclaimer">.+?</p>', r'', html_text,
+                       flags=re.DOTALL)
     html_text = re.sub(r'<p class="arrow">.+?</p>', r'', html_text,
                        flags=re.DOTALL)
     html_text = re.sub(r'<p class="modref">.+?</p>', r'', html_text,
@@ -102,7 +104,7 @@ def souper(file_name, html_text, style, over=False, save_intermediates=False):
         return clean_text
     soup = BeautifulSoup(html_text, "lxml")
     # separate branches for each document type
-    find_div = soup.find(id='text')
+    find_div = soup.find(id='document1')
     if style == "celex":
         try:
             if soup.txt_te is not None:
