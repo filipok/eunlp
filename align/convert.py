@@ -138,6 +138,24 @@ def gzipper(source_file):
     os.remove(source_file)
 
 
+
+def eu_csv_converter(file_name):
+    """
+
+    :type file_name: str
+    :rtype: list
+    """
+    lista = []
+    with open(file_name, 'rb') as csv_file:
+        for row in csv_file:
+            data = row.split('","')
+            if len(data) == 10:
+                print 'Loading celex item: ' + data[1]
+                title = data[0]
+                celex = data[1]
+                lista.append((celex, title))
+    return lista
+
 def eu_xml_converter(file_name):
     """
 

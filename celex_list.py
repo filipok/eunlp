@@ -1,14 +1,15 @@
 """
 Name:        celex_list.py
-Purpose:     Download Eurlex documents using the celex codes from an XML file
+Purpose:     Download Eurlex documents using the celex codes from an CSV file
 How to use:
-One language pair: python ~/eunlp/celex_list.py searchresults.xml en ro
-All language pairs: python ~/eunlp/celex_list.py searchresults.xml all
-Pivot language: python ~/eunlp/celex_list.py searchresults.xml en
+One language pair: python ~/eunlp/celex_list.py searchresults.csv en -t ro
+All language pairs: python ~/eunlp/celex_list.py searchresults.csv all
+Pivot language: python ~/eunlp/celex_list.py searchresults.csv en
 
 Author:      Filip
 
 Created:     17.02.2015
+Updated:     07.04.2020
 """
 
 import sys
@@ -58,16 +59,18 @@ def main():
 
     # collect xml list name
     xml_list = args.XML_list
-    try:
-        response = urllib2.urlopen(xml_list)
-    except ValueError:
-        logging.error('ValueError: invalid file url %s', xml_list)
-        raise
-    xml_text = response.read()
-    with open('file_list.xml', 'w') as fout:
-        fout.write(xml_text)
-    file_list = convert.eu_xml_converter('file_list.xml')
+    # try:
+    #     response = urllib2.urlopen(xml_list)
+    # except ValueError:
+    #     logging.error('ValueError: invalid file url %s', xml_list)Working on ...
+    #     raise
+    # xml_text = response.read()
+    # with open('file_list.xml', 'w') as fout:
+    #     fout.write(xml_text)
+    # file_list = convert.eu_xml_converter('file_list.xml')
+    file_list = convert.eu_csv_converter(xml_list)
     file_no = len(file_list)
+    print 'Loaded ' + str(file_no) + ' items to be aligned.'
 
     # collect source language
     s_lang = args.Source_language
