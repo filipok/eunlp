@@ -62,6 +62,9 @@ def downloader(link, new_name, over=False, save_intermediates=False):
                        flags=re.DOTALL)
     html_text = re.sub(r'<hr class="separator"/>\n\s+<p class="normal">.+?</p>',
                        r'', html_text, flags=re.DOTALL)
+    # remove signatures from Court documents
+    html_text = re.sub(r'<td\s*>\n\s+<div class="signaturecase">.+?</td>',
+                       r'', html_text, flags=re.DOTALL)
     # currently useful for Czech texts
     html_text = html_text.replace('&nbsp;', ' ')
     # Curia documents use upper-case tags
