@@ -307,6 +307,7 @@ def numbering_separator(text, lang):
         # TODO test 32015R0003_en_hu
         # TODO daca in HU nu incep alineate cu cifra plus punct, ar fi ok.
         # only restore abbreviations of two or more characters, if not numeric
+        # TODO this may lead to issues with French M. (Monsieur)
         roman_num = ['ii', 'iii', 'iv', 'vi', 'vii', 'viii', 'ix']
         if len(abb) > 1 and not abb.isdigit() and abb not in roman_num:
             text = re.sub(r'\n' + abb + r'(\.\xa0)', r'\n' + abb + r'. ', text)
@@ -314,7 +315,7 @@ def numbering_separator(text, lang):
     return text
 
 
-def file_to_list(text, lang, tries=0):
+def file_to_list(text, lang, tries=0, numbering=1):
     # clean and convert file to list of paragraphs
     """[\s|\xa0]+
 
@@ -324,6 +325,7 @@ def file_to_list(text, lang, tries=0):
     :rtype: list
     """
     text = re.sub(r'\xa0+', ' ', text)  # replace non-breaking space
+    text = re.sub(r'\t', ' ', text)  # replace tab
     text = re.sub(r'\n\s+', r'\n', text)  # remove whitespace after newline
     text = re.sub(r'^\n+', r'', text)  # remove empty lines at the beginning
     text = re.sub(r'\n$', r'', text)  # remove empty lines at the end
@@ -335,8 +337,8 @@ def file_to_list(text, lang, tries=0):
     text = re.sub(r'(\([0-9]{1,3}\)\.)([A-Z])', r'\1 \2', text)
     #missing spaces after footnote references
     text = re.sub(r'(\([0-9]{1,3}\)\.)(\S+?\s)', r'\1 \2', text, re.UNICODE)
-
-    text = numbering_separator(text, lang)  # separate para numbers from text
+    if numbering == 1:
+        text = numbering_separator(text, lang)  # separate para numbers from text
     if tries in [1, 2, 3]:
         # remove one-character lines which can make the aligner to fail
         text = re.sub(r'\n.(?=\n)', r'', text)

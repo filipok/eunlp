@@ -77,16 +77,40 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
         return  # exit if already aligned and over=False
     source_list = convert.file_to_list(texts[0], s_lang)
     target_list = convert.file_to_list(texts[1], t_lang)
-    # when debugging:
-    # jsalign = convert.jsalign_table(source_list, target_list, s_lang,
-    #                                 t_lang, note)
-    # with codecs.open(align_file + '_manual_0.html', 'w', 'utf-8') as fout:
-    #     fout.write(jsalign)
+    if len(source_list) != len(target_list):
+        logging.error('Trying numbering=0 in %s: %s-%s', note,
+                      s_lang, t_lang)
+        source_list = convert.file_to_list(texts[0], s_lang, numbering=0)
+        target_list = convert.file_to_list(texts[1], t_lang, numbering=0)
+
+    # Write html file as before further processing:
+    tag_list = ['none'] * max(len(source_list), len(target_list))
+    jsalign = convert.jsalign_table(source_list, target_list, tag_list, s_lang,
+                                    t_lang, note)
+    with codecs.open(align_file + '_manual_0.html', 'w', 'utf-8') as fout:
+        fout.write(jsalign)
 
     if len(source_list) != len(target_list):
+        # Warn smart alignment failed
         logging.error('Smart alignment failed in %s: %s-%s', note,
                       s_lang, t_lang)
+        # Write html file with some sentence splitting for manual alignment purposes
         jsalign_with_error(texts, s_lang, t_lang, note, align_file)
+        # Try parallel on all this
+        tab_file = parallel_aligner(source_list, target_list, s_lang, t_lang,
+                                    dictionary, para_size=para_size,
+                                    para_size_small=para_size_small,
+                                    note=note, make_dic=make_dic)
+        # turn alignment into tmx and manual html alignment
+        tmx_file = convert.tab_to_tmx(tab_file, s_lang, t_lang, note)
+        with codecs.open(align_file + '_whole_parallel.tmx', "w", "utf-8") as fout:
+            fout.write(tmx_file)
+        source_list, target_list, tag_list = convert.tab_to_separate(tab_file)
+        jsalign = convert.jsalign_table(source_list, target_list, tag_list,
+                                        s_lang, t_lang, note)
+        with codecs.open(align_file + '_whole_parallel.html', 'w', 'utf-8') as fout:
+            fout.write(jsalign)
+
         return
 
     try:
