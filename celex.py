@@ -49,7 +49,7 @@ def main():
 
     # call the celex_scraper
     align.celex_aligner(languages, path, celex, '', make_dic=False,
-                        save_intermediates=False)
+                        save_intermediates=True)
 
 if __name__ == '__main__':
     sys.exit(main())

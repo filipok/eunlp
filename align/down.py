@@ -15,13 +15,14 @@ import logging
 from bs4 import BeautifulSoup
 
 
-def downloader(link, new_name, over=False, save_intermediates=False):
+def downloader(link, new_name, over=False, save_intermediates=False, merge_count=False):
     """
 
     :type link: str
     :type new_name: str
     :type over: bool
     :type save_intermediates: bool
+    :type merge_count: bool
     :rtype: str
     """
     # Only download if not already existing, otherwise open from disk
@@ -84,6 +85,9 @@ def downloader(link, new_name, over=False, save_intermediates=False):
     html_text = re.sub(r'</td><td', r'</td> <td', html_text)
     # add new lines also before paras preceded by other tags (such as table)
     html_text = re.sub(r'> +<p', r'>\n<p', html_text)
+    if merge_count:
+        html_text = re.sub(r'<p class="count">(.+?)</p>.+?<p class="normal">',
+                           r'<p class="normal">\1 ', html_text, flags=re.DOTALL)
     # TODO abort when server error
     return html_text
 
@@ -151,7 +155,7 @@ def souper(file_name, html_text, style, over=False, save_intermediates=False):
 
 
 def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
-            over_txt=False, save_intermediates=False):
+            over_txt=False, save_intermediates=False, merge_count=False):
     """
     It downloads EU documents as html files and converts them to txt.
     Example usage:
@@ -166,6 +170,7 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
     :type over_html: bool
     :type over_txt: bool
     :type save_intermediates: bool
+    :type merge_count: bool
     """
     # TODO de utilizat linkurile cu ALL pt celex si de extras clasificarile
     texts = []
@@ -175,7 +180,7 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
         new_name = re.sub(r'/', r'_', new_name)
         try:
             link = make_link(url_code, lang_code)
-            text = downloader(link, new_name, over_html, save_intermediates)
+            text = downloader(link, new_name, over_html, save_intermediates, merge_count)
         except urllib2.HTTPError:
             logging.error("Link error in %s_%s", url_code, lang_code)
             raise
