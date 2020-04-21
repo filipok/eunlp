@@ -111,8 +111,9 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
         # with codecs.open(align_file + '_whole_parallel.html', 'w', 'utf-8') as fout:
         #     fout.write(jsalign)
 
-        return False
-
+        return False, len(source_list)
+    if len(source_list) == 1:
+        return False, len(source_list)
     try:
         tab_file = parallel_aligner(source_list, target_list, s_lang, t_lang,
                                     dictionary, para_size=para_size,
@@ -131,7 +132,7 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
         if compress:
             convert.gzipper(align_file + '.tmx')
             convert.gzipper(align_file + '_manual.html')
-        return True
+        return True, len(source_list)
 
     except StopIteration:
         logging.error('StopIteration in %s -> %s, %s', note, s_lang, t_lang)
@@ -141,7 +142,7 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
         #                             t_lang, note)
         # with codecs.open(align_file + '_stop_iter.html', 'w', 'utf-8') as fout:
         #     fout.write(jsalign)
-        return True
+        return True, len(source_list)
 
 
 def jsalign_with_error(texts, s_lang, t_lang, note, align_file):
@@ -439,7 +440,7 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False,
         # prepare paths
         align_file, dic = util.make_paths(path, prefix + celex, langs)
         # call the aligner
-        res = smart_aligner(texts, langs[0].lower(), langs[1].lower(),
+        res, align_len = smart_aligner(texts, langs[0].lower(), langs[1].lower(),
                             dic, align_file, celex, over=False, make_dic=make_dic,
                             compress=compress)
         # cleanup
@@ -447,6 +448,36 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False,
             os.remove('translate.txt')
         if os.path.isfile(dic):
             os.remove(dic)
+
+        if align_len == 1:
+            logging.warning('Trying add para = True in %s: %s-%s', celex,
+                            langs[0].lower(), langs[1].lower())
+            try:
+                texts = down.scraper(langs, util.make_celex_link, celex, prefix,
+                                     style="celex", over_html=False, over_txt=True,
+                                     save_intermediates=save_intermediates, add_para=True)
+            except urllib2.HTTPError:
+                logging.error("Aborting alignment due to link error in %s.", celex)
+            except (IndexError, AttributeError):
+                logging.error("Aborting alignment due to format error in %s", celex)
+            else:
+                # prepare paths
+                align_file, dic = util.make_paths(path, prefix + celex, langs)
+                # call the aligner
+                res, align_len = smart_aligner(texts, langs[0].lower(), langs[1].lower(),
+                                               dic, align_file, celex, over=False, make_dic=make_dic,
+                                               compress=compress)
+                # cleanup
+                if os.path.isfile('translate.txt'):
+                    os.remove('translate.txt')
+                if os.path.isfile(dic):
+                    os.remove(dic)
+                if not res:
+                    logging.error('Smart alignment failed in %s: %s-%s', celex,
+                                  langs[0].lower(), langs[1].lower())
+                    jsalign_with_error(texts, langs[0].lower(), langs[1].lower(), celex, align_file)
+                    return
+
     if not res:
         logging.warning('Trying merge count = True in %s: %s-%s', celex,
                       langs[0].lower(), langs[1].lower())
@@ -462,7 +493,7 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False,
             # prepare paths
             align_file, dic = util.make_paths(path, prefix + celex, langs)
             # call the aligner
-            res = smart_aligner(texts, langs[0].lower(), langs[1].lower(),
+            res, align_len = smart_aligner(texts, langs[0].lower(), langs[1].lower(),
                                 dic, align_file, celex, over=False, make_dic=make_dic,
                                 compress=compress)
             # cleanup

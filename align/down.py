@@ -15,7 +15,7 @@ import logging
 from bs4 import BeautifulSoup
 
 
-def downloader(link, new_name, over=False, save_intermediates=False, merge_count=False):
+def downloader(link, new_name, over=False, save_intermediates=False, merge_count=False, add_para=False):
     """
 
     :type link: str
@@ -23,6 +23,7 @@ def downloader(link, new_name, over=False, save_intermediates=False, merge_count
     :type over: bool
     :type save_intermediates: bool
     :type merge_count: bool
+    :type add_para: bool
     :rtype: str
     """
     # Only download if not already existing, otherwise open from disk
@@ -88,6 +89,17 @@ def downloader(link, new_name, over=False, save_intermediates=False, merge_count
     if merge_count:
         html_text = re.sub(r'<p class="count">(.+?)</p>.+?<p class="normal">',
                            r'<p class="normal">\1 ', html_text, flags=re.DOTALL)
+    if add_para:
+        html_text = re.sub(r'</table>\s+?<table',
+                           r'</table>\n<table', html_text)
+        html_text = re.sub(r'</p>\s+?<p class="pnormal">',
+                           r'</p>\n<p class="pnormal">', html_text)
+        html_text = re.sub(r'</p>\s+?<p class="normal">',
+                           r'</p>\n<p class="normal">', html_text)
+        html_text = re.sub(r'<p class="note">',
+                           r'\n<p class="note">', html_text)
+        html_text = re.sub(r'</p>\s+?<table',
+                           r'</p>\n<table', html_text)
     # TODO abort when server error
     return html_text
 
@@ -155,7 +167,7 @@ def souper(file_name, html_text, style, over=False, save_intermediates=False):
 
 
 def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
-            over_txt=False, save_intermediates=False, merge_count=False):
+            over_txt=False, save_intermediates=False, merge_count=False, add_para=False):
     """
     It downloads EU documents as html files and converts them to txt.
     Example usage:
@@ -171,6 +183,7 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
     :type over_txt: bool
     :type save_intermediates: bool
     :type merge_count: bool
+    :type add_para: bool
     """
     # TODO de utilizat linkurile cu ALL pt celex si de extras clasificarile
     texts = []
@@ -180,7 +193,7 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
         new_name = re.sub(r'/', r'_', new_name)
         try:
             link = make_link(url_code, lang_code)
-            text = downloader(link, new_name, over_html, save_intermediates, merge_count)
+            text = downloader(link, new_name, over_html, save_intermediates, merge_count, add_para)
         except urllib2.HTTPError:
             logging.error("Link error in %s_%s", url_code, lang_code)
             raise
