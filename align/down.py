@@ -104,13 +104,28 @@ def downloader(link, new_name, over=False, save_intermediates=False, merge_count
                            r'</p>\n<p class="pnormal">', html_text)
         html_text = re.sub(r'</p>\s+?<p class="normal">',
                            r'</p>\n<p class="normal">', html_text)
+        html_text = re.sub(r'</table>\s+?<p class="normal">',
+                           r'</table>\n<p class="normal">', html_text)
         html_text = re.sub(r'<p class="note">',
                            r'\n<p class="note">', html_text)
         html_text = re.sub(r'</p>\s+?<table',
                            r'</p>\n<table', html_text)
+        html_text = re.sub(r'<p class="sum-title-1">',
+                           r'\n<p class="sum-title-1">', html_text)
+        html_text = re.sub(r'<p class="index">',
+                           r'\n<p class="index">', html_text)
+        html_text = re.sub(r'<p class="pstatus">',
+                           r'\n<p class="pstatus">', html_text)
+        html_text = re.sub(r'<p class="title-grseq-3">',
+                           r'\n<p class="title-grseq-3">', html_text)
+        html_text = re.sub(r'<p class="title-grseq-2">',
+                           r'\n<p class="title-grseq-2">', html_text)
     if remove_s38:
         html_text = re.sub(r'<p class="S38ReferenceIntro">.+?</p>',
                            r'', html_text)
+    # for RO curia docs from 2008-2009
+    html_text = re.sub(r'<p class="S73Alineacentregras"><B>Cauza .+?</p>\n<br>',
+                           r'', html_text, flags=re.DOTALL)
     # TODO abort when server error
     return html_text
 

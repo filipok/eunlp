@@ -20,6 +20,7 @@ import l2t_new as l2t
 import util
 import convert
 import down
+import datetime
 from const import PARA_MAX, PARA_MIN
 
 
@@ -87,7 +88,7 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
     tag_list = ['none'] * max(len(source_list), len(target_list))
     jsalign = convert.jsalign_table(source_list, target_list, tag_list, s_lang,
                                     t_lang, note)
-    with codecs.open(align_file + '_manual_0.html', 'w', 'utf-8') as fout:
+    with codecs.open(align_file + '_manual_0' + datetime.datetime.now().isoformat() + '.html', 'w', 'utf-8') as fout:
         fout.write(jsalign)
 
     if len(source_list) != len(target_list):
@@ -450,6 +451,7 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False,
             os.remove(dic)
 
         if align_len == 1:
+            print res
             logging.warning('Trying add para = True in %s: %s-%s', celex,
                             langs[0].lower(), langs[1].lower())
             try:
@@ -475,7 +477,7 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False,
                 if not res:
                     logging.error('Smart alignment failed in %s: %s-%s', celex,
                                   langs[0].lower(), langs[1].lower())
-                    jsalign_with_error(texts, langs[0].lower(), langs[1].lower(), celex, align_file)
+                    jsalign_with_error(texts, langs[0].lower(), langs[1].lower(), celex, align_file + '_failed')
                     return
 
     if not res:
@@ -504,7 +506,7 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False,
             if not res:
                 logging.error('Smart alignment failed in %s: %s-%s', celex,
                               langs[0].lower(), langs[1].lower())
-                jsalign_with_error(texts, langs[0].lower(), langs[1].lower(), celex, align_file)
+                jsalign_with_error(texts, langs[0].lower(), langs[1].lower(), celex, align_file +'_failed')
 
 def bilingual_tmx_realigner(tmx_file):
     """
