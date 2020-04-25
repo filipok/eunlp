@@ -15,7 +15,8 @@ import logging
 from bs4 import BeautifulSoup
 
 
-def downloader(link, new_name, over=False, save_intermediates=False, merge_count=False, add_para=False):
+def downloader(link, new_name, over=False, save_intermediates=False, merge_count=False, add_para=False,
+               remove_s38=True):
     """
 
     :type link: str
@@ -24,6 +25,7 @@ def downloader(link, new_name, over=False, save_intermediates=False, merge_count
     :type save_intermediates: bool
     :type merge_count: bool
     :type add_para: bool
+    :type remove_s38: bool
     :rtype: str
     """
     # Only download if not already existing, otherwise open from disk
@@ -73,6 +75,7 @@ def downloader(link, new_name, over=False, save_intermediates=False, merge_count
     html_text = html_text.replace(r'</P>', r'</p>')
     html_text = html_text.replace(r'<P>', r'<p>')
     html_text = html_text.replace(r'<P >', r'<p >')
+    html_text = html_text.replace(r'<P class', r'<p class')
     # some celexes have one to three \n's inside <p> tags
     # remove all new lines and then recreate them after </p>
     # this hopefully eliminates all \n's inside <p> tags
@@ -100,6 +103,9 @@ def downloader(link, new_name, over=False, save_intermediates=False, merge_count
                            r'\n<p class="note">', html_text)
         html_text = re.sub(r'</p>\s+?<table',
                            r'</p>\n<table', html_text)
+    if remove_s38:
+        html_text = re.sub(r'<p class="S38ReferenceIntro">.+?</p>',
+                           r'', html_text)
     # TODO abort when server error
     return html_text
 
