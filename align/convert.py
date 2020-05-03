@@ -339,6 +339,9 @@ def file_to_list(text, lang, tries=0, numbering=1):
     text = re.sub(r'(\([0-9]{1,3}\)\.)(\S+?\s)', r'\1 \2', text, re.UNICODE)
     if numbering == 1:
         text = numbering_separator(text, lang)  # separate para numbers from text
+    if numbering == 2:
+        text = numbering_separator(text, lang)  # separate para numbers from text
+        text = re.sub(r'(\n[0-9]{1,3})\s', r'\1\n', text)
     if tries in [1, 2, 3]:
         # remove one-character lines which can make the aligner to fail
         text = re.sub(r'\n.(?=\n)', r'', text)

@@ -75,9 +75,21 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
             os.path.isfile(align_file + '_manual.html') or
             os.path.isfile(align_file + '.tmx.gz')):
         logging.warning("File pair already aligned: %s", align_file)
+        #TODO return value
         return  # exit if already aligned and over=False
     source_list = convert.file_to_list(texts[0], s_lang)
     target_list = convert.file_to_list(texts[1], t_lang)
+    # Write html file as before further processing:
+    tag_list = ['none'] * max(len(source_list), len(target_list))
+    jsalign = convert.jsalign_table(source_list, target_list, tag_list, s_lang,
+                                    t_lang, note)
+    with codecs.open(align_file + '_manual_0' + datetime.datetime.now().isoformat() + '.html', 'w', 'utf-8') as fout:
+        fout.write(jsalign)
+    if len(source_list) != len(target_list):
+        logging.warning('Trying numbering=2 in %s: %s-%s', note,
+                      s_lang, t_lang)
+        source_list = convert.file_to_list(texts[0], s_lang, numbering=2)
+        target_list = convert.file_to_list(texts[1], t_lang, numbering=2)
     if len(source_list) != len(target_list):
         logging.warning('Trying numbering=0 in %s: %s-%s', note,
                       s_lang, t_lang)
@@ -92,29 +104,11 @@ def smart_aligner(texts, s_lang, t_lang, dictionary,
         fout.write(jsalign)
 
     if len(source_list) != len(target_list):
-        # Warn smart alignment failed
-        # logging.error('Smart alignment failed in %s: %s-%s', note,
-        #               s_lang, t_lang)
-        # Write html file with some sentence splitting for manual alignment purposes
-        # jsalign_with_error(texts, s_lang, t_lang, note, align_file)
-        # # Try parallel on all this
-        # tab_file = parallel_aligner(source_list, target_list, s_lang, t_lang,
-        #                             dictionary, para_size=para_size,
-        #                             para_size_small=para_size_small,
-        #                             note=note, make_dic=make_dic)
-        # # turn alignment into tmx and manual html alignment
-        # tmx_file = convert.tab_to_tmx(tab_file, s_lang, t_lang, note)
-        # with codecs.open(align_file + '_whole_parallel.tmx', "w", "utf-8") as fout:
-        #     fout.write(tmx_file)
-        # source_list, target_list, tag_list = convert.tab_to_separate(tab_file)
-        # jsalign = convert.jsalign_table(source_list, target_list, tag_list,
-        #                                 s_lang, t_lang, note)
-        # with codecs.open(align_file + '_whole_parallel.html', 'w', 'utf-8') as fout:
-        #     fout.write(jsalign)
+         return False, len(source_list)
 
-        return False, len(source_list)
     if len(source_list) == 1:
         return False, len(source_list)
+
     try:
         tab_file = parallel_aligner(source_list, target_list, s_lang, t_lang,
                                     dictionary, para_size=para_size,
@@ -451,7 +445,6 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False,
             os.remove(dic)
 
         if align_len == 1:
-            print res
             logging.warning('Trying add para = True in %s: %s-%s', celex,
                             langs[0].lower(), langs[1].lower())
             try:
@@ -475,10 +468,35 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False,
                 if os.path.isfile(dic):
                     os.remove(dic)
                 if not res:
-                    logging.error('Smart alignment failed in %s: %s-%s', celex,
-                                  langs[0].lower(), langs[1].lower())
-                    jsalign_with_error(texts, langs[0].lower(), langs[1].lower(), celex, align_file + '_failed')
-                    return
+                    logging.warning('Trying dizpozitiv = True in %s: %s-%s', celex,
+                                    langs[0].lower(), langs[1].lower())
+                    try:
+                        dizpozitiv = True
+                        texts = down.scraper(langs, util.make_celex_link, celex, prefix,
+                                             style="celex", over_html=False, over_txt=True,
+                                             save_intermediates=save_intermediates, add_para=True,
+                                             dizpozitiv=dizpozitiv)
+                    except urllib2.HTTPError:
+                        logging.error("Aborting alignment due to link error in %s.", celex)
+                    except (IndexError, AttributeError):
+                        logging.error("Aborting alignment due to format error in %s", celex)
+                    else:
+                        # prepare paths
+                        align_file, dic = util.make_paths(path, prefix + celex, langs)
+                        # call the aligner
+                        res, align_len = smart_aligner(texts, langs[0].lower(), langs[1].lower(),
+                                                       dic, align_file, celex, over=False, make_dic=make_dic,
+                                                       compress=compress)
+                        # cleanup
+                        if os.path.isfile('translate.txt'):
+                            os.remove('translate.txt')
+                        if os.path.isfile(dic):
+                            os.remove(dic)
+                    # if not res:
+                    #     logging.error('Smart alignment failed in %s: %s-%s', celex,
+                    #                   langs[0].lower(), langs[1].lower())
+                    #     jsalign_with_error(texts, langs[0].lower(), langs[1].lower(), celex, align_file + '_failed')
+                    #     return #TODO de aici nu mai ajunge la merge count
 
     if not res:
         logging.warning('Trying merge count = True in %s: %s-%s', celex,

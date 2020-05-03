@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 
 
 def downloader(link, new_name, over=False, save_intermediates=False, merge_count=False, add_para=False,
-               remove_s38=True):
+               remove_s38=True, dizpozitiv=False, sumar_ro=True):
     """
 
     :type link: str
@@ -26,6 +26,8 @@ def downloader(link, new_name, over=False, save_intermediates=False, merge_count
     :type merge_count: bool
     :type add_para: bool
     :type remove_s38: bool
+    :type dizpozitiv: bool
+    :type sumar_ro: bool
     :rtype: str
     """
     # Only download if not already existing, otherwise open from disk
@@ -116,16 +118,33 @@ def downloader(link, new_name, over=False, save_intermediates=False, merge_count
                            r'\n<p class="index">', html_text)
         html_text = re.sub(r'<p class="pstatus">',
                            r'\n<p class="pstatus">', html_text)
-        html_text = re.sub(r'<p class="title-grseq-3">',
-                           r'\n<p class="title-grseq-3">', html_text)
-        html_text = re.sub(r'<p class="title-grseq-2">',
-                           r'\n<p class="title-grseq-2">', html_text)
+        html_text = re.sub(r'<p class="ti-art">',
+                           r'\n<p class="ti-art">', html_text)
+        # html_text = re.sub(r'<p class="title-grseq-3">',
+        #                    r'\n<p class="title-grseq-3">', html_text)
+        html_text = re.sub(r'<p class="title-grseq-(\d)">',
+                           r'\n<p class="title-grseq-\1">', html_text)
     if remove_s38:
         html_text = re.sub(r'<p class="S38ReferenceIntro">.+?</p>',
                            r'', html_text)
     # for RO curia docs from 2008-2009
-    html_text = re.sub(r'<p class="S73Alineacentregras"><B>Cauza .+?</p>\n<br>',
+    if not sumar_ro:
+        html_text = re.sub(r'<p class="S73Alineacentregras"><B>Cauza .+?</p>\n<br>',
                            r'', html_text, flags=re.DOTALL)
+    # for some FR-RO Curia alignments from 2008-2009
+    if dizpozitiv:
+        html_text = re.sub(r'<h2 class="rech">Dizpozitiv</h2>', r'', html_text) #RO
+        html_text = re.sub(r'<h2 class="rech">Motivele</h2>', r'', html_text) #RO
+        html_text = re.sub(r'<p class="normal">Signatures</p>', r'', html_text) #FR
+        html_text = re.sub(r'<p class="note">.+?</p>',r'', html_text, flags=re.DOTALL) #FR
+        html_text = re.sub(r'<p class="index">.+?</p>', r'', html_text)  #FR
+        html_text = re.sub(r'<a href="#I1">P.r.i</a>', r'', html_text)  # RO
+        html_text = re.sub(r'<a href="#MO">Motivele</a>', r'', html_text)  # RO
+        html_text = re.sub(r'<a href="#DI">Dizpozitiv</a>', r'', html_text)  # RO
+        html_text = re.sub(r'<h2 class="rech">P.r.i</h2>', r'', html_text)  # RO
+        html_text = re.sub(r'<p class="sum-title-1">.+?ARR.T DE LA COUR.+?</p>.+?<p class="sum-title-1">.+?</p>',
+                           r'', html_text, flags=re.DOTALL)  # FR
+
     # TODO abort when server error
     return html_text
 
@@ -193,7 +212,8 @@ def souper(file_name, html_text, style, over=False, save_intermediates=False):
 
 
 def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
-            over_txt=False, save_intermediates=False, merge_count=False, add_para=False):
+            over_txt=False, save_intermediates=False, merge_count=False, add_para=False,
+            dizpozitiv=False,sumar_ro=True):
     """
     It downloads EU documents as html files and converts them to txt.
     Example usage:
@@ -210,6 +230,8 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
     :type save_intermediates: bool
     :type merge_count: bool
     :type add_para: bool
+    :type dizpozitiv: bool
+    :type sumar_ro: bool
     """
     # TODO de utilizat linkurile cu ALL pt celex si de extras clasificarile
     texts = []
@@ -219,7 +241,8 @@ def scraper(langs, make_link, url_code, prefix, style="", over_html=False,
         new_name = re.sub(r'/', r'_', new_name)
         try:
             link = make_link(url_code, lang_code)
-            text = downloader(link, new_name, over_html, save_intermediates, merge_count, add_para)
+            text = downloader(link, new_name, over_html, save_intermediates, merge_count, add_para,
+                              dizpozitiv=dizpozitiv, sumar_ro=sumar_ro)
         except urllib2.HTTPError:
             logging.error("Link error in %s_%s", url_code, lang_code)
             raise
