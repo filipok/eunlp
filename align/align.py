@@ -409,6 +409,25 @@ def basic_aligner(s_file, t_file, dic, a_file, s_sentence_splitter,
     return lines
 
 
+def align_wrapper(langs, path, celex, prefix, make_dic, compress, save_intermediates, merge_count=False,
+                  add_para=False, dizpozitiv=False, sumar_ro=True):
+    texts = down.scraper(langs, util.make_celex_link, celex, prefix,
+                         style="celex", over_html=False, over_txt=False,
+                         save_intermediates=save_intermediates, merge_count=merge_count, add_para=add_para,
+                         dizpozitiv=dizpozitiv, sumar_ro=sumar_ro)
+    # prepare paths
+    align_file, dic = util.make_paths(path, prefix + celex, langs)
+    # call the aligner
+    res, align_len = smart_aligner(texts, langs[0].lower(), langs[1].lower(),
+                                   dic, align_file, celex, over=False, make_dic=make_dic,
+                                   compress=compress)
+    # cleanup
+    if os.path.isfile('translate.txt'):
+        os.remove('translate.txt')
+    if os.path.isfile(dic):
+        os.remove(dic)
+    return res, align_len
+
 def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False,
                   save_intermediates=False):
     """
@@ -424,107 +443,40 @@ def celex_aligner(langs, path, celex, prefix, make_dic=True, compress=False,
     # create html and txt files for each language code
     res = True
     try:
-        texts = down.scraper(langs, util.make_celex_link, celex, prefix,
-                             style="celex", over_html=False, over_txt=False,
-                             save_intermediates=save_intermediates, merge_count=False)
+        res, align_len = align_wrapper(langs, path, celex, prefix, make_dic, compress, save_intermediates)
+
+        if align_len == 1:
+            logging.warning('Trying add_para = True in %s: %s-%s', celex, langs[0].lower(), langs[1].lower())
+            res, align_len = align_wrapper(langs, path, celex, prefix, make_dic, compress, save_intermediates,
+                                           add_para=True)
+        if not res:
+            logging.warning('Trying sumar_ro = False in %s: %s-%s', celex, langs[0].lower(), langs[1].lower())
+            res, align_len = align_wrapper(langs, path, celex, prefix, make_dic, compress, save_intermediates,
+                                           add_para=True, sumar_ro=False)
+        if not res:
+            logging.warning('Trying dizpozitiv = True in %s: %s-%s', celex, langs[0].lower(), langs[1].lower())
+            res, align_len = align_wrapper(langs, path, celex, prefix, make_dic, compress, save_intermediates,
+                                           add_para=True, dizpozitiv=True, sumar_ro=True)
+        if not res:
+            logging.warning('Trying merge_count = True in %s: %s-%s', celex, langs[0].lower(), langs[1].lower())
+            res, align_len = align_wrapper(langs, path, celex, prefix, make_dic, compress, save_intermediates,
+                                           merge_count=True)
     except urllib2.HTTPError:
         logging.error("Aborting alignment due to link error in %s.", celex)
     except (IndexError, AttributeError):
         logging.error("Aborting alignment due to format error in %s", celex)
-    else:
-        # prepare paths
-        align_file, dic = util.make_paths(path, prefix + celex, langs)
-        # call the aligner
-        res, align_len = smart_aligner(texts, langs[0].lower(), langs[1].lower(),
-                            dic, align_file, celex, over=False, make_dic=make_dic,
-                            compress=compress)
-        # cleanup
-        if os.path.isfile('translate.txt'):
-            os.remove('translate.txt')
-        if os.path.isfile(dic):
-            os.remove(dic)
-
-        if align_len == 1:
-            logging.warning('Trying add para = True in %s: %s-%s', celex,
-                            langs[0].lower(), langs[1].lower())
-            try:
-                texts = down.scraper(langs, util.make_celex_link, celex, prefix,
-                                     style="celex", over_html=False, over_txt=True,
-                                     save_intermediates=save_intermediates, add_para=True)
-            except urllib2.HTTPError:
-                logging.error("Aborting alignment due to link error in %s.", celex)
-            except (IndexError, AttributeError):
-                logging.error("Aborting alignment due to format error in %s", celex)
-            else:
-                # prepare paths
-                align_file, dic = util.make_paths(path, prefix + celex, langs)
-                # call the aligner
-                res, align_len = smart_aligner(texts, langs[0].lower(), langs[1].lower(),
-                                               dic, align_file, celex, over=False, make_dic=make_dic,
-                                               compress=compress)
-                # cleanup
-                if os.path.isfile('translate.txt'):
-                    os.remove('translate.txt')
-                if os.path.isfile(dic):
-                    os.remove(dic)
-                if not res:
-                    logging.warning('Trying dizpozitiv = True in %s: %s-%s', celex,
-                                    langs[0].lower(), langs[1].lower())
-                    try:
-                        dizpozitiv = True
-                        texts = down.scraper(langs, util.make_celex_link, celex, prefix,
-                                             style="celex", over_html=False, over_txt=True,
-                                             save_intermediates=save_intermediates, add_para=True,
-                                             dizpozitiv=dizpozitiv)
-                    except urllib2.HTTPError:
-                        logging.error("Aborting alignment due to link error in %s.", celex)
-                    except (IndexError, AttributeError):
-                        logging.error("Aborting alignment due to format error in %s", celex)
-                    else:
-                        # prepare paths
-                        align_file, dic = util.make_paths(path, prefix + celex, langs)
-                        # call the aligner
-                        res, align_len = smart_aligner(texts, langs[0].lower(), langs[1].lower(),
-                                                       dic, align_file, celex, over=False, make_dic=make_dic,
-                                                       compress=compress)
-                        # cleanup
-                        if os.path.isfile('translate.txt'):
-                            os.remove('translate.txt')
-                        if os.path.isfile(dic):
-                            os.remove(dic)
-                    # if not res:
-                    #     logging.error('Smart alignment failed in %s: %s-%s', celex,
-                    #                   langs[0].lower(), langs[1].lower())
-                    #     jsalign_with_error(texts, langs[0].lower(), langs[1].lower(), celex, align_file + '_failed')
-                    #     return #TODO de aici nu mai ajunge la merge count
 
     if not res:
-        logging.warning('Trying merge count = True in %s: %s-%s', celex,
+        logging.error('Smart alignment failed in %s: %s-%s', celex,
                       langs[0].lower(), langs[1].lower())
-        try:
-            texts = down.scraper(langs, util.make_celex_link, celex, prefix,
-                                 style="celex", over_html=False, over_txt=True,
-                                 save_intermediates=save_intermediates, merge_count=True)
-        except urllib2.HTTPError:
-            logging.error("Aborting alignment due to link error in %s.", celex)
-        except (IndexError, AttributeError):
-            logging.error("Aborting alignment due to format error in %s", celex)
-        else:
-            # prepare paths
-            align_file, dic = util.make_paths(path, prefix + celex, langs)
-            # call the aligner
-            res, align_len = smart_aligner(texts, langs[0].lower(), langs[1].lower(),
-                                dic, align_file, celex, over=False, make_dic=make_dic,
-                                compress=compress)
-            # cleanup
-            if os.path.isfile('translate.txt'):
-                os.remove('translate.txt')
-            if os.path.isfile(dic):
-                os.remove(dic)
-            if not res:
-                logging.error('Smart alignment failed in %s: %s-%s', celex,
-                              langs[0].lower(), langs[1].lower())
-                jsalign_with_error(texts, langs[0].lower(), langs[1].lower(), celex, align_file +'_failed')
+        texts = down.scraper(langs, util.make_celex_link, celex, prefix,
+                             style="celex", over_html=False, over_txt=False,
+                             save_intermediates=save_intermediates)
+        # prepare paths
+        align_file, dic = util.make_paths(path, prefix + celex, langs)
+        smart_aligner(texts, langs[0].lower(), langs[1].lower(),
+                      dic, align_file, celex, over=False, make_dic=make_dic, compress=compress)
+        jsalign_with_error(texts, langs[0].lower(), langs[1].lower(), celex, align_file + '_failed')
 
 def bilingual_tmx_realigner(tmx_file):
     """

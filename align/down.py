@@ -13,6 +13,7 @@ import re
 import codecs
 import logging
 from bs4 import BeautifulSoup
+import datetime
 
 
 def downloader(link, new_name, over=False, save_intermediates=False, merge_count=False, add_para=False,
@@ -100,6 +101,14 @@ def downloader(link, new_name, over=False, save_intermediates=False, merge_count
         html_text = re.sub(r'<p class="count">(.+?)</p>.+?<p class="normal">',
                            r'<p class="normal">\1 ', html_text, flags=re.DOTALL)
     if add_para:
+        print 'in add para'
+        with codecs.open(datetime.datetime.now().isoformat() + '_before_addpara.html', 'w', 'utf-8') as fout:
+            fout.write(html_text)
+        html_text = re.sub(r'\r\n', r'\n', html_text)
+        html_text = re.sub(r'\r', r'\n', html_text)
+        with codecs.open(datetime.datetime.now().isoformat() + '_crreplace.html', 'w', 'utf-8') as fout:
+            fout.write(html_text)
+
         html_text = re.sub(r'</table>\s+?<table',
                            r'</table>\n<table', html_text)
         html_text = re.sub(r'</p>\s+?<p class="pnormal">',
@@ -120,19 +129,26 @@ def downloader(link, new_name, over=False, save_intermediates=False, merge_count
                            r'\n<p class="pstatus">', html_text)
         html_text = re.sub(r'<p class="ti-art">',
                            r'\n<p class="ti-art">', html_text)
-        # html_text = re.sub(r'<p class="title-grseq-3">',
-        #                    r'\n<p class="title-grseq-3">', html_text)
         html_text = re.sub(r'<p class="title-grseq-(\d)">',
                            r'\n<p class="title-grseq-\1">', html_text)
+        with codecs.open(datetime.datetime.now().isoformat() + '_after_addpara.html', 'w', 'utf-8') as fout:
+            fout.write(html_text)
     if remove_s38:
         html_text = re.sub(r'<p class="S38ReferenceIntro">.+?</p>',
                            r'', html_text)
     # for RO curia docs from 2008-2009
     if not sumar_ro:
+        with codecs.open(datetime.datetime.now().isoformat() + '_before_notsumar.html', 'w', 'utf-8') as fout:
+            fout.write(html_text)
         html_text = re.sub(r'<p class="S73Alineacentregras"><B>Cauza .+?</p>\n<br>',
                            r'', html_text, flags=re.DOTALL)
+        with codecs.open(datetime.datetime.now().isoformat() + '_after_notsumar.html', 'w', 'utf-8') as fout:
+            fout.write(html_text)
     # for some FR-RO Curia alignments from 2008-2009
     if dizpozitiv:
+        print 'in dizpozitiv'
+        with codecs.open(datetime.datetime.now().isoformat() + '_before_dizpozitiv.html', 'w', 'utf-8') as fout:
+            fout.write(html_text)
         html_text = re.sub(r'<h2 class="rech">Dizpozitiv</h2>', r'', html_text) #RO
         html_text = re.sub(r'<h2 class="rech">Motivele</h2>', r'', html_text) #RO
         html_text = re.sub(r'<p class="normal">Signatures</p>', r'', html_text) #FR
@@ -144,7 +160,8 @@ def downloader(link, new_name, over=False, save_intermediates=False, merge_count
         html_text = re.sub(r'<h2 class="rech">P.r.i</h2>', r'', html_text)  # RO
         html_text = re.sub(r'<p class="sum-title-1">.+?ARR.T DE LA COUR.+?</p>.+?<p class="sum-title-1">.+?</p>',
                            r'', html_text, flags=re.DOTALL)  # FR
-
+        with codecs.open(datetime.datetime.now().isoformat() + '_after_dizpozitiv.html', 'w', 'utf-8') as fout:
+            fout.write(html_text)
     # TODO abort when server error
     return html_text
 
