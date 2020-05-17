@@ -70,7 +70,29 @@ def main():
     # file_list = convert.eu_xml_converter('file_list.xml')
     file_list = convert.eu_csv_converter(xml_list)
     file_no = len(file_list)
+
+    #TODO add argument
+    xcluded = open('/home/filip/exclusions.txt')
+    xcluded_lines = xcluded.readlines()
+    xcluded.close()
+    xcluded_list = []
+    for line in xcluded_lines:
+        line_split = line.split(', ')
+        for xcluded in line_split:
+            xcluded = xcluded.strip('\n')
+            if re.match(r'^\d\d\d\d\dCJ\d\d\d\d$', xcluded):
+                xcluded_list.append(xcluded)
+    xcluded_list.sort()
+    xcluded_set = set(xcluded_list)
+    xcluded_set = list(xcluded_set)
+    xcluded_set.sort()
+    xcluded_set_no = len(xcluded_set)
     print 'Loaded ' + str(file_no) + ' items to be aligned.'
+    # print 'The excluded set contains ' + str(xcluded_set_no) + ' items.'
+    # clean_list = [x for x in file_list if x not in xcluded_set]
+    # clean_list_no = len(clean_list)
+    # print 'Aligning ' + str(clean_list_no) + ' items.'
+    #raw_input("Press Enter to continue...")
 
     # collect source language
     s_lang = args.Source_language
@@ -81,10 +103,15 @@ def main():
         logging.info('Aligning one language pair: %s - %s ...', s_lang,
                      t_lang)
         for item in enumerate(file_list):
-            logging.info("F:%s/%s: Processing %s ...", str(item[0] + 1),
-                         str(file_no), item[1][0])
-            align.celex_aligner([s_lang, t_lang], path, item[1][0], '',
-                                make_dic=False, save_intermediates=True)
+            if item[1][0] not in xcluded_set:
+                logging.info("F:%s/%s: Processing %s ...", str(item[0] + 1),
+                             str(file_no), item[1][0])
+                align.celex_aligner([s_lang, t_lang], path, item[1][0], '',
+                                    make_dic=False, save_intermediates=True)
+            else:
+                logging.info("F:%s/%s: %s already aligned!", str(item[0] + 1),
+                             str(file_no), item[1][0])
+            #raw_input("Press Enter to continue...")
     # all language pairs
     elif s_lang == 'all':
         logging.info('Aligning all language pairs')
